@@ -1,0 +1,42 @@
+﻿@model SIREON.Escuela
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Escuela</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Directore.ID_Director)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Directore.ID_Director)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Facultade.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Facultade.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Escuela }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

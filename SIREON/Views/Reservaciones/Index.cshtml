@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SIREON.Reservacione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_Empleado)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaSolicitada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HSolicitada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HEntrada)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sala.ID_Sala)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Usuario1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_Empleado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaSolicitada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSolicitada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HEntrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sala.ID_Sala)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Usuario1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Reservacion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Reservacion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Reservacion })
+        </td>
+    </tr>
+}
+
+</table>

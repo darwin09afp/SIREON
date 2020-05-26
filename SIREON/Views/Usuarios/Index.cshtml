@@ -1,0 +1,75 @@
+﻿@model IEnumerable<SIREON.Usuario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Contrasena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pregunta1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pregunta2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Respuesta1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Respuesta2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nivel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contrasena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pregunta1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pregunta2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Respuesta1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Respuesta2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nivel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Usuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Usuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Usuario })
+        </td>
+    </tr>
+}
+
+</table>

@@ -176,8 +176,22 @@
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CargosController.cs" />
+    <Compile Include="Controllers\CarrerasController.cs" />
+    <Compile Include="Controllers\CubiculosController.cs" />
+    <Compile Include="Controllers\DirectoresController.cs" />
+    <Compile Include="Controllers\EmpleadosController.cs" />
+    <Compile Include="Controllers\EntidadesController.cs" />
+    <Compile Include="Controllers\EscuelasController.cs" />
+    <Compile Include="Controllers\EstudiantesController.cs" />
+    <Compile Include="Controllers\FacultadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListaNegrasController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfesoresController.cs" />
+    <Compile Include="Controllers\ReservacionesController.cs" />
+    <Compile Include="Controllers\SalasController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
@@ -2196,6 +2210,76 @@
     <Content Include="SIREONModel.edmx.diagram">
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Views\Cargos\Create.cshtml" />
+    <Content Include="Views\Cargos\Delete.cshtml" />
+    <Content Include="Views\Cargos\Details.cshtml" />
+    <Content Include="Views\Cargos\Edit.cshtml" />
+    <Content Include="Views\Cargos\Index.cshtml" />
+    <Content Include="Views\Carreras\Create.cshtml" />
+    <Content Include="Views\Carreras\Delete.cshtml" />
+    <Content Include="Views\Carreras\Details.cshtml" />
+    <Content Include="Views\Carreras\Edit.cshtml" />
+    <Content Include="Views\Carreras\Index.cshtml" />
+    <Content Include="Views\Directores\Create.cshtml" />
+    <Content Include="Views\Directores\Delete.cshtml" />
+    <Content Include="Views\Directores\Details.cshtml" />
+    <Content Include="Views\Directores\Edit.cshtml" />
+    <Content Include="Views\Directores\Index.cshtml" />
+    <Content Include="Views\Empleados\Create.cshtml" />
+    <Content Include="Views\Empleados\Delete.cshtml" />
+    <Content Include="Views\Empleados\Details.cshtml" />
+    <Content Include="Views\Empleados\Edit.cshtml" />
+    <Content Include="Views\Empleados\Index.cshtml" />
+    <Content Include="Views\Entidades\Create.cshtml" />
+    <Content Include="Views\Entidades\Delete.cshtml" />
+    <Content Include="Views\Entidades\Details.cshtml" />
+    <Content Include="Views\Entidades\Edit.cshtml" />
+    <Content Include="Views\Entidades\Index.cshtml" />
+    <Content Include="Views\Escuelas\Create.cshtml" />
+    <Content Include="Views\Escuelas\Delete.cshtml" />
+    <Content Include="Views\Escuelas\Details.cshtml" />
+    <Content Include="Views\Escuelas\Edit.cshtml" />
+    <Content Include="Views\Escuelas\Index.cshtml" />
+    <Content Include="Views\Estudiantes\Create.cshtml" />
+    <Content Include="Views\Estudiantes\Delete.cshtml" />
+    <Content Include="Views\Estudiantes\Details.cshtml" />
+    <Content Include="Views\Estudiantes\Edit.cshtml" />
+    <Content Include="Views\Estudiantes\Index.cshtml" />
+    <Content Include="Views\Facultades\Create.cshtml" />
+    <Content Include="Views\Facultades\Delete.cshtml" />
+    <Content Include="Views\Facultades\Details.cshtml" />
+    <Content Include="Views\Facultades\Edit.cshtml" />
+    <Content Include="Views\Facultades\Index.cshtml" />
+    <Content Include="Views\Profesores\Create.cshtml" />
+    <Content Include="Views\Profesores\Delete.cshtml" />
+    <Content Include="Views\Profesores\Details.cshtml" />
+    <Content Include="Views\Profesores\Edit.cshtml" />
+    <Content Include="Views\Profesores\Index.cshtml" />
+    <Content Include="Views\Cubiculos\Create.cshtml" />
+    <Content Include="Views\Cubiculos\Delete.cshtml" />
+    <Content Include="Views\Cubiculos\Details.cshtml" />
+    <Content Include="Views\Cubiculos\Edit.cshtml" />
+    <Content Include="Views\Cubiculos\Index.cshtml" />
+    <Content Include="Views\ListaNegras\Create.cshtml" />
+    <Content Include="Views\ListaNegras\Delete.cshtml" />
+    <Content Include="Views\ListaNegras\Details.cshtml" />
+    <Content Include="Views\ListaNegras\Edit.cshtml" />
+    <Content Include="Views\ListaNegras\Index.cshtml" />
+    <Content Include="Views\Reservaciones\Create.cshtml" />
+    <Content Include="Views\Reservaciones\Delete.cshtml" />
+    <Content Include="Views\Reservaciones\Details.cshtml" />
+    <Content Include="Views\Reservaciones\Edit.cshtml" />
+    <Content Include="Views\Reservaciones\Index.cshtml" />
+    <Content Include="Views\Salas\Create.cshtml" />
+    <Content Include="Views\Salas\Delete.cshtml" />
+    <Content Include="Views\Salas\Details.cshtml" />
+    <Content Include="Views\Salas\Edit.cshtml" />
+    <Content Include="Views\Salas\Index.cshtml" />
+    <Content Include="Views\Usuarios\Create.cshtml" />
+    <Content Include="Views\Usuarios\Delete.cshtml" />
+    <Content Include="Views\Usuarios\Details.cshtml" />
+    <Content Include="Views\Usuarios\Edit.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
