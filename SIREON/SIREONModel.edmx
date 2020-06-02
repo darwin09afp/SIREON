@@ -47,6 +47,14 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
           <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID_RolUsuario" />
+          </Key>
+          <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Usuario" Type="int" Nullable="false" />
+          <Property Name="Rol" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="Salas">
           <Key>
             <PropertyRef Name="ID_Sala" />
@@ -74,7 +82,6 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <Property Name="Pregunta2" Type="char" MaxLength="15" Nullable="false" />
           <Property Name="Respuesta1" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Respuesta2" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Nivel" Type="int" Nullable="false" />
           <Property Name="Estatus" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_ListaNegra_Usuarios">
@@ -149,6 +156,18 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Roles_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -184,6 +203,7 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
@@ -216,6 +236,10 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <AssociationSet Name="FK_Reservaciones_Usuarios" Association="Self.FK_Reservaciones_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -260,6 +284,15 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <NavigationProperty Name="Sala" Relationship="Self.FK_Reservaciones_Salas" FromRole="Reservaciones" ToRole="Salas" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Reservaciones" ToRole="Usuarios" />
         </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID_RolUsuario" />
+          </Key>
+          <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Roles_Usuarios" FromRole="Roles" ToRole="Usuarios" />
+        </EntityType>
         <EntityType Name="Sala">
           <Key>
             <PropertyRef Name="ID_Sala" />
@@ -289,10 +322,10 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <Property Name="Pregunta2" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Respuesta1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nivel" Type="Int32" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
           <NavigationProperty Name="Salas" Relationship="Self.R_Salas_Usuarios" FromRole="Usuarios" ToRole="Salas" />
         </EntityType>
         <Association Name="FK_Reservaciones_Cubiculos">
@@ -343,6 +376,18 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Roles_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="R_Salas_Usuarios">
           <End Role="Salas" Type="Self.Sala" Multiplicity="*" />
           <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
@@ -351,6 +396,7 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
           <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservacione" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Salas" EntityType="Self.Sala" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
@@ -369,6 +415,10 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <AssociationSet Name="FK_Reservaciones_Usuarios" Association="Self.FK_Reservaciones_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
           <AssociationSet Name="R_Salas_Usuarios" Association="Self.R_Salas_Usuarios">
             <End Role="Salas" EntitySet="Salas" />
@@ -457,6 +507,15 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="SIREONModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ID_RolUsuario" ColumnName="ID_RolUsuario" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Salas">
             <EntityTypeMapping TypeName="SIREONModel.Sala">
               <MappingFragment StoreEntitySet="Salas">
@@ -485,7 +544,6 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
                 <ScalarProperty Name="Pregunta2" ColumnName="Pregunta2" />
                 <ScalarProperty Name="Respuesta1" ColumnName="Respuesta1" />
                 <ScalarProperty Name="Respuesta2" ColumnName="Respuesta2" />
-                <ScalarProperty Name="Nivel" ColumnName="Nivel" />
                 <ScalarProperty Name="Estatus" ColumnName="Estatus" />
               </MappingFragment>
             </EntityTypeMapping>

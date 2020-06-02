@@ -190,6 +190,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProfesoresController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SalasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Cubiculo.cs">
@@ -227,6 +228,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservacione.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Sala.cs">
@@ -2203,13 +2207,6 @@
     <Content Include="UniversidadModel.edmx.diagram">
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="SIREONModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SIREONModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="SIREONModel.edmx.diagram">
-      <DependentUpon>SIREONModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Cargos\Create.cshtml" />
     <Content Include="Views\Cargos\Delete.cshtml" />
     <Content Include="Views\Cargos\Details.cshtml" />
@@ -2275,6 +2272,18 @@
     <Content Include="Views\Salas\Details.cshtml" />
     <Content Include="Views\Salas\Edit.cshtml" />
     <Content Include="Views\Salas\Index.cshtml" />
+    <EntityDeploy Include="SIREONModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SIREONModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="SIREONModel.edmx.diagram">
+      <DependentUpon>SIREONModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />

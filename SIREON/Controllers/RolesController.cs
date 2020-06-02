@@ -10,107 +10,112 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    public class UsuariosController : Controller
+    public class RolesController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
 
-        // GET: Usuarios
+        // GET: Roles
         public ActionResult Index()
         {
-            return View(db.Usuarios.ToList());
+            var roles = db.Roles.Include(r => r.Usuario);
+            return View(roles.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Roles/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(role);
         }
 
-        // GET: Usuarios/Create
+        // GET: Roles/Create
         public ActionResult Create()
         {
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1");
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Roles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Usuario,Usuario1,Contrasena,Pregunta1,Pregunta2,Respuesta1,Respuesta2,Estatus")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "ID_RolUsuario,ID_Usuario,Rol")] Role role)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuario);
+                db.Roles.Add(role);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuario);
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", role.ID_Usuario);
+            return View(role);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Roles/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", role.ID_Usuario);
+            return View(role);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Roles/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Usuario,Usuario1,Contrasena,Pregunta1,Pregunta2,Respuesta1,Respuesta2,Estatus")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "ID_RolUsuario,ID_Usuario,Rol")] Role role)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(role).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuario);
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", role.ID_Usuario);
+            return View(role);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Roles/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
+            Role role = db.Roles.Find(id);
+            if (role == null)
             {
                 return HttpNotFound();
             }
-            return View(usuario);
+            return View(role);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Roles/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuario usuario = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuario);
+            Role role = db.Roles.Find(id);
+            db.Roles.Remove(role);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
