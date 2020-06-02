@@ -10,7 +10,7 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    [Authorize]
+    [Authorize (Roles = "Operador,Usuario")]
     public class ReservacionesController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
