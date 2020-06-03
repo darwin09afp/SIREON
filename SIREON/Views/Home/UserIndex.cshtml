@@ -48,15 +48,16 @@
                 </button>
                 <div class="row">
                     <div class="col-12 py-5">
-                        @*<h4>Bienvenido</h4>*@
+                        <h4>Bienvenido</h4>
                     </div>
                 </div>
                 <ul class="nav ml-auto">
-                    <li><h2>
-                        <a href=@Html.Partial("_LoginPartial")
+                    <li>
+                        <a href=@Html.Partial("_LoginPartial")>
+                            <span class="link-title" style="text-decoration-color:green"><h2>Login</h2></span>
                         </a>
-                        </h2>
                     </li>
+
                 </ul>
             </div>
         </div>
@@ -78,7 +79,7 @@
 
                 <li>
                     <a href='@Url.Action("Index", "Reservaciones")'>
-                        <span class="link-title"><h6>Mi espacio</h6></span>
+                        <span class="link-title"><h6>Reservar</h6></span>
                         <i class="mdi mdi-calendar link-icon"></i>
                     </a>
                 </li>
@@ -196,6 +197,7 @@
 
                             </div>
                         </div>
+
                         <div class="col-lg-6 col-md-6 col-sm-12 equel-grid">
                             <div class="grid">
                                 <div class="grid-body">
@@ -206,24 +208,25 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- content viewport ends -->
-                        <!-- partial:partials/_footer.html -->
-                        <footer class="footer">
-                            <div class="row">
-                                <div class="col-sm-6 text-center text-sm-right order-sm-1">
-
-                                </div>
-                                <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
-                                    <small class="text-gray mt-2">UNPHU 2020 <i class="mdi mdi-book text-black"></i></small>
-                                </div>
-                            </div>
-                        </footer>
-                        <!-- partial -->
                     </div>
-                    <!-- page content ends -->
                 </div>
+                <!-- content viewport ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="row">
+                        <div class="col-sm-6 text-center text-sm-right order-sm-1">
+
+                        </div>
+                        <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
+                            <small class="text-gray mt-2">UNPHU 2020 <i class="mdi mdi-book text-black"></i></small>
+                        </div>
+                    </div>
+                </footer>
+                <!-- partial -->
             </div>
+            <!-- page content ends -->
         </div>
+    </div>
         <!--page body ends -->
         <!-- SCRIPT LOADING START FORM HERE /////////////-->
         <!-- plugins:js -->
@@ -238,7 +241,7 @@
         <script src="../content/assets/js/template.js"></script>
         <script src="../content/assets/js/dashboard.js"></script>
         <!-- endbuild -->
-    </div>
+
 
 </body>
 </html>
