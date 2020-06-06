@@ -4,25 +4,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bienvenido a SIREON</title>
+    @Html.Partial("_Header")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body class="header-fixed">
-    @Html.Partial("_Header")
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        @Html.Partial("_SideBar")
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
+    <!-- partial -->
+    <div class="page-body">
+        <!-- partial:partials/_sidebar.html -->
+        <div class="sidebar">
+            @Html.Partial("_SideBar")
+        </div>
+        <!-- partial -->
+        <div class="page-content-wrapper">
+            <div class="page-content-wrapper-inner">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- content viewport ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
             @Html.Partial("_Footer")
         </footer>
+        <!-- partial -->
     </div>
-
+    <!-- page content ends -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-</body class="header-fixed">
+</body>
 </html>
