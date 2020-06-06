@@ -20,11 +20,19 @@ namespace SIREON
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Content/vendors/js/core.js",    
+                      "~/Content/vendors/apexcharts/apexcharts.min.js",
+                      "~/Content/vendors/chartjs/Chart.min.js",
+                      "~/Content/js/charts/chartjs.addon.js",   
+                      "~/Content/js/template.js", 
+                      "~/Content/js/dashboard.js" ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/vendors/iconfonts/mdi/css/materialdesignicons.css",
+                      "~/Content/css/shared/style.css",
+                      "~/Content/css/demo_1/style.css",
+                      "~/Content/images/favicon.ico"));
         }
     }
 }

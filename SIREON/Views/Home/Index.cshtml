@@ -1,139 +1,7 @@
-﻿@{
-    Layout = null;
-    <!-- Compiled and minified Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Minified JS library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Compiled and minified Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-}
+﻿<!DOCTYPE html>
+<html>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bienvenido a SIREON</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="../content/assets/vendors/iconfonts/mdi/css/materialdesignicons.css">
-    <!-- endinject -->
-    <!-- vendor css for this page -->
-    <!-- End vendor css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../content/assets/css/shared/style.css">
-    <!-- endinject -->
-    <!-- Layout style -->
-    <link rel="stylesheet" href="../content/assets/css/demo_2/style.css">
-    <!-- Layout style -->
-    <link rel="shortcut icon" href="../content/asssets/images/favicon.ico" />
-</head>
-
-
-<body class="header-fixed">
-    <!-- partial:partials/_header.html -->
-    <nav class="t-header">
-        <div class="t-header-brand-wrapper">
-            <a href='@Url.Action("Index", "Home")'>
-                <img class="logo" src="../content/assets/images/logo.png" alt="" style="width:150px;height:90px">
-                <img class="logo-mini" src="../content/assets/images/logo mini.png" style="width:90px;height:50px">
-            </a>
-
-        </div>
-        <div class="t-header-content-wrapper">
-            <div class="t-header-content">
-
-                <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
-                    <i class="mdi mdi-menu"></i>
-                </button>
-                <div class="row">
-                    <div class="col-12 py-5">
-                        @*<h4>Bienvenido</h4>*@
-                    </div>
-                </div>
-                <ul class="nav ml-auto">
-                    <li><h2>
-                        <a href=@Html.Partial("_LoginPartial")>
-                        </a>
-                        </h2>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <!-- partial -->
-
-
-    <div class="page-body">
-        <!-- partial:partials/_sidebar.html -->
-        <div class="sidebar">
-            <ul class="navigation-menu">
-                <li class="nav-category-divider">PRINCIPAL</li>
-                <li>
-                    <a href='@Url.Action("Index", "Home")'>
-                        <div class="link-title"><h6>Inicio</h6></div>
-                        <i class="mdi mdi-home link-icon"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href='@Url.Action("Index", "Reservaciones")'>
-                        <div class="link-title"><h6>Mi espacio</h6></div>
-                        <i class="mdi mdi-calendar link-icon"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href='@Url.Action("Contact", "Home")'>
-                        <div class="link-title"><h6>Contáctanos</h6></div>
-                        <i class="mdi mdi-cellphone link-icon"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href='@Url.Action("About", "Home")'>
-                        <div class="link-title"><h6>Nosotros</h6></div>
-                        <i class="mdi mdi-nature-people link-icon"></i>
-                    </a>
-                </li>
-
-                <li>
-                    <a href='@Url.Action("About", "Home")'>
-                        <div class="link-title"><h6>Ayuda</h6></div>
-                        <i class="mdi mdi-help link-icon"></i>
-                    </a>
-                </li>
-
-                <li class="nav-category-divider">VISITA TAMBIEN</li>
-                <li>
-                    <a href="http://akademia.unphu.edu.do/SitePages/Inicio.aspx">
-                        <span class="link-title">AKADEMIA</span>
-                        <i class="mdi mdi-calendar link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.unphu.edu.do/">
-                        <span class="link-title">UNPHU</span>
-                        <i class="mdi mdi-calendar link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="http://virtual.unphu.edu.do/login/index.php">
-                        <span class="link-title">UNPHU Virtual</span>
-                        <i class="mdi mdi-calendar link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.unphu.edu.do/servicios/biblioteca/">
-                        <span class="link-title">Biblioteca Virtual</span>
-                        <i class="mdi mdi-calendar link-icon"></i>
-                    </a>
-                </li>
-
-
-            </ul>
-        </div>
-
+<body>    
         <!-- partial -->
         <div class="page-content-wrapper">
             <div class="page-content-wrapper-inner">
@@ -148,13 +16,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="~/Content/assets/images/unphu.jpg" alt="First slide">
+                                <img class="d-block w-100" src="~/Content/images/unphu.jpg" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="~/Content/assets/images/unphu.jpg" alt="Second slide">
+                                <img class="d-block w-100" src="~/Content/images/unphu.jpg" alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="~/Content/assets/images/unphu.jpg" alt="Third slide">
+                                <img class="d-block w-100" src="~/Content/images/unphu.jpg" alt="Third slide">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -167,12 +35,7 @@
                         </a>
                     </div>
 
-                    <div class="row">
-                        <div class="col-12 py-5">
-                            @*<h4>Bienvenido</h4>*@
-                        </div>
-                    </div>
-
+                    
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 equel-grid">
                             <div class="grid">
@@ -196,49 +59,13 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 equel-grid">
-                            <div class="grid">
-                                <div class="grid-body">
-                                    <div class="split-header">
-                                        <p class="card-title">Reglas de uso</p>
-                                        <img src="" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- content viewport ends -->
-                        <!-- partial:partials/_footer.html -->
-                        <footer class="footer">
-                            <div class="row">
-                                <div class="col-sm-6 text-center text-sm-right order-sm-1">
-
-                                </div>
-                                <div class="col-sm-6 text-center text-sm-left mt-3 mt-sm-0">
-                                    <small class="text-gray mt-2">UNPHU 2020 <i class="mdi mdi-book text-black"></i></small>
-                                </div>
-                            </div>
-                        </footer>
+                                             
                         <!-- partial -->
                     </div>
                     <!-- page content ends -->
                 </div>
             </div>
-        </div>
-        <!--page body ends -->
-        <!-- SCRIPT LOADING START FORM HERE /////////////-->
-        <!-- plugins:js -->
-        <script src="../content/assets/vendors/js/core.js"></script>
-        <!-- endinject -->
-        <!-- Vendor Js For This Page Ends-->
-        <script src="../content/assets/vendors/apexcharts/apexcharts.min.js"></script>
-        <script src="../content/assets/vendors/chartjs/Chart.min.js"></script>
-        <script src="../content/assets/js/charts/chartjs.addon.js"></script>
-        <!-- Vendor Js For This Page Ends-->
-        <!-- build:js -->
-        <script src="../content/assets/js/template.js"></script>
-        <script src="../content/assets/js/dashboard.js"></script>
-        <!-- endbuild -->
-    </div>
+        </div>  
 
 </body>
 </html>
