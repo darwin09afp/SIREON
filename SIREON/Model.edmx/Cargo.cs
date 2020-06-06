@@ -7,25 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Sala
+    public partial class Cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sala()
+        public Cargo()
         {
-            this.Reservaciones = new HashSet<Reservacione>();
-            this.Usuarios = new HashSet<Usuario>();
+            this.Empleados = new HashSet<Empleado>();
         }
     
-        public int ID_Sala { get; set; }
+        public int ID_Cargo { get; set; }
+        public string Descripcion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservacione> Reservaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Empleado> Empleados { get; set; }
     }
 }

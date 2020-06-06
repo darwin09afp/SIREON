@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class Role
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int ID_RolUsuario { get; set; }
+        public int ID_Usuario { get; set; }
+        public string Rol { get; set; }
+    
+        public virtual Usuario Usuario { get; set; }
     }
 }

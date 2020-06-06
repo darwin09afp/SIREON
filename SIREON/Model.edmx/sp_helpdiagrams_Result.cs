@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     

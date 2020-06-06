@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ListaNegra
+    public partial class Estudiante
     {
-        public int ID_ListaN { get; set; }
-        public int ID_Usuario { get; set; }
-        public string Descripcion { get; set; }
+        public string ID_Estudiante { get; set; }
+        public int ID_Entidad { get; set; }
+        public int ID_Carrera { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual Carrera Carrera { get; set; }
+        public virtual Entidad Entidad { get; set; }
     }
 }

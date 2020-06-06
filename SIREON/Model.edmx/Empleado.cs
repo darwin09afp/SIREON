@@ -7,13 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class Empleado
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public string ID_Empleado { get; set; }
+        public int ID_Entidad { get; set; }
+        public int ID_Cargo { get; set; }
+    
+        public virtual Cargo Cargo { get; set; }
+        public virtual Entidad Entidad { get; set; }
     }
 }

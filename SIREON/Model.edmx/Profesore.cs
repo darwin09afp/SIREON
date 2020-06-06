@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class Profesore
     {
-        public int ID_RolUsuario { get; set; }
-        public int ID_Usuario { get; set; }
-        public string Rol { get; set; }
+        public string ID_Profesor { get; set; }
+        public int ID_Entidad { get; set; }
+        public int ID_Escuela { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual Entidad Entidad { get; set; }
+        public virtual Escuela Escuela { get; set; }
     }
 }

@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON
+namespace SIREON.Model.edmx
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Estudiante
+    public partial class sysdiagram
     {
-        public string ID_Estudiante { get; set; }
-        public int ID_Entidad { get; set; }
-        public int ID_Carrera { get; set; }
-    
-        public virtual Carrera Carrera { get; set; }
-        public virtual Entidad Entidad { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
