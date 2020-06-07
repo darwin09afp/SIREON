@@ -7,30 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON.Model.edmx
+namespace SIREON
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Escuela
+    public partial class Facultade
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Escuela()
+        public Facultade()
         {
-            this.Carreras = new HashSet<Carrera>();
-            this.Profesores = new HashSet<Profesore>();
+            this.Escuelas = new HashSet<Escuela>();
         }
     
-        public int ID_Escuela { get; set; }
-        public string ID_Director { get; set; }
         public int ID_Facultad { get; set; }
         public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carrera> Carreras { get; set; }
-        public virtual Directore Directore { get; set; }
-        public virtual Facultade Facultade { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profesore> Profesores { get; set; }
+        public virtual ICollection<Escuela> Escuelas { get; set; }
     }
 }

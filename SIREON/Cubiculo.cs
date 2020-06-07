@@ -7,23 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON.Model.edmx
+namespace SIREON
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Facultade
+    public partial class Cubiculo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Facultade()
+        public Cubiculo()
         {
-            this.Escuelas = new HashSet<Escuela>();
+            this.Reservaciones = new HashSet<Reservacione>();
         }
     
-        public int ID_Facultad { get; set; }
-        public string Nombre { get; set; }
+        public int ID_Cubiculo { get; set; }
+        public string Descripcion { get; set; }
+        public decimal Capacidad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Escuela> Escuelas { get; set; }
+        public virtual ICollection<Reservacione> Reservaciones { get; set; }
     }
 }

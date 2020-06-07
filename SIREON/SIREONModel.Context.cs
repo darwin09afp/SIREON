@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON.Model.edmx
+namespace SIREON
 {
     using System;
     using System.Data.Entity;

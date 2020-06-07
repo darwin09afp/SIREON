@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SIREON;
-using SIREON.Model.edmx;
 
 namespace SIREON.Controllers
 {

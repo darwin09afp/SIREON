@@ -7,17 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SIREON.Model.edmx
+namespace SIREON
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ListaNegra
+    public partial class Cargo
     {
-        public int ID_ListaN { get; set; }
-        public int ID_Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cargo()
+        {
+            this.Empleados = new HashSet<Empleado>();
+        }
+    
+        public int ID_Cargo { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Empleado> Empleados { get; set; }
     }
 }

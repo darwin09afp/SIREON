@@ -169,10 +169,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Model.edmx\Cargo.cs">
+    <Compile Include="Cargo.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Carrera.cs">
+    <Compile Include="Carrera.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
@@ -193,91 +193,91 @@
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\SalasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
-    <Compile Include="Model.edmx\Cubiculo.cs">
+    <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Directore.cs">
+    <Compile Include="Directore.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Empleado.cs">
+    <Compile Include="Empleado.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Entidad.cs">
+    <Compile Include="Entidad.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Escuela.cs">
+    <Compile Include="Escuela.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Estudiante.cs">
+    <Compile Include="Estudiante.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Facultade.cs">
+    <Compile Include="Facultade.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\ListaNegra.cs">
+    <Compile Include="ListaNegra.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Model.edmx\Profesore.cs">
+    <Compile Include="Profesore.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Model.edmx\Reservacione.cs">
+    <Compile Include="Reservacione.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Role.cs">
+    <Compile Include="Role.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Sala.cs">
+    <Compile Include="Sala.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\SIREONModel.Context.cs">
+    <Compile Include="SIREONModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SIREONModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\SIREONModel.cs">
+    <Compile Include="SIREONModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\SIREONModel.Designer.cs">
+    <Compile Include="SIREONModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\sp_helpdiagrams_Result.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Model.edmx\sysdiagram.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\UniversidadModel.Context.cs">
+    <Compile Include="UniversidadModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversidadModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\UniversidadModel.cs">
+    <Compile Include="UniversidadModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\UniversidadModel.Designer.cs">
+    <Compile Include="UniversidadModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Model.edmx\Usuario.cs">
+    <Compile Include="Usuario.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WebRoleProvider.cs" />
@@ -2253,22 +2253,22 @@
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
     <Content Include="bin\SIREON.dll.config" />
-    <Content Include="Model.edmx\SIREONModel.Context.tt">
+    <Content Include="SIREONModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIREONModel.edmx</DependentUpon>
       <LastGenOutput>SIREONModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.edmx\SIREONModel.tt">
+    <Content Include="SIREONModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIREONModel.edmx</DependentUpon>
       <LastGenOutput>SIREONModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.edmx\UniversidadModel.Context.tt">
+    <Content Include="UniversidadModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
       <LastGenOutput>UniversidadModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model.edmx\UniversidadModel.tt">
+    <Content Include="UniversidadModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
       <LastGenOutput>UniversidadModel.cs</LastGenOutput>
@@ -2307,11 +2307,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <EntityDeploy Include="Model.edmx\UniversidadModel.edmx">
+    <EntityDeploy Include="UniversidadModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UniversidadModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model.edmx\UniversidadModel.edmx.diagram">
+    <Content Include="UniversidadModel.edmx.diagram">
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Cargos\Create.cshtml" />
@@ -2379,11 +2379,11 @@
     <Content Include="Views\Salas\Details.cshtml" />
     <Content Include="Views\Salas\Edit.cshtml" />
     <Content Include="Views\Salas\Index.cshtml" />
-    <EntityDeploy Include="Model.edmx\SIREONModel.edmx">
+    <EntityDeploy Include="SIREONModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>SIREONModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model.edmx\SIREONModel.edmx.diagram">
+    <Content Include="SIREONModel.edmx.diagram">
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Roles\Create.cshtml" />
