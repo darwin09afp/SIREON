@@ -7,6 +7,20 @@
     @Html.Partial("_Header")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Content/vendors/iconfonts/mdi/css/materialdesignicons.css">
+    <!-- endinject -->
+    <!-- vendor css for this page -->
+    <!-- End vendor css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="~/Content/css/shared/style.css">
+    <!-- endinject -->
+    <!-- Layout style -->
+    <link rel="stylesheet" href="~/Content/css/demo_1/style.css">
+    <!-- Layout style -->
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
 </head>
 <body class="header-fixed">
     <!-- partial -->
@@ -17,16 +31,17 @@
         </div>
         <!-- partial -->
         <div class="page-content-wrapper">
-            <div class="page-content-wrapper-inner">
+            <div class="content-viewport">
                 @RenderBody()
+
             </div>
+            <footer class="container">
+                <!-- partial:partials/_footer.html -->
+                @Html.Partial("_Footer")
+                <!-- partial -->
+            </footer>
+            <!-- content viewport ends -->
         </div>
-        <!-- content viewport ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-            @Html.Partial("_Footer")
-        </footer>
-        <!-- partial -->
     </div>
     <!-- page content ends -->
     @Scripts.Render("~/bundles/jquery")
@@ -34,3 +49,7 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
+
+
