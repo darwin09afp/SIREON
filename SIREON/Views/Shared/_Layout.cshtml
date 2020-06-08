@@ -36,25 +36,26 @@
         <div class="page-content-wrapper">
             <div class="page-content-wrapper-inner">
                 <div class="content-viewport-header">
-                    
+
                     <div class="content-viewport">
-                        
-                            @RenderBody()
-                        
+
+                        @RenderBody()
+
                     </div>
                 </div>
-            <!-- content viewport ends -->
-            <!-- partial:partials/_footer.html -->
-            <footer class="footer">
-                <div class="row">
-                    <div class="elementor-inner" style="color:black">
-                        @Html.Partial("_Footer")
+                <!-- content viewport ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="row">
+                        <div class="elementor-inner" style="color:black">
+                            @Html.Partial("_Footer")
+                        </div>
                     </div>
-                </div>
-            </footer>
-            <!-- partial -->
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- page content ends -->
         </div>
-        <!-- page content ends -->
     </div>
     <!--page body ends -->
     @Scripts.Render("~/bundles/jquery")
