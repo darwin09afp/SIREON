@@ -10,11 +10,13 @@ namespace SIREON.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.title = "Bienvenido";
             return View();
         }
 
         public ActionResult About()
         {
+            ViewBag.title = "Sobre nosotros";
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -22,7 +24,15 @@ namespace SIREON.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.title = "Contactos";
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Help()
+        {
+            ViewBag.title = "Ayuda";
+            ViewBag.Message = "Your Help page.";
 
             return View();
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Bienvenido a SIREON</title>
+    <title>@ViewBag.title</title>
     @Html.Partial("_Header")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -35,7 +35,9 @@
                 @RenderBody()
 
             </div>
-            <footer class="container">
+            <div class="row row-m-t"></div>
+            <div class="row row-m-t"></div>
+            <footer style=" background-color:GhostWhite">
                 <!-- partial:partials/_footer.html -->
                 @Html.Partial("_Footer")
                 <!-- partial -->

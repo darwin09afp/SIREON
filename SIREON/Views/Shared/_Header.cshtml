@@ -12,12 +12,14 @@
             <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
                 <i class="mdi mdi-menu"></i>
             </button>
-          
+            @{ 
+                <h4>@ViewBag.title</h4>
+            }
             <ul class="nav ml-auto">
                 <li>
-                    <h2>
+                    <h4>
                        @Html.Partial("_LoginPartial")                        
-                    </h2>
+                    </h4>
                 </li>
             </ul>
         </div>
