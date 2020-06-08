@@ -8,8 +8,8 @@ module.exports = (grunt)->
         src: 'less/flag-icon.less'
         dest: 'css/flag-icon.css'
       docs:
-        src: 'assets/docs.less'
-        dest: 'assets/docs.css'
+        src: 'docs.less'
+        dest: 'docs.css'
 
     cssmin:
       flag:
@@ -26,7 +26,7 @@ module.exports = (grunt)->
       assets:
         options:
           livereload: true
-        files: ['index.html', 'assets/*']
+        files: ['index.html', '*']
 
     connect:
       server:

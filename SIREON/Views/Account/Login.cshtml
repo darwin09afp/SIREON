@@ -2,7 +2,7 @@
 @model LoginViewModel
 @{
     Layout = null;
-    ViewBag.Title = "Log in";
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -10,25 +10,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- plugins:css -->
-    <link rel="stylesheet" href="~/Content/assets/vendors/iconfonts/mdi/css/materialdesignicons.css" />
-    <link rel="stylesheet" href="~/Content/assets/vendors/css/vendor.addons.css" />
+    <link rel="stylesheet" href="~/Content/vendors/iconfonts/mdi/css/materialdesignicons.css" />
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.addons.css" />
     <!-- endinject -->
     <!-- vendor css for this page -->
     <!-- End vendor css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="~/Content/assets/css/shared/style.css" />
+    <link rel="stylesheet" href="~/Content/css/shared/style.css" />
     <!-- endinject -->
     <!-- Layout style -->
-    <link rel="stylesheet" href="~/Content/assets/css/demo_1/style.css">
+    <link rel="stylesheet" href="~/Content/css/demo_1/style.css">
     <!-- Layout style -->
-    <link rel="shortcut icon" href="~/Content/assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
 </head>
 <body>
     <div class="authentication-theme auth-style_1">
         <div class="row">
             <div class="col-12 logo-section">
                 <a href='@Url.Action("Index", "Home")' class="logo">
-                    <img src="~/Content/assets/images/logo2.png" alt="logo" />
+                    <img src="~/Content/images/logo2.png" alt="logo" />
                 </a>
             </div>
         </div>
@@ -86,17 +86,13 @@
     <!--page body ends -->
     <!-- SCRIPT LOADING START FORM HERE /////////////-->
     <!-- plugins:js -->
-    <script src="~/Content/assets/vendors/js/core.js"></script>
-    <script src="~/Content/assets/vendors/js/vendor.addons.js"></script>
+    <script src="~/Content/vendors/js/core.js"></script>
+    <script src="~/Content/vendors/js/vendor.addons.js"></script>
     <!-- endinject -->
     <!-- Vendor Js For This Page Ends-->
     <!-- Vendor Js For This Page Ends-->
     <!-- build:js -->
-    <script src="~/Content/assets/js/template.js"></script>
+    <script src="~/Content/js/template.js"></script>
     <!-- endbuild -->
 </body>
 </html>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
