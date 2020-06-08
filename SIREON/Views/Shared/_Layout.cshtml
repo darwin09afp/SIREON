@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Bienvenido a SIREON</title>
-    @Html.Partial("_Header")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <meta charset="utf-8">
@@ -23,6 +22,10 @@
     <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
 </head>
 <body class="header-fixed">
+    <!-- partial:partials/_header.html -->
+    <nav class="t-header">
+        @Html.Partial("_Header")
+    </nav>
     <!-- partial -->
     <div class="page-body">
         <!-- partial:partials/_sidebar.html -->
@@ -31,25 +34,30 @@
         </div>
         <!-- partial -->
         <div class="page-content-wrapper">
-            <div class="content-viewport">
-                @RenderBody()
-
-            </div>
-            <footer class="container">
-                <!-- partial:partials/_footer.html -->
-                @Html.Partial("_Footer")
-                <!-- partial -->
-            </footer>
+            <div class="page-content-wrapper-inner">
+                <div class="content-viewport-header">
+                    
+                    <div class="content-viewport">
+                        
+                            @RenderBody()
+                        
+                    </div>
+                </div>
             <!-- content viewport ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="row">
+                    <div class="elementor-inner" style="color:black">
+                        @Html.Partial("_Footer")
+                    </div>
+                </div>
+            </footer>
+            <!-- partial -->
         </div>
+        <!-- page content ends -->
     </div>
-    <!-- page content ends -->
+    <!--page body ends -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>
-
-
-
-

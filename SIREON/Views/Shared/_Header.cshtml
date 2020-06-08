@@ -1,25 +1,25 @@
-﻿<nav class="t-header">
-    <div class="t-header-brand-wrapper">
-        <a href='@Url.Action("Index", "Home")'>
-            <img class="logo" src="~/Content/images/logo.png" alt="" style="width:150px;height:90px">
-            <img class="logo-mini" src="~/Content/images/logo mini.png" style="width:90px;height:50px">
-        </a>
-
+﻿<div class="t-header-brand-wrapper">
+    <a href='@Url.Action("Index", "Home")'>
+        <img class="logo" src="~/Content/images/logo.png" alt="" style="width:150px;height:90px">
+        <img class="logo-mini" src="~/Content/images/logo mini.png" style="width:90px;height:50px">
+    </a>
+</div>
+<div class="t-header-content-wrapper">
+    <div class="t-header-content">
+        <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
+            <i class="mdi mdi-menu"></i>
+        </button>
+        <form action="#" class="t-header-search-box">
+            <div class="input-group">
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search" autocomplete="off">
+                <button class="btn btn-primary" type="submit"><i class="mdi mdi-arrow-right-thick"></i></button>
+            </div>
+        </form>
     </div>
-    <div class="t-header-content-wrapper">
-        <div class="t-header-content">
-
-            <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
-                <i class="mdi mdi-menu"></i>
-            </button>
-          
-            <ul class="nav ml-auto">
-                <li>
-                    <h2>
-                       @Html.Partial("_LoginPartial")                        
-                    </h2>
-                </li>
-            </ul>
-        </div>
+    <div class="t-header-content-wrapper-right">
+        <h6>
+            @Html.Partial("_LoginPartial")
+        </h6>
     </div>
-</nav>
+
+</div>
