@@ -24,16 +24,16 @@
     <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
 </head>
 <body>
-    <div class="authentication-theme auth-style_1">
+    <div class="authentication-theme auth-style_1" style="padding: 5% 0 1px 0;">
         <div class="row">
             <div class="col-12 logo-section">
                 <a href='@Url.Action("Index", "Home")' class="logo">
-                    <img src="~/Content/images/logo2.png" alt="logo" />
+                    <img src="~/Content/images/logo2.png" alt="logo" style="width:130%" />
                 </a>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-5 col-md-7 col-sm-9 col-11 mx-auto">
+            <div class="col-lg-4 col-md-6 col-sm-7 col-11 mx-auto">
                 <div class="grid">
                     <div class="grid-body">
                         <section id="loginForm">
@@ -61,13 +61,13 @@
                                             </div>
                                         </div>
                                         @*<div class="form-group">
-                                                @Html.CheckBoxFor(m => m.RememberMe)
-                                                @Html.LabelFor(m => m.RememberMe)
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            @Html.LabelFor(m => m.RememberMe)
                                         </div>*@
-                                        <div class="form-group">
+
+                                        <div class="form-group input-rounded">
                                             <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> Iniciar sesión </button>
                                         </div>
-
                                         <div class="signup-link">
                                             <p>¿No tienes una cuenta aún?</p>
                                             @Html.ActionLink("Regístrate", "Register")
