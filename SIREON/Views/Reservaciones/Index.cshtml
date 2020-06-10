@@ -157,14 +157,14 @@
                                     {
                                         <label class="badge badge-success">Completada</label>
                                     }
-                                    else
+                                    else if (item.Estatus == "Cancelada")
                                     {
                                         <label class="badge badge-danger">Cancelada</label>
                                     }
                                 }
 
-                                <label class="badge badge-success">Completed</label>
-                                <label class="badge badge-danger">Pending</label>
+                                @*<label class="badge badge-success">Completed</label>
+                                <label class="badge badge-danger">Pending</label>*@
                             </td>
                             <td>
                                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
