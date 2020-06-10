@@ -19,7 +19,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Index()
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
             return View(reservaciones.ToList());
         }
@@ -27,7 +27,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones/Details/5
         public ActionResult Details(int? id)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,7 +43,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones/Create
         public ActionResult Create()
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala");
             ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1");
@@ -57,10 +57,10 @@ namespace SIREON.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID_Reservacion,ID_Usuario,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus")] Reservacione reservacione)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             if (ModelState.IsValid)
             {
-                ViewBag.title = "Mi espacio";
+                ViewBag.title = "Mi espacio | SIREON";
                 db.Reservaciones.Add(reservacione);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -75,7 +75,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones/Edit/5
         public ActionResult Edit(int? id)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -98,7 +98,7 @@ namespace SIREON.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID_Reservacion,ID_Usuario,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus")] Reservacione reservacione)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             if (ModelState.IsValid)
             {
                 db.Entry(reservacione).State = EntityState.Modified;
@@ -114,7 +114,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones/Delete/5
         public ActionResult Delete(int? id)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,7 +132,7 @@ namespace SIREON.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.title = "Mi espacio";
+            ViewBag.title = "Mi espacio | SIREON";
             Reservacione reservacione = db.Reservaciones.Find(id);
             db.Reservaciones.Remove(reservacione);
             db.SaveChanges();
