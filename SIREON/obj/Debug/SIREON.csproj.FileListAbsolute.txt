@@ -132,3 +132,4 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\vbc.exe.config
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\vbc.rsp
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache
