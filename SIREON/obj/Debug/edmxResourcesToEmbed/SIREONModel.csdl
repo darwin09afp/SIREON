@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SIREONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cubiculo">
+    <Key>
+      <PropertyRef Name="ID_Cubiculo" />
+    </Key>
+    <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Capacidad" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Cubiculos" ToRole="Reservaciones" />
+  </EntityType>
+  <EntityType Name="ListaNegra">
+    <Key>
+      <PropertyRef Name="ID_ListaN" />
+    </Key>
+    <Property Name="ID_ListaN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="ListaNegra" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Reservacione">
+    <Key>
+      <PropertyRef Name="ID_Reservacion" />
+    </Key>
+    <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="ID_Sala" Type="Int32" Nullable="false" />
+    <Property Name="ID_Empleado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
+    <Property Name="FechaSolicitada" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="HSolicitada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HEntrada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HSalida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Cubiculo" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Reservaciones" ToRole="Cubiculos" />
+    <NavigationProperty Name="Sala" Relationship="Self.FK_Reservaciones_Salas" FromRole="Reservaciones" ToRole="Salas" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Reservaciones" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID_RolUsuario" />
+    </Key>
+    <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK_Roles_Usuarios" FromRole="Roles" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Sala">
+    <Key>
+      <PropertyRef Name="ID_Sala" />
+    </Key>
+    <Property Name="ID_Sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Salas" FromRole="Salas" ToRole="Reservaciones" />
+    <NavigationProperty Name="Usuarios" Relationship="Self.R_Salas_Usuarios" FromRole="Salas" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="ID_Usuario" />
+    </Key>
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario1" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contrasena" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Pregunta1" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Pregunta2" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Respuesta1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
+    <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
+    <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
+    <NavigationProperty Name="Salas" Relationship="Self.R_Salas_Usuarios" FromRole="Usuarios" ToRole="Salas" />
+  </EntityType>
+  <Association Name="FK_Reservaciones_Cubiculos">
+    <End Role="Cubiculos" Type="Self.Cubiculo" Multiplicity="1" />
+    <End Role="Reservaciones" Type="Self.Reservacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cubiculos">
+        <PropertyRef Name="ID_Cubiculo" />
+      </Principal>
+      <Dependent Role="Reservaciones">
+        <PropertyRef Name="ID_Cubiculo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListaNegra_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="ListaNegra">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservaciones_Salas">
+    <End Role="Salas" Type="Self.Sala" Multiplicity="1" />
+    <End Role="Reservaciones" Type="Self.Reservacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salas">
+        <PropertyRef Name="ID_Sala" />
+      </Principal>
+      <Dependent Role="Reservaciones">
+        <PropertyRef Name="ID_Sala" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservaciones_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Reservaciones" Type="Self.Reservacione" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Reservaciones">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Roles_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Roles">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_Salas_Usuarios">
+    <End Role="Salas" Type="Self.Sala" Multiplicity="*" />
+    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="SIREONEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
+    <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
+    <EntitySet Name="Reservaciones" EntityType="Self.Reservacione" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Salas" EntityType="Self.Sala" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <AssociationSet Name="FK_Reservaciones_Cubiculos" Association="Self.FK_Reservaciones_Cubiculos">
+      <End Role="Cubiculos" EntitySet="Cubiculos" />
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="ListaNegra" EntitySet="ListaNegras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservaciones_Salas" Association="Self.FK_Reservaciones_Salas">
+      <End Role="Salas" EntitySet="Salas" />
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservaciones_Usuarios" Association="Self.FK_Reservaciones_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Roles" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="R_Salas_Usuarios" Association="Self.R_Salas_Usuarios">
+      <End Role="Salas" EntitySet="Salas" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SIREONModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SIREONModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

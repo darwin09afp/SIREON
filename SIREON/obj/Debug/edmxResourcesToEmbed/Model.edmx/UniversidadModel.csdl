@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UniversidadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cargo">
+    <Key>
+      <PropertyRef Name="ID_Cargo" />
+    </Key>
+    <Property Name="ID_Cargo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Cargos" FromRole="Cargos" ToRole="Empleados" />
+  </EntityType>
+  <EntityType Name="Carrera">
+    <Key>
+      <PropertyRef Name="ID_Carrera" />
+    </Key>
+    <Property Name="ID_Carrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Escuela" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Escuela" Relationship="Self.FK_Carreras_Escuelas" FromRole="Carreras" ToRole="Escuelas" />
+    <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_Carreras" FromRole="Carreras" ToRole="Estudiantes" />
+  </EntityType>
+  <EntityType Name="Directore">
+    <Key>
+      <PropertyRef Name="ID_Director" />
+    </Key>
+    <Property Name="ID_Director" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Entidad" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Entidad" Relationship="Self.FK_Directores_Entidad" FromRole="Directores" ToRole="Entidad" />
+    <NavigationProperty Name="Escuelas" Relationship="Self.FK_Escuelas_Directores" FromRole="Directores" ToRole="Escuelas" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="ID_Empleado" />
+    </Key>
+    <Property Name="ID_Empleado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Entidad" Type="Int32" Nullable="false" />
+    <Property Name="ID_Cargo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cargo" Relationship="Self.FK_Empleados_Cargos" FromRole="Empleados" ToRole="Cargos" />
+    <NavigationProperty Name="Entidad" Relationship="Self.FK_Empleados_Entidad" FromRole="Empleados" ToRole="Entidad" />
+  </EntityType>
+  <EntityType Name="Entidad">
+    <Key>
+      <PropertyRef Name="ID_Entidad" />
+    </Key>
+    <Property Name="ID_Entidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Directores" Relationship="Self.FK_Directores_Entidad" FromRole="Entidad" ToRole="Directores" />
+    <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Entidad" FromRole="Entidad" ToRole="Empleados" />
+    <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_Entidad" FromRole="Entidad" ToRole="Estudiantes" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK_Profesores_Entidad" FromRole="Entidad" ToRole="Profesores" />
+  </EntityType>
+  <EntityType Name="Escuela">
+    <Key>
+      <PropertyRef Name="ID_Escuela" />
+    </Key>
+    <Property Name="ID_Escuela" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Director" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Facultad" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Carreras" Relationship="Self.FK_Carreras_Escuelas" FromRole="Escuelas" ToRole="Carreras" />
+    <NavigationProperty Name="Directore" Relationship="Self.FK_Escuelas_Directores" FromRole="Escuelas" ToRole="Directores" />
+    <NavigationProperty Name="Facultade" Relationship="Self.FK_Escuelas_Facultades" FromRole="Escuelas" ToRole="Facultades" />
+    <NavigationProperty Name="Profesores" Relationship="Self.FK_Profesores_Escuelas" FromRole="Escuelas" ToRole="Profesores" />
+  </EntityType>
+  <EntityType Name="Estudiante">
+    <Key>
+      <PropertyRef Name="ID_Estudiante" />
+    </Key>
+    <Property Name="ID_Estudiante" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Entidad" Type="Int32" Nullable="false" />
+    <Property Name="ID_Carrera" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carrera" Relationship="Self.FK_Estudiantes_Carreras" FromRole="Estudiantes" ToRole="Carreras" />
+    <NavigationProperty Name="Entidad" Relationship="Self.FK_Estudiantes_Entidad" FromRole="Estudiantes" ToRole="Entidad" />
+  </EntityType>
+  <EntityType Name="Facultade">
+    <Key>
+      <PropertyRef Name="ID_Facultad" />
+    </Key>
+    <Property Name="ID_Facultad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Escuelas" Relationship="Self.FK_Escuelas_Facultades" FromRole="Facultades" ToRole="Escuelas" />
+  </EntityType>
+  <EntityType Name="Profesore">
+    <Key>
+      <PropertyRef Name="ID_Profesor" />
+    </Key>
+    <Property Name="ID_Profesor" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Entidad" Type="Int32" Nullable="false" />
+    <Property Name="ID_Escuela" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Entidad" Relationship="Self.FK_Profesores_Entidad" FromRole="Profesores" ToRole="Entidad" />
+    <NavigationProperty Name="Escuela" Relationship="Self.FK_Profesores_Escuelas" FromRole="Profesores" ToRole="Escuelas" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Empleados_Cargos">
+    <End Role="Cargos" Type="Self.Cargo" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cargos">
+        <PropertyRef Name="ID_Cargo" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="ID_Cargo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carreras_Escuelas">
+    <End Role="Escuelas" Type="Self.Escuela" Multiplicity="1" />
+    <End Role="Carreras" Type="Self.Carrera" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Escuelas">
+        <PropertyRef Name="ID_Escuela" />
+      </Principal>
+      <Dependent Role="Carreras">
+        <PropertyRef Name="ID_Escuela" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estudiantes_Carreras">
+    <End Role="Carreras" Type="Self.Carrera" Multiplicity="1" />
+    <End Role="Estudiantes" Type="Self.Estudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carreras">
+        <PropertyRef Name="ID_Carrera" />
+      </Principal>
+      <Dependent Role="Estudiantes">
+        <PropertyRef Name="ID_Carrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Directores_Entidad">
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
+    <End Role="Directores" Type="Self.Directore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad">
+        <PropertyRef Name="ID_Entidad" />
+      </Principal>
+      <Dependent Role="Directores">
+        <PropertyRef Name="ID_Entidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Escuelas_Directores">
+    <End Role="Directores" Type="Self.Directore" Multiplicity="1" />
+    <End Role="Escuelas" Type="Self.Escuela" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Directores">
+        <PropertyRef Name="ID_Director" />
+      </Principal>
+      <Dependent Role="Escuelas">
+        <PropertyRef Name="ID_Director" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empleados_Entidad">
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
+    <End Role="Empleados" Type="Self.Empleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad">
+        <PropertyRef Name="ID_Entidad" />
+      </Principal>
+      <Dependent Role="Empleados">
+        <PropertyRef Name="ID_Entidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Estudiantes_Entidad">
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
+    <End Role="Estudiantes" Type="Self.Estudiante" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad">
+        <PropertyRef Name="ID_Entidad" />
+      </Principal>
+      <Dependent Role="Estudiantes">
+        <PropertyRef Name="ID_Entidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profesores_Entidad">
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
+    <End Role="Profesores" Type="Self.Profesore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entidad">
+        <PropertyRef Name="ID_Entidad" />
+      </Principal>
+      <Dependent Role="Profesores">
+        <PropertyRef Name="ID_Entidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Escuelas_Facultades">
+    <End Role="Facultades" Type="Self.Facultade" Multiplicity="1" />
+    <End Role="Escuelas" Type="Self.Escuela" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facultades">
+        <PropertyRef Name="ID_Facultad" />
+      </Principal>
+      <Dependent Role="Escuelas">
+        <PropertyRef Name="ID_Facultad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profesores_Escuelas">
+    <End Role="Escuelas" Type="Self.Escuela" Multiplicity="1" />
+    <End Role="Profesores" Type="Self.Profesore" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Escuelas">
+        <PropertyRef Name="ID_Escuela" />
+      </Principal>
+      <Dependent Role="Profesores">
+        <PropertyRef Name="ID_Escuela" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UniversidadEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cargos" EntityType="Self.Cargo" />
+    <EntitySet Name="Carreras" EntityType="Self.Carrera" />
+    <EntitySet Name="Directores" EntityType="Self.Directore" />
+    <EntitySet Name="Empleados" EntityType="Self.Empleado" />
+    <EntitySet Name="Entidads" EntityType="Self.Entidad" />
+    <EntitySet Name="Escuelas" EntityType="Self.Escuela" />
+    <EntitySet Name="Estudiantes" EntityType="Self.Estudiante" />
+    <EntitySet Name="Facultades" EntityType="Self.Facultade" />
+    <EntitySet Name="Profesores" EntityType="Self.Profesore" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
+      <End Role="Cargos" EntitySet="Cargos" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carreras_Escuelas" Association="Self.FK_Carreras_Escuelas">
+      <End Role="Escuelas" EntitySet="Escuelas" />
+      <End Role="Carreras" EntitySet="Carreras" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estudiantes_Carreras" Association="Self.FK_Estudiantes_Carreras">
+      <End Role="Carreras" EntitySet="Carreras" />
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Directores_Entidad" Association="Self.FK_Directores_Entidad">
+      <End Role="Entidad" EntitySet="Entidads" />
+      <End Role="Directores" EntitySet="Directores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Escuelas_Directores" Association="Self.FK_Escuelas_Directores">
+      <End Role="Directores" EntitySet="Directores" />
+      <End Role="Escuelas" EntitySet="Escuelas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empleados_Entidad" Association="Self.FK_Empleados_Entidad">
+      <End Role="Entidad" EntitySet="Entidads" />
+      <End Role="Empleados" EntitySet="Empleados" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Estudiantes_Entidad" Association="Self.FK_Estudiantes_Entidad">
+      <End Role="Entidad" EntitySet="Entidads" />
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profesores_Entidad" Association="Self.FK_Profesores_Entidad">
+      <End Role="Entidad" EntitySet="Entidads" />
+      <End Role="Profesores" EntitySet="Profesores" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Escuelas_Facultades" Association="Self.FK_Escuelas_Facultades">
+      <End Role="Facultades" EntitySet="Facultades" />
+      <End Role="Escuelas" EntitySet="Escuelas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profesores_Escuelas" Association="Self.FK_Profesores_Escuelas">
+      <End Role="Escuelas" EntitySet="Escuelas" />
+      <End Role="Profesores" EntitySet="Profesores" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(UniversidadModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(UniversidadModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
