@@ -11,13 +11,19 @@
         </a>
     </li>
     <li>
-        <a href="@Url.Action("Index", "Reservaciones")">
-            <span class="link-title">Mi Espacio</span>
-            <i class="mdi mdi-calendar link-icon"></i>
+        <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
+            <span class="link-title">Mi espacio</span>
+            <i class="mdi mdi-nature-people link-icon"></i>
         </a>
-
+        <ul class="collapse navigation-submenu" id="sample-pages">
+            <li>
+                <a href="@Url.Action("Index", "Reservaciones")">Mis reservaciones</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index2", "Reservaciones")">Mis invitaciones</a>
+            </li>
+        </ul>
     </li>
-
     <li>
         <a href="@Url.Action("Contact", "Home")">
             <span class="link-title">Contáctanos</span>

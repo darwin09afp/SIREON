@@ -11,13 +11,21 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    [Authorize /*(Roles = "Operador,Usuario")*/]
+    //[Authorize /*(Roles = "Operador,Usuario")*/]
     public class ReservacionesController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
 
         // GET: Reservaciones
         public ActionResult Index()
+        {
+            ViewBag.title = "Mi espacio | SIREON";
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
+            return View(reservaciones.ToList());
+        }
+
+        // GET: Reservaciones
+        public ActionResult Index2()
         {
             ViewBag.title = "Mi espacio | SIREON";
             var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
