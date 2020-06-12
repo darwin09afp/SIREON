@@ -3,110 +3,170 @@
 @{
 
 }
-<body>
-    <div class="authentication-theme auth-style_1" style="padding: 5% 0 1px 0;">
+    <body>
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-11 mx-auto">
+            <div class="col-lg-6 equel-grid">
                 <div class="grid">
+                    <p class="grid-header">Detalles de reservación</p>
                     <div class="grid-body">
-                        <section id="loginForm">
-                            <div class="row">
-                                <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
-                                    @using (Html.BeginForm())
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.ID_Usuario, "ID_Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.ID_Sala, "ID_Sala", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.DropDownList("ID_Sala", null, htmlAttributes: new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.ID_Sala, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.ID_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.ID_Empleado, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.ID_Cubiculo, "ID_Cubiculo", htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.DropDownList("ID_Cubiculo", null, htmlAttributes: new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.ID_Cubiculo, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.FechaSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.FechaSolicitada, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.FechaSolicitada, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.HSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.HEntrada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.HEntrada, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.HEntrada, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.HSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group input-rounded">
-                                            @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                                            <div class="form-group input-rounded">
-                                                @Html.EditorFor(model => model.Estatus, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                        <div class="form-group input-rounded ">
-                                            <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> RESERVAR </button>
-                                        </div>
-                                    }
+                        <div class="item-wrapper">
+                            <form>
+                                <div class="form-group row showcase_row_area justify-content-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
+                                        <label>Fecha:</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5  showcase_content_area">
+                                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/AAAA" } })
+                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                                <div class="form-group row showcase_row_area justify-content-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
+                                        <label>Entrada:</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 showcase_content_area">
+                                        @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
+                                        @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row showcase_row_area justify-content-center">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
+                                        <label>Salida:</label>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 showcase_content_area">
+                                        @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
+                                        @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                                <div class="row" style="justify-content:space-between">
+                                    <button type="button" class="btn btn-sm btn-primary" style="background-color:darkred">Regresar</button>
+                                    <button type="button" class="btn btn-sm btn-primary" style="background-color:green">Continuar</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 equel-grid">
+                <div class="grid">
+                    <p class="grid-header">Invitar compañeros</p>
+                    <div class="grid-body">
+                        <div class="item-wrapper">
+                            <form>
+
+                                <button type="submit" class="btn btn-sm btn-primary">Invitar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-</body>
+        
+        <div class="authentication-theme auth-style_1" style="padding: 5% 0 1px 0;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-11 mx-auto">
+                    <div class="grid">
+                        <div class="grid-body">
+                            <section id="loginForm">
+                                <div class="row">
+                                    <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
+                                        @using (Html.BeginForm())
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.ID_Usuario, "ID_Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.ID_Sala, "ID_Sala", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.DropDownList("ID_Sala", null, htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ID_Sala, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.ID_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.ID_Empleado, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.ID_Cubiculo, "ID_Cubiculo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.DropDownList("ID_Cubiculo", null, htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.ID_Cubiculo, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.FechaSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.FechaSolicitada, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.FechaSolicitada, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.HSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.HEntrada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.HEntrada, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.HEntrada, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.HSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group input-rounded">
+                                                @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.EditorFor(model => model.Estatus, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group input-rounded ">
+                                                <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> RESERVAR </button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
 
 
