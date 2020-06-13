@@ -29,6 +29,7 @@ namespace SIREON
     
         public virtual DbSet<Cubiculo> Cubiculos { get; set; }
         public virtual DbSet<ListaNegra> ListaNegras { get; set; }
+        public virtual DbSet<R_Salas_Usuarios> R_Salas_Usuarios { get; set; }
         public virtual DbSet<Reservacione> Reservaciones { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Sala> Salas { get; set; }

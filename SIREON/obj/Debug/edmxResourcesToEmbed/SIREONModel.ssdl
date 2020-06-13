@@ -16,13 +16,11 @@
     <Property Name="ID_Usuario" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="R_Salas-Usuarios">
     <Key>
-      <PropertyRef Name="ID_Sala" />
-      <PropertyRef Name="ID_Usuario" />
+      <PropertyRef Name="ID_RSalas" />
     </Key>
+    <Property Name="ID_RSalas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ID_Sala" Type="int" Nullable="false" />
     <Property Name="ID_Usuario" Type="int" Nullable="false" />
   </EntityType>
@@ -197,17 +195,12 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
   <EntityContainer Name="SIREONModelStoreContainer">
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [R_Salas-Usuarios].[ID_Sala] AS [ID_Sala], 
-    [R_Salas-Usuarios].[ID_Usuario] AS [ID_Usuario]
-    FROM [dbo].[R_Salas-Usuarios] AS [R_Salas-Usuarios]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="ListaNegra" EntitySet="ListaNegra" />

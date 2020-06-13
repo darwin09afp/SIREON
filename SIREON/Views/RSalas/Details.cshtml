@@ -1,0 +1,35 @@
+﻿@model SIREON.R_Salas_Usuarios
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>R_Salas_Usuarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Sala.ID_Sala)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sala.ID_Sala)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Usuario1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Usuario1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_RSalas }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -21,13 +21,11 @@
           <Property Name="ID_Usuario" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="R_Salas-Usuarios">
           <Key>
-            <PropertyRef Name="ID_Sala" />
-            <PropertyRef Name="ID_Usuario" />
+            <PropertyRef Name="ID_RSalas" />
           </Key>
+          <Property Name="ID_RSalas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_Sala" Type="int" Nullable="false" />
           <Property Name="ID_Usuario" Type="int" Nullable="false" />
         </EntityType>
@@ -202,17 +200,12 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
         <EntityContainer Name="SIREONModelStoreContainer">
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [R_Salas-Usuarios].[ID_Sala] AS [ID_Sala], 
-    [R_Salas-Usuarios].[ID_Usuario] AS [ID_Usuario]
-    FROM [dbo].[R_Salas-Usuarios] AS [R_Salas-Usuarios]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="ListaNegra" EntitySet="ListaNegra" />
@@ -265,6 +258,16 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="ListaNegra" ToRole="Usuarios" />
         </EntityType>
+        <EntityType Name="R_Salas_Usuarios">
+          <Key>
+            <PropertyRef Name="ID_RSalas" />
+          </Key>
+          <Property Name="ID_RSalas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Sala" Type="Int32" Nullable="false" />
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sala" Relationship="Self.FK_R_Salas_Usuarios_Salas" FromRole="R_Salas_Usuarios" ToRole="Salas" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_R_Salas_Usuarios_Usuarios" FromRole="R_Salas_Usuarios" ToRole="Usuarios" />
+        </EntityType>
         <EntityType Name="Reservacione">
           <Key>
             <PropertyRef Name="ID_Reservacion" />
@@ -298,8 +301,8 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
             <PropertyRef Name="ID_Sala" />
           </Key>
           <Property Name="ID_Sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="R_Salas_Usuarios" Relationship="Self.FK_R_Salas_Usuarios_Salas" FromRole="Salas" ToRole="R_Salas_Usuarios" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Salas" FromRole="Salas" ToRole="Reservaciones" />
-          <NavigationProperty Name="Usuarios" Relationship="Self.R_Salas_Usuarios" FromRole="Salas" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -324,9 +327,9 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Estatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
+          <NavigationProperty Name="R_Salas_Usuarios" Relationship="Self.FK_R_Salas_Usuarios_Usuarios" FromRole="Usuarios" ToRole="R_Salas_Usuarios" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
-          <NavigationProperty Name="Salas" Relationship="Self.R_Salas_Usuarios" FromRole="Usuarios" ToRole="Salas" />
         </EntityType>
         <Association Name="FK_Reservaciones_Cubiculos">
           <End Role="Cubiculos" Type="Self.Cubiculo" Multiplicity="1" />
@@ -348,6 +351,30 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
               <PropertyRef Name="ID_Usuario" />
             </Principal>
             <Dependent Role="ListaNegra">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_R_Salas_Usuarios_Salas">
+          <End Role="Salas" Type="Self.Sala" Multiplicity="1" />
+          <End Role="R_Salas_Usuarios" Type="Self.R_Salas_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salas">
+              <PropertyRef Name="ID_Sala" />
+            </Principal>
+            <Dependent Role="R_Salas_Usuarios">
+              <PropertyRef Name="ID_Sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_R_Salas_Usuarios_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="R_Salas_Usuarios" Type="Self.R_Salas_Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="R_Salas_Usuarios">
               <PropertyRef Name="ID_Usuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -388,13 +415,10 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="R_Salas_Usuarios">
-          <End Role="Salas" Type="Self.Sala" Multiplicity="*" />
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="SIREONEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
           <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
+          <EntitySet Name="R_Salas_Usuarios" EntityType="Self.R_Salas_Usuarios" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservacione" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Salas" EntityType="Self.Sala" />
@@ -408,6 +432,14 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="ListaNegra" EntitySet="ListaNegras" />
           </AssociationSet>
+          <AssociationSet Name="FK_R_Salas_Usuarios_Salas" Association="Self.FK_R_Salas_Usuarios_Salas">
+            <End Role="Salas" EntitySet="Salas" />
+            <End Role="R_Salas_Usuarios" EntitySet="R_Salas_Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_R_Salas_Usuarios_Usuarios" Association="Self.FK_R_Salas_Usuarios_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="R_Salas_Usuarios" EntitySet="R_Salas_Usuarios" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reservaciones_Salas" Association="Self.FK_Reservaciones_Salas">
             <End Role="Salas" EntitySet="Salas" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
@@ -419,10 +451,6 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
           <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Roles" EntitySet="Roles" />
-          </AssociationSet>
-          <AssociationSet Name="R_Salas_Usuarios" Association="Self.R_Salas_Usuarios">
-            <End Role="Salas" EntitySet="Salas" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -490,6 +518,15 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="R_Salas_Usuarios">
+            <EntityTypeMapping TypeName="SIREONModel.R_Salas_Usuarios">
+              <MappingFragment StoreEntitySet="R_Salas-Usuarios">
+                <ScalarProperty Name="ID_RSalas" ColumnName="ID_RSalas" />
+                <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Reservaciones">
             <EntityTypeMapping TypeName="SIREONModel.Reservacione">
               <MappingFragment StoreEntitySet="Reservaciones">
@@ -548,14 +585,6 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.R_Salas-Usuarios' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="R_Salas_Usuarios" TypeName="SIREONModel.R_Salas_Usuarios" StoreEntitySet="R_Salas-Usuarios">
-            <EndProperty Name="Salas">
-              <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
-            </EndProperty>
-            <EndProperty Name="Usuarios">
-              <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SIREONModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SIREONModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SIREONModel.Store.sp_dropdiagram" />

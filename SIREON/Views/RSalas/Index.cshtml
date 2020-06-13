@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SIREON.R_Salas_Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Sala.ID_Sala)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Usuario1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sala.ID_Sala)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Usuario1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_RSalas }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_RSalas }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_RSalas })
+        </td>
+    </tr>
+}
+
+</table>

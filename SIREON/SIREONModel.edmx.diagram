@@ -4,20 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cf7660e237284c3d8bc3c406b20ecd46" Name="Diagram1">
-        <EntityTypeShape EntityType="SIREONModel.Cubiculo" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.ListaNegra" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.Reservacione" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.Role" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.Sala" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+      <Diagram DiagramId="8e49fa680f5f4e0bb32873df01ef7395" Name="Diagram1">
+        <EntityTypeShape EntityType="SIREONModel.Cubiculo" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.ListaNegra" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.R_Salas_Usuarios" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.Reservacione" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.Role" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.Sala" Width="1.5" PointX="3.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.Usuario" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SIREONModel.Usuario" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Cubiculos" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_ListaNegra_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_Salas" ManuallyRouted="false" />
+        <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Salas" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Roles_Usuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="SIREONModel.R_Salas_Usuarios" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

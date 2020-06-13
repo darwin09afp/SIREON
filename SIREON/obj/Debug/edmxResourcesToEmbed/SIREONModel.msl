@@ -19,6 +19,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="R_Salas_Usuarios">
+      <EntityTypeMapping TypeName="SIREONModel.R_Salas_Usuarios">
+        <MappingFragment StoreEntitySet="R_Salas-Usuarios">
+          <ScalarProperty Name="ID_RSalas" ColumnName="ID_RSalas" />
+          <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
+          <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Reservaciones">
       <EntityTypeMapping TypeName="SIREONModel.Reservacione">
         <MappingFragment StoreEntitySet="Reservaciones">
@@ -77,14 +86,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="R_Salas_Usuarios" TypeName="SIREONModel.R_Salas_Usuarios" StoreEntitySet="R_Salas-Usuarios">
-      <EndProperty Name="Salas">
-        <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
-      </EndProperty>
-      <EndProperty Name="Usuarios">
-        <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
-      </EndProperty>
-    </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SIREONModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SIREONModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SIREONModel.Store.sp_dropdiagram" />
