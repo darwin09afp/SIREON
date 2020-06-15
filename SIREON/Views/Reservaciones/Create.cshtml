@@ -3,170 +3,340 @@
 @{
 
 }
-    <body>
-        <div class="row">
-            <div class="col-lg-6 equel-grid">
-                <div class="grid">
-                    <p class="grid-header">Detalles de reservación</p>
-                    <div class="grid-body">
-                        <div class="item-wrapper">
-                            <form>
-                                <div class="form-group row showcase_row_area justify-content-center">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
-                                        <label>Fecha:</label>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5  showcase_content_area">
-                                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/AAAA" } })
-                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                                    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <div class="row">
+        <div class="col-lg-12 equel-grid">
+            <div class="grid">
+                <p class="grid-header" style="border-left-color:green">Detalles de reservación</p>
+                <div class="grid-body">
+                    <div class="item-wrapper">
+                        <form>
+                            <div class="form-row align-items-center justify-content-between">
+                                <div class="col-lg-3 col-md-3 col-sm-3  showcase_content_area">
+                                    <label>Fecha:</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="DD/MM/AAAA" readonly>
+                                    @*@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/AAAA"} })
+                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })*@
                                 </div>
-                                <div class="form-group row showcase_row_area justify-content-center">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
-                                        <label>Entrada:</label>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 showcase_content_area">
-                                        @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
-                                        @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
-                                    </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
+                                    <label>Hora de entrada:</label>
+                                    <select class="custom-select my-1 mr-sm-2" id="Horaentrada">
+                                        <option value="" disabled selected>Elige...</option>
+                                        <option value="1">08:00 AM</option>
+                                        <option value="2">09:00 AM</option>
+                                        <option value="3">10:00 AM</option>
+                                        <option value="4">11:00 AM</option>
+                                        <option value="5">12:00 PM</option>
+                                        <option value="6">01:00 PM</option>
+                                        <option value="7">02:00 PM</option>
+                                        <option value="8">03:00 PM</option>
+                                        <option value="9">04:00 PM</option>
+                                        <option value="10">05:00 PM</option>
+                                        <option value="11">06:00 PM</option>
+                                        <option value="12">07:00 PM</option>
+                                    </select>
+                                    @*@Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
+                                    @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })*@
                                 </div>
-                                <div class="form-group row showcase_row_area justify-content-center">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
-                                        <label>Salida:</label>
-                                    </div>
-                                    <div class="col-lg-5 col-md-5 col-sm-5 showcase_content_area">
-                                        @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
-                                        @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
-                                    </div>
 
-                                </div>
-                                <div class="row" style="justify-content:space-between">
-                                    <button type="button" class="btn btn-sm btn-primary" style="background-color:darkred">Regresar</button>
-                                    <button type="button" class="btn btn-sm btn-primary" style="background-color:green">Continuar</button>
-                                </div>
-                                
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 equel-grid">
-                <div class="grid">
-                    <p class="grid-header">Invitar compañeros</p>
-                    <div class="grid-body">
-                        <div class="item-wrapper">
-                            <form>
+                                <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
+                                    <label>Hora de salida:</label>
 
-                                <button type="submit" class="btn btn-sm btn-primary">Invitar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="authentication-theme auth-style_1" style="padding: 5% 0 1px 0;">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-11 mx-auto">
-                    <div class="grid">
-                        <div class="grid-body">
-                            <section id="loginForm">
-                                <div class="row">
-                                    <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
-                                        @using (Html.BeginForm())
+                                    @{
+
+                                        if (true)
                                         {
-                                            @Html.AntiForgeryToken()
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.ID_Usuario, "ID_Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.ID_Sala, "ID_Sala", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.DropDownList("ID_Sala", null, htmlAttributes: new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.ID_Sala, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.ID_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.ID_Empleado, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.ID_Cubiculo, "ID_Cubiculo", htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.DropDownList("ID_Cubiculo", null, htmlAttributes: new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(model => model.ID_Cubiculo, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.FechaSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.FechaSolicitada, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.FechaSolicitada, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.HSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.HEntrada, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.HEntrada, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.HEntrada, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.HSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group input-rounded">
-                                                @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="form-group input-rounded">
-                                                    @Html.EditorFor(model => model.Estatus, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-                                            <div class="form-group input-rounded ">
-                                                <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> RESERVAR </button>
-                                            </div>
+                                            <input type="text" class="form-control" id="Horasalida" placeholder="HH:MM" readonly>
                                         }
-                                    </div>
+                                    }
+
+
+                                    @*@Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
+                                    @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })*@
+
                                 </div>
-                            </section>
-                        </div>
+                                <br />
+                                <label>Disponibilidad:</label>
+                                <img src="~/Content/images/check.png" alt="check" width="70" />
+                                <img src="~/Content/images/warning.png" alt="check" width="70" />
+                            </div>
+
+                            <br />
+                            <div class="row" style="justify-content:space-between">
+                                <a href='@Url.Action("Index", "Reservaciones")' button type="button" class="btn btn-sm btn-primary" style="background-color:darkred">Regresar</a>
+                                <button type="button" class="btn btn-sm btn-primary" style="background-color:green">Consultar Disponibilidad</button>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-lg-12 equel-grid">
+            <div class="grid">
+                <p class="grid-header" style="border-left-color:green">Invitar compañeros</p>
+                <div class="grid-body">
+                    <div class="item-wrapper">
+                        <form>
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>2<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>3<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>4<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>5<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>6<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>7<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-row align-items-center justify-content-between">
+                                <label>8<sup>o</sup> Integrante</label>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputName">Name</label>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <img src="~/Content/images/at.png" alt="check" width="33" />
+                                        </div>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
+                                    </div>
+                                </div>
+                                <div class="col-auto my-1">
+                                    <button type="submit" class="btn btn-primary">Consultar</button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="form-group input-rounded">
+                                <button type="submit" class="btn btn-lg btn-primary" style="background-color:green"> RESERVAR </button>
+                            </div>
 
-    </body>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <sesion>
+        @*
+            <div class="authentication-theme auth-style_1" style="padding: 5% 0 1px 0;">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-11 mx-auto">
+                        <div class="grid">
+                            <div class="grid-body">
+                                <section id="loginForm">
+                                    <div class="row">
+                                        <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
+                                            @using (Html.BeginForm())
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.ID_Usuario, "ID_Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.DropDownList("ID_Usuario", null, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.ID_Usuario, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.ID_Sala, "ID_Sala", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.DropDownList("ID_Sala", null, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.ID_Sala, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
 
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.ID_Empleado, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.ID_Empleado, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
 
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.ID_Cubiculo, "ID_Cubiculo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.DropDownList("ID_Cubiculo", null, htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.ID_Cubiculo, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.FechaSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.FechaSolicitada, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.FechaSolicitada, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.HSolicitada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.HEntrada, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.HEntrada, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.HEntrada, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.HSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group input-rounded">
+                                                    @Html.LabelFor(model => model.Estatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                                                    <div class="form-group input-rounded">
+                                                        @Html.EditorFor(model => model.Estatus, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Estatus, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group input-rounded ">
+                                                    <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> RESERVAR </button>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        *@
+    </sesion>
+</body>    
+</html>

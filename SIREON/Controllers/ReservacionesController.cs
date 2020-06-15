@@ -78,6 +78,7 @@ namespace SIREON.Controllers
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
             ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", reservacione.ID_Usuario);
             return View(reservacione);
+        
         }
 
         // GET: Reservaciones/Edit/5
