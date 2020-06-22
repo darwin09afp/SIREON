@@ -2318,6 +2318,20 @@
     <Content Include="Views\RSalas\Details.cshtml" />
     <Content Include="Views\RSalas\Edit.cshtml" />
     <Content Include="Views\RSalas\Index.cshtml" />
+    <Content Include="Views\Shared\_SideBarOp.cshtml" />
+    <Content Include="Views\Shared\_SideBarAdmin.cshtml" />
+    <Content Include="Views\Account-Original\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account-Original\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account-Original\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account-Original\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account-Original\ForgotPassword.cshtml" />
+    <Content Include="Views\Account-Original\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account-Original\Login.cshtml" />
+    <Content Include="Views\Account-Original\Register.cshtml" />
+    <Content Include="Views\Account-Original\ResetPassword.cshtml" />
+    <Content Include="Views\Account-Original\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account-Original\SendCode.cshtml" />
+    <Content Include="Views\Account-Original\VerifyCode.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
