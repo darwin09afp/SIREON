@@ -176,21 +176,11 @@
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CargosController.cs" />
-    <Compile Include="Controllers\CarrerasController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
-    <Compile Include="Controllers\DirectoresController.cs" />
-    <Compile Include="Controllers\EmpleadosController.cs" />
-    <Compile Include="Controllers\EntidadesController.cs" />
-    <Compile Include="Controllers\EscuelasController.cs" />
-    <Compile Include="Controllers\EstudiantesController.cs" />
-    <Compile Include="Controllers\FacultadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegrasController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ProfesoresController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\RSalasController.cs" />
     <Compile Include="Controllers\SalasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -238,7 +228,13 @@
     <Compile Include="R_Salas_Usuarios.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="R_Usuarios_Roles.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sala.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seguridad.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SIREONModel.Context.cs">
@@ -287,6 +283,10 @@
     <Compile Include="WebRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-SIREON-20200525085053.mdf" />
+    <Content Include="App_Data\aspnet-SIREON-20200525085053_log.ldf">
+      <DependentUpon>aspnet-SIREON-20200525085053.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\css\demo_1\style.css" />
     <Content Include="Content\css\demo_2\style.css" />
     <Content Include="Content\css\shared\style.css" />
@@ -2188,18 +2188,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -2215,51 +2203,6 @@
     <Content Include="UniversidadModel.edmx.diagram">
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Cargos\Create.cshtml" />
-    <Content Include="Views\Cargos\Delete.cshtml" />
-    <Content Include="Views\Cargos\Details.cshtml" />
-    <Content Include="Views\Cargos\Edit.cshtml" />
-    <Content Include="Views\Cargos\Index.cshtml" />
-    <Content Include="Views\Carreras\Create.cshtml" />
-    <Content Include="Views\Carreras\Delete.cshtml" />
-    <Content Include="Views\Carreras\Details.cshtml" />
-    <Content Include="Views\Carreras\Edit.cshtml" />
-    <Content Include="Views\Carreras\Index.cshtml" />
-    <Content Include="Views\Directores\Create.cshtml" />
-    <Content Include="Views\Directores\Delete.cshtml" />
-    <Content Include="Views\Directores\Details.cshtml" />
-    <Content Include="Views\Directores\Edit.cshtml" />
-    <Content Include="Views\Directores\Index.cshtml" />
-    <Content Include="Views\Empleados\Create.cshtml" />
-    <Content Include="Views\Empleados\Delete.cshtml" />
-    <Content Include="Views\Empleados\Details.cshtml" />
-    <Content Include="Views\Empleados\Edit.cshtml" />
-    <Content Include="Views\Empleados\Index.cshtml" />
-    <Content Include="Views\Entidades\Create.cshtml" />
-    <Content Include="Views\Entidades\Delete.cshtml" />
-    <Content Include="Views\Entidades\Details.cshtml" />
-    <Content Include="Views\Entidades\Edit.cshtml" />
-    <Content Include="Views\Entidades\Index.cshtml" />
-    <Content Include="Views\Escuelas\Create.cshtml" />
-    <Content Include="Views\Escuelas\Delete.cshtml" />
-    <Content Include="Views\Escuelas\Details.cshtml" />
-    <Content Include="Views\Escuelas\Edit.cshtml" />
-    <Content Include="Views\Escuelas\Index.cshtml" />
-    <Content Include="Views\Estudiantes\Create.cshtml" />
-    <Content Include="Views\Estudiantes\Delete.cshtml" />
-    <Content Include="Views\Estudiantes\Details.cshtml" />
-    <Content Include="Views\Estudiantes\Edit.cshtml" />
-    <Content Include="Views\Estudiantes\Index.cshtml" />
-    <Content Include="Views\Facultades\Create.cshtml" />
-    <Content Include="Views\Facultades\Delete.cshtml" />
-    <Content Include="Views\Facultades\Details.cshtml" />
-    <Content Include="Views\Facultades\Edit.cshtml" />
-    <Content Include="Views\Facultades\Index.cshtml" />
-    <Content Include="Views\Profesores\Create.cshtml" />
-    <Content Include="Views\Profesores\Delete.cshtml" />
-    <Content Include="Views\Profesores\Details.cshtml" />
-    <Content Include="Views\Profesores\Edit.cshtml" />
-    <Content Include="Views\Profesores\Index.cshtml" />
     <Content Include="Views\Cubiculos\Create.cshtml" />
     <Content Include="Views\Cubiculos\Delete.cshtml" />
     <Content Include="Views\Cubiculos\Details.cshtml" />
@@ -2280,19 +2223,8 @@
     <Content Include="Views\Salas\Details.cshtml" />
     <Content Include="Views\Salas\Edit.cshtml" />
     <Content Include="Views\Salas\Index.cshtml" />
-    <Content Include="Views\Roles\Create.cshtml" />
-    <Content Include="Views\Roles\Delete.cshtml" />
-    <Content Include="Views\Roles\Details.cshtml" />
-    <Content Include="Views\Roles\Edit.cshtml" />
-    <Content Include="Views\Roles\Index.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
@@ -2320,18 +2252,19 @@
     <Content Include="Views\RSalas\Index.cshtml" />
     <Content Include="Views\Shared\_SideBarOp.cshtml" />
     <Content Include="Views\Shared\_SideBarAdmin.cshtml" />
-    <Content Include="Views\Account-Original\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account-Original\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account-Original\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account-Original\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account-Original\ForgotPassword.cshtml" />
-    <Content Include="Views\Account-Original\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account-Original\Login.cshtml" />
-    <Content Include="Views\Account-Original\Register.cshtml" />
-    <Content Include="Views\Account-Original\ResetPassword.cshtml" />
-    <Content Include="Views\Account-Original\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account-Original\SendCode.cshtml" />
-    <Content Include="Views\Account-Original\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Shared\_Layout-login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

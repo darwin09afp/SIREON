@@ -49,12 +49,11 @@
   </EntityType>
   <EntityType Name="Role">
     <Key>
-      <PropertyRef Name="ID_RolUsuario" />
+      <PropertyRef Name="ID_Rol" />
     </Key>
-    <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
-    <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK_Roles_Usuarios" FromRole="Roles" ToRole="Usuarios" />
+    <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="ID_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="R_Usuarios_Roles" Relationship="SIREONModel.FK_R_Usuarios_Roles_Roles" FromRole="Role" ToRole="R_Usuarios_Roles" />
   </EntityType>
   <EntityType Name="Sala">
     <Key>
@@ -81,15 +80,11 @@
     <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Usuario1" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Contrasena" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Pregunta1" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Pregunta2" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Respuesta1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Estatus" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
     <NavigationProperty Name="R_Salas_Usuarios" Relationship="Self.FK_R_Salas_Usuarios_Usuarios" FromRole="Usuarios" ToRole="R_Salas_Usuarios" />
     <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
-    <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
+    <NavigationProperty Name="R_Usuarios_Roles" Relationship="SIREONModel.FK_R_Usuarios_Roles_Usuarios" FromRole="Usuario" ToRole="R_Usuarios_Roles" />
+    <NavigationProperty Name="Seguridad" Relationship="SIREONModel.FK_Seguridad_Usuarios" FromRole="Usuario" ToRole="Seguridad" />
   </EntityType>
   <Association Name="FK_Reservaciones_Cubiculos">
     <End Role="Cubiculos" Type="Self.Cubiculo" Multiplicity="1" />
@@ -163,18 +158,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Roles_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="ID_Usuario" />
-      </Principal>
-      <Dependent Role="Roles">
-        <PropertyRef Name="ID_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="SIREONEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
     <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
@@ -208,10 +191,6 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
-    <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Roles" EntitySet="Roles" />
-    </AssociationSet>
     <FunctionImport Name="sp_alterdiagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -242,6 +221,20 @@
       <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="R_Usuarios_Roles" EntityType="SIREONModel.R_Usuarios_Roles" />
+    <EntitySet Name="Seguridads" EntityType="SIREONModel.Seguridad" />
+    <AssociationSet Name="FK_R_Usuarios_Roles_Roles" Association="SIREONModel.FK_R_Usuarios_Roles_Roles">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="R_Usuarios_Roles" EntitySet="R_Usuarios_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_R_Usuarios_Roles_Usuarios" Association="SIREONModel.FK_R_Usuarios_Roles_Usuarios">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="R_Usuarios_Roles" EntitySet="R_Usuarios_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seguridad_Usuarios" Association="SIREONModel.FK_Seguridad_Usuarios">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Seguridad" EntitySet="Seguridads" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -254,4 +247,63 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="R_Usuarios_Roles">
+    <Key>
+      <PropertyRef Name="ID_RolUsuario" />
+    </Key>
+    <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+    <Property Name="ID_Rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Role" Relationship="SIREONModel.FK_R_Usuarios_Roles_Roles" FromRole="R_Usuarios_Roles" ToRole="Role" />
+    <NavigationProperty Name="Usuario" Relationship="SIREONModel.FK_R_Usuarios_Roles_Usuarios" FromRole="R_Usuarios_Roles" ToRole="Usuario" />
+  </EntityType>
+  <EntityType Name="Seguridad">
+    <Key>
+      <PropertyRef Name="ID_Seguridad" />
+    </Key>
+    <Property Name="ID_Seguridad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Usuario" Type="Int32" />
+    <Property Name="pregunta1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="respuesta1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="pregunta2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="respuesta2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Usuario" Relationship="SIREONModel.FK_Seguridad_Usuarios" FromRole="Seguridad" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK_R_Usuarios_Roles_Roles">
+    <End Type="SIREONModel.Role" Role="Role" Multiplicity="1" />
+    <End Type="SIREONModel.R_Usuarios_Roles" Role="R_Usuarios_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID_Rol" />
+      </Principal>
+      <Dependent Role="R_Usuarios_Roles">
+        <PropertyRef Name="ID_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_R_Usuarios_Roles_Usuarios">
+    <End Type="SIREONModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="SIREONModel.R_Usuarios_Roles" Role="R_Usuarios_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="R_Usuarios_Roles">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Seguridad_Usuarios">
+    <End Type="SIREONModel.Usuario" Role="Usuario" Multiplicity="1" />
+    <End Type="SIREONModel.Seguridad" Role="Seguridad" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="Seguridad">
+        <PropertyRef Name="ID_Seguridad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

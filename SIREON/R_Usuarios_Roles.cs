@@ -12,18 +12,13 @@ namespace SIREON
     using System;
     using System.Collections.Generic;
     
-    public partial class Role
+    public partial class R_Usuarios_Roles
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Role()
-        {
-            this.R_Usuarios_Roles = new HashSet<R_Usuarios_Roles>();
-        }
-    
-        public string Rol { get; set; }
+        public int ID_RolUsuario { get; set; }
+        public int ID_Usuario { get; set; }
         public int ID_Rol { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<R_Usuarios_Roles> R_Usuarios_Roles { get; set; }
+        public virtual Role Role { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

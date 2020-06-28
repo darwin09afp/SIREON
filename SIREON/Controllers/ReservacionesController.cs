@@ -7,11 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SIREON;
-
+using System.Web.Security;
+using System.Security.Authentication;
 
 namespace SIREON.Controllers
 {
-    //[Authorize /*(Roles = "Operador,Usuario")*/]
+    [Authorize]
     public class ReservacionesController : Controller
     {
         private SIREONEntities db = new SIREONEntities();

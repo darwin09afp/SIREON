@@ -1,29 +1,10 @@
-﻿@model SIREON.Usuario
+﻿@model SIREON.Models.LoginViewModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout-login.cshtml";
 
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="~/Content/vendors/iconfonts/mdi/css/materialdesignicons.css" />
-    <link rel="stylesheet" href="~/Content/vendors/css/vendor.addons.css" />
-    <!-- endinject -->
-    <!-- vendor css for this page -->
-    <!-- End vendor css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="~/Content/css/shared/style.css" />
-    <!-- endinject -->
-    <!-- Layout style -->
-    <link rel="stylesheet" href="~/Content/css/demo_1/style.css">
-    <!-- Layout style -->
-    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
-</head>
 <body>
-    <div class="authentication-theme auth-style_1" style="padding: 3% 0 1px 0;">
+    <div class="authentication-theme auth-style_1" style="padding: 4% 0 1px 0;">
         <div class="row">
             <div class="col-12 logo-section">
                 <a href='@Url.Action("Index", "Home")' class="logo">
@@ -43,17 +24,17 @@
                                         @Html.AntiForgeryToken()
                                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                         <div class="form-group input-rounded">
-                                            @Html.LabelFor(m => m.Usuario1, new { @class = "col-md-2 control-label" })
+                                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
                                             <div class="form-group input-rounded">
-                                                @Html.TextBoxFor(m => m.Usuario1, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(m => m.Usuario1, "", new { @class = "text-danger" })
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="form-group input-rounded">
-                                            @Html.LabelFor(m => m.Contrasena, new { @class = "col-md-2 control-label" })
+                                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
                                             <div class="form-group input-rounded">
-                                                @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(m => m.Contrasena, "", new { @class = "text-danger" })
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                             </div>
                                             <div class="form-group" style="text-align:center">
                                                 @Html.ActionLink("Olvidé mi contraseña", "ForgotPassword")
@@ -94,4 +75,4 @@
     <script src="~/Content/js/template.js"></script>
     <!-- endbuild -->
 </body>
-</html>
+

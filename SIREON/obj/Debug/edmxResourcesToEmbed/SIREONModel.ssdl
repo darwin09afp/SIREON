@@ -24,6 +24,14 @@
     <Property Name="ID_Sala" Type="int" Nullable="false" />
     <Property Name="ID_Usuario" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="R_Usuarios-Roles">
+    <Key>
+      <PropertyRef Name="ID_RolUsuario" />
+    </Key>
+    <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Usuario" Type="int" Nullable="false" />
+    <Property Name="ID_Rol" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Reservaciones">
     <Key>
       <PropertyRef Name="ID_Reservacion" />
@@ -42,17 +50,28 @@
   </EntityType>
   <EntityType Name="Roles">
     <Key>
-      <PropertyRef Name="ID_RolUsuario" />
+      <PropertyRef Name="ID_Rol" />
     </Key>
-    <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ID_Usuario" Type="int" Nullable="false" />
-    <Property Name="Rol" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ID_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rol" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="Salas">
     <Key>
       <PropertyRef Name="ID_Sala" />
     </Key>
     <Property Name="ID_Sala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seguridad">
+    <Key>
+      <PropertyRef Name="ID_Seguridad" />
+    </Key>
+    <Property Name="ID_Seguridad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Usuario" Type="int" />
+    <Property Name="pregunta1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="respuesta1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pregunta2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="respuesta2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -71,11 +90,6 @@
     <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Usuario" Type="varchar" MaxLength="9" Nullable="false" />
     <Property Name="Contrasena" Type="varchar" MaxLength="16" Nullable="false" />
-    <Property Name="Pregunta1" Type="char" MaxLength="15" Nullable="false" />
-    <Property Name="Pregunta2" Type="char" MaxLength="15" Nullable="false" />
-    <Property Name="Respuesta1" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Respuesta2" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Estatus" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_ListaNegra_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
@@ -109,6 +123,30 @@
         <PropertyRef Name="ID_Usuario" />
       </Principal>
       <Dependent Role="R_Salas-Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_R_Usuarios-Roles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ID_Rol" />
+      </Principal>
+      <Dependent Role="R_Usuarios-Roles">
+        <PropertyRef Name="ID_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_R_Usuarios-Roles_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="R_Usuarios-Roles">
         <PropertyRef Name="ID_Usuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -149,15 +187,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Roles_Usuarios">
+  <Association Name="FK_Seguridad_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+    <End Role="Seguridad" Type="Self.Seguridad" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
         <PropertyRef Name="ID_Usuario" />
       </Principal>
-      <Dependent Role="Roles">
-        <PropertyRef Name="ID_Usuario" />
+      <Dependent Role="Seguridad">
+        <PropertyRef Name="ID_Seguridad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -196,9 +234,11 @@
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="R_Usuarios-Roles" EntityType="Self.R_Usuarios-Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seguridad" EntityType="Self.Seguridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
@@ -213,6 +253,14 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="R_Salas-Usuarios" EntitySet="R_Salas-Usuarios" />
     </AssociationSet>
+    <AssociationSet Name="FK_R_Usuarios-Roles_Roles" Association="Self.FK_R_Usuarios-Roles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_R_Usuarios-Roles_Usuarios" Association="Self.FK_R_Usuarios-Roles_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
+    </AssociationSet>
     <AssociationSet Name="FK_Reservaciones_Cubiculos" Association="Self.FK_Reservaciones_Cubiculos">
       <End Role="Cubiculos" EntitySet="Cubiculos" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
@@ -225,9 +273,9 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
-    <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+    <AssociationSet Name="FK_Seguridad_Usuarios" Association="Self.FK_Seguridad_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Seguridad" EntitySet="Seguridad" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

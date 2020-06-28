@@ -1,28 +1,9 @@
-﻿@model SIREON.Usuario
+﻿@model SIREON.Models.RegisterViewModel
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout-login.cshtml";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="~/Content/vendors/iconfonts/mdi/css/materialdesignicons.css" />
-    <link rel="stylesheet" href="~/Content/vendors/css/vendor.addons.css" />
-    <!-- endinject -->
-    <!-- vendor css for this page -->
-    <!-- End vendor css for this page -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="~/Content/css/shared/style.css" />
-    <!-- endinject -->
-    <!-- Layout style -->
-    <link rel="stylesheet" href="~/Content/css/demo_1/style.css">
-    <!-- Layout style -->
-    <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
-</head>
 <body>
-    <div class="authentication-theme auth-style_1" style="padding: 3% 0 1px 0;">
+    <div class="authentication-theme auth-style_1" style="padding: 4% 0 1px 0;">
         <div class="row">
             <div class="col-12 logo-section">
                 <a href='@Url.Action("Index", "Home")' class="logo">
@@ -31,101 +12,39 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-11 mx-auto">
+            <div class="col-lg-4 col-md-6 col-sm-7 col-11 mx-auto">
                 <div class="grid">
                     <div class="grid-body">
                         <section id="loginForm">
                             <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-8 col-12 mx-auto form-wrapper">
+                                <div class="col-lg-7 col-md-8 col-sm-9 col-12 mx-auto form-wrapper">
                                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                                     {
                                         @Html.AntiForgeryToken()
                                         <h5 style="text-align:center">Crear cuenta</h5>
+                                        
                                         @Html.ValidationSummary("", new { @class = "text-danger" })
-                                        <div class="form-row align-items-center justify-content-between">
-                                            <div class="col">
-                                                <div class="form-group input-rounded">
-                                                    @Html.LabelFor(m => m.Usuario1, new { @class = "col-md-2 control-label" })
-                                                    <div class="form-group input-rounded">
-                                                        @Html.TextBoxFor(m => m.Usuario1, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group input-rounded">
-                                                    @Html.LabelFor(m => m.Contrasena, new { @class = "col-md-2 control-label" })
-                                                    <div class="form-group input-rounded">
-                                                        @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group input-rounded">
-                                                    @Html.LabelFor(m => m.Contrasena, new { @class = "col-md-2 control-label" })
-                                                    <div class="form-group input-rounded">
-                                                        @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="form-group input-rounded" style="justify-items:center">
-                                                    <button type="submit" class="btn btn-lg btn-primary" style="background-color:green"> Registrar </button>
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group input-rounded">
-                                                    <label>Pregunta 1</label>
-                                                    <select class="custom-select my-1 mr-sm-2" id="Pregunta 1">
-                                                        <option value="" disabled selected>Elige...</option>
-                                                        <option value="1">Pregunta 1</option>
-                                                        <option value="2">Pregunta 2</option>
-                                                        <option value="3">Pregunta 3</option>
-                                                        <option value="4">Pregunta 4</option>
-                                                        <option value="5">Pregunta 5</option>
-                                                        <option value="6">Pregunta 6</option>
-                                                        <option value="7">Pregunta 7</option>
-                                                        <option value="8">Pregunta 8</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group input-rounded">
-                                                        @Html.LabelFor(m => m.Respuesta1, new { @class = "col-md-2 control-label" })
-                                                        <div class="form-group input-rounded">
-                                                            @Html.TextBoxFor(m => m.Respuesta1, new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
-                                                <div class="form-group input-rounded">
-                                                    <label>Pregunta 2</label>
-                                                    <select class="custom-select my-1 mr-sm-2" id="Pregunta 2">
-                                                        <option value="" disabled selected>Elige...</option>
-                                                        <option value="1">Pregunta 1</option>
-                                                        <option value="2">Pregunta 2</option>
-                                                        <option value="3">Pregunta 3</option>
-                                                        <option value="4">Pregunta 4</option>
-                                                        <option value="5">Pregunta 5</option>
-                                                        <option value="6">Pregunta 6</option>
-                                                        <option value="7">Pregunta 7</option>
-                                                        <option value="8">Pregunta 8</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group input-rounded">
-                                                        @Html.LabelFor(m => m.Respuesta2, new { @class = "col-md-2 control-label" })
-                                                        <div class="form-group input-rounded">
-                                                            @Html.TextBoxFor(m => m.Respuesta2, new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
-                                                <div class="form-group input-rounded" hidden>
-                                                        @Html.LabelFor(m => m.Roles, new { @class = "col-md-2 control-label" })
-                                                        <div class="form-group input-rounded">
-                                                            @Html.TextBoxFor(m => m.Roles, new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
+                                        <div class="form-group input-rounded">
+                                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                            <div class="form-group input-rounded">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                             </div>
                                         </div>
-                                        
-                                        
-
-                                        @*<div class="form-group input-rounded">
+                                        <div class="form-group input-rounded">
+                                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                            <div class="form-group input-rounded">
+                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group input-rounded">
                                             @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-12 col-md-12 col-lg-12 control-label" })
                                             <div class="form-group input-rounded">
                                                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                                             </div>
-                                        </div>*@
-                                        
+                                        </div>
+                                        <div class="form-group input-rounded">
+                                            <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> Registrar </button>
+                                        </div>
                                     }
                                 </div>
                             </div>
@@ -148,4 +67,3 @@
     <script src="~/Content/js/template.js"></script>
     <!-- endbuild -->
 </body>
-</html>

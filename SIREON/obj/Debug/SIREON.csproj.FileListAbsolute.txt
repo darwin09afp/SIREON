@@ -109,7 +109,6 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\vbc.exe.config
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\vbc.rsp
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\roslyn\System.Net.Http.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Antlr3.Runtime.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EntityFramework.dll
@@ -162,3 +161,4 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Securit
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\darwi\source\repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache

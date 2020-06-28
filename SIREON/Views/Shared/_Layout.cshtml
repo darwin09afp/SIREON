@@ -30,9 +30,9 @@
     <div class="page-body">
         <!-- partial:partials/_sidebar.html -->
         <div class="sidebar">
-            @*@if (User.Identity.IsAuthenticated)
+            @if (User.Identity.IsAuthenticated)
             {
-                @if (User.IsInRole("Admin"))
+                if (User.IsInRole("Admin"))
                 {
                     @Html.Partial("_SideBarAdmin")
                 }
@@ -48,9 +48,7 @@
             else
             {
                 @Html.Partial("_SideBar")
-            }*@
-
-            @Html.Partial("_SideBar")
+            }
 
         </div>
         <!-- partial -->

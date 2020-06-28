@@ -48,8 +48,7 @@
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="SIREONModel.Role">
         <MappingFragment StoreEntitySet="Roles">
-          <ScalarProperty Name="ID_RolUsuario" ColumnName="ID_RolUsuario" />
-          <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+          <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
           <ScalarProperty Name="Rol" ColumnName="Rol" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -78,11 +77,6 @@
           <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
           <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
           <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-          <ScalarProperty Name="Pregunta1" ColumnName="Pregunta1" />
-          <ScalarProperty Name="Pregunta2" ColumnName="Pregunta2" />
-          <ScalarProperty Name="Respuesta1" ColumnName="Respuesta1" />
-          <ScalarProperty Name="Respuesta2" ColumnName="Respuesta2" />
-          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -110,5 +104,27 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SIREONModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SIREONModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="R_Usuarios_Roles">
+      <EntityTypeMapping TypeName="SIREONModel.R_Usuarios_Roles">
+        <MappingFragment StoreEntitySet="R_Usuarios-Roles">
+          <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
+          <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+          <ScalarProperty Name="ID_RolUsuario" ColumnName="ID_RolUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seguridads">
+      <EntityTypeMapping TypeName="SIREONModel.Seguridad">
+        <MappingFragment StoreEntitySet="Seguridad">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="respuesta2" ColumnName="respuesta2" />
+          <ScalarProperty Name="pregunta2" ColumnName="pregunta2" />
+          <ScalarProperty Name="respuesta1" ColumnName="respuesta1" />
+          <ScalarProperty Name="pregunta1" ColumnName="pregunta1" />
+          <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+          <ScalarProperty Name="ID_Seguridad" ColumnName="ID_Seguridad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
