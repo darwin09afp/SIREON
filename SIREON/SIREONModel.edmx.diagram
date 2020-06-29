@@ -24,6 +24,13 @@
         <AssociationConnector Association="SIREONModel.FK_R_Usuarios_Roles_Roles" />
         <AssociationConnector Association="SIREONModel.FK_R_Usuarios_Roles_Usuarios" />
         <AssociationConnector Association="SIREONModel.FK_Seguridad_Usuarios" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetRole" Width="1.5" PointX="8.375" PointY="2.5" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="3.75" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUser" Width="1.5" PointX="10.625" PointY="1.375" />
+        <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SIREONModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
