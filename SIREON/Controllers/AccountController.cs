@@ -197,6 +197,7 @@ namespace SIREON.Controllers
 
 
         [HttpPost]
+        [Authorize (Roles = "Administradores")]
         public ActionResult Roles(UserViewModels user)
 
         {

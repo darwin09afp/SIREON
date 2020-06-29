@@ -1,11 +1,12 @@
-﻿<div class="sidebar" style="position: fixed; top:0  ">
+﻿@using Microsoft.AspNet.Identity
+<div class="sidebar" style="position: fixed; top:0  ">
     <div class="user-profile">
         <div class="display-avatar animated-avatar">
             <img class="profile-img img-lg rounded-circle" src="assets/images/profile/male/image_1.png" alt="profile image">
         </div>
         <div class="info-wrapper">
-            <p class="user-name">Allen Clerk</p>
-            <h6 class="display-income">$3,400,00</h6>
+            <p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".","Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>
+            <h6 class="display-income">Administrador</h6>
         </div>
     </div>
     <ul class="navigation-menu">
@@ -22,17 +23,24 @@
         </li>
         <li>
             <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
-                <span class="link-title">Mi espacio</span>
+                <span class="link-title">Reporteía</span>
                 <i class="mdi mdi-home-assistant link-icon"></i>
             </a>
             <ul class="collapse navigation-submenu" id="sample-pages">
                 <li>
-                    <a href="@Url.Action("Index", "Reservaciones")">Mis reservaciones</a>
+                    <a href="@Url.Action("Index", "Reservaciones")">Uso de cubículos</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("Index2", "Reservaciones")">Mis invitaciones</a>
+                    <a href="@Url.Action("Index2", "Reservaciones")">Filas de espera</a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Account")">
+                <span class="link-title">Manejo de usuarios</span>
+                <i class="mdi mdi-cellphone link-icon"></i>
+            </a>
+
         </li>
         <li>
             <a href="@Url.Action("Contact", "Home")">
@@ -40,20 +48,6 @@
                 <i class="mdi mdi-cellphone link-icon"></i>
             </a>
 
-        </li>
-        <li>
-            <a href="@Url.Action("Contact", "Home")">
-                <span class="link-title">Contáctanos</span>
-                <i class="mdi mdi-cellphone link-icon"></i>
-            </a>
-
-        </li>
-
-        <li>
-            <a href="@Url.Action("About", "Home")">
-                <span class="link-title">Nosotros</span>
-                <i class="mdi mdi-nature-people link-icon"></i>
-            </a>
         </li>
 
         <li>
