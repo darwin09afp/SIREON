@@ -289,6 +289,119 @@ namespace SIREON.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "Administradores")]
+
+        public ActionResult Edit(string id)
+
+        {
+
+
+
+            if (String.IsNullOrEmpty(id))
+
+            {
+
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            }
+
+            AspNetUser user = context.AspNetUsers.Find(id);
+
+            if (user == null)
+
+            {
+
+                return HttpNotFound();
+
+            }
+
+
+
+            ViewBag.Employees = new SelectList(db.AspNetUsers.ToList(), "Id", "Name");
+
+            return View(user);
+
+        }
+
+        //public JsonResult getEmployee(string EmployeeId)
+
+        //{
+
+        //    var employee = business.GetEmployee(EmployeeId);
+
+        //    var empName = employee.Name;
+
+        //    var empId = employee.Id;
+
+        //    return Json(new { Id = empId, Name = empName, Email = employee.Email }, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
+        //[Authorize(Roles = "Administradores")]
+        //[HttpPost]
+        ////[Authorize(Roles = "Administrators")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,UserName,Email")] AspNetUser model)
+
+        //{
+
+        //    ViewBag.user = new SelectList(db.AspNetUsers.ToList(), "Id", "Name");
+
+        //    if (ModelState.IsValid)
+
+        //    {
+
+        //        var results = Usuario(model);
+
+        //        if (results.IsSuccess)
+
+        //        {
+
+        //            Alert(results.Message, Utilities.NotificationType.success);
+
+        //            Utilities.Utilities.PrepareAuditTrail("User edited: " + model.UserName, User.Identity.Name,
+
+        //                AuditTrailAction.Update);
+
+        //        }
+
+        //        else
+
+        //            Alert(results.Message, Utilities.NotificationType.error);
+
+        //        return View(model);
+
+        //    }
+
+        //    return View(model);
+
+
+
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]

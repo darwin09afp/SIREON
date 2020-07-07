@@ -42,23 +42,23 @@ $(function () {
     var options = {
       type: 'line',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 2,
+            label: '# Estudiantes atentidos',
+            data: [48, 61, 35, 25, 30, 55, 61, 35, 25, 30, 20, 10],
+            borderWidth: 5,
             fill: false,
-            backgroundColor: chartColors[0],
-            borderColor: chartColors[0],
+            backgroundColor: chartColors[3],
+            borderColor: chartColors[3],
             borderWidth: 0
           },
           {
-            label: '# of Points',
-            data: [7, 11, 5, 8, 3, 7],
-            borderWidth: 2,
+            label: '# Estudiantes no atendidos',
+            data: [55, 71, 5, 8, 10, 45, 75, 7, 10, 6, 2, 0],
+            borderWidth: 5,
             fill: false,
-            backgroundColor: chartColors[1],
-            borderColor: chartColors[1],
+            backgroundColor: chartColors[2],
+            borderColor: chartColors[2],
             borderWidth: 0
           }
         ]
@@ -79,6 +79,50 @@ $(function () {
     var ctx = document.getElementById('chartjs-staked-line-chart').getContext('2d');
     new Chart(ctx, options);
   }
+
+  if ($("#chartjs-staked-line-chart2").length) {
+        var options = {
+            type: 'line',
+            data: {
+                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                datasets: [{
+                    label: '# Estudiantes atentidos',
+                    data: [48, 61, 35, 25, 30, 55, 61, 35, 25, 30, 20, 10],
+                    borderWidth: 5,
+                    fill: false,
+                    backgroundColor: chartColors[3],
+                    borderColor: chartColors[3],
+                    borderWidth: 0
+                },
+                {
+                    label: '# Estudiantes no atendidos',
+                    data: [55, 71, 5, 8, 10, 45, 75, 7, 10, 6, 2, 0],
+                    borderWidth: 5,
+                    fill: false,
+                    backgroundColor: chartColors[2],
+                    borderColor: chartColors[2],
+                    borderWidth: 0
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            reverse: false
+                        }
+                    }]
+                },
+                fill: false,
+                legend: false
+            }
+        }
+
+        var ctx = document.getElementById('chartjs-staked-line-chart2').getContext('2d');
+        new Chart(ctx, options);
+    }
+
+
 
   if ($("#chartjs-bar-chart").length) {
     var BarData = {
@@ -209,7 +253,7 @@ $(function () {
   if ($("#chartjs-pie-chart").length) {
     var PieData = {
       datasets: [{
-        data: [10, 40, 20, 30],
+        data: [15, 35, 25, 10, 25],
         backgroundColor: chartColors,
         borderColor: chartColors,
         borderWidth: chartColors
@@ -218,9 +262,10 @@ $(function () {
       // These labels appear in the legend and in the tooltips when hovering different arcs
       labels: [
         'Arquitectura',
-        'Ingeniería',
+        'Ingenieria',
         'Medicina',
         'Derecho',
+        'Ad Empresas',
       ]
     };
     var PieOptions = {
