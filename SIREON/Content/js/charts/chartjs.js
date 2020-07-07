@@ -5,17 +5,17 @@ $(function () {
     var options = {
       type: 'line',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre","Diciembre" ],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
             backgroundColor: chartColors[0],
             borderColor: chartColors[0],
             borderWidth: 1,
           },
           {
             label: '# of Points',
-            data: [7, 11, 5, 8, 3, 7],
+            data: [100, 200, 300, 400, 500],
             borderColor: chartColors[1],
             borderWidth: 1,
             backgroundColor: chartColors[1]
@@ -209,7 +209,7 @@ $(function () {
   if ($("#chartjs-pie-chart").length) {
     var PieData = {
       datasets: [{
-        data: [30, 40, 30],
+        data: [10, 40, 20, 30],
         backgroundColor: chartColors,
         borderColor: chartColors,
         borderWidth: chartColors
@@ -217,9 +217,10 @@ $(function () {
 
       // These labels appear in the legend and in the tooltips when hovering different arcs
       labels: [
-        'Data 1',
-        'Data 2',
-        'Data 3',
+        'Arquitectura',
+        'Ingeniería',
+        'Medicina',
+        'Derecho',
       ]
     };
     var PieOptions = {
@@ -236,4 +237,38 @@ $(function () {
       options: PieOptions
     });
   }
+
+
+    if ($("#chartjs-pie-chart2").length) {
+        var PieData = {
+            datasets: [{
+                data: [80, 20],
+                backgroundColor: chartColors,
+                borderColor: chartColors,
+                borderWidth: chartColors
+            }],
+
+            // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [
+                'Masculino',
+                'Femenino',
+                
+            ]
+        };
+        var PieOptions = {
+            responsive: true,
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+        var pieChartCanvas = $("#chartjs-pie-chart2").get(0).getContext("2d");
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: PieData,
+            options: PieOptions
+        });
+    }
+
+
 });

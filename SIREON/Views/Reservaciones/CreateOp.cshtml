@@ -19,7 +19,7 @@
                                     <label>Fecha:</label>
                                     <input type="text" class="form-control" id="inlineFormInputName" placeholder="DD/MM/AAAA" readonly>
                                     @*@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/AAAA"} })
-                                    @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })*@
+                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })*@
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
                                     <label>Hora de entrada:</label>
@@ -40,7 +40,7 @@
                                         <option value="12">08:00 PM</option>
                                     </select>
                                     @*@Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
-                                    @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })*@
+                                        @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })*@
                                 </div>
 
                                 <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
@@ -56,7 +56,7 @@
 
 
                                     @*@Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
-                                    @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })*@
+                                        @Html.ValidationMessageFor(model => model.HSalida, "", new { @class = "text-danger" })*@
 
                                 </div>
                                 <br />
@@ -67,7 +67,7 @@
 
                             <br />
                             <div class="row" style="justify-content:space-between">
-                                <a href='@Url.Action("Index", "Reservaciones")' button type="button" class="btn btn-sm btn-primary" style="background-color:darkred">Regresar</a>
+                                <a href='@Url.Action("Index3", "Reservaciones")' button type="button" class="btn btn-sm btn-primary" style="background-color:darkred">Regresar</a>
                                 <button type="button" class="btn btn-sm btn-primary" style="background-color:green">Consultar Disponibilidad</button>
                             </div>
 
@@ -95,7 +95,7 @@
                                         <div class="input-group-prepend">
                                             <img src="~/Content/images/at.png" alt="check" width="33" />
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469" readonly>
+                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469">
                                     </div>
                                 </div>
                             </div>
@@ -417,5 +417,5 @@
             </div>
         *@
     </sesion>
-</body>    
+</body>
 </html>

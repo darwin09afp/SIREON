@@ -188,6 +188,7 @@
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CentroController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegrasController.cs" />
@@ -300,11 +301,13 @@
     <Content Include="App_Data\aspnet-SIREON-20200525085053_log.ldf">
       <DependentUpon>aspnet-SIREON-20200525085053.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\css\dark-mode.css" />
     <Content Include="Content\css\demo_1\style.css" />
     <Content Include="Content\css\demo_2\style.css" />
     <Content Include="Content\css\shared\style.css" />
     <Content Include="Content\images\logo.svg" />
     <Content Include="Content\images\logo_mini.svg" />
+    <Content Include="Content\images\social-icons\porcentaje.png" />
     <Content Include="Content\images\profile\female\image_1.png" />
     <Content Include="Content\images\profile\female\image_10.png" />
     <Content Include="Content\images\profile\female\image_2.png" />
@@ -332,8 +335,11 @@
     <Content Include="Content\images\social-icons\linkedin.svg" />
     <Content Include="Content\images\social-icons\messenger.svg" />
     <Content Include="Content\images\social-icons\twitter.svg" />
+    <Content Include="Content\images\social-icons\Usuarios.png" />
     <Content Include="Content\js\charts\chartjs.addon.js" />
     <Content Include="Content\js\charts\chartjs.js" />
+    <Content Include="Content\js\dark-mode-switch.js" />
+    <Content Include="Content\js\dark-mode-switch.min.js" />
     <Content Include="Content\js\dashboard.js" />
     <Content Include="Content\js\highlight.pack.js" />
     <Content Include="Content\js\template.js" />
@@ -2280,6 +2286,14 @@
     <Content Include="Views\Shared\_Layout-login.cshtml" />
     <Content Include="Views\Account\Roles.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Centro\Create.cshtml" />
+    <Content Include="Views\Centro\Delete.cshtml" />
+    <Content Include="Views\Centro\Details.cshtml" />
+    <Content Include="Views\Centro\Edit.cshtml" />
+    <Content Include="Views\Centro\Index.cshtml" />
+    <Content Include="Views\Reservaciones\CreateOp.cshtml" />
+    <Content Include="Views\Reservaciones\Index3.cshtml" />
+    <Content Include="Views\Reservaciones\Cola.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -1,0 +1,112 @@
+﻿@model SIREON.Reservacione
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Reservacione</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ID_Empleado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ID_Empleado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaSolicitada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaSolicitada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HSolicitada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HSolicitada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HEntrada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HEntrada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HSalida)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HSalida)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Estatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cubiculo.Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Sala.ID_Sala)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Sala.ID_Sala)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuario.Usuario1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.Usuario1)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

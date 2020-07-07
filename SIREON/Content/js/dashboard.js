@@ -214,7 +214,7 @@ $(function () {
             stroke: {
                 lineCap: "round"
             },
-            labels: ["Progress"]
+            labels: ["Porcentaje"]
         };
         (r = new ApexCharts(document.querySelector("#radial-chart"), a)).render()
     }
