@@ -7,11 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SIREON;
-
+using System.Web.Security;
+using System.Security.Authentication;
 
 namespace SIREON.Controllers
 {
-    //[Authorize /*(Roles = "Operador,Usuario")*/]
+    
     public class ReservacionesController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
@@ -31,6 +32,23 @@ namespace SIREON.Controllers
             var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
             return View(reservaciones.ToList());
         }
+
+        // GET: Reservaciones
+        public ActionResult Index3()
+        {
+            ViewBag.title = "Reservaciones | SIREON";
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
+            return View(reservaciones.ToList());
+        }
+
+        // GET: Reservaciones
+        public ActionResult Cola()
+        {
+            ViewBag.title = "En espera | SIREON";
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.Usuario);
+            return View(reservaciones.ToList());
+        }
+
 
         // GET: Reservaciones/Details/5
         public ActionResult Details(int? id)
@@ -80,6 +98,43 @@ namespace SIREON.Controllers
             return View(reservacione);
         
         }
+
+
+
+
+        // GET: Reservaciones/CreateOp
+        public ActionResult CreateOp()
+        {
+            ViewBag.title = "Nueva reservación | SIREON";
+            ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
+            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala");
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1");
+            return View();
+        }
+
+        // POST: Reservaciones/CreateOp
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOp([Bind(Include = "ID_Reservacion,ID_Usuario,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus")] Reservacione reservacione)
+        {
+            ViewBag.title = "Nueva reservación | SIREON";
+            if (ModelState.IsValid)
+            {
+                ViewBag.title = "Nueva reservación | SIREON";
+                db.Reservaciones.Add(reservacione);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
+            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
+            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", reservacione.ID_Usuario);
+            return View(reservacione);
+
+        }
+
 
         // GET: Reservaciones/Edit/5
         public ActionResult Edit(int? id)

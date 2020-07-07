@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e49fa680f5f4e0bb32873df01ef7395" Name="Diagram1">
+      <Diagram DiagramId="8e49fa680f5f4e0bb32873df01ef7395" Name="Diagram1" ZoomLevel="58">
         <EntityTypeShape EntityType="SIREONModel.Cubiculo" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.ListaNegra" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.R_Salas_Usuarios" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
@@ -19,7 +19,18 @@
         <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Salas" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios" ManuallyRouted="false" />
-        <AssociationConnector Association="SIREONModel.FK_Roles_Usuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SIREONModel.R_Usuarios_Roles" Width="1.5" PointX="6.25" PointY="10.125" />
+        <EntityTypeShape EntityType="SIREONModel.Seguridad" Width="1.5" PointX="3" PointY="18.125" />
+        <AssociationConnector Association="SIREONModel.FK_R_Usuarios_Roles_Roles" />
+        <AssociationConnector Association="SIREONModel.FK_R_Usuarios_Roles_Usuarios" />
+        <AssociationConnector Association="SIREONModel.FK_Seguridad_Usuarios" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetRole" Width="1.5" PointX="8.375" PointY="2.5" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUserClaim" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUserLogin" Width="1.5" PointX="12.875" PointY="3.75" />
+        <EntityTypeShape EntityType="SIREONModel.AspNetUser" Width="1.5" PointX="10.625" PointY="1.375" />
+        <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="SIREONModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

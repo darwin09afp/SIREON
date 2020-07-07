@@ -38,14 +38,26 @@ namespace SIREON
 
         public override string[] GetRolesForUser(string username)
         {
-            using (var context = new SIREONEntities())
-            {
-                var result = (from Usuario in context.Usuarios
-                              join Role in context.Roles on Usuario.ID_Usuario equals Role.ID_Usuario
-                              where Usuario.Usuario1 == username
-                              select Role.Rol).ToArray();
+            //using (var context = new SIREONEntities())
+            //{
+            //    var result = (from Usuario in context.Usuarios
+            //                  join Role in context.Roles on Usuario.ID_Usuario equals Role.ID_Usuario
+            //                  where Usuario.Usuario1 == username
+            //                  select Role.Rol).ToArray();
 
-                return result;
+            //    return result;
+            //}
+
+            using (SIREONEntities _Context = new SIREONEntities())
+            {
+                var userRoles = (from Usuario in _Context.Usuarios
+                                 join R_Usuarios_Roles in _Context.R_Usuarios_Roles
+                                 on Usuario.ID_Usuario equals R_Usuarios_Roles.ID_Usuario
+                                 join role in _Context.Roles
+                                 on R_Usuarios_Roles.ID_Rol equals role.ID_Rol
+                                 where Usuario.Usuario1 == username
+                                 select role.Rol).ToArray();
+                return userRoles;
             }
             throw new NotImplementedException();
         }

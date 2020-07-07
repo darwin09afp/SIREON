@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNet.Identity
+<div class="sidebar" style="position: fixed; top:0  ">
+    <div class="user-profile">
+        <div class="display-avatar animated-avatar">
+            <img class="profile-img img-lg rounded-circle" src="assets/images/profile/male/image_1.png" alt="profile image">
+        </div>
+        <div class="info-wrapper">
+            <p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>
+            <h6 class="display-income">Operador</h6>
+        </div>
+    </div>
+    <ul class="navigation-menu">
+        <li>
+            <a>
+                <span class="page-title-heading" style="color:gray">PRINCIPAL</span>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Home")">
+                <span class="link-title">Inicio</span>
+                <i class="mdi mdi-home link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
+                <span class="link-title">Reservaciones</span>
+                <i class="mdi mdi-home-assistant link-icon"></i>
+            </a>
+            <ul class="collapse navigation-submenu" id="sample-pages">
+                <li>
+                    <a href="@Url.Action("CreateOp", "Reservaciones")">Nueva reservación</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index3", "Reservaciones")">Reservaciones</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "ListaNegras")">
+                <span class="link-title">Lista negra</span>
+                <i class="mdi mdi-cellphone link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Contact", "Home")">
+                <span class="link-title">Reglamento</span>
+                <i class="mdi mdi-book-lock-open link-icon"></i>
+            </a>
+
+        </li>
+        <li>
+            <a href="@Url.Action("Help", "Home")">
+                <span class="link-title">Ayuda</span>
+                <i class="mdi mdi-help link-icon"></i>
+            </a>
+        </li>
+        <li>
+            <a>
+                <span>
+                </span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+

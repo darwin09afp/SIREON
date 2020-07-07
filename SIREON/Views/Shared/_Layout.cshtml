@@ -18,8 +18,10 @@
     <!-- endinject -->
     <!-- Layout style -->
     <link rel="stylesheet" href="~/Content/css/demo_1/style.css">
+    @*<link rel="stylesheet" href="~/Content/js/dark-mode-switch.js">*@
     <!-- Layout style -->
     <link rel="shortcut icon" href="~/Content/images/favicon.ico" />
+
 </head>
 <body class="header-fixed">
     <!-- partial:partials/_header.html -->
@@ -29,8 +31,27 @@
     <!-- partial -->
     <div class="page-body">
         <!-- partial:partials/_sidebar.html -->
-        <div class="sidebar" >
-            @Html.Partial("_SideBar")
+        <div class="sidebar">
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Administradores"))
+                {
+                    @Html.Partial("_SideBarAdmin")
+                }
+                else if (User.IsInRole("Operador"))
+                {
+                    @Html.Partial("_SideBarOp")
+                }
+                else
+                {
+                    @Html.Partial("_SideBar")
+                }
+            }
+            else
+            {
+                @Html.Partial("_SideBar")
+            }
+
         </div>
         <!-- partial -->
         <div class="page-content-wrapper">
@@ -44,7 +65,7 @@
                         <hr />
 
                     </div>
-                    
+
                 </div>
             </div>
             <br />
@@ -65,7 +86,7 @@
             <!-- page content ends -->
         </div>
     </div>
-    <!--page body ends -->
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 </body>

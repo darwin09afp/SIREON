@@ -11,11 +11,13 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
+    [Authorize(Roles ="Administradores")]
     public class CubiculosController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
 
         // GET: Cubiculos
+       
         public ActionResult Index()
         {
             return View(db.Cubiculos.ToList());

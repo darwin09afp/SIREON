@@ -1,5 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SIREONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
   <EntityType Name="Cubiculos">
     <Key>
       <PropertyRef Name="ID_Cubiculo" />
@@ -24,6 +75,14 @@
     <Property Name="ID_Sala" Type="int" Nullable="false" />
     <Property Name="ID_Usuario" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="R_Usuarios-Roles">
+    <Key>
+      <PropertyRef Name="ID_RolUsuario" />
+    </Key>
+    <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Usuario" Type="int" Nullable="false" />
+    <Property Name="ID_Rol" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Reservaciones">
     <Key>
       <PropertyRef Name="ID_Reservacion" />
@@ -42,17 +101,28 @@
   </EntityType>
   <EntityType Name="Roles">
     <Key>
-      <PropertyRef Name="ID_RolUsuario" />
+      <PropertyRef Name="ID_Rol" />
     </Key>
-    <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ID_Usuario" Type="int" Nullable="false" />
-    <Property Name="Rol" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ID_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rol" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="Salas">
     <Key>
       <PropertyRef Name="ID_Sala" />
     </Key>
     <Property Name="ID_Sala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Seguridad">
+    <Key>
+      <PropertyRef Name="ID_Seguridad" />
+    </Key>
+    <Property Name="ID_Seguridad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_Usuario" Type="int" />
+    <Property Name="pregunta1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="respuesta1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="pregunta2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="respuesta2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -71,12 +141,63 @@
     <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Usuario" Type="varchar" MaxLength="9" Nullable="false" />
     <Property Name="Contrasena" Type="varchar" MaxLength="16" Nullable="false" />
-    <Property Name="Pregunta1" Type="char" MaxLength="15" Nullable="false" />
-    <Property Name="Pregunta2" Type="char" MaxLength="15" Nullable="false" />
-    <Property Name="Respuesta1" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Respuesta2" Type="varchar" MaxLength="20" Nullable="false" />
-    <Property Name="Estatus" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ListaNegra_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
@@ -109,6 +230,30 @@
         <PropertyRef Name="ID_Usuario" />
       </Principal>
       <Dependent Role="R_Salas-Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_R_Usuarios-Roles_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ID_Rol" />
+      </Principal>
+      <Dependent Role="R_Usuarios-Roles">
+        <PropertyRef Name="ID_Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_R_Usuarios-Roles_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="ID_Usuario" />
+      </Principal>
+      <Dependent Role="R_Usuarios-Roles">
         <PropertyRef Name="ID_Usuario" />
       </Dependent>
     </ReferentialConstraint>
@@ -149,15 +294,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Roles_Usuarios">
+  <Association Name="FK_Seguridad_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+    <End Role="Seguridad" Type="Self.Seguridad" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
         <PropertyRef Name="ID_Usuario" />
       </Principal>
-      <Dependent Role="Roles">
-        <PropertyRef Name="ID_Usuario" />
+      <Dependent Role="Seguridad">
+        <PropertyRef Name="ID_Seguridad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -193,14 +338,37 @@
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="SIREONModelStoreContainer">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="R_Usuarios-Roles" EntityType="Self.R_Usuarios-Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Seguridad" EntityType="Self.Seguridad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
     <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="ListaNegra" EntitySet="ListaNegra" />
@@ -212,6 +380,14 @@
     <AssociationSet Name="FK_R_Salas-Usuarios_Usuarios" Association="Self.FK_R_Salas-Usuarios_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="R_Salas-Usuarios" EntitySet="R_Salas-Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_R_Usuarios-Roles_Roles" Association="Self.FK_R_Usuarios-Roles_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_R_Usuarios-Roles_Usuarios" Association="Self.FK_R_Usuarios-Roles_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
     </AssociationSet>
     <AssociationSet Name="FK_Reservaciones_Cubiculos" Association="Self.FK_Reservaciones_Cubiculos">
       <End Role="Cubiculos" EntitySet="Cubiculos" />
@@ -225,9 +401,9 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
-    <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+    <AssociationSet Name="FK_Seguridad_Usuarios" Association="Self.FK_Seguridad_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Seguridad" EntitySet="Seguridad" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

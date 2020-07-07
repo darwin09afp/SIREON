@@ -11,11 +11,14 @@ namespace SIREON
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ListaNegra
     {
         public int ID_ListaN { get; set; }
+        [Required]
         public int ID_Usuario { get; set; }
+        [Required]
         public string Descripcion { get; set; }
     
         public virtual Usuario Usuario { get; set; }

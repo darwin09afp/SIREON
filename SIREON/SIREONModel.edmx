@@ -4,7 +4,58 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SIREONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SIREONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Cubiculos">
           <Key>
             <PropertyRef Name="ID_Cubiculo" />
@@ -29,6 +80,14 @@
           <Property Name="ID_Sala" Type="int" Nullable="false" />
           <Property Name="ID_Usuario" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="R_Usuarios-Roles">
+          <Key>
+            <PropertyRef Name="ID_RolUsuario" />
+          </Key>
+          <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Usuario" Type="int" Nullable="false" />
+          <Property Name="ID_Rol" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reservaciones">
           <Key>
             <PropertyRef Name="ID_Reservacion" />
@@ -47,17 +106,28 @@
         </EntityType>
         <EntityType Name="Roles">
           <Key>
-            <PropertyRef Name="ID_RolUsuario" />
+            <PropertyRef Name="ID_Rol" />
           </Key>
-          <Property Name="ID_RolUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_Usuario" Type="int" Nullable="false" />
-          <Property Name="Rol" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ID_Rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rol" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="Salas">
           <Key>
             <PropertyRef Name="ID_Sala" />
           </Key>
           <Property Name="ID_Sala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seguridad">
+          <Key>
+            <PropertyRef Name="ID_Seguridad" />
+          </Key>
+          <Property Name="ID_Seguridad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Usuario" Type="int" />
+          <Property Name="pregunta1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="respuesta1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pregunta2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="respuesta2" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -76,12 +146,63 @@
           <Property Name="ID_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="9" Nullable="false" />
           <Property Name="Contrasena" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="Pregunta1" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="Pregunta2" Type="char" MaxLength="15" Nullable="false" />
-          <Property Name="Respuesta1" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Respuesta2" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Estatus" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ListaNegra_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
@@ -114,6 +235,30 @@
               <PropertyRef Name="ID_Usuario" />
             </Principal>
             <Dependent Role="R_Salas-Usuarios">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_R_Usuarios-Roles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID_Rol" />
+            </Principal>
+            <Dependent Role="R_Usuarios-Roles">
+              <PropertyRef Name="ID_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_R_Usuarios-Roles_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="R_Usuarios-Roles" Type="Self.R_Usuarios-Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="R_Usuarios-Roles">
               <PropertyRef Name="ID_Usuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -154,15 +299,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Roles_Usuarios">
+        <Association Name="FK_Seguridad_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <End Role="Seguridad" Type="Self.Seguridad" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="ID_Usuario" />
             </Principal>
-            <Dependent Role="Roles">
-              <PropertyRef Name="ID_Usuario" />
+            <Dependent Role="Seguridad">
+              <PropertyRef Name="ID_Seguridad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -198,14 +343,37 @@
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="SIREONModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="R_Usuarios-Roles" EntityType="Self.R_Usuarios-Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seguridad" EntityType="Self.Seguridad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
           <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="ListaNegra" EntitySet="ListaNegra" />
@@ -217,6 +385,14 @@
           <AssociationSet Name="FK_R_Salas-Usuarios_Usuarios" Association="Self.FK_R_Salas-Usuarios_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="R_Salas-Usuarios" EntitySet="R_Salas-Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_R_Usuarios-Roles_Roles" Association="Self.FK_R_Usuarios-Roles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_R_Usuarios-Roles_Usuarios" Association="Self.FK_R_Usuarios-Roles_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="R_Usuarios-Roles" EntitySet="R_Usuarios-Roles" />
           </AssociationSet>
           <AssociationSet Name="FK_Reservaciones_Cubiculos" Association="Self.FK_Reservaciones_Cubiculos">
             <End Role="Cubiculos" EntitySet="Cubiculos" />
@@ -230,13 +406,12 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
+          <AssociationSet Name="FK_Seguridad_Usuarios" Association="Self.FK_Seguridad_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Seguridad" EntitySet="Seguridad" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SIREONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -289,12 +464,11 @@
         </EntityType>
         <EntityType Name="Role">
           <Key>
-            <PropertyRef Name="ID_RolUsuario" />
+            <PropertyRef Name="ID_Rol" />
           </Key>
-          <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
-          <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK_Roles_Usuarios" FromRole="Roles" ToRole="Usuarios" />
+          <Property Name="Rol" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ID_Rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="R_Usuarios_Roles" Relationship="SIREONModel.FK_R_Usuarios_Roles_Roles" FromRole="Role" ToRole="R_Usuarios_Roles" />
         </EntityType>
         <EntityType Name="Sala">
           <Key>
@@ -321,15 +495,11 @@
           <Property Name="ID_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Usuario1" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contrasena" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pregunta1" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Pregunta2" Type="String" MaxLength="15" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="Respuesta1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Estatus" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
           <NavigationProperty Name="R_Salas_Usuarios" Relationship="Self.FK_R_Salas_Usuarios_Usuarios" FromRole="Usuarios" ToRole="R_Salas_Usuarios" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
-          <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
+          <NavigationProperty Name="R_Usuarios_Roles" Relationship="SIREONModel.FK_R_Usuarios_Roles_Usuarios" FromRole="Usuario" ToRole="R_Usuarios_Roles" />
+          <NavigationProperty Name="Seguridad" Relationship="SIREONModel.FK_Seguridad_Usuarios" FromRole="Usuario" ToRole="Seguridad" />
         </EntityType>
         <Association Name="FK_Reservaciones_Cubiculos">
           <End Role="Cubiculos" Type="Self.Cubiculo" Multiplicity="1" />
@@ -403,18 +573,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Roles_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuario" Multiplicity="1" />
-          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="ID_Usuario" />
-            </Principal>
-            <Dependent Role="Roles">
-              <PropertyRef Name="ID_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SIREONEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
           <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
@@ -448,10 +606,6 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_Roles_Usuarios" Association="Self.FK_Roles_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="Roles" EntitySet="Roles" />
-          </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -482,6 +636,36 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="R_Usuarios_Roles" EntityType="SIREONModel.R_Usuarios_Roles" />
+          <EntitySet Name="Seguridads" EntityType="SIREONModel.Seguridad" />
+          <AssociationSet Name="FK_R_Usuarios_Roles_Roles" Association="SIREONModel.FK_R_Usuarios_Roles_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="R_Usuarios_Roles" EntitySet="R_Usuarios_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_R_Usuarios_Roles_Usuarios" Association="SIREONModel.FK_R_Usuarios_Roles_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="R_Usuarios_Roles" EntitySet="R_Usuarios_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seguridad_Usuarios" Association="SIREONModel.FK_Seguridad_Usuarios">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Seguridad" EntitySet="Seguridads" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="SIREONModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="SIREONModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="SIREONModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="SIREONModel.AspNetUser" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="SIREONModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -494,6 +678,146 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="R_Usuarios_Roles">
+          <Key>
+            <PropertyRef Name="ID_RolUsuario" />
+          </Key>
+          <Property Name="ID_RolUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="ID_Rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="SIREONModel.FK_R_Usuarios_Roles_Roles" FromRole="R_Usuarios_Roles" ToRole="Role" />
+          <NavigationProperty Name="Usuario" Relationship="SIREONModel.FK_R_Usuarios_Roles_Usuarios" FromRole="R_Usuarios_Roles" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Seguridad">
+          <Key>
+            <PropertyRef Name="ID_Seguridad" />
+          </Key>
+          <Property Name="ID_Seguridad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Usuario" Type="Int32" />
+          <Property Name="pregunta1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="respuesta1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pregunta2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="respuesta2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="SIREONModel.FK_Seguridad_Usuarios" FromRole="Seguridad" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_R_Usuarios_Roles_Roles">
+          <End Type="SIREONModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="SIREONModel.R_Usuarios_Roles" Role="R_Usuarios_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID_Rol" />
+            </Principal>
+            <Dependent Role="R_Usuarios_Roles">
+              <PropertyRef Name="ID_Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_R_Usuarios_Roles_Usuarios">
+          <End Type="SIREONModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SIREONModel.R_Usuarios_Roles" Role="R_Usuarios_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="R_Usuarios_Roles">
+              <PropertyRef Name="ID_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seguridad_Usuarios">
+          <End Type="SIREONModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="SIREONModel.Seguridad" Role="Seguridad" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_Usuario" />
+            </Principal>
+            <Dependent Role="Seguridad">
+              <PropertyRef Name="ID_Seguridad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="SIREONModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="AspNetRoles" Relationship="SIREONModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="SIREONModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SIREONModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="SIREONModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="SIREONModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="SIREONModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="SIREONModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -547,8 +871,7 @@
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="SIREONModel.Role">
               <MappingFragment StoreEntitySet="Roles">
-                <ScalarProperty Name="ID_RolUsuario" ColumnName="ID_RolUsuario" />
-                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
                 <ScalarProperty Name="Rol" ColumnName="Rol" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -577,12 +900,7 @@
                 <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
                 <ScalarProperty Name="Usuario1" ColumnName="Usuario" />
                 <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
-                <ScalarProperty Name="Pregunta1" ColumnName="Pregunta1" />
-                <ScalarProperty Name="Pregunta2" ColumnName="Pregunta2" />
-                <ScalarProperty Name="Respuesta1" ColumnName="Respuesta1" />
-                <ScalarProperty Name="Respuesta2" ColumnName="Respuesta2" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SIREONModel.Store.sp_alterdiagram" />
@@ -609,6 +927,81 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SIREONModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SIREONModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="R_Usuarios_Roles">
+            <EntityTypeMapping TypeName="SIREONModel.R_Usuarios_Roles">
+              <MappingFragment StoreEntitySet="R_Usuarios-Roles">
+                <ScalarProperty Name="ID_Rol" ColumnName="ID_Rol" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="ID_RolUsuario" ColumnName="ID_RolUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguridads">
+            <EntityTypeMapping TypeName="SIREONModel.Seguridad">
+              <MappingFragment StoreEntitySet="Seguridad">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="respuesta2" ColumnName="respuesta2" />
+                <ScalarProperty Name="pregunta2" ColumnName="pregunta2" />
+                <ScalarProperty Name="respuesta1" ColumnName="respuesta1" />
+                <ScalarProperty Name="pregunta1" ColumnName="pregunta1" />
+                <ScalarProperty Name="ID_Usuario" ColumnName="ID_Usuario" />
+                <ScalarProperty Name="ID_Seguridad" ColumnName="ID_Seguridad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="SIREONModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="SIREONModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="SIREONModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="SIREONModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="SIREONModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

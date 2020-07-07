@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -17,6 +18,9 @@ namespace SIREON.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private SIREONEntities context = new SIREONEntities();
+        private SIREONEntities db = new SIREONEntities();
+
 
         public AccountController()
         {
@@ -57,7 +61,8 @@ namespace SIREON.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.title = "SIREON";
+            //ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
@@ -139,8 +144,106 @@ namespace SIREON.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.title = "SIREON";
             return View();
         }
+
+        public ActionResult Roles(string id)
+
+        {
+
+            if (id == null)
+
+            {
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            }
+
+            AspNetUser user = context.AspNetUsers.Find(id);
+
+            if (user == null)
+
+            {
+
+                return HttpNotFound();
+
+            }
+
+            UserViewModels userRole = new UserViewModels() { Email = user.Email, Id = user.Id, Role = user.AspNetRoles, UserName = user.UserName };
+
+            if (userRole.Role.Count() != 0)
+
+            {
+
+                ViewBag.RoleId = new SelectList(db.AspNetRoles.ToList(), "Id", "Name", userRole.Role.FirstOrDefault().Id);
+
+
+            }
+
+            else
+
+            {
+
+                ViewBag.RoleId = new SelectList(db.AspNetRoles.ToList(), "Id", "Name");
+
+
+
+            }
+
+            return View(userRole);
+
+        }
+
+
+        [HttpPost]
+        [Authorize (Roles = "Administradores")]
+        public ActionResult Roles(UserViewModels user)
+
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                var roles = context.AspNetUsers.Find(user.Id).AspNetRoles.ToList();
+
+                foreach (var item in roles)
+
+                {
+
+                    UserManager.RemoveFromRoles(user.Id, item.Name);
+
+                }
+
+                db.SaveChanges();
+
+
+
+                AspNetUser users = context.AspNetUsers.Find(user.Id);
+
+                var role = context.AspNetRoles.Find(user.RoleId.ToString());
+
+                UserManager.AddToRole(user.Id, role.Name);
+
+                db.SaveChanges();
+
+
+
+                // users.AspNetRoles.Select();
+
+                // db.Entry(users).State = EntityState.Modified;
+
+
+
+                return RedirectToAction("Index");
+
+            }
+            ViewBag.RoleId = new SelectList(db.AspNetRoles.ToList(), "Id", "Name", user.RoleId);
+
+            return View(user);
+
+        }
+
 
         //
         // POST: /Account/Register
@@ -155,6 +258,7 @@ namespace SIREON.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "Usuario");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -185,11 +289,125 @@ namespace SIREON.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
+
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "Administradores")]
+
+        public ActionResult Edit(string id)
+
+        {
+
+
+
+            if (String.IsNullOrEmpty(id))
+
+            {
+
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            }
+
+            AspNetUser user = context.AspNetUsers.Find(id);
+
+            if (user == null)
+
+            {
+
+                return HttpNotFound();
+
+            }
+
+
+
+            ViewBag.Employees = new SelectList(db.AspNetUsers.ToList(), "Id", "Name");
+
+            return View(user);
+
+        }
+
+        //public JsonResult getEmployee(string EmployeeId)
+
+        //{
+
+        //    var employee = business.GetEmployee(EmployeeId);
+
+        //    var empName = employee.Name;
+
+        //    var empId = employee.Id;
+
+        //    return Json(new { Id = empId, Name = empName, Email = employee.Email }, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
+        //[Authorize(Roles = "Administradores")]
+        //[HttpPost]
+        ////[Authorize(Roles = "Administrators")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,UserName,Email")] AspNetUser model)
+
+        //{
+
+        //    ViewBag.user = new SelectList(db.AspNetUsers.ToList(), "Id", "Name");
+
+        //    if (ModelState.IsValid)
+
+        //    {
+
+        //        var results = Usuario(model);
+
+        //        if (results.IsSuccess)
+
+        //        {
+
+        //            Alert(results.Message, Utilities.NotificationType.success);
+
+        //            Utilities.Utilities.PrepareAuditTrail("User edited: " + model.UserName, User.Identity.Name,
+
+        //                AuditTrailAction.Update);
+
+        //        }
+
+        //        else
+
+        //            Alert(results.Message, Utilities.NotificationType.error);
+
+        //        return View(model);
+
+        //    }
+
+        //    return View(model);
+
+
+
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
+            ViewBag.title = "SIREON";
             return View();
         }
 
@@ -226,6 +444,7 @@ namespace SIREON.Controllers
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
+            ViewBag.title = "SIREON";
             return View();
         }
 
@@ -234,6 +453,7 @@ namespace SIREON.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
+            ViewBag.title = "SIREON";
             return code == null ? View("Error") : View();
         }
 
@@ -268,6 +488,7 @@ namespace SIREON.Controllers
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
+            ViewBag.title = "SIREON";
             return View();
         }
 
@@ -384,6 +605,26 @@ namespace SIREON.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
+
+        public ActionResult Index()
+
+        {
+
+            var users = db.AspNetUsers.Include("AspNetRoles").ToList().Select(b => new UserViewModels()
+                         {
+                             Id = b.Id,
+                             Email = b.Email,
+                             Role = b.AspNetRoles,
+                         }).ToList();
+
+
+
+            ViewBag.Role = new SelectList(db.AspNetRoles, "Id", "Name");
+
+            return View(users);
+
+        }
+
 
         //
         // POST: /Account/LogOff

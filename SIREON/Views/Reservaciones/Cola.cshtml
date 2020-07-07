@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SIREON.Reservacione>
+@{
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+    @*<div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 equel-grid">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="d-flex flex-row mt-4 mb-4">
+                        <a href='@Url.Action("CreateOP", "Reservaciones")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:green">Nueva reservación</a>
+                        <a href='@Url.Action("Create", "Reservaciones")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:yellowgreen">En espera</a>
+                        <a href='@Url.Action("Index", "ListaNegras")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:darkred">Lista negra</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <br />
+    <div class="col-lg-12">
+        <div class="grid">
+            <p class="grid-header" style="border-left-color:green">En espera de disponibilidad</p>
+            <div class="item-wrapper">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Hora solicitada
+                                </th>
+                                <th>
+                                    Estatus de reservación
+                                </th>
+                                <th></th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(ModelItem => item.ID_Usuario)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HSolicitada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estatus)
+                                        @{
+                                            if (item.Estatus == "Cola")
+                                            {
+                                                <label class="badge badge-warning">Cola</label>
+                                            }
+                                            else if (item.Estatus == "Cancelada")
+                                            {
+                                                <label class="badge badge-danger">Cancelada</label>
+                                            }
+                                        }
+
+
+                                        @*<% if (item.Estatus) { %>
+                                            <label class="badge badge-warning">Activa</label>
+                                            <% } else { %>
+                                            <label class="badge badge-danger">Cancelada</label>
+                                            <% } %>*@
+
+                                        @*<label class="badge badge-success">Completed</label>
+                                            <label class="badge badge-warning">In progress</label>
+                                            <label class="badge badge-danger">Pending</label>*@
+
+
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID_Reservacion })
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</body>
+</html>
+
+

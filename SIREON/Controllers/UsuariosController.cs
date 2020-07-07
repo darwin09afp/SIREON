@@ -11,12 +11,13 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
+    [Authorize]
     public class UsuariosController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
-
-        // GET: Usuarios
-        public ActionResult Index()
+ 
+    // GET: Usuarios
+    public ActionResult Index()
         {
             return View(db.Usuarios.ToList());
         }
