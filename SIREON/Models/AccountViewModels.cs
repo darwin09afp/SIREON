@@ -79,6 +79,11 @@ namespace SIREON.Models
         [Display(Name = "Confirmar contraseña")]
         [Compare("Password", ErrorMessage = "Las contraseñas no son idénticas.")]
         public string ConfirmPassword { get; set; }
+
+        
+        [DataType(DataType.ImageUrl)]
+        [Display(Name = "Imagen para perfil")]
+        public byte[] Image { get; set; }
     }
 
     public class ResetPasswordViewModel

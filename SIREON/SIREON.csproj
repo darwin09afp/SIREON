@@ -200,6 +200,9 @@
     <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Directore.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>

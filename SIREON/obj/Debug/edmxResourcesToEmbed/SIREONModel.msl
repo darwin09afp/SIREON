@@ -156,6 +156,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="SIREONModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -179,5 +180,15 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="SIREONModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -36,6 +36,13 @@
                                                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                                                 </div>
                                             </div>
+                                            @*<div class="form-group input-rounded">
+                                                @Html.LabelFor(m => m.Image, new { @class = "col-sm-12 col-md-12 col-lg-12 control-label" })
+                                                <div class="form-group input-rounded">
+                                                    <input type="file" name="FotoPerfil" />
+                                                    @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>*@
                                             <div class="form-group input-rounded">
                                                 <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> Registrar </button>
                                             </div>

@@ -12,12 +12,11 @@ namespace SIREON
     using System;
     using System.Collections.Generic;
     
-    public partial class ListaNegra
+    public partial class C__MigrationHistory
     {
-        public int ID_ListaN { get; set; }
-        public int ID_Usuario { get; set; }
-        public string Descripcion { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }
