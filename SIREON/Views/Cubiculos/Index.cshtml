@@ -4,36 +4,53 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="grid">
+        <div class="grid-body">
+            <h2 class="grid-title">Acciones</h2>
+            <div class="item-wrapper">
+                <a href="@Url.Action("Create", "Cubiculos")" class="btn btn-success has-icon"><i class="mdi mdi-account-plus-outline"></i>Habilitar nuevo Cubículos</a>
+            </div>
+        </div>
+    </div>
+<br/>
+<div class="col-lg-12">
+                <div class="grid">
+                    <p class="grid-header" style="border-left-color:green">Cubículos</p>
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Cubiculo No.
+                                        </th>
+                                        <th>
+                                            Capacidad
+                                        </th>
+                                        <th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacidad)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Capacidad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Cubiculo }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Cubiculo }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Cubiculo })
-        </td>
-    </tr>
-}
-
-</table>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Descripcion)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Capacidad)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID_Cubiculo }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID_Cubiculo }) |
+                                            @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Cubiculo })*@
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+     
