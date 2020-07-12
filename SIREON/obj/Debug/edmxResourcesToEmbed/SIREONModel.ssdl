@@ -78,6 +78,15 @@
     <Property Name="ID_Usuario" Type="int" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCorto" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Valor" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
   <EntityType Name="R_Salas-Usuarios">
     <Key>
       <PropertyRef Name="ID_RSalas" />
@@ -357,6 +366,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="R_Salas-Usuarios" EntityType="Self.R_Salas-Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="R_Usuarios-Roles" EntityType="Self.R_Usuarios-Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />

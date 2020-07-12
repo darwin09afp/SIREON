@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SIREON.Parametro>
+
+@{
+
+}
+
+    <body>
+        <div class="row">
+
+            @{
+                foreach (var item in Model)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-4 equel-grid" style="text-align:center">
+                        <div class="grid">
+                            <div class="grid-body text-gray">
+                                <h6 class="text-black">@Html.DisplayFor(modelItem => item.Nombre)</h6>
+                                <h1 class="font-light text-center">@Html.DisplayFor(modelItem => item.Valor)</h1>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <br/>
+        <div class="col-lg-12">
+                <div class="grid">
+                    <p class="grid-header">Todos los parametros</p>
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table info-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Valor)</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Nombre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Valor)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { htmlAttributes = new { @class = "btn btn-xs btn-primary" } })|
+                                                @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </body>
+

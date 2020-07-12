@@ -21,7 +21,21 @@
                 <i class="mdi mdi-home link-icon"></i>
             </a>
         </li>
+
         <li>
+            <a href="@Url.Action("Index3", "Reservaciones")">
+                <span class="link-title">Reservaciones</span>
+                <i class="mdi mdi-calendar link-icon"></i>
+            </a>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Disponibilidad", "Cubiculos")">
+                <span class="link-title">Disponibilidad</span>
+                <i class="mdi mdi-check link-icon"></i>
+            </a>
+        </li>
+        @*<li>
             <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
                 <span class="link-title">Reservaciones</span>
                 <i class="mdi mdi-home-assistant link-icon"></i>
@@ -34,19 +48,13 @@
                     <a href="@Url.Action("Index3", "Reservaciones")">Reservaciones</a>
                 </li>
             </ul>
-        </li>
+        </li>*@
         <li>
             <a href="@Url.Action("Index", "Account")">
-                <span class="link-title">Manejo de usuarios</span>
-                <i class="mdi mdi-locker link-icon"></i>
+                <span class="link-title">Consulta de usuarios</span>
+                <i class="mdi mdi-human-handsdown link-icon"></i>
             </a>
 
-        </li>
-        <li>
-            <a href="@Url.Action("Index", "ListaNegras")">
-                <span class="link-title">Lista negra</span>
-                <i class="mdi mdi-cellphone link-icon"></i>
-            </a>
         </li>
         <li>
             <a href="@Url.Action("Contact", "Home")">
@@ -55,6 +63,13 @@
             </a>
 
         </li>
+        <li>
+            <a href="@Url.Action("Index", "ListaNegras")">
+                <span class="link-title">Lista negra</span>
+                <i class="mdi mdi-format-list-checkbox link-icon"></i>
+            </a>
+        </li>
+
         <li>
             <a href="@Url.Action("Help", "Home")">
                 <span class="link-title">Ayuda</span>

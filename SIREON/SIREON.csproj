@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegrasController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
     <Compile Include="Controllers\RSalasController.cs" />
     <Compile Include="Controllers\SalasController.cs" />
@@ -231,6 +232,9 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Parametro.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Profesore.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
@@ -2298,6 +2302,12 @@
     <Content Include="Views\Reservaciones\Index3.cshtml" />
     <Content Include="Views\Reservaciones\Cola.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Parametros\Create.cshtml" />
+    <Content Include="Views\Parametros\Delete.cshtml" />
+    <Content Include="Views\Parametros\Details.cshtml" />
+    <Content Include="Views\Parametros\Edit.cshtml" />
+    <Content Include="Views\Parametros\Index.cshtml" />
+    <Content Include="Views\Cubiculos\Disponibilidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

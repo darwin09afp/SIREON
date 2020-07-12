@@ -8,119 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using SIREON;
 
-
 namespace SIREON.Controllers
 {
-    [Authorize]
-    public class CubiculosController : Controller
+    public class ParametrosController : Controller
     {
         private SIREONEntities db = new SIREONEntities();
 
-        // GET: Cubiculos
+        // GET: Parametros
         public ActionResult Index()
         {
-            return View(db.Cubiculos.ToList());
+            return View(db.Parametros.ToList());
         }
 
-        [Authorize(Roles = "Operador")]
-        // GET: Cubiculos
-        public ActionResult Disponibilidad()
-        {
-            return View(db.Cubiculos.ToList());
-        }
-
-
-        // GET: Cubiculos/Details/5
+        // GET: Parametros/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cubiculo cubiculo = db.Cubiculos.Find(id);
-            if (cubiculo == null)
+            Parametro parametro = db.Parametros.Find(id);
+            if (parametro == null)
             {
                 return HttpNotFound();
             }
-            return View(cubiculo);
+            return View(parametro);
         }
 
-        // GET: Cubiculos/Create
+        // GET: Parametros/Create
         public ActionResult Create()
         {
             return View();
         }
-         
-        // POST: Cubiculos/Create
+
+        // POST: Parametros/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad")] Cubiculo cubiculo)
+        public ActionResult Create([Bind(Include = "ID,Nombre,Valor,NombreCorto")] Parametro parametro)
         {
             if (ModelState.IsValid)
             {
-                db.Cubiculos.Add(cubiculo);
+                db.Parametros.Add(parametro);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(cubiculo);
+            return View(parametro);
         }
 
-        // GET: Cubiculos/Edit/5
+        // GET: Parametros/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cubiculo cubiculo = db.Cubiculos.Find(id);
-            if (cubiculo == null)
+            Parametro parametro = db.Parametros.Find(id);
+            if (parametro == null)
             {
                 return HttpNotFound();
             }
-            return View(cubiculo);
+            return View(parametro);
         }
 
-        // POST: Cubiculos/Edit/5
+        // POST: Parametros/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad")] Cubiculo cubiculo)
+        public ActionResult Edit([Bind(Include = "ID,Nombre,Valor,NombreCorto")] Parametro parametro)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cubiculo).State = EntityState.Modified;
+                db.Entry(parametro).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cubiculo);
+            return View(parametro);
         }
 
-        // GET: Cubiculos/Delete/5
+        // GET: Parametros/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cubiculo cubiculo = db.Cubiculos.Find(id);
-            if (cubiculo == null)
+            Parametro parametro = db.Parametros.Find(id);
+            if (parametro == null)
             {
                 return HttpNotFound();
             }
-            return View(cubiculo);
+            return View(parametro);
         }
 
-        // POST: Cubiculos/Delete/5
+        // POST: Parametros/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cubiculo cubiculo = db.Cubiculos.Find(id);
-            db.Cubiculos.Remove(cubiculo);
+            Parametro parametro = db.Parametros.Find(id);
+            db.Parametros.Remove(parametro);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
