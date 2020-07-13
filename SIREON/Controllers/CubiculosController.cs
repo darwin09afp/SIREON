@@ -11,10 +11,10 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    [Authorize]
+
     public class CubiculosController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Cubiculos
         public ActionResult Index()
@@ -22,7 +22,7 @@ namespace SIREON.Controllers
             return View(db.Cubiculos.ToList());
         }
 
-        [Authorize(Roles = "Operador")]
+
         // GET: Cubiculos
         public ActionResult Disponibilidad()
         {

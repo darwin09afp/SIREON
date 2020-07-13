@@ -181,12 +181,6 @@
     <Compile Include="AspNetUserLogin.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Cargo.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Carrera.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CentroController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
@@ -204,24 +198,6 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Directore.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Empleado.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entidad.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Escuela.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Estudiante.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Facultade.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,9 +210,6 @@
     <Compile Include="Models\UserViewModels.cs" />
     <Compile Include="Parametro.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Profesore.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -273,31 +246,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UniversidadModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UniversidadModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UniversidadModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UniversidadModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UniversidadModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Usuario.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
@@ -2185,20 +2134,11 @@
       <DependentUpon>SIREONModel.edmx</DependentUpon>
       <LastGenOutput>SIREONModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="SIREONModel.edmx.sql" />
     <Content Include="SIREONModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SIREONModel.edmx</DependentUpon>
       <LastGenOutput>SIREONModel.cs</LastGenOutput>
-    </Content>
-    <Content Include="UniversidadModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UniversidadModel.edmx</DependentUpon>
-      <LastGenOutput>UniversidadModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="UniversidadModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UniversidadModel.edmx</DependentUpon>
-      <LastGenOutput>UniversidadModel.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2222,13 +2162,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <EntityDeploy Include="UniversidadModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UniversidadModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="UniversidadModel.edmx.diagram">
-      <DependentUpon>UniversidadModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\Cubiculos\Create.cshtml" />
     <Content Include="Views\Cubiculos\Delete.cshtml" />
     <Content Include="Views\Cubiculos\Details.cshtml" />
@@ -2264,13 +2197,6 @@
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Home\Help.cshtml" />
     <Content Include="Views\Reservaciones\Index2.cshtml" />
-    <EntityDeploy Include="SIREONModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SIREONModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="SIREONModel.edmx.diagram">
-      <DependentUpon>SIREONModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Views\RSalas\Create.cshtml" />
     <Content Include="Views\RSalas\Delete.cshtml" />
     <Content Include="Views\RSalas\Details.cshtml" />
@@ -2308,6 +2234,14 @@
     <Content Include="Views\Parametros\Edit.cshtml" />
     <Content Include="Views\Parametros\Index.cshtml" />
     <Content Include="Views\Cubiculos\Disponibilidad.cshtml" />
+    <EntityDeploy Include="SIREONModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SIREONModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="SIREONModel.edmx.diagram">
+      <DependentUpon>SIREONModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Views\Shared\_SideBarUsr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

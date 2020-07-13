@@ -13,7 +13,7 @@ namespace SIREON.Controllers
 {
     public class ListaNegrasController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: ListaNegras
         public ActionResult Index()

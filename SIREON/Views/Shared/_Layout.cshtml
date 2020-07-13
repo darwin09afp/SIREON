@@ -34,7 +34,7 @@
         <div class="sidebar">
             @if (User.Identity.IsAuthenticated)
             {
-                if (User.IsInRole("Administradores"))
+                if (User.IsInRole("Administrador"))
                 {
                     @Html.Partial("_SideBarAdmin")
                 }
@@ -44,7 +44,7 @@
                 }
                 else
                 {
-                    @Html.Partial("_SideBar")
+                    @Html.Partial("_SideBarUsr")
                 }
             }
             else

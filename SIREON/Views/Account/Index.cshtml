@@ -1,4 +1,4 @@
-﻿@model  ICollection <SIREON.Models.UserViewModels>
+﻿@model  ICollection<SIREON.Models.UserViewModels>
 
 
 @{
@@ -63,7 +63,7 @@
     </div>
     @if (User.Identity.IsAuthenticated)
     {
-        if (User.IsInRole("Administradores"))
+        if (User.IsInRole("Administrador"))
         {
             <div class="col-lg-12">
                 <div class="grid">
@@ -86,7 +86,7 @@
 
                                         </th>
                                     </tr>
-                            </thead>
+                                </thead>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
@@ -135,19 +135,19 @@
                                     </tr>
                                 </thead>
                                 @foreach (var item in Model)
-                                    {
-                                        <tr>
+                                {
+                                    <tr>
 
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Email)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Email)
-                                            </td>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                    }
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
 
                             </table>
                         </div>
@@ -179,17 +179,17 @@
                                 </thead>
 
                                 @foreach (var item in Model)
-                                    {
-                                        <tr>
+                                {
+                                    <tr>
 
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                        </tr>
-                                    }
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                }
 
                             </table>
                         </div>

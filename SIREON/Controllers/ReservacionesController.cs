@@ -15,7 +15,7 @@ namespace SIREON.Controllers
     
     public class ReservacionesController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Reservaciones
         public ActionResult Index()

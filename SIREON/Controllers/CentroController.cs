@@ -12,7 +12,7 @@ namespace SIREON.Controllers
 {
     public class CentroController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Centro
         public ActionResult Index()

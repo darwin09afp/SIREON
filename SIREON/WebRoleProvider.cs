@@ -48,7 +48,7 @@ namespace SIREON
             //    return result;
             //}
 
-            using (SIREONEntities _Context = new SIREONEntities())
+            using (SIREONEntitiess _Context = new SIREONEntitiess())
             {
                 var userRoles = (from Usuario in _Context.Usuarios
                                  join R_Usuarios_Roles in _Context.R_Usuarios_Roles

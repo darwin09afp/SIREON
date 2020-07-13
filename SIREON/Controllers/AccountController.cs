@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -13,13 +14,13 @@ using SIREON.Models;
 
 namespace SIREON.Controllers
 {
-    [Authorize]
+
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private SIREONEntities context = new SIREONEntities();
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess context = new SIREONEntitiess();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
 
         public AccountController()
@@ -197,7 +198,7 @@ namespace SIREON.Controllers
 
 
         [HttpPost]
-        [Authorize (Roles = "Administradores")]
+
         public ActionResult Roles(UserViewModels user)
 
         {
@@ -254,7 +255,19 @@ namespace SIREON.Controllers
         {
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
+                {
+                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
+                }
+
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                user.UserPhoto = imageData;
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -294,7 +307,7 @@ namespace SIREON.Controllers
 
 
         [HttpGet]
-        [Authorize(Roles = "Administradores")]
+
 
         public ActionResult Edit(string id)
 

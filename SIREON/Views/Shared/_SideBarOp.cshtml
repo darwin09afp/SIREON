@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 <div class="sidebar" style="position: fixed; top:0  ">
-    <div class="user-profile">
+    <div class="user-profile" style="padding:10px;">
         <div class="display-avatar animated-avatar">
-            <img class="profile-img img-lg rounded-circle" src="assets/images/profile/male/image_1.png" alt="profile image">
+            <img class="profile-img img-lg rounded-circle" src="@Url.Action("UserPhotos", "Home" )" alt="profile image" style="width: 110px; height: 110px;">
         </div>
         <div class="info-wrapper">
             <p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>

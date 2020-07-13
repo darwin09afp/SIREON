@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace SIREON.Models
 {
@@ -80,10 +81,9 @@ namespace SIREON.Models
         [Compare("Password", ErrorMessage = "Las contraseñas no son idénticas.")]
         public string ConfirmPassword { get; set; }
 
-        
-        [DataType(DataType.ImageUrl)]
-        [Display(Name = "Imagen para perfil")]
-        public byte[] Image { get; set; }
+
+        [Display(Name = "Foto de perfil")]
+        public HttpPostedFileBase UserPhoto { get; set; }
     }
 
     public class ResetPasswordViewModel

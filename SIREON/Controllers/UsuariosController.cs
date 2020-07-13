@@ -14,7 +14,7 @@ namespace SIREON.Controllers
     [Authorize]
     public class UsuariosController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
  
     // GET: Usuarios
     public ActionResult Index()

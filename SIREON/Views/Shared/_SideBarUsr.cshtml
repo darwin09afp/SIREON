@@ -1,12 +1,20 @@
 ﻿@using Microsoft.AspNet.Identity
-<div class="sidebar" style="position: fixed; top:0;">
+<div class="sidebar" style="position: fixed; top:0  ">
     <div class="user-profile" style="padding:10px;">
+        @*<div class="display-avatar">
+            <img src="@Url.Action("UserPhotos", "Home" )" style="width:110px;height:110px; background: #FFFFFF;
+                                                            margin: auto;
+                                                            -moz-border-radius: 60px;
+                                                            border-radius: 100px;
+                                                            padding: 4px;
+                                                            box-shadow: 0px 0px 20px #888;" />
+        </div>*@
         <div class="display-avatar animated-avatar">
             <img class="profile-img img-lg rounded-circle" src="@Url.Action("UserPhotos", "Home" )" alt="profile image" style="width: 110px; height: 110px;">
         </div>
-        <div class="info-wrapper">
+        <div class="info-wrapper" >
             <p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>
-            <h6 class="display-income">Administrador</h6>
+            <h6 class="display-income">Bienvenido/a</h6>
         </div>
     </div>
     <ul class="navigation-menu">
@@ -22,38 +30,18 @@
             </a>
         </li>
         <li>
-            <a href="@Url.Action("Index", "Centro")">
-                <span class="link-title">Dashboard</span>
-                <i class="mdi mdi-monitor-dashboard link-icon"></i>
-            </a>
-
-        </li>
-        <li>
             <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
-                <span class="link-title">Por definir</span>
+                <span class="link-title">Mi espacio</span>
                 <i class="mdi mdi-home-assistant link-icon"></i>
             </a>
             <ul class="collapse navigation-submenu" id="sample-pages">
                 <li>
-                    <a href="#">Por definir</a>
+                    <a href="@Url.Action("Index", "Reservaciones")">Mis reservaciones</a>
                 </li>
                 <li>
-                    <a href="#">Por definir</a>
+                    <a href="@Url.Action("Index2", "Reservaciones")">Mis invitaciones</a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="@Url.Action("Index", "Parametros")">
-                <span class="link-title">Manejo de parametros</span>
-                <i class="mdi mdi-settings link-icon"></i>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.Action("Index", "Account")">
-                <span class="link-title">Manejo de usuarios</span>
-                <i class="mdi mdi-locker link-icon"></i>
-            </a>
-
         </li>
         <li>
             <a href="@Url.Action("Contact", "Home")">
@@ -61,6 +49,20 @@
                 <i class="mdi mdi-book-lock-open link-icon"></i>
             </a>
 
+        </li>
+        <li>
+            <a href="@Url.Action("Contact", "Home")">
+                <span class="link-title">Contáctanos</span>
+                <i class="mdi mdi-cellphone link-icon"></i>
+            </a>
+
+        </li>
+
+        <li>
+            <a href="@Url.Action("About", "Home")">
+                <span class="link-title">Nosotros</span>
+                <i class="mdi mdi-nature-people link-icon"></i>
+            </a>
         </li>
 
         <li>
@@ -79,3 +81,4 @@
     </ul>
 
 </div>
+

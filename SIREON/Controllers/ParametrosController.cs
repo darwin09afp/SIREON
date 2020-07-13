@@ -12,7 +12,7 @@ namespace SIREON.Controllers
 {
     public class ParametrosController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Parametros
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace SIREON.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Nombre,Valor,NombreCorto")] Parametro parametro)
+        public ActionResult Create([Bind(Include = "ID,Nombre,Valor")] Parametro parametro)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace SIREON.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Nombre,Valor,NombreCorto")] Parametro parametro)
+        public ActionResult Edit([Bind(Include = "ID,Nombre,Valor")] Parametro parametro)
         {
             if (ModelState.IsValid)
             {

@@ -13,7 +13,7 @@ namespace SIREON.Controllers
 {
     public class SalasController : Controller
     {
-        private SIREONEntities db = new SIREONEntities();
+        private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Salas
         public ActionResult Index()

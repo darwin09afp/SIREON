@@ -20,8 +20,8 @@ namespace SIREON
             this.R_Usuarios_Roles = new HashSet<R_Usuarios_Roles>();
         }
     
-        public string Rol { get; set; }
         public int ID_Rol { get; set; }
+        public string Rol { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<R_Usuarios_Roles> R_Usuarios_Roles { get; set; }
