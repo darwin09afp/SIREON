@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -356,47 +357,31 @@ namespace SIREON.Controllers
         //}
 
 
-        //[Authorize(Roles = "Administradores")]
-        //[HttpPost]
-        ////[Authorize(Roles = "Administrators")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id,UserName,Email")] AspNetUser model)
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult ChangeProfilePic([Bind(Include = "UserPhoto")] AspNetUser model)
+        {
+            byte[] UserPhoto = null;
 
-        //{
-
-        //    ViewBag.user = new SelectList(db.AspNetUsers.ToList(), "Id", "Name");
-
-        //    if (ModelState.IsValid)
-
-        //    {
-
-        //        var results = Usuario(model);
-
-        //        if (results.IsSuccess)
-
-        //        {
-
-        //            Alert(results.Message, Utilities.NotificationType.success);
-
-        //            Utilities.Utilities.PrepareAuditTrail("User edited: " + model.UserName, User.Identity.Name,
-
-        //                AuditTrailAction.Update);
-
-        //        }
-
-        //        else
-
-        //            Alert(results.Message, Utilities.NotificationType.error);
-
-        //        return View(model);
-
-        //    }
-
-        //    return View(model);
+            HttpPostedFileBase FileBase = Request.Files[0];
+            if (FileBase == null)
+            {
+                UserPhoto = context.AspNetUsers.Find(User.Identity.GetUserId()).UserPhoto;
+            }
+            else
+            {
+                WebImage image = new WebImage(FileBase.InputStream);
+                db.AspNetUsers.FirstOrDefault().UserPhoto = image.GetBytes();
+            }
 
 
 
-        //}
+            return Json(model);
+
+
+
+        }
 
 
 

@@ -182,16 +182,16 @@
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CentroController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegrasController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
+    <Compile Include="Controllers\ReservacionePruebaController.cs" />
     <Compile Include="Controllers\RSalasController.cs" />
     <Compile Include="Controllers\SalasController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
@@ -216,19 +216,10 @@
     <Compile Include="Reservacione.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Role.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="R_Salas_Usuarios.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="R_Usuarios_Roles.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Sala.cs">
-      <DependentUpon>SIREONModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Seguridad.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SIREONModel.Context.cs">
@@ -247,7 +238,7 @@
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="Usuario.cs">
+    <Compile Include="sysdiagram.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WebRoleProvider.cs" />
@@ -2219,11 +2210,6 @@
     <Content Include="Views\Shared\_Layout-login.cshtml" />
     <Content Include="Views\Account\Roles.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Centro\Create.cshtml" />
-    <Content Include="Views\Centro\Delete.cshtml" />
-    <Content Include="Views\Centro\Details.cshtml" />
-    <Content Include="Views\Centro\Edit.cshtml" />
-    <Content Include="Views\Centro\Index.cshtml" />
     <Content Include="Views\Reservaciones\CreateOp.cshtml" />
     <Content Include="Views\Reservaciones\Index3.cshtml" />
     <Content Include="Views\Reservaciones\Cola.cshtml" />
@@ -2242,6 +2228,11 @@
       <DependentUpon>SIREONModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_SideBarUsr.cshtml" />
+    <Content Include="Views\Stats\Create.cshtml" />
+    <Content Include="Views\Stats\Delete.cshtml" />
+    <Content Include="Views\Stats\Details.cshtml" />
+    <Content Include="Views\Stats\Edit.cshtml" />
+    <Content Include="Views\Stats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

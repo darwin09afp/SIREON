@@ -12,13 +12,12 @@ namespace SIREON
     using System;
     using System.Collections.Generic;
     
-    public partial class R_Usuarios_Roles
+    public partial class sysdiagram
     {
-        public int ID_RolUsuario { get; set; }
-        public int ID_Usuario { get; set; }
-        public int ID_Rol { get; set; }
-    
-        public virtual Role Role { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

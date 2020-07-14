@@ -17,7 +17,7 @@ namespace SIREON.Controllers
         // GET: RSalas
         public ActionResult Index()
         {
-            var r_Salas_Usuarios = db.R_Salas_Usuarios.Include(r => r.Sala).Include(r => r.Usuario);
+            var r_Salas_Usuarios = db.R_Salas_Usuarios.Include(r => r.Sala).Include(r => r.IdAspNetUsers);
             return View(r_Salas_Usuarios.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace SIREON.Controllers
         public ActionResult Create()
         {
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala");
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1");
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace SIREON.Controllers
             }
 
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", r_Salas_Usuarios.ID_Sala);
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", r_Salas_Usuarios.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", r_Salas_Usuarios.IdAspNetUsers);
             return View(r_Salas_Usuarios);
         }
 
@@ -76,7 +76,7 @@ namespace SIREON.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", r_Salas_Usuarios.ID_Sala);
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", r_Salas_Usuarios.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", r_Salas_Usuarios.IdAspNetUsers);
             return View(r_Salas_Usuarios);
         }
 
@@ -94,7 +94,7 @@ namespace SIREON.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", r_Salas_Usuarios.ID_Sala);
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", r_Salas_Usuarios.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", r_Salas_Usuarios.IdAspNetUsers);
             return View(r_Salas_Usuarios);
         }
 

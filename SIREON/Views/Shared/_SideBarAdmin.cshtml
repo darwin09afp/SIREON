@@ -30,31 +30,26 @@
         </li>
         <li>
             <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
-                <span class="link-title">Por definir</span>
-                <i class="mdi mdi-home-assistant link-icon"></i>
+                <span class="link-title">Controles</span>
+                <i class="mdi mdi-settings link-icon"></i>
             </a>
             <ul class="collapse navigation-submenu" id="sample-pages">
                 <li>
-                    <a href="#">Por definir</a>
+                    <a href="@Url.Action("Index", "Parametros")">
+                        <span class="link-title">Manejo de parametros</span>
+                        <i class="mdi mdi-wrench link-icon"></i>
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Por definir</a>
+                    <a href="@Url.Action("Index", "Account")">
+                        <span class="link-title">Manejo de usuarios</span>
+                        <i class="mdi mdi-account-search link-icon"></i>
+                    </a>
+
                 </li>
             </ul>
         </li>
-        <li>
-            <a href="@Url.Action("Index", "Parametros")">
-                <span class="link-title">Manejo de parametros</span>
-                <i class="mdi mdi-settings link-icon"></i>
-            </a>
-        </li>
-        <li>
-            <a href="@Url.Action("Index", "Account")">
-                <span class="link-title">Manejo de usuarios</span>
-                <i class="mdi mdi-locker link-icon"></i>
-            </a>
 
-        </li>
         <li>
             <a href="@Url.Action("Contact", "Home")">
                 <span class="link-title">Reglamento</span>

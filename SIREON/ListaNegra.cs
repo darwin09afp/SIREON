@@ -15,9 +15,9 @@ namespace SIREON
     public partial class ListaNegra
     {
         public int ID_ListaN { get; set; }
-        public int ID_Usuario { get; set; }
         public string Descripcion { get; set; }
+        public string IdAspNetUsers { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

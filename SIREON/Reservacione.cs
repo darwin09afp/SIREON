@@ -15,7 +15,6 @@ namespace SIREON
     public partial class Reservacione
     {
         public int ID_Reservacion { get; set; }
-        public int ID_Usuario { get; set; }
         public int ID_Sala { get; set; }
         public string ID_Empleado { get; set; }
         public System.DateTime Fecha { get; set; }
@@ -25,9 +24,10 @@ namespace SIREON
         public System.TimeSpan HEntrada { get; set; }
         public System.TimeSpan HSalida { get; set; }
         public string Estatus { get; set; }
+        public string IdAspNetUsers { get; set; }
     
         public virtual Cubiculo Cubiculo { get; set; }
         public virtual Sala Sala { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

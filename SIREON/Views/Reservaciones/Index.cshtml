@@ -9,9 +9,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-    <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Nueva reservación</a>
-    <br/>
-    <br/>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <h1 class="grid-title">
+                        Nueva reservacion
+                    </h1>
+                    <p>
+                        <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Nueva reservación</a>
+                    </p>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <h1>
+                        @*@{
+                            int Cont;
+
+                            foreach (var item in Model)
+                            {
+                                Cont = +1;
+                                if (Cont == 0)
+                                {
+                                    @Html.DisplayText("0")
+                                }
+                                else
+                                {
+                                    @Html.Display(Convert.ToString(Cont))
+                                }
+                            }
+                        }*@
+                        0
+                    </h1>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <p>
+                        Reservaciones realizadas
+                    </p>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <h1>
+                        @*@{
+                            int Cont;
+
+                            foreach (var item in Model)
+                            {
+                                Cont = +1;
+                                if (Cont == 0)
+                                {
+                                    @Html.DisplayText("0")
+                                }
+                                else
+                                {
+                                    @Html.Display(Convert.ToString(Cont))
+                                }
+                            }
+                        }*@
+                        0
+                    </h1>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <p>
+                        Participaciones en otras salas
+                    </p>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                    <h1 class="grid-title">
+                        Invitaciones
+                    </h1>
+                    <p>
+                        <a href="@Url.Action("Index2", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Ver Invitaciones</a>
+                    </p>
+                    <p>
+                        <a>
+
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
     <div class="col-lg-12">
         <div class="grid">
             <p class="grid-header" style="border-left-color:green">Próxima reservación</p>

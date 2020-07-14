@@ -18,7 +18,7 @@ namespace SIREON.Controllers
         // GET: ListaNegras
         public ActionResult Index()
         {
-            var listaNegras = db.ListaNegras.Include(l => l.Usuario);
+            var listaNegras = db.ListaNegras.Include(l => l.IdAspNetUsers);
             return View(listaNegras.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace SIREON.Controllers
         // GET: ListaNegras/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1");
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace SIREON.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ListaN,ID_Usuario,Descripcion")] ListaNegra listaNegra)
+        public ActionResult Create([Bind(Include = "ID_ListaN,IdAspNetUsers,Descripcion")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace SIREON.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", listaNegra.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
@@ -74,7 +74,7 @@ namespace SIREON.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", listaNegra.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
@@ -83,7 +83,7 @@ namespace SIREON.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ListaN,ID_Usuario,Descripcion")] ListaNegra listaNegra)
+        public ActionResult Edit([Bind(Include = "ID_ListaN,IdAspNetUsers,Descripcion")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace SIREON.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Usuario = new SelectList(db.Usuarios, "ID_Usuario", "Usuario1", listaNegra.ID_Usuario);
+            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
