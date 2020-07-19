@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SIREON.ListaNegra>
+@{
+    ViewBag.Title = "Lista Negra";
+}
+<body>
+    <div class="d-flex flex-row mt-5 mb-5">
+        <a href='@Url.Action("Create", "ListaNegra")' class="btn btn-primary component-flat w-25 mr-2" type="button" style="background-color:green">Agregar nuevo usuario a la lista</a>
+    </div>
+    <br />
+    <div class="col-lg-12">
+        <div class="grid">
+            <p class="grid-header" style="border-left-color:green">Lista de usuarios limitados al uso</p>
+            <div class="item-wrapper">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <labe>Usuario</labe>
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                </th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_ListaN }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID_ListaN }) |
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+

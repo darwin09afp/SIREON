@@ -19,22 +19,22 @@
         {
             <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                 <div class="col-md-3 col-sm-3 grid">
-                        <div class="grid-body">
-                            <h1 class="grid-title">
-                                Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
-                            </h1>
-                            <a href="#">
-                                <div class="item-wrapper">
-                                    <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/CubiculosDisponible.jpg" alt="" width="100">
-                                </div>
-                            </a>
-                            <p>
-                                Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
-                            </p>
-                            <p>
-                                Personas dentro: @Html.DisplayFor(modelItem => item.Descripcion)
-                            </p>
-                        </div>
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
+                        </h1>
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/CubiculosDisponible.jpg" alt="" width="100">
+                            </div>
+                        </a>
+                        <p>
+                            Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
+                        </p>
+                        <p>
+                            Personas dentro: @Html.DisplayFor(modelItem => item.Descripcion)
+                        </p>
+                    </div>
                 </div>
             </div>
         }
@@ -43,45 +43,46 @@
 
 
 
-<br/>
+<br />
+@*
+    <div class="col-lg-12">
+        <div class="grid">
+            <p class="grid-header" style="border-left-color:green">Cubículos</p>
+            <div class="item-wrapper"> 
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Cubículo No.
+                                </th>
+                                <th>
+                                    Capacidad
+                                </th>
+                                <th>
 
-<div class="col-lg-12">
-    <div class="grid">
-        <p class="grid-header" style="border-left-color:green">Cubículos</p>
-        <div class="item-wrapper">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>
-                                Cubículo No.
-                            </th>
-                            <th>
-                                Capacidad
-                            </th>
-                            <th>
-
-                            </th>
-                        </tr>
-                    </thead>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Descripcion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Capacidad)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Cubiculo }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID_Cubiculo })
-                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Cubiculo })*@
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Descripcion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Capacidad)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID_Cubiculo }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID_Cubiculo })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID_Cubiculo })
+                                    </td>
+                                    </tr>
+                                    }
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    *@

@@ -76,7 +76,7 @@
     <Property Name="Respuesta1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Respuesta2" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Estatus" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="ListaNegras" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
+    <NavigationProperty Name="ListaNegra" Relationship="Self.FK_ListaNegra_Usuarios" FromRole="Usuarios" ToRole="ListaNegra" />
     <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Usuarios" FromRole="Usuarios" ToRole="Reservaciones" />
     <NavigationProperty Name="Roles" Relationship="Self.FK_Roles_Usuarios" FromRole="Usuarios" ToRole="Roles" />
     <NavigationProperty Name="Salas" Relationship="Self.R_Salas_Usuarios" FromRole="Usuarios" ToRole="Salas" />
@@ -147,7 +147,7 @@
   </Association>
   <EntityContainer Name="SIREONEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculo" />
-    <EntitySet Name="ListaNegras" EntityType="Self.ListaNegra" />
+    <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservacione" />
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Salas" EntityType="Self.Sala" />
@@ -159,7 +159,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_ListaNegra_Usuarios" Association="Self.FK_ListaNegra_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="ListaNegra" EntitySet="ListaNegras" />
+      <End Role="ListaNegra" EntitySet="ListaNegra" />
     </AssociationSet>
     <AssociationSet Name="FK_Reservaciones_Salas" Association="Self.FK_Reservaciones_Salas">
       <End Role="Salas" EntitySet="Salas" />

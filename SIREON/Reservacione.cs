@@ -14,8 +14,13 @@ namespace SIREON
     
     public partial class Reservacione
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Reservacione()
+        {
+            this.Reservaciones_Usuarios = new HashSet<Reservaciones_Usuarios>();
+        }
+    
         public int ID_Reservacion { get; set; }
-        public int ID_Sala { get; set; }
         public string ID_Empleado { get; set; }
         public System.DateTime Fecha { get; set; }
         public int ID_Cubiculo { get; set; }
@@ -27,7 +32,8 @@ namespace SIREON
         public string IdAspNetUsers { get; set; }
     
         public virtual Cubiculo Cubiculo { get; set; }
-        public virtual Sala Sala { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
     }
 }

@@ -19,7 +19,9 @@ namespace SIREON
                       "~/Content/vendors/chartjs/Chart.min.js",
                       "~/Content/js/charts/chartjs.addon.js",   
                       "~/Content/js/template.js", 
-                      "~/Content/js/dashboard.js" ));
+                      "~/Scripts/jquery-3.4.1.js",
+                      "~/Scripts/jquery-3.4.1.min.js",
+                      "~/Content/js/dashboard.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

@@ -13,6 +13,30 @@
         </div>
     </div>
 <br/>
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
+                        </h1>
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/CubiculosDisponible.jpg" alt="" width="100">
+                            </div>
+                        </a>
+                        <p>
+                            Capacidad: @Html.DisplayFor(modelItem => item.Capacidad)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
 <div class="col-lg-12">
                 <div class="grid">
                     <p class="grid-header" style="border-left-color:green">Cubículos</p>
@@ -43,7 +67,7 @@
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.ID_Cubiculo }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.ID_Cubiculo }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.ID_Cubiculo }) 
                                             @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Cubiculo })*@
                                         </td>
                                     </tr>

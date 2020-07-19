@@ -125,8 +125,8 @@ CREATE TABLE [dbo].[Cubiculos] (
 );
 GO
 
--- Creating table 'ListaNegras'
-CREATE TABLE [dbo].[ListaNegras] (
+-- Creating table 'ListaNegra'
+CREATE TABLE [dbo].[ListaNegra] (
     [ID_ListaN] int IDENTITY(1,1) NOT NULL,
     [ID_Usuario] int  NOT NULL,
     [Descripcion] varchar(30)  NOT NULL
@@ -285,9 +285,9 @@ ADD CONSTRAINT [PK_Cubiculos]
     PRIMARY KEY CLUSTERED ([ID_Cubiculo] ASC);
 GO
 
--- Creating primary key on [ID_ListaN] in table 'ListaNegras'
-ALTER TABLE [dbo].[ListaNegras]
-ADD CONSTRAINT [PK_ListaNegras]
+-- Creating primary key on [ID_ListaN] in table 'ListaNegra'
+ALTER TABLE [dbo].[ListaNegra]
+ADD CONSTRAINT [PK_ListaNegra]
     PRIMARY KEY CLUSTERED ([ID_ListaN] ASC);
 GO
 
@@ -400,8 +400,8 @@ ON [dbo].[Reservaciones]
     ([ID_Cubiculo]);
 GO
 
--- Creating foreign key on [ID_Usuario] in table 'ListaNegras'
-ALTER TABLE [dbo].[ListaNegras]
+-- Creating foreign key on [ID_Usuario] in table 'ListaNegra'
+ALTER TABLE [dbo].[ListaNegra]
 ADD CONSTRAINT [FK_ListaNegra_Usuarios]
     FOREIGN KEY ([ID_Usuario])
     REFERENCES [dbo].[Usuarios]
@@ -411,7 +411,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_ListaNegra_Usuarios'
 CREATE INDEX [IX_FK_ListaNegra_Usuarios]
-ON [dbo].[ListaNegras]
+ON [dbo].[ListaNegra]
     ([ID_Usuario]);
 GO
 

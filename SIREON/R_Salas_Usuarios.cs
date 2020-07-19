@@ -18,7 +18,6 @@ namespace SIREON
         public int ID_Sala { get; set; }
         public string IdAspNetUsers { get; set; }
     
-        public virtual Sala Sala { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
     }
 }

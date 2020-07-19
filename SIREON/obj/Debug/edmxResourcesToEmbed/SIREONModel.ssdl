@@ -100,7 +100,6 @@
     </Key>
     <Property Name="ID_Reservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ID_Sala" Type="int" Nullable="false" />
     <Property Name="ID_Empleado" Type="varchar" MaxLength="9" Nullable="false" />
     <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="ID_Cubiculo" Type="int" Nullable="false" />
@@ -109,6 +108,16 @@
     <Property Name="HEntrada" Type="time" Precision="7" Nullable="false" />
     <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
     <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Aplicativo.dbo.Reservaciones_Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Reservaciones_Usuarios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdAspNetUser" Type="nvarchar" MaxLength="128" />
+    <Property Name="IdReservacion" Type="int" />
   </EntityType>
   <EntityType Name="Salas">
     <Key>
@@ -230,15 +239,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Reservaciones_Salas">
-    <End Role="Salas" Type="Self.Salas" Multiplicity="1" />
-    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
+  <Association Name="FK_Reservaciones_Usuarios_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Reservaciones_Usuarios" Type="Self.Reservaciones_Usuarios" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Salas">
-        <PropertyRef Name="ID_Sala" />
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Reservaciones">
-        <PropertyRef Name="ID_Sala" />
+      <Dependent Role="Reservaciones_Usuarios">
+        <PropertyRef Name="IdAspNetUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservaciones_Usuarios_Reservaciones">
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones_Usuarios" Type="Self.Reservaciones_Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservaciones">
+        <PropertyRef Name="ID_Reservacion" />
+      </Principal>
+      <Dependent Role="Reservaciones_Usuarios">
+        <PropertyRef Name="IdReservacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reservaciones_Usuarios_Reservaciones1">
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones_Usuarios" Type="Self.Reservaciones_Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservaciones">
+        <PropertyRef Name="ID_Reservacion" />
+      </Principal>
+      <Dependent Role="Reservaciones_Usuarios">
+        <PropertyRef Name="IdReservacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -256,6 +289,13 @@
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Salas" EntityType="Self.Salas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservaciones_Usuarios" EntityType="Self.Reservaciones_Usuarios" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Reservaciones_Usuarios].[Id] AS [Id], 
+    [Reservaciones_Usuarios].[IdAspNetUser] AS [IdAspNetUser], 
+    [Reservaciones_Usuarios].[IdReservacion] AS [IdReservacion]
+    FROM [dbo].[Reservaciones_Usuarios] AS [Reservaciones_Usuarios]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -288,9 +328,17 @@
       <End Role="Cubiculos" EntitySet="Cubiculos" />
       <End Role="Reservaciones" EntitySet="Reservaciones" />
     </AssociationSet>
-    <AssociationSet Name="FK_Reservaciones_Salas" Association="Self.FK_Reservaciones_Salas">
-      <End Role="Salas" EntitySet="Salas" />
+    <AssociationSet Name="FK_Reservaciones_Usuarios_AspNetUsers" Association="Self.FK_Reservaciones_Usuarios_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Reservaciones_Usuarios" EntitySet="Reservaciones_Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservaciones_Usuarios_Reservaciones" Association="Self.FK_Reservaciones_Usuarios_Reservaciones">
       <End Role="Reservaciones" EntitySet="Reservaciones" />
+      <End Role="Reservaciones_Usuarios" EntitySet="Reservaciones_Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reservaciones_Usuarios_Reservaciones1" Association="Self.FK_Reservaciones_Usuarios_Reservaciones1">
+      <End Role="Reservaciones" EntitySet="Reservaciones" />
+      <End Role="Reservaciones_Usuarios" EntitySet="Reservaciones_Usuarios" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

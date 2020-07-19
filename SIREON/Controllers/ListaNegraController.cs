@@ -8,21 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using SIREON;
 
-
 namespace SIREON.Controllers
 {
-    public class ListaNegrasController : Controller
+    public class ListaNegraController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
 
-        // GET: ListaNegras
+        // GET: ListaNegra
         public ActionResult Index()
         {
-            var listaNegras = db.ListaNegras.Include(l => l.IdAspNetUsers);
-            return View(listaNegras.ToList());
+            var ListaNegra = db.ListaNegras.Include(l => l.AspNetUser);
+            return View(ListaNegra.ToList());
         }
 
-        // GET: ListaNegras/Details/5
+        // GET: ListaNegra/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,19 +36,19 @@ namespace SIREON.Controllers
             return View(listaNegra);
         }
 
-        // GET: ListaNegras/Create
+        // GET: ListaNegra/Create
         public ActionResult Create()
         {
-            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: ListaNegras/Create
+        // POST: ListaNegra/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ListaN,IdAspNetUsers,Descripcion")] ListaNegra listaNegra)
+        public ActionResult Create([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -58,11 +57,11 @@ namespace SIREON.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
-        // GET: ListaNegras/Edit/5
+        // GET: ListaNegra/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -74,16 +73,16 @@ namespace SIREON.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
-        // POST: ListaNegras/Edit/5
+        // POST: ListaNegra/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ListaN,IdAspNetUsers,Descripcion")] ListaNegra listaNegra)
+        public ActionResult Edit([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -91,11 +90,11 @@ namespace SIREON.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_Usuario = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
             return View(listaNegra);
         }
 
-        // GET: ListaNegras/Delete/5
+        // GET: ListaNegra/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,7 +109,7 @@ namespace SIREON.Controllers
             return View(listaNegra);
         }
 
-        // POST: ListaNegras/Delete/5
+        // POST: ListaNegra/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

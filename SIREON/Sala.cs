@@ -14,18 +14,6 @@ namespace SIREON
     
     public partial class Sala
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Sala()
-        {
-            this.R_Salas_Usuarios = new HashSet<R_Salas_Usuarios>();
-            this.Reservaciones = new HashSet<Reservacione>();
-        }
-    
         public int ID_Sala { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<R_Salas_Usuarios> R_Salas_Usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservacione> Reservaciones { get; set; }
     }
 }

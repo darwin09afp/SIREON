@@ -10,7 +10,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ListaNegras">
+    <EntitySetMapping Name="ListaNegra">
       <EntityTypeMapping TypeName="SIREONModel.ListaNegra">
         <MappingFragment StoreEntitySet="ListaNegra">
           <ScalarProperty Name="ID_ListaN" ColumnName="ID_ListaN" />

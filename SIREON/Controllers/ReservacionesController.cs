@@ -10,6 +10,7 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
+    
     public class ReservacionesController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
@@ -17,14 +18,14 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Index()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.AspNetUser);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
         // GET: Reservaciones
         public ActionResult Index2()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.AspNetUser);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
@@ -32,7 +33,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Index3()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.AspNetUser);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
@@ -40,7 +41,7 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Cola()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.Sala).Include(r => r.AspNetUser);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
@@ -65,7 +66,6 @@ namespace SIREON.Controllers
         public ActionResult Create()
         {
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala");
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
@@ -85,7 +85,6 @@ namespace SIREON.Controllers
             }
 
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
             return View(reservacione);
         }
@@ -96,7 +95,6 @@ namespace SIREON.Controllers
         public ActionResult CreateOp()
         {
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala");
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
@@ -116,7 +114,6 @@ namespace SIREON.Controllers
             }
 
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
             return View(reservacione);
         }
@@ -138,7 +135,6 @@ namespace SIREON.Controllers
                 return HttpNotFound();
             }
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
             return View(reservacione);
         }
@@ -157,7 +153,6 @@ namespace SIREON.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
-            ViewBag.ID_Sala = new SelectList(db.Salas, "ID_Sala", "ID_Sala", reservacione.ID_Sala);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
             return View(reservacione);
         }

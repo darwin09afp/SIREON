@@ -13,19 +13,20 @@
         <EntityTypeShape EntityType="SIREONModel.Cubiculo" Width="1.5" PointX="3.75" PointY="3.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.ListaNegra" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.Parametro" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.R_Salas_Usuarios" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.Reservacione" Width="1.5" PointX="6" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SIREONModel.Sala" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Cubiculos" ManuallyRouted="false" />
-        <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_Salas" ManuallyRouted="false" />
-        <AssociationConnector Association="SIREONModel.FK_Reservaciones_Salas" ManuallyRouted="false" />
         <AssociationConnector Association="SIREONModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SIREONModel.sysdiagram" Width="1.5" PointX="8.375" PointY="7.75" />
         <AssociationConnector Association="SIREONModel.FK_ListaNegra_AspNetUsers" />
-        <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_AspNetUsers" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_AspNetUsers" />
+        <EntityTypeShape EntityType="SIREONModel.Reservaciones_Usuarios" Width="1.5" PointX="16.25" PointY="2.875" />
+        <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_AspNetUsers" />
+        <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones" />
+        <EntityTypeShape EntityType="SIREONModel.R_Salas_Usuarios" Width="1.5" PointX="13.25" PointY="7" />
+        <EntityTypeShape EntityType="SIREONModel.Sala" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="SIREONModel.FK_R_Salas_Usuarios_AspNetUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

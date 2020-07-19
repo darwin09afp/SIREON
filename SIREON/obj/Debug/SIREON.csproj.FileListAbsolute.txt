@@ -54,7 +54,6 @@ C:\Users\antho\source\repos\SIREON\SIREON\bin\roslyn\vbc.exe.config
 C:\Users\antho\source\repos\SIREON\SIREON\bin\roslyn\vbc.rsp
 C:\Users\antho\source\repos\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe
 C:\Users\antho\source\repos\SIREON\SIREON\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.CoreCompileInputs.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\SIREON.dll.config
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\SIREON.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\SIREON.pdb
@@ -158,6 +157,7 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Securit
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.CoreCompileInputs.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.CopyComplete
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.pdb

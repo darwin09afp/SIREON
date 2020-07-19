@@ -1,98 +1,106 @@
 ﻿@model SIREON.Reservacione
 
 @{
-    
+    Layout = null;
 }
 
-<h2>Details</h2>
+<!DOCTYPE html>
 
-<div>
-    <h4>Reservacione</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID_Empleado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_Empleado)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaSolicitada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FechaSolicitada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HSolicitada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HSolicitada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HEntrada)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HEntrada)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HSalida)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HSalida)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Estatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Cubiculo.Descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sala.ID_Sala)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sala.ID_Sala)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.Usuario1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.Usuario1)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Reservacion }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Reservacione</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ID_Empleado)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ID_Empleado)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaSolicitada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FechaSolicitada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HSolicitada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HSolicitada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HEntrada)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HEntrada)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HSalida)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HSalida)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Estatus)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cubiculo.Descripcion)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Sala.ID_Sala)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Sala.ID_Sala)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUser.Email)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Reservacion }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
