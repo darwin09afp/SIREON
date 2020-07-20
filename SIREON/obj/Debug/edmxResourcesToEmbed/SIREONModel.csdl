@@ -62,7 +62,7 @@
     <NavigationProperty Name="ListaNegras" Relationship="SIREONModel.FK_ListaNegra_AspNetUsers" FromRole="AspNetUser" ToRole="ListaNegra" />
     <NavigationProperty Name="Reservaciones" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers" FromRole="AspNetUser" ToRole="Reservacione" />
     <NavigationProperty Name="Reservaciones_Usuarios" Relationship="SIREONModel.FK_Reservaciones_Usuarios_AspNetUsers" FromRole="AspNetUser" ToRole="Reservaciones_Usuarios" />
-    <NavigationProperty Name="R_Salas_Usuarios" Relationship="SIREONModel.FK_R_Salas_Usuarios_AspNetUsers" FromRole="AspNetUser" ToRole="R_Salas_Usuarios" />
+    <NavigationProperty Name="Reservaciones1" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers1" FromRole="AspNetUser" ToRole="Reservacione" />
   </EntityType>
   <EntityType Name="Cubiculo">
     <Key>
@@ -95,7 +95,7 @@
       <PropertyRef Name="ID_Reservacion" />
     </Key>
     <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ID_Empleado" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
     <Property Name="FechaSolicitada" Type="DateTime" Nullable="false" Precision="0" />
@@ -107,6 +107,7 @@
     <Property Name="IdAspNetUsers" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers" FromRole="Reservacione" ToRole="AspNetUser" />
     <NavigationProperty Name="Reservaciones_Usuarios" Relationship="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones" FromRole="Reservacione" ToRole="Reservaciones_Usuarios" />
+    <NavigationProperty Name="AspNetUser1" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers1" FromRole="Reservacione" ToRole="AspNetUser" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -196,11 +197,9 @@
       <End Role="Reservacione" EntitySet="Reservaciones" />
       <End Role="Reservaciones_Usuarios" EntitySet="Reservaciones_Usuarios" />
     </AssociationSet>
-    <EntitySet Name="R_Salas_Usuarios" EntityType="SIREONModel.R_Salas_Usuarios" />
-    <EntitySet Name="Salas" EntityType="SIREONModel.Sala" />
-    <AssociationSet Name="FK_R_Salas_Usuarios_AspNetUsers" Association="SIREONModel.FK_R_Salas_Usuarios_AspNetUsers">
+    <AssociationSet Name="FK_Reservaciones_AspNetUsers1" Association="SIREONModel.FK_Reservaciones_AspNetUsers1">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="R_Salas_Usuarios" EntitySet="R_Salas_Usuarios" />
+      <End Role="Reservacione" EntitySet="Reservaciones" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="sysdiagram">
@@ -271,30 +270,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="R_Salas_Usuarios">
-    <Key>
-      <PropertyRef Name="ID_RSalas" />
-    </Key>
-    <Property Name="ID_RSalas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ID_Sala" Type="Int32" Nullable="false" />
-    <Property Name="IdAspNetUsers" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_R_Salas_Usuarios_AspNetUsers" FromRole="R_Salas_Usuarios" ToRole="AspNetUser" />
-  </EntityType>
-  <EntityType Name="Sala">
-    <Key>
-      <PropertyRef Name="ID_Sala" />
-    </Key>
-    <Property Name="ID_Sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-  </EntityType>
-  <Association Name="FK_R_Salas_Usuarios_AspNetUsers">
+  <Association Name="FK_Reservaciones_AspNetUsers1">
     <End Type="SIREONModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-    <End Type="SIREONModel.R_Salas_Usuarios" Role="R_Salas_Usuarios" Multiplicity="*" />
+    <End Type="SIREONModel.Reservacione" Role="Reservacione" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="R_Salas_Usuarios">
-        <PropertyRef Name="IdAspNetUsers" />
+      <Dependent Role="Reservacione">
+        <PropertyRef Name="ID_Empleado" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

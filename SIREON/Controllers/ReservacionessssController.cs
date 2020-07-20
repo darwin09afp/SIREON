@@ -10,22 +10,22 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    public class ReservacionesController : Controller
+    
+    public class ReservacionessssController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
 
         // GET: Reservaciones
         public ActionResult Index()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
-
 
         // GET: Reservaciones
         public ActionResult Index2()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
@@ -33,19 +33,21 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Index3()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
-        // GET: Cola
+
+        // GET: Reservaciones
         public ActionResult Cola()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser);
             return View(reservaciones.ToList());
         }
 
 
-        // GET: Reservaciones1/Details/5
+
+        // GET: Reservaciones/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,21 +62,20 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // GET: Reservaciones1/Create
+        // GET: Reservaciones/Create
         public ActionResult Create()
         {
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
-        // POST: Reservaciones1/Create
+        // POST: Reservaciones/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Reservacion,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus,IdAspNetUsers")] Reservacione reservacione)
+        public ActionResult Create([Bind(Include = "ID_Reservacion,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus,IdAspNetUsers")] Reservacione reservacione)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +86,38 @@ namespace SIREON.Controllers
 
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
-            ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.ID_Empleado);
             return View(reservacione);
         }
+
+
+
+        // GET: Reservaciones/CreateOp
+        public ActionResult CreateOp()
+        {
+            ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
+            return View();
+        }
+
+        // POST: Reservaciones/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateOp([Bind(Include = "ID_Reservacion,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus,IdAspNetUsers")] Reservacione reservacione)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Reservaciones.Add(reservacione);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
+            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
+            return View(reservacione);
+        }
+
 
 
         public JsonResult SetRes(Reservacione reservacione)
@@ -98,7 +128,8 @@ namespace SIREON.Controllers
 
 
 
-        // GET: Reservaciones1/Edit/5
+
+        // GET: Reservaciones/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,16 +143,15 @@ namespace SIREON.Controllers
             }
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
-            ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.ID_Empleado);
             return View(reservacione);
         }
 
-        // POST: Reservaciones1/Edit/5
+        // POST: Reservaciones/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Reservacion,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus,IdAspNetUsers")] Reservacione reservacione)
+        public ActionResult Edit([Bind(Include = "ID_Reservacion,ID_Sala,ID_Empleado,Fecha,ID_Cubiculo,FechaSolicitada,HSolicitada,HEntrada,HSalida,Estatus,IdAspNetUsers")] Reservacione reservacione)
         {
             if (ModelState.IsValid)
             {
@@ -131,11 +161,10 @@ namespace SIREON.Controllers
             }
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
-            ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.ID_Empleado);
             return View(reservacione);
         }
 
-        // GET: Reservaciones1/Delete/5
+        // GET: Reservaciones/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -150,7 +179,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // POST: Reservaciones1/Delete/5
+        // POST: Reservaciones/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -10,42 +10,18 @@ using SIREON;
 
 namespace SIREON.Controllers
 {
-    public class ReservacionesController : Controller
+    public class StatsController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
 
-        // GET: Reservaciones
+        // GET: Stats
         public ActionResult Index()
         {
             var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
             return View(reservaciones.ToList());
         }
 
-
-        // GET: Reservaciones
-        public ActionResult Index2()
-        {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
-        }
-
-
-        // GET: Reservaciones
-        public ActionResult Index3()
-        {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
-        }
-
-        // GET: Cola
-        public ActionResult Cola()
-        {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
-        }
-
-
-        // GET: Reservaciones1/Details/5
+        // GET: Stats/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -60,7 +36,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // GET: Reservaciones1/Create
+        // GET: Stats/Create
         public ActionResult Create()
         {
             ViewBag.ID_Cubiculo = new SelectList(db.Cubiculos, "ID_Cubiculo", "Descripcion");
@@ -69,7 +45,7 @@ namespace SIREON.Controllers
             return View();
         }
 
-        // POST: Reservaciones1/Create
+        // POST: Stats/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,16 +65,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-
-        public JsonResult SetRes(Reservacione reservacione)
-        {
-            //insertar una reservacion
-            return Json(reservacione.ID_Reservacion, JsonRequestBehavior.AllowGet);
-        }
-
-
-
-        // GET: Reservaciones1/Edit/5
+        // GET: Stats/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -116,7 +83,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // POST: Reservaciones1/Edit/5
+        // POST: Stats/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -135,7 +102,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // GET: Reservaciones1/Delete/5
+        // GET: Stats/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -150,7 +117,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-        // POST: Reservaciones1/Delete/5
+        // POST: Stats/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

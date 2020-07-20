@@ -187,34 +187,36 @@
                                         @Html.DisplayFor(modelItem => item.HSalida)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Estatus)
+                                        @*@Html.DisplayFor(modelItem => item.Estatus)*@
                                         @{
-                                            if (item.Estatus == "Activa")
+                                            if (Convert.ToString(item.Estatus) == "Activa")
                                             {
+
                                                 <label class="badge badge-warning">Activa</label>
                                             }
                                             else if (item.Estatus == "Cancelada")
                                             {
                                                 <label class="badge badge-danger">Cancelada</label>
                                             }
+
                                         }
 
 
                                         @*<% if (item.Estatus) { %>
-                                            <label class="badge badge-warning">Activa</label>
-                                            <% } else { %>
-                                            <label class="badge badge-danger">Cancelada</label>
-                                            <% } %>*@
+                                        <label class="badge badge-warning">Activa</label>
+                                        <% } else { %>
+                                        <label class="badge badge-danger">Cancelada</label>
+                                        <% } %>*@
 
                                         @*<label class="badge badge-success">Completed</label>
-                                            <label class="badge badge-warning">In progress</label>
-                                            <label class="badge badge-danger">Pending</label>*@
+                                        <label class="badge badge-warning">In progress</label>
+                                        <label class="badge badge-danger">Pending</label>*@
 
 
                                     </td>
                                     <td>
                                         @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID_Reservacion })
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion })
                                         @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
                                     </td>
                                 </tr>
@@ -282,7 +284,7 @@
                                         @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Estatus)
+                                        @*@Html.DisplayFor(modelItem => item.Estatus)*@
                                         @{
                                             if (item.Estatus == "Completada")
                                             {
@@ -299,7 +301,7 @@
                                     </td>
                                     <td>
                                         @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID_Reservacion })
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion })
                                         @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
                                     </td>
                                 </tr>

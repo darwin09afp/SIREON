@@ -35,5 +35,6 @@ namespace SIREON
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }

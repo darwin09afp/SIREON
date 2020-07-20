@@ -36,7 +36,5 @@ namespace SIREON
         public virtual DbSet<Reservacione> Reservaciones { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
-        public virtual DbSet<R_Salas_Usuarios> R_Salas_Usuarios { get; set; }
-        public virtual DbSet<Sala> Salas { get; set; }
     }
 }

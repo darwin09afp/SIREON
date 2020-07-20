@@ -128,21 +128,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="R_Salas_Usuarios">
-      <EntityTypeMapping TypeName="SIREONModel.R_Salas_Usuarios">
-        <MappingFragment StoreEntitySet="R_Salas-Usuarios">
-          <ScalarProperty Name="IdAspNetUsers" ColumnName="IdAspNetUsers" />
-          <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
-          <ScalarProperty Name="ID_RSalas" ColumnName="ID_RSalas" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Salas">
-      <EntityTypeMapping TypeName="SIREONModel.Sala">
-        <MappingFragment StoreEntitySet="Salas">
-          <ScalarProperty Name="ID_Sala" ColumnName="ID_Sala" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
