@@ -69,6 +69,7 @@
     <Property Name="ID_Cubiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Capacidad" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="ListaNegra">
     <Key>
@@ -101,8 +102,6 @@
     <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
     <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_Aplicativo.dbo.Reservaciones_Usuarios' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Reservaciones_Usuarios">
     <Key>
       <PropertyRef Name="Id" />
@@ -272,14 +271,8 @@ warning 6002: The table/view 'DB_Aplicativo.dbo.Reservaciones_Usuarios' does not
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reservaciones_Usuarios" EntityType="Self.Reservaciones_Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Reservaciones_Usuarios" EntityType="Self.Reservaciones_Usuarios" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Reservaciones_Usuarios].[Id] AS [Id], 
-    [Reservaciones_Usuarios].[IdAspNetUser] AS [IdAspNetUser], 
-    [Reservaciones_Usuarios].[IdReservacion] AS [IdReservacion]
-    FROM [dbo].[Reservaciones_Usuarios] AS [Reservaciones_Usuarios]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

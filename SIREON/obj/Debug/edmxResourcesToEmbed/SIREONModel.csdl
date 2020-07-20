@@ -72,6 +72,7 @@
     <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Capacidad" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
     <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Cubiculos" ToRole="Reservaciones" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>
   <EntityType Name="ListaNegra">
     <Key>

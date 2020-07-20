@@ -10,6 +10,7 @@
 namespace SIREON
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     
     public partial class Reservacione
@@ -36,5 +37,18 @@ namespace SIREON
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
+
+
+
+        private List<Reservacione> ListaReservaciones;
+
+
+        public IEnumerator<Reservacione> GetEnumerator()
+        {
+            return ListaReservaciones.GetEnumerator();
+        }
+
+
+
     }
 }

@@ -45,6 +45,19 @@ namespace SIREON.Controllers
         }
 
 
+
+        public ActionResult Create2()
+        {
+            List<Reservaciones_Usuarios> ListaInvitados = db.Reservaciones_Usuarios.ToList();
+            return View(ListaInvitados);
+        }
+
+
+
+
+
+
+
         // GET: Reservaciones1/Details/5
         public ActionResult Details(int? id)
         {

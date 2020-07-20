@@ -189,6 +189,7 @@
     <Compile Include="Controllers\ParametrosController.cs" />
     <Compile Include="Controllers\ReservacionesController.cs" />
     <Compile Include="Controllers\ReservacionessssController.cs" />
+    <Compile Include="Controllers\Reservaciones_UsuariosController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
@@ -2179,6 +2180,9 @@
     <Content Include="Views\Reservaciones1\Details.cshtml" />
     <Content Include="Views\Reservaciones1\Edit.cshtml" />
     <Content Include="Views\Reservaciones1\Index.cshtml" />
+    <Content Include="Views\Reservaciones\Create2.cshtml" />
+    <Content Include="Views\Reservaciones_Usuarios\Index.cshtml" />
+    <Content Include="Views\Reservaciones_Usuarios\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

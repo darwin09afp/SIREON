@@ -60,6 +60,7 @@
     <EntitySetMapping Name="Cubiculos">
       <EntityTypeMapping TypeName="SIREONModel.Cubiculo">
         <MappingFragment StoreEntitySet="Cubiculos">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
           <ScalarProperty Name="ID_Cubiculo" ColumnName="ID_Cubiculo" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />

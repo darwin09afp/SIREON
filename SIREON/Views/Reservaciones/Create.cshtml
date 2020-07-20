@@ -77,15 +77,6 @@
                 </div>
             </div>
         </div>
-        @*<form>
-                Nombre: <input type="text" name="nombre">
-                <br>
-                <input type="checkbox" name="mayor_edad" value="1" id="mayoria_edad"> Soy mayor de edad
-                <br>
-                <div id="formulariomayores" style="display: none;">
-                    Dato para mayores de edad: <input type="text" name="mayores_edad">
-                </div>
-            </form>*@
         <div class="col-lg-12 equel-grid">
             <div class="grid">
                 <p class="grid-header" style="border-left-color:green">Integrantes</p>
@@ -110,6 +101,9 @@
                                 </div>
                             </div>
                             <br />
+                            <br />
+                            <br />
+
                             <hr />
                             <h4>Integrantes</h4>
                             <br />
@@ -117,14 +111,14 @@
                                 <!--Invitado 1-->
                                 <div class="form-row align-items-center justify-content-between">
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
-                                        <select class="custom-select my-1 mr-sm-2" id="Invitado1" runat="server" ClientIDMode="Static" required>
-                                            <option value="1" selected>Estudiante/Profesor</option>
-                                            <option value="2">Invitado</option>
+                                        <select class="custom-select my-1 mr-sm-2" id="TipoInvitado" runat="server" ClientIDMode="Static" required>
+                                            <option value="Estudiante/Profesor" selected>Estudiante/Profesor</option>
+                                            <option value="Invitado">Invitado</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
-                                        <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                        <input type="text" class="form-control" id="NombreInvitado" placeholder="Gabriela Marte">
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
                                         <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
@@ -132,12 +126,11 @@
                                             <div class="input-group-prepend">
                                                 <img src="~/Content/images/at.png" alt="check" width="33" />
                                             </div>
-                                            <input type="text" class="form-control" id="Usuario" placeholder="gm20-0469">
+                                            <input type="text" class="form-control" id="UsuarioInvitado" placeholder="gm20-0469" required>
                                         </div>
                                     </div>
                                     <div class="col-auto my-1">
-                                        <button onclick="Consultar()" class="btn btn-primary" id="btnConsultar">Consultar</button>
-                                        <button onclick="EliminarIntegrate()" class="btn btn-primary" style="background-color:darkgray" id="btn2" disabled >Eliminar</button>
+                                        <button class="btn btn-primary" id="addToList">Agregar</button>
                                     </div>
                                 </div>
 
@@ -145,24 +138,142 @@
 
                         </form>
                         <br />
+                        <br />
+                        <table id="detailsTable" class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%">Tipo</th>
+                                    <th style="width:40%">Nombre</th>
+                                    <th style="width:30%">Matricula</th>
+                                    <th style="width:20%"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        <br />
+                        <br/>
                         <div class="form-group" style="justify-content:space-between">
-                            <button onclick="AgregarIntegrate()" class="btn btn-lg btn-primary">NUEVO INTEGRANTE</button>
                             <button type="submit" class="btn btn-lg btn-primary" style="background-color:green"> RESERVAR </button>
                         </div>
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
     </div>
-    <br/>
+    <br />
 
     <script>
+        //Show Modal.
+        function addNewOrder() {
+            $("#newOrderModal").modal();
+        }
+        //Add Multiple Order.
+        $("#addToList").click(function (e) {
+            e.preventDefault();
+
+            if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado").val()) == "" || $.trim($("#UsuarioInvitado").val()) == "") return;
+
+            var TipoInvitado = $("#TipoInvitado").val(),
+                NombreInvitado = $("#NombreInvitado").val(),
+                UsuarioInvitado = $("#UsuarioInvitado").val(),
+                detailsTableBody = $("#detailsTable tbody");
+
+            var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + UsuarioInvitado + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            detailsTableBody.append(productItem);
+            clearItem();
+        });
+        //After Add A New Order In The List, Clear Clean The Form For Add More Order.
+        function clearItem() {
+            $("#NombreInvitado").val('');
+            $("#UsuarioInvitado").val('');
+        }
+        // After Add A New Order In The List, If You Want, You Can Remove It.
+        $(document).on('click', 'a.deleteItem', function (e) {
+            e.preventDefault();
+            var $self = $(this);
+            if ($(this).attr('data-itemId') == "0") {
+                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                    $(this).remove();
+                });
+            }
+        });
+        //After Click Save Button Pass All Data View To Controller For Save Database
+        function saveOrder(data) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Orders/SaveOrder",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error!")
+                }
+            });
+        }
+        //Collect Multiple Order List For Pass To Controller
+        $("#saveOrder").click(function (e) {
+            e.preventDefault();
+
+            var orderArr = [];
+            orderArr.length = 0;
+
+            $.each($("#detailsTable tbody tr"), function () {
+                orderArr.push({
+                    productName: $(this).find('td:eq(0)').html(),
+                    quantity: $(this).find('td:eq(1)').html(),
+                    price: $(this).find('td:eq(2)').html(),
+                    amount: $(this).find('td:eq(3)').html()
+                });
+            });
+
+
+            var data = JSON.stringify({
+                name: $("#name").val(),
+                address: $("#address").val(),
+                order: orderArr
+            });
+
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<script>
         function AgregarIntegrate() {
 
             $('#integrantes').append('<div><div class="form-row align-items-center justify-content-between" ><div class="col-lg-3 col-md-3 col-sm-3 my-1"><select class="custom-select my-1 mr-sm-2" id="Invitado1"><option value="1" selected>Estudiante/Profesor</option><option value="2">Invitado</option></select></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputName">Name</label><input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label><div class="input-group"><div class="input-group-prepend"><img src="~/Content/images/at.png" alt="Matricula" width="33" /></div><input type="text" class="form-control" placeholder="gm20-0469" id="Usuario"></div></div><div class="col-auto my-1"><button onclick="Consultar()" class="btn btn-primary" id="btnConsultar">Consultar</button><button onclick="EliminarIntegrate()" class="btn btn-primary"  style="background-color:darkred" id="btn2">Eliminar</button></div></div></div>');
-            
+
         }
 
 
@@ -194,9 +305,9 @@
             })
 
         }
-    </script>
+    </script>*@
 
-    
+
 </body>    
 </html>
 

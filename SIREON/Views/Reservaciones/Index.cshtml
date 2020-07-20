@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
+
     <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
             <div class="col-md-3 col-sm-3 grid">
@@ -42,21 +43,21 @@
                     </p>
                     <h1>
                         @*@{
-                            int Cont;
+                                int Cont;
 
-                            foreach (var item in Model)
-                            {
-                                Cont = +1;
-                                if (Cont == 0)
+                                foreach (var item in Model)
                                 {
-                                    @Html.DisplayText("0")
+                                    Cont = +1;
+                                    if (Cont == 0)
+                                    {
+                                        @Html.DisplayText("0")
+                                    }
+                                    else
+                                    {
+                                        @Html.Display(Convert.ToString(Cont))
+                                    }
                                 }
-                                else
-                                {
-                                    @Html.Display(Convert.ToString(Cont))
-                                }
-                            }
-                        }*@
+                            }*@
                         0
                     </h1>
                     <p>
@@ -85,21 +86,21 @@
                     </p>
                     <h1>
                         @*@{
-                            int Cont;
+                                int Cont;
 
-                            foreach (var item in Model)
-                            {
-                                Cont = +1;
-                                if (Cont == 0)
+                                foreach (var item in Model)
                                 {
-                                    @Html.DisplayText("0")
+                                    Cont = +1;
+                                    if (Cont == 0)
+                                    {
+                                        @Html.DisplayText("0")
+                                    }
+                                    else
+                                    {
+                                        @Html.Display(Convert.ToString(Cont))
+                                    }
                                 }
-                                else
-                                {
-                                    @Html.Display(Convert.ToString(Cont))
-                                }
-                            }
-                        }*@
+                            }*@
                         0
                     </h1>
                     <p>
@@ -113,7 +114,7 @@
                     <p>
                         <a>
 
-                        </a>   
+                        </a>
                     </p>
                 </div>
             </div>
@@ -203,14 +204,14 @@
 
 
                                         @*<% if (item.Estatus) { %>
-                                        <label class="badge badge-warning">Activa</label>
-                                        <% } else { %>
-                                        <label class="badge badge-danger">Cancelada</label>
-                                        <% } %>*@
+                                            <label class="badge badge-warning">Activa</label>
+                                            <% } else { %>
+                                            <label class="badge badge-danger">Cancelada</label>
+                                            <% } %>*@
 
                                         @*<label class="badge badge-success">Completed</label>
-                                        <label class="badge badge-warning">In progress</label>
-                                        <label class="badge badge-danger">Pending</label>*@
+                                            <label class="badge badge-warning">In progress</label>
+                                            <label class="badge badge-danger">Pending</label>*@
 
 
                                     </td>
