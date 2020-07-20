@@ -1,11 +1,12 @@
 ﻿@model SIREON.Reservacione
+@using Microsoft.AspNet.Identity
 @{
 
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+
 </head>
 <body>
     <div class="row">
@@ -16,44 +17,42 @@
                     <div class="item-wrapper">
                         <form>
                             <div class="form-row align-items-center justify-content-between">
-                                <div class="col-lg-3 col-md-3 col-sm-3  showcase_content_area">
+                                @Html.HiddenFor(model => model.ID_Reservacion, new { htmlAttributes = new { @class = "form-control", id = "ID_Reservacion" } })
+
+                                @Html.HiddenFor(model => model.ID_Cubiculo, new { htmlAttributes = new { @class = "form-control", id = "ID_Cubiculo" } })
+                                @Html.HiddenFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control", id = "ID_Empleado" } })
+
+                                <div class="col-lg-2 col-md-2 col-sm-2  showcase_content_area">
                                     <label>Fecha:</label>
-                                    <input type="text" class="form-control" id="fecha" placeholder="DD/MM/AAAA" readonly>
-                                    @*@Html.EditorFor(model => model.Fecha, new { htmlAttributes = new { @class = "form-control", placeholder = "DD/MM/AAAA"} })
-                                        @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })*@
+                                    <input type="date" class="form-control" id="fecha" placeholder="DD/MM/AAAA">
+
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
+                                <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de entrada:</label>
-                                    <select class="custom-select my-1 mr-sm-2" id="Horaentrada">
-                                        <option value="" disabled selected>Elige...</option>
-                                        <option value="1">08:00 AM</option>
-                                        <option value="2">09:00 AM</option>
-                                        <option value="3">10:00 AM</option>
-                                        <option value="4">11:00 AM</option>
-                                        <option value="5">12:00 PM</option>
-                                        <option value="6">01:00 PM</option>
-                                        <option value="7">02:00 PM</option>
-                                        <option value="8">03:00 PM</option>
-                                        <option value="9">04:00 PM</option>
-                                        <option value="10">05:00 PM</option>
-                                        <option value="11">06:00 PM</option>
-                                        <option value="12">07:00 PM</option>
-                                        <option value="12">08:00 PM</option>
-                                    </select>
+                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM">
+                                    @*<select class="custom-select my-1 mr-sm-2" id="Horaentrada">
+                                            <option value="" disabled selected>Elige...</option>
+                                            <option value="08:00:00">08:00 AM</option>
+                                            <option value="09:00:00">09:00 AM</option>
+                                            <option value="10:00:00">10:00 AM</option>
+                                            <option value="11:00:00">11:00 AM</option>
+                                            <option value="12:00:00">12:00 PM</option>
+                                            <option value="01:00:00">01:00 PM</option>
+                                            <option value="02:00:00">02:00 PM</option>
+                                            <option value="03:00:00">03:00 PM</option>
+                                            <option value="04:00:00">04:00 PM</option>
+                                            <option value="05:00:00">05:00 PM</option>
+                                            <option value="06:00:00">06:00 PM</option>
+                                            <option value="07:00:00">07:00 PM</option>
+                                            <option value="08:00:00">08:00 PM</option>
+                                        </select>*@
                                     @*@Html.EditorFor(model => model.HSolicitada, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
                                         @Html.ValidationMessageFor(model => model.HSolicitada, "", new { @class = "text-danger" })*@
                                 </div>
 
-                                <div class="col-lg-3 col-md-3 col-sm-3 showcase_text_area">
+                                <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de salida:</label>
-
-                                    @{
-
-                                        if (true)
-                                        {
-                                            <input type="text" class="form-control" id="Horasalida" placeholder="HH:MM" readonly>
-                                        }
-                                    }
+                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM">
 
 
                                     @*@Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
@@ -88,7 +87,7 @@
                             <div class="form-row align-items-center justify-content-between">
                                 <div class="col-lg-5 col-md-5 col-sm-5 my-1">
                                     <label class="sr-only" for="inlineFormInputName">Name</label>
-                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
+                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" value="Gabriela Marte" readonly>
                                 </div>
                                 <div class="col-lg-5 col-md-5 col-sm-5 my-1">
                                     <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
@@ -96,7 +95,8 @@
                                         <div class="input-group-prepend">
                                             <img src="~/Content/images/at.png" alt="check" width="33" />
                                         </div>
-                                        <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="gm20-0469" readonly>
+                                        <input type="text" class="form-control" id="IdAspNetUsers" placeholder="gm20-0469"  value="gm20-0469">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -151,9 +151,9 @@
                             <tbody></tbody>
                         </table>
                         <br />
-                        <br/>
-                        <div class="form-group" style="justify-content:space-between">
-                            <button type="submit" class="btn btn-lg btn-primary" style="background-color:green"> RESERVAR </button>
+                        <br />
+                        <div class="col-auto my-1">
+                            <button onclick="saveOrder()" class="btn btn-primary" id="saveOrder">Reservar</button>
                         </div>
 
                     </div>
@@ -206,7 +206,7 @@
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
                 type: 'POST',
-                url: "/Orders/SaveOrder",
+                url: "/Reservaciones/SaveOrder",
                 data: data,
                 success: function (result) {
                     alert(result);
@@ -226,17 +226,21 @@
 
             $.each($("#detailsTable tbody tr"), function () {
                 orderArr.push({
-                    productName: $(this).find('td:eq(0)').html(),
-                    quantity: $(this).find('td:eq(1)').html(),
-                    price: $(this).find('td:eq(2)').html(),
-                    amount: $(this).find('td:eq(3)').html()
+                    NombreInvitado: $(this).find('td:eq(0)').html(),
+                    UsuarioInvitado: $(this).find('td:eq(1)').html(),
                 });
             });
 
 
             var data = JSON.stringify({
-                name: $("#name").val(),
-                address: $("#address").val(),
+                ID_Reservacion: $("ID_Reservacion").val(),
+                fecha: $("#fecha").val(),
+                ID_Cubiculo: $("ID_Cubiculo").val(1),
+                HSolicitada: $("#Horaentrada").val(),
+                HEntrada: $("#Horaentrada").val(),
+                Horasalida: $("#Horasalida").val(),
+                Estatus: $("#Estatus").val(),
+                IdAspNetUsers: $("#IdAspNetUsers").val(),
                 order: orderArr
             });
 
@@ -270,44 +274,44 @@
 
 
     @*<script>
-        function AgregarIntegrate() {
+            function AgregarIntegrate() {
 
-            $('#integrantes').append('<div><div class="form-row align-items-center justify-content-between" ><div class="col-lg-3 col-md-3 col-sm-3 my-1"><select class="custom-select my-1 mr-sm-2" id="Invitado1"><option value="1" selected>Estudiante/Profesor</option><option value="2">Invitado</option></select></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputName">Name</label><input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label><div class="input-group"><div class="input-group-prepend"><img src="~/Content/images/at.png" alt="Matricula" width="33" /></div><input type="text" class="form-control" placeholder="gm20-0469" id="Usuario"></div></div><div class="col-auto my-1"><button onclick="Consultar()" class="btn btn-primary" id="btnConsultar">Consultar</button><button onclick="EliminarIntegrate()" class="btn btn-primary"  style="background-color:darkred" id="btn2">Eliminar</button></div></div></div>');
+                $('#integrantes').append('<div><div class="form-row align-items-center justify-content-between" ><div class="col-lg-3 col-md-3 col-sm-3 my-1"><select class="custom-select my-1 mr-sm-2" id="Invitado1"><option value="1" selected>Estudiante/Profesor</option><option value="2">Invitado</option></select></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputName">Name</label><input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly></div><div class="col-lg-3 col-md-3 col-sm-3 my-1"><label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label><div class="input-group"><div class="input-group-prepend"><img src="~/Content/images/at.png" alt="Matricula" width="33" /></div><input type="text" class="form-control" placeholder="gm20-0469" id="Usuario"></div></div><div class="col-auto my-1"><button onclick="Consultar()" class="btn btn-primary" id="btnConsultar">Consultar</button><button onclick="EliminarIntegrate()" class="btn btn-primary"  style="background-color:darkred" id="btn2">Eliminar</button></div></div></div>');
 
-        }
-
-
-        function EliminarIntegrante() {
-            $('#integrantes').prepend();
-            //$(this).children("#integrantes").remove();
-        }
-
-        function Fecha() {
-
-            $('#fecha').get(Date);
-        }
-
-        function Consultar() {
-            var data = { Usuario: $('#Usuario').val(), Reservacion: $('#Reservacion').val() };
-            $.ajax({
-                type: "POST",
-                contentType: "application/json; charset=utf-8",
-                data: "{data:" + JSON.stringify(data) + "}",
-                url: "/Reservaciones/SetRes",
-                success: function (data) {
-                    //codigo de exito
-                    alert("Disponible");
-                },
-                error: function (error) {
-                    //codigo error
-                    alert("No disponible");
-                }
-            })
-
-        }
-    </script>*@
+            }
 
 
-</body>    
+            function EliminarIntegrante() {
+                $('#integrantes').prepend();
+                //$(this).children("#integrantes").remove();
+            }
+
+            function Fecha() {
+
+                $('#fecha').get(Date);
+            }
+
+            function Consultar() {
+                var data = { Usuario: $('#Usuario').val(), Reservacion: $('#Reservacion').val() };
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: "{data:" + JSON.stringify(data) + "}",
+                    url: "/Reservaciones/SetRes",
+                    success: function (data) {
+                        //codigo de exito
+                        alert("Disponible");
+                    },
+                    error: function (error) {
+                        //codigo error
+                        alert("No disponible");
+                    }
+                })
+
+            }
+        </script>*@
+
+
+</body>
 </html>
 

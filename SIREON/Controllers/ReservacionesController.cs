@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using SIREON;
 
 namespace SIREON.Controllers
@@ -73,6 +74,50 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
+
+        public ActionResult SaveOrder(int ID_Reservacion, string ID_Empleado, DateTime Fecha, int ID_Cubiculo, DateTime FechaSolicitada, DateTime HSolicitada, DateTime HEntrada, DateTime HSalida, string Estatus, string IdAspNetUsers, Reservaciones_Usuarios[] reservaciones_Usuarios)
+        {
+            string result = "Error! Datos no completados!";
+            if (Fecha == null && FechaSolicitada == null && HSolicitada == null && HEntrada == null && HSalida == null && Estatus == null && IdAspNetUsers == null)
+            {
+                var FechayHora = DateTime.Now;
+                var SelFecha = FechayHora.Date;
+                var SelHora = FechayHora.TimeOfDay;
+                var cutomerId = Guid.NewGuid();
+                Reservacione model = new Reservacione();
+                model.ID_Reservacion = ID_Reservacion;
+                model.ID_Empleado = ID_Empleado.FirstOrDefault().ToString();
+                model.Fecha = SelFecha;
+                model.ID_Cubiculo = 1;
+                model.FechaSolicitada = SelFecha;
+                model.HSolicitada = SelHora;
+                model.HEntrada = SelHora;
+                model.HEntrada = SelHora;
+                model.Estatus = "Activa";
+                model.IdAspNetUsers = IdAspNetUsers;
+                db.Reservaciones.Add(model);
+
+                foreach (var item in reservaciones_Usuarios)
+                {
+                    var orderId = Guid.NewGuid();
+                    Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
+                    Res.Id = Res.Id;
+                    Res.IdAspNetUser = item.IdAspNetUser;
+                    Res.IdReservacion = item.IdReservacion;
+                    db.Reservaciones_Usuarios.Add(Res);
+                }
+                db.SaveChanges();
+                result = "Success! Order Is Complete!";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
         // GET: Reservaciones1/Create
         public ActionResult Create()
         {
@@ -81,6 +126,7 @@ namespace SIREON.Controllers
             ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
+
 
         // POST: Reservaciones1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

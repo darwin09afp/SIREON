@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Mvc;
 using SIREON;
@@ -73,8 +74,7 @@ namespace SIREON.Controllers
         }
 
 
-
-
+        
 
 
         // GET: Reservaciones_Usuarios/Edit/5
