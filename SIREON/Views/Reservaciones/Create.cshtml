@@ -17,19 +17,15 @@
                     <div class="item-wrapper">
                         <form>
                             <div class="form-row align-items-center justify-content-between">
-                                @Html.HiddenFor(model => model.ID_Reservacion, new { htmlAttributes = new { @class = "form-control", id = "ID_Reservacion" } })
-
-                                @Html.HiddenFor(model => model.ID_Cubiculo, new { htmlAttributes = new { @class = "form-control", id = "ID_Cubiculo" } })
-                                @Html.HiddenFor(model => model.ID_Empleado, new { htmlAttributes = new { @class = "form-control", id = "ID_Empleado" } })
-
+                                
                                 <div class="col-lg-2 col-md-2 col-sm-2  showcase_content_area">
                                     <label>Fecha:</label>
-                                    <input type="date" class="form-control" id="fecha" placeholder="DD/MM/AAAA">
+                                    <input type="text" class="form-control" id="fecha" placeholder="AAAA/MM/DD" value="2020-07-21">
 
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de entrada:</label>
-                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM">
+                                    <input type="text" class="form-control" id="Horaentrada" placeholder="HH:MM" value="6:00:00">
                                     @*<select class="custom-select my-1 mr-sm-2" id="Horaentrada">
                                             <option value="" disabled selected>Elige...</option>
                                             <option value="08:00:00">08:00 AM</option>
@@ -52,7 +48,7 @@
 
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de salida:</label>
-                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM">
+                                    <input type="text" class="form-control" id="Horasalida" placeholder="HH:MM" value="8:00:00">
 
 
                                     @*@Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
@@ -118,7 +114,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
-                                        <input type="text" class="form-control" id="NombreInvitado" placeholder="Gabriela Marte">
+                                        <input type="text" class="form-control" id="NombreInvitado" placeholder="Gabriela Marte" value="Darwin Ferreyra">
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
                                         <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
@@ -126,7 +122,7 @@
                                             <div class="input-group-prepend">
                                                 <img src="~/Content/images/at.png" alt="check" width="33" />
                                             </div>
-                                            <input type="text" class="form-control" id="UsuarioInvitado" placeholder="gm20-0469" required>
+                                            <input type="text" class="form-control" id="UsuarioInvitado" placeholder="gm20-0469" value="357a2e31-49b2-488b-82d3-9e029b243bd5" required>
                                         </div>
                                     </div>
                                     <div class="col-auto my-1">
@@ -178,12 +174,13 @@
 
             var TipoInvitado = $("#TipoInvitado").val(),
                 NombreInvitado = $("#NombreInvitado").val(),
-                UsuarioInvitado = $("#UsuarioInvitado").val(),
+                IdAspNetUser = $("#UsuarioInvitado").val(),
                 detailsTableBody = $("#detailsTable tbody");
 
-            var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + UsuarioInvitado + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Remove</a></td></tr>';
+            var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + IdAspNetUser + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
             detailsTableBody.append(productItem);
             clearItem();
+
         });
         //After Add A New Order In The List, Clear Clean The Form For Add More Order.
         function clearItem() {
@@ -200,6 +197,7 @@
                 });
             }
         });
+
         //After Click Save Button Pass All Data View To Controller For Save Database
         function saveOrder(data) {
             return $.ajax({
@@ -226,21 +224,17 @@
 
             $.each($("#detailsTable tbody tr"), function () {
                 orderArr.push({
-                    NombreInvitado: $(this).find('td:eq(0)').html(),
-                    UsuarioInvitado: $(this).find('td:eq(1)').html(),
+                    IdAspNetUser: $(this).find('td:eq(2)').html(),
+                    IdReservacion: $().val()
                 });
             });
 
 
             var data = JSON.stringify({
-                ID_Reservacion: $("ID_Reservacion").val(),
-                fecha: $("#fecha").val(),
-                ID_Cubiculo: $("ID_Cubiculo").val(1),
+                Fecha: $("#fecha").val(),
                 HSolicitada: $("#Horaentrada").val(),
                 HEntrada: $("#Horaentrada").val(),
                 Horasalida: $("#Horasalida").val(),
-                Estatus: $("#Estatus").val(),
-                IdAspNetUsers: $("#IdAspNetUsers").val(),
                 order: orderArr
             });
 

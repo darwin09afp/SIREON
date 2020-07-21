@@ -20,7 +20,5 @@ namespace SIREON
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Reservacione Reservacione { get; set; }
-
-        
     }
 }

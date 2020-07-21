@@ -10,7 +10,6 @@
 namespace SIREON
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     
     public partial class Reservacione
@@ -23,12 +22,12 @@ namespace SIREON
     
         public int ID_Reservacion { get; set; }
         public string ID_Empleado { get; set; }
-        public System.DateTime Fecha { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
         public int ID_Cubiculo { get; set; }
-        public System.DateTime FechaSolicitada { get; set; }
-        public System.TimeSpan HSolicitada { get; set; }
-        public System.TimeSpan HEntrada { get; set; }
-        public System.TimeSpan HSalida { get; set; }
+        public Nullable<System.DateTime> FechaSolicitada { get; set; }
+        public Nullable<System.TimeSpan> HSolicitada { get; set; }
+        public Nullable<System.TimeSpan> HEntrada { get; set; }
+        public Nullable<System.TimeSpan> HSalida { get; set; }
         public string Estatus { get; set; }
         public string IdAspNetUsers { get; set; }
     
@@ -37,18 +36,5 @@ namespace SIREON
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
-
-
-
-        private List<Reservacione> ListaReservaciones;
-
-
-        public IEnumerator<Reservacione> GetEnumerator()
-        {
-            return ListaReservaciones.GetEnumerator();
-        }
-
-
-
     }
 }

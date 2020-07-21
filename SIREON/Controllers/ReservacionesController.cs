@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using SIREON;
 
 namespace SIREON.Controllers
@@ -75,35 +76,39 @@ namespace SIREON.Controllers
         }
 
 
-        public ActionResult SaveOrder(int ID_Reservacion, string ID_Empleado, DateTime Fecha, int ID_Cubiculo, DateTime FechaSolicitada, DateTime HSolicitada, DateTime HEntrada, DateTime HSalida, string Estatus, string IdAspNetUsers, Reservaciones_Usuarios[] reservaciones_Usuarios)
+        public ActionResult SaveOrder(string ID_Empleado, DateTime Fecha, int ID_Cubiculo, DateTime FechaSolicitada, TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, string Estatus, string IdAspNetUsers, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
             string result = "Error! Datos no completados!";
-            if (Fecha == null && FechaSolicitada == null && HSolicitada == null && HEntrada == null && HSalida == null && Estatus == null && IdAspNetUsers == null)
+            if (Fecha == null || FechaSolicitada == null || HSolicitada == null || HEntrada == null || HSalida == null || Estatus == null || IdAspNetUsers == null)
             {
+                List<Cubiculo> cubs = new List<Cubiculo>();
+                
                 var FechayHora = DateTime.Now;
                 var SelFecha = FechayHora.Date;
                 var SelHora = FechayHora.TimeOfDay;
-                var cutomerId = Guid.NewGuid();
+                var usuario = User.Identity.GetUserId();
+                var disponibilidad = Convert.ToInt32(cubs.Where(x => x.Estatus == "Libre").FirstOrDefault());
+                var IdReservacion = Convert.ToInt32(Guid.NewGuid());
                 Reservacione model = new Reservacione();
-                model.ID_Reservacion = ID_Reservacion;
+                model.ID_Reservacion = IdReservacion;
                 model.ID_Empleado = ID_Empleado.FirstOrDefault().ToString();
                 model.Fecha = SelFecha;
-                model.ID_Cubiculo = 1;
+                model.ID_Cubiculo = disponibilidad;
                 model.FechaSolicitada = SelFecha;
                 model.HSolicitada = SelHora;
                 model.HEntrada = SelHora;
-                model.HEntrada = SelHora;
+                model.HSalida = SelHora;
                 model.Estatus = "Activa";
-                model.IdAspNetUsers = IdAspNetUsers;
+                model.IdAspNetUsers = usuario;
                 db.Reservaciones.Add(model);
 
                 foreach (var item in reservaciones_Usuarios)
                 {
-                    var orderId = Guid.NewGuid();
+                    var IdResUsuario = Convert.ToInt32(Guid.NewGuid());
                     Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                    Res.Id = Res.Id;
+                    Res.Id = IdResUsuario;
                     Res.IdAspNetUser = item.IdAspNetUser;
-                    Res.IdReservacion = item.IdReservacion;
+                    Res.IdReservacion = IdReservacion;
                     db.Reservaciones_Usuarios.Add(Res);
                 }
                 db.SaveChanges();

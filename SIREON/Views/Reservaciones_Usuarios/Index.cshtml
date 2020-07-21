@@ -35,7 +35,7 @@
                                         @{
                                             var Invitados = 0;
                                         }
-                                        @foreach (var res in item.Reservacione)
+                                        @*@foreach (var res in item.Reservacione)
                                         {
                                             <tr>
                                                 <td>@res.ID_Reservacion</td>
@@ -43,7 +43,7 @@
 
                                             </tr>
                                             Invitados = Invitados + @Convert.ToInt32(res.ID_Reservacion);
-                                        }
+                                        }*@
                                     </tbody>
                                 </table>
                                 <span class="pull-right" style="margin-right:100px;"><strong>Invitados :  </strong> @Invitados</span>

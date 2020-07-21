@@ -161,4 +161,3 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.Co
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.CopyComplete
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.pdb
-C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache

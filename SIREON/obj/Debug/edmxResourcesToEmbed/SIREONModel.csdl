@@ -97,15 +97,15 @@
     </Key>
     <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ID_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
     <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
-    <Property Name="FechaSolicitada" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="HSolicitada" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="HEntrada" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="HSalida" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FechaSolicitada" Type="DateTime" Precision="0" />
+    <Property Name="HSolicitada" Type="Time" Precision="7" />
+    <Property Name="HEntrada" Type="Time" Precision="7" />
+    <Property Name="HSalida" Type="Time" Precision="7" />
+    <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="Cubiculo" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Reservaciones" ToRole="Cubiculos" />
-    <Property Name="IdAspNetUsers" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IdAspNetUsers" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers" FromRole="Reservacione" ToRole="AspNetUser" />
     <NavigationProperty Name="Reservaciones_Usuarios" Relationship="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones" FromRole="Reservacione" ToRole="Reservaciones_Usuarios" />
     <NavigationProperty Name="AspNetUser1" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers1" FromRole="Reservacione" ToRole="AspNetUser" />
