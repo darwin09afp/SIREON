@@ -85,15 +85,15 @@ namespace SIREON.Controllers
             var SelHora = FechayHora.TimeOfDay;
             var usuario = User.Identity.GetUserId();
             var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
-            var disponibilidad = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
+            var disponibilidad = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
             Reservacione model = new Reservacione();
             model.ID_Empleado = empleado;
             model.Fecha = SelFecha;
             model.ID_Cubiculo = disponibilidad;
             model.FechaSolicitada = SelFecha;
-            model.HSolicitada = SelHora;
-            model.HEntrada = SelHora;
-            model.HSalida = SelHora;
+            model.HSolicitada = HSolicitada;
+            model.HEntrada = HEntrada;
+            model.HSalida = HSalida;
             model.Estatus = "Activa";
             model.IdAspNetUsers = usuario;
             db.Reservaciones.Add(model);
@@ -111,10 +111,6 @@ namespace SIREON.Controllers
             result = "Exito! Datos guardados!";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-
-
-
 
 
 

@@ -150,7 +150,7 @@
             <p class="grid-header" style="border-left-color:green">Próxima reservación</p>
             <div class="item-wrapper">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table info-table table-striped">
                         <thead>
                             <tr>
                                 <th>
@@ -170,7 +170,8 @@
                                 </th>
                                 <th></th>
                             </tr>
-
+                        </thead>
+                        <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
@@ -188,16 +189,19 @@
                                         @Html.DisplayFor(modelItem => item.HSalida)
                                     </td>
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.Estatus)*@
+                                        @Html.DisplayFor(modelItem => item.Estatus)
                                         @{
-                                            if (Convert.ToString(item.Estatus) == "Activa")
+                                            if (item.Estatus == "Activa")
                                             {
 
                                                 <label class="badge badge-warning">Activa</label>
+
                                             }
                                             else if (item.Estatus == "Cancelada")
                                             {
+
                                                 <label class="badge badge-danger">Cancelada</label>
+
                                             }
 
                                         }
@@ -222,19 +226,20 @@
                                     </td>
                                 </tr>
                             }
+                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row row-m-t"></div>
-    <div class="row row-m-t"></div>
+    <br/>
+    <br/>
     <div class="col-lg-12">
         <div class="grid">
             <p class="grid-header" style="border-left-color:green">Historial</p>
             <div class="item-wrapper">
                 <div class="table-responsive">
-                    <table class="table table-hover">
+                    <table class="table info-table table-striped">
                         <thead>
                             <tr>
                                 <th>
@@ -261,7 +266,8 @@
                                 </th>
                                 <th></th>
                             </tr>
-
+                        </thead>
+                        <tbody>
                             @foreach (var item in Model)
                             {
                                 <tr>
@@ -285,7 +291,7 @@
                                         @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
                                     </td>
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.Estatus)*@
+                                        @Html.DisplayFor(modelItem => item.Estatus)
                                         @{
                                             if (item.Estatus == "Completada")
                                             {
@@ -307,6 +313,7 @@
                                     </td>
                                 </tr>
                             }
+                        </tbody>
                     </table>
                 </div>
             </div>

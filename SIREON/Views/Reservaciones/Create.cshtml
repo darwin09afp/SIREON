@@ -18,14 +18,18 @@
                         <form>
                             <div class="form-row align-items-center justify-content-between">
                                 
+                                @{ 
+                                    var FechayHora = DateTime.Now;
+                                    var SelFecha = FechayHora.ToString("dd/MM/yyyy");
+                                }
                                 <div class="col-lg-2 col-md-2 col-sm-2  showcase_content_area">
                                     <label>Fecha:</label>
-                                    <input type="text" class="form-control" id="fecha" placeholder="AAAA/MM/DD" value="2020-07-21">
+                                    <input type="text" class="form-control" id="fecha" placeholder="AAAA/MM/DD" value="@SelFecha">
 
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de entrada:</label>
-                                    <input type="text" class="form-control" id="Horaentrada" placeholder="HH:MM" value="6:00:00">
+                                    <input type="time" class="form-control" id="Horaentrada" placeholder="HH:MM" value="">
                                     @*<select class="custom-select my-1 mr-sm-2" id="Horaentrada">
                                             <option value="" disabled selected>Elige...</option>
                                             <option value="08:00:00">08:00 AM</option>
@@ -48,7 +52,7 @@
 
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de salida:</label>
-                                    <input type="text" class="form-control" id="Horasalida" placeholder="HH:MM" value="8:00:00">
+                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM" value="">
 
 
                                     @*@Html.EditorFor(model => model.HSalida, new { htmlAttributes = new { @class = "form-control", placeholder = "HH:MM" } })
