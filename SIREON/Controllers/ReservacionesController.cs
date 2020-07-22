@@ -75,45 +75,40 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
-
-        public ActionResult SaveOrder(string ID_Empleado, DateTime Fecha, int ID_Cubiculo, DateTime FechaSolicitada, TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, string Estatus, string IdAspNetUsers, Reservaciones_Usuarios[] reservaciones_Usuarios)
+        [HttpPost]
+        public ActionResult SaveOrder(TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
             string result = "Error! Datos no completados!";
-            if (Fecha == null || FechaSolicitada == null || HSolicitada == null || HEntrada == null || HSalida == null || Estatus == null || IdAspNetUsers == null)
-            {
-                List<Cubiculo> cubs = new List<Cubiculo>();
-                
-                var FechayHora = DateTime.Now;
-                var SelFecha = FechayHora.Date;
-                var SelHora = FechayHora.TimeOfDay;
-                var usuario = User.Identity.GetUserId();
-                var disponibilidad = Convert.ToInt32(cubs.Where(x => x.Estatus == "Libre").FirstOrDefault());
-                var IdReservacion = Convert.ToInt32(Guid.NewGuid());
-                Reservacione model = new Reservacione();
-                model.ID_Reservacion = IdReservacion;
-                model.ID_Empleado = ID_Empleado.FirstOrDefault().ToString();
-                model.Fecha = SelFecha;
-                model.ID_Cubiculo = disponibilidad;
-                model.FechaSolicitada = SelFecha;
-                model.HSolicitada = SelHora;
-                model.HEntrada = SelHora;
-                model.HSalida = SelHora;
-                model.Estatus = "Activa";
-                model.IdAspNetUsers = usuario;
-                db.Reservaciones.Add(model);
+            List<Cubiculo> cubs = new List<Cubiculo>();
+            var FechayHora = DateTime.Now;
+            var SelFecha = FechayHora.Date;
+            var SelHora = FechayHora.TimeOfDay;
+            var usuario = User.Identity.GetUserId();
+            var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
+            var disponibilidad = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
+            Reservacione model = new Reservacione();
+            model.ID_Empleado = empleado;
+            model.Fecha = SelFecha;
+            model.ID_Cubiculo = disponibilidad;
+            model.FechaSolicitada = SelFecha;
+            model.HSolicitada = SelHora;
+            model.HEntrada = SelHora;
+            model.HSalida = SelHora;
+            model.Estatus = "Activa";
+            model.IdAspNetUsers = usuario;
+            db.Reservaciones.Add(model);
+            db.SaveChanges();
 
-                foreach (var item in reservaciones_Usuarios)
-                {
-                    var IdResUsuario = Convert.ToInt32(Guid.NewGuid());
-                    Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                    Res.Id = IdResUsuario;
-                    Res.IdAspNetUser = item.IdAspNetUser;
-                    Res.IdReservacion = IdReservacion;
-                    db.Reservaciones_Usuarios.Add(Res);
-                }
+            foreach (var item in reservaciones_Usuarios)
+            {
+                Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
+                Res.IdAspNetUser = item.IdAspNetUser;
+                Res.IdReservacion = model.ID_Reservacion;
+                db.Reservaciones_Usuarios.Add(Res);
                 db.SaveChanges();
-                result = "Success! Order Is Complete!";
             }
+
+            result = "Exito! Datos guardados!";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 

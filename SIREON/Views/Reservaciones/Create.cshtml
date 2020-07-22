@@ -149,7 +149,7 @@
                         <br />
                         <br />
                         <div class="col-auto my-1">
-                            <button onclick="saveOrder()" class="btn btn-primary" id="saveOrder">Reservar</button>
+                            <button class="btn btn-primary" id="saveOrder">Reservar</button>
                         </div>
 
                     </div>
@@ -198,8 +198,14 @@
             }
         });
 
+
+        console.log
+
+        
+
         //After Click Save Button Pass All Data View To Controller For Save Database
         function saveOrder(data) {
+
             return $.ajax({
                 contentType: 'application/json; charset=utf-8',
                 dataType: 'json',
@@ -215,9 +221,14 @@
                 }
             });
         }
-        //Collect Multiple Order List For Pass To Controller
+
+
+        ////Collect Multiple Order List For Pass To Controller
         $("#saveOrder").click(function (e) {
             e.preventDefault();
+
+            //alert($("#fecha").val());
+            
 
             var orderArr = [];
             orderArr.length = 0;
@@ -231,12 +242,13 @@
 
 
             var data = JSON.stringify({
-                Fecha: $("#fecha").val(),
                 HSolicitada: $("#Horaentrada").val(),
                 HEntrada: $("#Horaentrada").val(),
-                Horasalida: $("#Horasalida").val(),
-                order: orderArr
+                HSalida: $("#Horasalida").val(),
+                reservaciones_Usuarios: orderArr
             });
+
+            console.log(data);
 
             $.when(saveOrder(data)).then(function (response) {
                 console.log(response);
