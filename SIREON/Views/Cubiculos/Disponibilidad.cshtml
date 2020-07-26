@@ -17,26 +17,77 @@
     @{
         foreach (var item in Model)
         {
-            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
-                    <div class="grid-body">
-                        <h1 class="grid-title">
-                            Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
-                        </h1>
-                        <a href="#">
-                            <div class="item-wrapper">
-                                <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/CubiculosDisponible.jpg" alt="" width="100">
-                            </div>
-                        </a>
-                        <p>
-                            Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
-                        </p>
-                        <p>
-                            Personas dentro: @Html.DisplayFor(modelItem => item.Descripcion)
-                        </p>
+            if (item.Estatus == "Disponible")
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <h1 class="grid-title">
+                                Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
+                            </h1>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Disponible.jpg" alt="" width="100">
+                                </div>
+                            </a>
+                            <p>
+                                Disponible
+                            </p>
+                            <p>
+                               
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+            else if (item.Estatus == "En uso")
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <h1 class="grid-title">
+                                Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
+                            </h1>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/EnUso.jpg" alt="" width="100">
+                                </div>
+                            </a>
+                            <p>
+                                Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
+                            </p>
+                            <p>
+                                Personas dentro: @Html.DisplayFor(modelItem => item.Descripcion)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <h1 class="grid-title">
+                                Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
+                            </h1>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Reservado.jpg" alt="" width="100">
+                                </div>
+                            </a>
+                            <p>
+                                Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
+                            </p>
+                            <p>
+                                Personas en la reservación: @Html.DisplayFor(modelItem => item.Descripcion)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
         }
     }
 </div>

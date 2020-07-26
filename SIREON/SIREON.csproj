@@ -2180,7 +2180,7 @@
     <Content Include="Views\Reservaciones1\Details.cshtml" />
     <Content Include="Views\Reservaciones1\Edit.cshtml" />
     <Content Include="Views\Reservaciones1\Index.cshtml" />
-    <Content Include="Views\Reservaciones\Create2.cshtml" />
+    <Content Include="Views\Reservaciones\CreateOp.cshtml" />
     <Content Include="Views\Reservaciones_Usuarios\Index.cshtml" />
     <Content Include="Views\Reservaciones_Usuarios\Create.cshtml" />
     <Content Include="Views\Reservaciones_Usuarios\Create2.cshtml" />
