@@ -4,240 +4,379 @@
 @{
     ViewBag.Title = "Usuarios | SIREON";
 }
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- plugins:js -->
+        <script src="../../../content/vendors/js/core.js"></script>
 
-<div class="container-fluid">
-    @using (Html.BeginForm())
-    {
-        @*<div class="form-group form-inline">
-                <div class="form-group">
-                    <div>
-                        <p class="text-info">Nombre de Usuario</p>
+    </head>
+    <body>
+        <div class="container-fluid">
+            @using (Html.BeginForm())
+            {
+                @*<div class="form-group form-inline">
+                    <div class="form-group">
+                        <div>
+                            <p class="text-info">Nombre de Usuario</p>
+                        </div>
+                        <input type="text" placeholder="" id="card" name="user" class="form-control" />
                     </div>
-                    <input type="text" placeholder="" id="card" name="user" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <div>
-                        <p class="text-info">Rol</p>
+                    <div class="form-group">
+                        <div>
+                            <p class="text-info">Rol</p>
+                        </div>
+                        @Html.DropDownList("Role", null, htmlAttributes: new { @class = "form-control" })
                     </div>
-                    @Html.DropDownList("Role", null, htmlAttributes: new { @class = "form-control" })
-                </div>
 
-                <div class="form-group">
-                    <div>
-                        <p class="text-info">Acciones</p>
+                    <div class="form-group">
+                        <div>
+                            <p class="text-info">Acciones</p>
+                        </div>
+                        <button type="submit" class="btn btn-default" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+                            Filtrar
+                        </button>
+                        @Html.ActionLink("Limpiar Filtro", "Index", "Attachments", htmlAttributes: new { @class = "btn btn-default" })
                     </div>
-                    <button type="submit" class="btn btn-default" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
-                        Filtrar
-                    </button>
-                    @Html.ActionLink("Limpiar Filtro", "Index", "Attachments", htmlAttributes: new { @class = "btn btn-default" })
-                </div>
 
-            </div>*@
-    }
+                </div>*@
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Administrador"))
+                {
+                    <div class="grid">
+                        <div class="grid-body">
+                            <h2 class="grid-title">Filtros</h2>
+                            <div class="item-wrapper">
+                                <div class="row" style="justify-content:space-between">
+                                    <div class="form-group input-rounded col-lg-4 col-md-4">
+                                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar"/>
+                                    </div>
+                                    <div class="btn-group mb-0" data-toggle="checkbox">
+                                        <label class="btn btn-info active" id="ch1">
+                                            <input type="checkbox" id="chh1" class="name" name="name" value="Administrador">
+                                            <i class="mdi mdi-human-greeting"></i>Admins
+                                        </label>
+                                        <label class="btn btn-info active" id="ch2">
+                                            <input type="checkbox" id="chh2" class="name" name="name" value="Operador">
+                                            <i class="mdi mdi-human-male"></i>Opers.
+                                        </label>
+                                        <label class="btn btn-info active" id="ch3">
+                                            <input type="checkbox" id="chh3" class="name" name="name" value="Usuario">
+                                            <i class="mdi mdi-human-handsdown"></i>Usrs.
+                                        </label>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Register", "Account")" class="btn btn-success has-icon pull-right"><i class="mdi mdi-account-plus-outline"></i>Crear nuevo usuario</a>
 
-    <div class="grid">
-        <div class="grid-body">
-            <h2 class="grid-title">Filtros</h2>
-            <div class="item-wrapper">
-                <div class="demo-wrapper" style="justify-content:space-between">
-                    <div class="btn-group mb-0" data-toggle="buttons">
-                        <label class="btn btn-info">
-                            <input type="checkbox">
-                            <i class="mdi mdi-human-greeting"></i>Admins
-                        </label>
-                        <label class="btn btn-info  active">
-                            <input type="checkbox" checked>
-                            <i class="mdi mdi-human-male"></i>Opers.
-                        </label>
-                        <label class="btn btn-info">
-                            <input type="checkbox">
-                            <i class="mdi mdi-human-handsdown"></i>Usrs.
-                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <a href="@Url.Action("Register", "Account")" class="btn btn-success has-icon pull-right"><i class="mdi mdi-account-plus-outline"></i>Crear nuevo usuario</a>
-                </div>
+                    <div class="col-lg-12">
+                        <div class="grid">
+                            <p class="grid-header" style="border-left-color:green">Usuarios</p>
+                            <div class="item-wrapper">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="example">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Correo
+                                                </th>
+                                                <th>
+                                                    Usuario
+                                                </th>
+                                                <th>
+                                                    Rol Asignado
+                                                </th>
+                                                <th>
 
-            </div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Role.FirstOrDefault().Name)
+                                                    </td>
+                                                    <td>
+                                                        @*@Html.ActionLink("Editar", "Edit", new { id=item.Id }, htmlAttributes: new {@class="btn btn-primary" }) |*@
+                                                        @Html.ActionLink("Editar Rol", "Roles", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
+                                                        @*@Html.ActionLink("Eliminar", "Delete","Account", new { id=item.Id },htmlAttributes: new { @class = "btn btn-danger" })*@
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else if (User.IsInRole("Operador"))
+                {
+                    <div class="grid">
+                        <div class="grid-body">
+                            <h2 class="grid-title">Filtros</h2>
+                            <div class="item-wrapper">
+                                <div class="row" style="justify-content:space-between">
+                                    <div class="form-group input-rounded col-lg-4 col-md-4">
+                                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar"/>
+                                    </div>
+                                    <div class="btn-group mb-0" data-toggle="checkbox" hidden>
+                                        <label class="btn btn-info active" id="ch1">
+                                            <input type="checkbox" id="chh1" class="name" name="name" value="Administrador">
+                                            <i class="mdi mdi-human-greeting"></i>Admins
+                                        </label>
+                                        <label class="btn btn-info active" id="ch2">
+                                            <input type="checkbox" id="chh2" class="name" name="name" value="Operador">
+                                            <i class="mdi mdi-human-male"></i>Opers.
+                                        </label>
+                                        <label class="btn btn-info active" id="ch3">
+                                            <input type="checkbox" id="chh3" class="name" name="name" value="Usuario" checked>
+                                            <i class="mdi mdi-human-handsdown"></i>Usrs.
+                                        </label>
+                                    </div>
+                                    <div class="btn-group">
+                                        <a href="@Url.Action("Register", "Account")" class="btn btn-success has-icon pull-right"><i class="mdi mdi-account-plus-outline"></i>Crear nuevo usuario</a>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="grid">
+                            <p class="grid-header" style="border-left-color:green">Usuarios</p>
+                            <div class="item-wrapper">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="example">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Correo
+                                                </th>
+                                                <th>
+                                                    Usuario
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="myTable">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        <input type="button" src="#" class = "btn btn-default" value="Detalles"/>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-12">
+                        <div class="grid">
+                            <p class="grid-header" style="border-left-color:green">Usuarios</p>
+                            <div class="item-wrapper">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="myTable">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                    <td>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+            else
+            {
+                <div class="col-lg-12">
+                    <div class="grid">
+                        <p class="grid-header" style="border-left-color:green">Usuarios</p>
+                        <div class="item-wrapper">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="myTable">
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
-    </div>
-    @if (User.Identity.IsAuthenticated)
-    {
-        if (User.IsInRole("Administrador"))
-        {
-            <div class="col-lg-12">
-                <div class="grid">
-                    <p class="grid-header" style="border-left-color:green">Usuarios</p>
-                    <div class="item-wrapper">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Correo
-                                        </th>
-                                        <th>
-                                            Usuario
-                                        </th>
-                                        <th>
-                                            Rol Asignado
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                    </tr>
-                                </thead>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Role.FirstOrDefault().Name)
-                                        </td>
-                                        <td>
-                                            @*@Html.ActionLink("Editar", "Edit", new { id=item.Id }, htmlAttributes: new {@class="btn btn-primary" }) |*@
-                                            @Html.ActionLink("Editar Rol", "Roles", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-default" })
-                                            @*@Html.ActionLink("Eliminar", "Delete","Account", new { id=item.Id },htmlAttributes: new { @class = "btn btn-danger" })*@
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-        else if (User.IsInRole("Operador"))
-        {
-            <div class="col-lg-12">
-                <div class="grid">
-                    <p class="grid-header" style="border-left-color:green">Usuarios</p>
-                    <div class="item-wrapper">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            Correo
-                                        </th>
-                                        <th>
-                                            Usuario
-                                        </th>
-                                        <th>
+        <br />
+        <br />
 
-                                        </th>
-                                    </tr>
-                                </thead>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
 
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                }
+        <br><br>
 
-                            </table>
-                        </div>
+    </body>
 
-                    </div>
-                </div>
-            </div>
-        }
-        else
-        {
-            <div class="col-lg-12">
-                <div class="grid">
-                    <p class="grid-header" style="border-left-color:green">Usuarios</p>
-                    <div class="item-wrapper">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>
 
-                                        </th>
-                                        <th>
 
-                                        </th>
-                                        <th>
+<script>
+    $(document).ready(function () {
+        $(".name").on("click", function () {
+            name_list = []
+            $("#myTable tr").hide()
+            var flag = 1
+            $("input:checkbox[name=name]:checked").each(function () {
+                flag = 0;
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    if ($(this).text().toLowerCase().indexOf(value) > -1)
+                        $(this).show()
+                        
+                });
 
-                                        </th>
-                                    </tr>
-                                </thead>
+                    
+            });
+            if (flag == 1) {
+                $("#myTable tr").show();
+            }
+                    
+                                   
+        });
+    });
 
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
 
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                }
+    $(document).ready(function () {
+        $(".form-control").on('keyup change', function () {
+            name_list = []
+            $("#myTable tr").hide()
+            flag = 0;
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                if ($(this).text().toLowerCase().indexOf(value) > -1)
+                    $(this).show()
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            });
+            if (flag == 1) {
+                $("#myTable tr").show();
+            }
 
-        }
-    }
-    else
-    {
-        <div class="col-lg-12">
-            <div class="grid">
-                <p class="grid-header" style="border-left-color:green">Usuarios</p>
-                <div class="item-wrapper">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>
 
-                                    </th>
-                                    <th>
+        });
+    });
 
-                                    </th>
-                                    <th>
+    //$(document).ready(function () {
 
-                                    </th>
-                                </tr>
-
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                }
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-
-</div>
+    //    $('#chh1').change(function () {
+    //        if (this.checked) {
+    //            $("#ch1").addClass("btn btn-info active");
+    //        }
+    //        else{
+    //            $("#ch1").addClass("btn btn-info");
+    //        }
+            
+    //    });
+    //    $('#chh2').change(function () {
+    //        if (this.checked) {
+    //            $("#ch2").addClass("btn btn-info active");
+    //        }
+    //        else {
+    //            $("#ch2").addClass("btn btn-info");
+    //        }
+            
+    //    });
+    //    $('#chh3').change(function () {
+    //        if (this.checked) {
+    //            $("#ch3").addClass("btn btn-info active");
+    //        }
+    //        else {
+    //            $("#ch3").addClass("btn btn-info");
+    //        }
+           
+    //    });
+    //});
+</script>
