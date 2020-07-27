@@ -1,89 +1,360 @@
 ﻿@model SIREON.Reservacione
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles | SIREON";
 }
 
-<h2>Details</h2>
+    <div>
+        <h4>Detalles de reservacion</h4>
+        <br />
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Fecha
+                        </h1>
+                        <a href="#">
+                            <div class="item-wrapper">
 
-<div>
-    <h4>Reservacione</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </dt>
+                            </div>
+                        </a>
+                        <p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Fecha)
-        </dd>
+                        </p>
+                        <p>
+                            @Html.DisplayFor(model => model.Fecha)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaSolicitada)
-        </dt>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Horario
+                        </h1>
+                        <a href="#">
+                            <div class="item-wrapper">
+                            </div>
+                        </a>
+                        <p>
+                            @Html.DisplayFor(model => model.HEntrada)  -  @Html.DisplayFor(model => model.HSalida)
 
-        <dd>
-            @Html.DisplayFor(model => model.FechaSolicitada)
-        </dd>
+                        </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HSolicitada)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HSolicitada)
-        </dd>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Cubículo No.
+                        </h1>
+                        <h1>
+                            @Html.DisplayFor(model => model.Cubiculo.Descripcion)
+                        </h1>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HEntrada)
-        </dt>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h1 class="grid-title">
+                            Estatus
+                        </h1>
+                        @if ((Model.Estatus) == "Activa")
+                        {
+                            <a href="#">
+                                <div class="item-wrapper">
+                                </div>
+                            </a>
+                            <p>
+                                <input type="button" class="btn-primary" style="background-color:darkred" value="Cancelar" />
+                            </p>
+                        }
+                        else if ((Model.Estatus) == "Cancelada")
+                        {
+                            <br/>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/warning.png" alt="" width="200">
 
-        <dd>
-            @Html.DisplayFor(model => model.HEntrada)
-        </dd>
+                                </div>
+                            </a>
+                            <p>
+                                Cancelada
+                            </p>
+                        }
+                        else
+                        {
+                            <br/>
+                            <a href="#">
+                                <div class="item-wrapper" style="justify-content:center">
+                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Rechazada.png" alt="" width="200">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HSalida)
-        </dt>
+                                </div>
+                            </a>
+                            <br/>
+                            <p>
+                                Rechazada
+                            </p>
+                        }
 
-        <dd>
-            @Html.DisplayFor(model => model.HSalida)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </dt>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 equel-grid" style="text-align:center">
+                <div class="grid">
+                    <div class="grid-body">
+                        @*<a href="#">
+                            <div class="item-wrapper">
+                                <img class="img mt-1 mb-1 mr-2" src="~/Content/images/Cubiculos.jpg" alt="" width="100">
 
-        <dd>
-            @Html.DisplayFor(model => model.Estatus)
-        </dd>
+                            </div>
+                        </a>
+                        <p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
-        </dt>
+                        </p>
+                        <p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Cubiculo.Descripcion)
-        </dd>
+                        </p>*@
+                        <div class="split-header">
+                            <p class="card-title">
+                                <img class="img-sm mt-1 mb-1 mr-2" src="~/Content/images/Participantes.png" alt="" width="25">Participantes
+                            </p>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-trasnparent action-btn btn-xs component-flat pr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mdi mdi-dots-vertical"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="vertical-timeline-wrapper">
+                            <div class="timeline-vertical dashboard-timeline">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th width="20" style="text-align:left">Nombre</th>
+                                            <th width="20">Matricula/Cédula</th>
+                                            <th width="60"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="d-flex align-items-center border-top-0">
+                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">
+                                                <span>Herman Rosado</span>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    hr20-0182
+                                                </p>
+                                            </td>
+                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex align-items-center border-top-0">
+                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">
+                                                <span>Elena Peralta</span>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    ep20-1132
+                                                </p>
+                                            </td>
+                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="d-flex align-items-center border-top-0">
+                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">
+                                                <span>Maria Castillo</span>
+                                            </td>
+                                            <td>
+                                                <p>
+                                                    mc19-3185
+                                                </p>
+                                            </td>
+                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                        </tr>
+                                        @*<div class="activity-log">
+            <p class="log-name">Reporte 1</p>
+            <div class="log-details">
+                Detalles de reporte 1
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Diario</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 2</p>
+            <div class="log-details">
+                Detalles de reporte 2
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Diario</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 3</p>
+            <div class="log-details">
+                Detalles de reporte 3
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Diario</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 4</p>
+            <div class="log-details">
+                Detalles de reporte 4
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Mensual</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 5</p>
+            <div class="log-details">
+                Detalles de reporte 5
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Mensual</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 6</p>
+            <div class="log-details">
+                Detalles de reporte 6
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Mensual</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 7</p>
+            <div class="log-details">
+                Detalles de reporte 7
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Anual</small>
+        </div>
+        <div class="activity-log">
+            <p class="log-name">Reporte 8</p>
+            <div class="log-details">
+                Detalles de reporte 8
+                <div class="wrapper mt-2">
+                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
+                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                </div>
+            </div>
+            <small class="log-time">Anual</small>
+        </div>*@
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                              
+                    </div>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+        </div>
+        @*<hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Fecha)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.FechaSolicitada)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser1.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.FechaSolicitada)
+            </dd>
 
-    </dl>
-</div>
+            <dt>
+                @Html.DisplayNameFor(model => model.HSolicitada)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HSolicitada)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HEntrada)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HEntrada)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HSalida)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HSalida)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Estatus)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cubiculo.Descripcion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUser.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AspNetUser1.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUser1.Email)
+            </dd>
+
+        </dl>*@
+    </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Reservacion }) |
     @Html.ActionLink("Back to List", "Index")

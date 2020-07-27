@@ -10,453 +10,656 @@
 </head>
 <body>
 
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-            <div class="col-md-3 col-sm-3 grid">
-                <div class="grid-body">
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <h1 class="grid-title">
-                        Nueva reservacion
-                    </h1>
-                    <p>
-                        <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Nueva reservación</a>
-                    </p>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if ((User.IsInRole("Operador")))
+        {
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 equel-grid">
+                    <div class="grid">
+                        <div class="grid-body">
+                            <div class="d-flex flex-row mt-4 mb-4">
+                                <a href='@Url.Action("CreateOP", "Reservaciones")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:green">Nueva reservación</a>
+                                <a href='@Url.Action("Cola", "Reservaciones")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:yellowgreen">En espera</a>
+                                <a href='@Url.Action("Index", "ListaNegra")' class="btn btn-primary component-flat w-50 mr-2" type="button" style="background-color:darkred">Lista negra</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-            <div class="col-md-3 col-sm-3 grid">
-                <div class="grid-body">
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <h1>
-                        @*@{
-                                int Cont;
-
-                                foreach (var item in Model)
-                                {
-                                    Cont = +1;
-                                    if (Cont == 0)
-                                    {
-                                        @Html.DisplayText("0")
-                                    }
-                                    else
-                                    {
-                                        @Html.Display(Convert.ToString(Cont))
-                                    }
-                                }
-                            }*@
-                        0
-                    </h1>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <p>
-                        Reservaciones realizadas
-                    </p>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-            <div class="col-md-3 col-sm-3 grid">
-                <div class="grid-body">
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <h1>
-                        @*@{
-                                int Cont;
-
-                                foreach (var item in Model)
-                                {
-                                    Cont = +1;
-                                    if (Cont == 0)
-                                    {
-                                        @Html.DisplayText("0")
-                                    }
-                                    else
-                                    {
-                                        @Html.Display(Convert.ToString(Cont))
-                                    }
-                                }
-                            }*@
-                        0
-                    </h1>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <p>
-                        Participaciones en otras salas
-                    </p>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-            <div class="col-md-3 col-sm-3 grid">
-                <div class="grid-body">
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                    <h1 class="grid-title">
-                        Invitaciones
-                    </h1>
-                    <p>
-                        <a href="@Url.Action("Index2", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Ver Invitaciones</a>
-                    </p>
-                    <p>
-                        <a>
-
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />
-
-    <div class="col-lg-12">
-        <div class="grid">
-            <p class="grid-header" style="border-left-color:green">Próxima reservación</p>
-            <div class="item-wrapper">
-                <div class="table-responsive">
-                    <table class="table info-table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Fecha
-                                </th>
-                                <th>
-                                    Hora solicitada
-                                </th>
-                                <th>
-                                    Hora de entrada
-                                </th>
-                                <th>
-                                    Hora de salida
-                                </th>
-                                <th>
-                                    Estatus de reservación
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaSolicitada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSolicitada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HEntrada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSalida)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estatus)
-                                        @{
-                                            if (item.Estatus == "Activa")
-                                            {
-
-                                                <label class="badge badge-warning">Activa</label>
-
-                                            }
-                                            else if (item.Estatus == "Cancelada")
-                                            {
-
-                                                <label class="badge badge-danger">Cancelada</label>
-
-                                            }
-
-                                        }
-
-
-                                        @*<% if (item.Estatus) { %>
-                                            <label class="badge badge-warning">Activa</label>
-                                            <% } else { %>
-                                            <label class="badge badge-danger">Cancelada</label>
-                                            <% } %>*@
-
-                                        @*<label class="badge badge-success">Completed</label>
-                                            <label class="badge badge-warning">In progress</label>
-                                            <label class="badge badge-danger">Pending</label>*@
-
-
-                                    </td>
-                                    <td>
-                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion })
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <br/>
-    <div class="col-lg-12">
-        <div class="grid">
-            <p class="grid-header" style="border-left-color:green">Historial</p>
-            <div class="item-wrapper">
-                <div class="table-responsive">
-                    <table class="table info-table table-striped">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Facilitador
-                                </th>
-                                <th>
-                                    Fecha
-                                </th>
-                                <th>
-                                    Hora solicitada
-                                </th>
-                                <th>
-                                    Hora de entrada
-                                </th>
-                                <th>
-                                    Hora de salida
-                                </th>
-
-                                <th>
-                                    Cubículo No.
-                                </th>
-                                <th>
-                                    Estatus de Reservación
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ID_Empleado)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaSolicitada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSolicitada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HEntrada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSalida)
-                                    </td> 
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Estatus)
-                                        @{
-                                            if (item.Estatus == "Completada")
-                                            {
-                                                <label class="badge badge-success">Completada</label>
-                                            }
-                                            else if (item.Estatus == "Cancelada")
-                                            {
-                                                <label class="badge badge-danger">Cancelada</label>
-                                            }
-                                        }
-
-                                        @*<label class="badge badge-success">Completed</label>
-                                            <label class="badge badge-danger">Pending</label>*@
-                                    </td>
-                                    <td>
-                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion })
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="row row-m-t"></div>
-        <div class="row row-m-t"></div>
-        @*<div class="col-lg-12">
+            <br />
+            <div class="col-lg-12">
                 <div class="grid">
-                    <p class="grid-header">Image&Components Table</p>
+                    <p class="grid-header" style="border-left-color:green">Reservaciones en curso</p>
                     <div class="item-wrapper">
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>User</th>
-                                        <th>Progress</th>
-                                        <th>Earnings</th>
-                                        <th>Target</th>
-                                        <th>Points</th>
-                                        <th>Sales</th>
-                                        <th>Started</th>
-                                        <th>Deadline</th>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            Hora solicitada
+                                        </th>
+                                        <th>
+                                            Hora de entrada
+                                        </th>
+                                        <th>
+                                            Hora de salida
+                                        </th>
+                                        <th>
+                                            Estatus de reservación
+                                        </th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HEntrada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSalida)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                                @{
+                                                    if (item.Estatus == "Activa")
+                                                    {
+                                                        <label class="badge badge-warning">Activa</label>
+                                                    }
+                                                    else if (item.Estatus == "Cancelada")
+                                                    {
+                                                        <label class="badge badge-danger">Cancelada</label>
+                                                    }
+                                                }
+
+
+                                                @*<% if (item.Estatus) { %>
+                                                    <label class="badge badge-warning">Activa</label>
+                                                    <% } else { %>
+                                                    <label class="badge badge-danger">Cancelada</label>
+                                                    <% } %>*@
+
+                                                @*<label class="badge badge-success">Completed</label>
+                                                    <label class="badge badge-warning">In progress</label>
+                                                    <label class="badge badge-danger">Pending</label>*@
+
+
+                                            </td>
+                                            <td>
+                                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="col-lg-12">
+                <div class="grid">
+                    <p class="grid-header" style="border-left-color:green">Histórico</p>
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
                                     <tr>
-                                        <td class="d-flex align-items-center border-top-0">
-                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="profile image">
-                                            <span>Herman Beck</span>
-                                        </td>
-                                        <td>
-                                            <div class="progress progress-slim">
-                                                <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>$23,563</td>
-                                        <td>$30,000</td>
-                                        <td>3454</td>
-                                        <td class="text-success">
-                                            15.67% <i class="mdi mdi-arrow-up"></i>
-                                        </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td>Jar 23, 2019 </td>
-                                        <td class="actions">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </td>
+                                        <th>
+                                            Solicitante
+                                        </th>
+                                        <th>
+                                            Operador
+                                        </th>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            Hora de entrada
+                                        </th>
+                                        <th>
+                                            Hora de salida
+                                        </th>
+
+                                        <th>
+                                            Cubículo No.
+                                        </th>
+                                        <th>
+                                            Estatus de Reservación
+                                        </th>
+                                        <th></th>
                                     </tr>
-                                    <tr>
-                                        <td class="d-flex align-items-center">
-                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_7.png" alt="profile image">
-                                            <span>Curtis Greer</span>
-                                        </td>
-                                        <td>
-                                            <div class="progress progress-slim">
-                                                <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>$14,435</td>
-                                        <td>$30,000</td>
-                                        <td>3454</td>
-                                        <td class="text-danger">
-                                            23.05% <i class="mdi mdi-arrow-down"></i>
-                                        </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td> May 15, 2019 </td>
-                                        <td class="actions">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="d-flex align-items-center">
-                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_10.png" alt="profile image">
-                                            <span>Lettie Phillips</span>
-                                        </td>
-                                        <td>
-                                            <div class="progress progress-slim">
-                                                <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>$16,745</td>
-                                        <td>$30,000</td>
-                                        <td>3454</td>
-                                        <td class="text-success">
-                                            23.05% <i class="mdi mdi-arrow-up"></i>
-                                        </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td> May 15, 2019 </td>
-                                        <td class="actions">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="d-flex align-items-center">
-                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="profile image">
-                                            <span>Rachel Garza</span>
-                                        </td>
-                                        <td>
-                                            <div class="progress progress-slim">
-                                                <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>$34,546</td>
-                                        <td>$30,000</td>
-                                        <td>3454</td>
-                                        <td class="text-success">
-                                            67.23% <i class="mdi mdi-arrow-up"></i>
-                                        </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td>Apr 06, 2019 </td>
-                                        <td class="actions">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="d-flex align-items-center">
-                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_3.png" alt="profile image">
-                                            <span>Estelle Guzman</span>
-                                        </td>
-                                        <td>
-                                            <div class="progress progress-slim">
-                                                <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </td>
-                                        <td>$23,657</td>
-                                        <td>$30,000</td>
-                                        <td>3454</td>
-                                        <td class="text-danger">
-                                            12.45% <i class="mdi mdi-arrow-down"></i>
-                                        </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td>Jul 12, 2019 </td>
-                                        <td class="actions">
-                                            <i class="mdi mdi-dots-vertical"></i>
-                                        </td>
-                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IdAspNetUsers)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ID_Empleado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HEntrada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSalida)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                                @{
+                                                    if (item.Estatus == "Completada")
+                                                    {
+                                                        <label class="badge badge-success">Completada</label>
+                                                    }
+                                                    else if (item.Estatus == "Cancelada")
+                                                    {
+                                                        <label class="badge badge-danger">Cancelada</label>
+                                                    }
+                                                }
+
+                                                @*<label class="badge badge-success">Completed</label>
+                                                    <label class="badge badge-danger">Pending</label>*@
+                                            </td>
+                                            <td>
+                                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>*@
-    </div>
+                <br />
+                <br />
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <h1 class="grid-title">
+                                Nueva reservacion
+                            </h1>
+                            <p>
+                                <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Nueva reservación</a>
+                            </p>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <h1>
+                                @*@{
+                                        int Cont;
+
+                                        foreach (var item in Model)
+                                        {
+                                            Cont = +1;
+                                            if (Cont == 0)
+                                            {
+                                                @Html.DisplayText("0")
+                                            }
+                                            else
+                                            {
+                                                @Html.Display(Convert.ToString(Cont))
+                                            }
+                                        }
+                                    }*@
+                                0
+                            </h1>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <p>
+                                Reservaciones realizadas
+                            </p>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <h1>
+                                @*@{
+                                        int Cont;
+
+                                        foreach (var item in Model)
+                                        {
+                                            Cont = +1;
+                                            if (Cont == 0)
+                                            {
+                                                @Html.DisplayText("0")
+                                            }
+                                            else
+                                            {
+                                                @Html.Display(Convert.ToString(Cont))
+                                            }
+                                        }
+                                    }*@
+                                0
+                            </h1>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <p>
+                                Participaciones en otras salas
+                            </p>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                            <h1 class="grid-title">
+                                Invitaciones
+                            </h1>
+                            <p>
+                                <a href="@Url.Action("Invitaciones", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar"></i>Ver Invitaciones</a>
+                            </p>
+                            <p>
+                                <a>
+
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+
+            <div class="col-lg-12">
+                <div class="grid">
+                    <p class="grid-header" style="border-left-color:green">Próxima reservación</p>
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table info-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            Hora solicitada
+                                        </th>
+                                        <th>
+                                            Hora de entrada
+                                        </th>
+                                        <th>
+                                            Hora de salida
+                                        </th>
+                                        <th>
+                                            Estatus de reservación
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HEntrada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSalida)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                                @{
+                                                    if (item.Estatus == "Activa")
+                                                    {
+
+                                                        <label class="badge badge-warning">Activa</label>
+
+                                                    }
+                                                    else if (item.Estatus == "Cancelada")
+                                                    {
+
+                                                        <label class="badge badge-danger">Cancelada</label>
+
+                                                    }
+
+                                                }
+
+
+                                                @*<% if (item.Estatus) { %>
+                                                    <label class="badge badge-warning">Activa</label>
+                                                    <% } else { %>
+                                                    <label class="badge badge-danger">Cancelada</label>
+                                                    <% } %>*@
+
+                                                @*<label class="badge badge-success">Completed</label>
+                                                    <label class="badge badge-warning">In progress</label>
+                                                    <label class="badge badge-danger">Pending</label>*@
+
+
+                                            </td>
+                                            <td>
+                                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="col-lg-12">
+                <div class="grid">
+                    <p class="grid-header" style="border-left-color:green">Historial</p>
+                    <div class="item-wrapper">
+                        <div class="table-responsive">
+                            <table class="table info-table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Facilitador
+                                        </th>
+                                        <th>
+                                            Fecha
+                                        </th>
+                                        <th>
+                                            Hora solicitada
+                                        </th>
+                                        <th>
+                                            Hora de entrada
+                                        </th>
+                                        <th>
+                                            Hora de salida
+                                        </th>
+
+                                        <th>
+                                            Cubículo No.
+                                        </th>
+                                        <th>
+                                            Estatus de Reservación
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ID_Empleado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSolicitada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HEntrada)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSalida)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Estatus)
+                                                @{
+                                                    if (item.Estatus == "Completada")
+                                                    {
+                                                        <label class="badge badge-success">Completada</label>
+                                                    }
+                                                    else if (item.Estatus == "Cancelada")
+                                                    {
+                                                        <label class="badge badge-danger">Cancelada</label>
+                                                    }
+                                                }
+
+                                                @*<label class="badge badge-success">Completed</label>
+                                                    <label class="badge badge-danger">Pending</label>*@
+                                            </td>
+                                            <td>
+                                                @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                                @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-m-t"></div>
+                <div class="row row-m-t"></div>
+                @*<div class="col-lg-12">
+                        <div class="grid">
+                            <p class="grid-header">Image&Components Table</p>
+                            <div class="item-wrapper">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>User</th>
+                                                <th>Progress</th>
+                                                <th>Earnings</th>
+                                                <th>Target</th>
+                                                <th>Points</th>
+                                                <th>Sales</th>
+                                                <th>Started</th>
+                                                <th>Deadline</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="d-flex align-items-center border-top-0">
+                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="profile image">
+                                                    <span>Herman Beck</span>
+                                                </td>
+                                                <td>
+                                                    <div class="progress progress-slim">
+                                                        <div class="progress-bar bg-info progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </td>
+                                                <td>$23,563</td>
+                                                <td>$30,000</td>
+                                                <td>3454</td>
+                                                <td class="text-success">
+                                                    15.67% <i class="mdi mdi-arrow-up"></i>
+                                                </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td>Jar 23, 2019 </td>
+                                                <td class="actions">
+                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="d-flex align-items-center">
+                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_7.png" alt="profile image">
+                                                    <span>Curtis Greer</span>
+                                                </td>
+                                                <td>
+                                                    <div class="progress progress-slim">
+                                                        <div class="progress-bar bg-success progress-bar-striped" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </td>
+                                                <td>$14,435</td>
+                                                <td>$30,000</td>
+                                                <td>3454</td>
+                                                <td class="text-danger">
+                                                    23.05% <i class="mdi mdi-arrow-down"></i>
+                                                </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td> May 15, 2019 </td>
+                                                <td class="actions">
+                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="d-flex align-items-center">
+                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_10.png" alt="profile image">
+                                                    <span>Lettie Phillips</span>
+                                                </td>
+                                                <td>
+                                                    <div class="progress progress-slim">
+                                                        <div class="progress-bar bg-primary progress-bar-striped" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </td>
+                                                <td>$16,745</td>
+                                                <td>$30,000</td>
+                                                <td>3454</td>
+                                                <td class="text-success">
+                                                    23.05% <i class="mdi mdi-arrow-up"></i>
+                                                </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td> May 15, 2019 </td>
+                                                <td class="actions">
+                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="d-flex align-items-center">
+                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="profile image">
+                                                    <span>Rachel Garza</span>
+                                                </td>
+                                                <td>
+                                                    <div class="progress progress-slim">
+                                                        <div class="progress-bar bg-danger progress-bar-striped" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </td>
+                                                <td>$34,546</td>
+                                                <td>$30,000</td>
+                                                <td>3454</td>
+                                                <td class="text-success">
+                                                    67.23% <i class="mdi mdi-arrow-up"></i>
+                                                </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td>Apr 06, 2019 </td>
+                                                <td class="actions">
+                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="d-flex align-items-center">
+                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_3.png" alt="profile image">
+                                                    <span>Estelle Guzman</span>
+                                                </td>
+                                                <td>
+                                                    <div class="progress progress-slim">
+                                                        <div class="progress-bar bg-warning progress-bar-striped" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </td>
+                                                <td>$23,657</td>
+                                                <td>$30,000</td>
+                                                <td>3454</td>
+                                                <td class="text-danger">
+                                                    12.45% <i class="mdi mdi-arrow-down"></i>
+                                                </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td>Jul 12, 2019 </td>
+                                                <td class="actions">
+                                                    <i class="mdi mdi-dots-vertical"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+        }
+
+    }
+    else
+    {
+        
+    }
+
+
+
 </body>
 </html>
 

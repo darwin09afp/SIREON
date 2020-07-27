@@ -25,19 +25,13 @@ namespace SIREON.Controllers
 
 
         // GET: Reservaciones
-        public ActionResult Index2()
+        public ActionResult Invitaciones()
         {
             var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
             return View(reservaciones.ToList());
         }
 
 
-        // GET: Reservaciones
-        public ActionResult Index3()
-        {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
-        }
 
         // GET: Cola
         public ActionResult Cola()
