@@ -2184,6 +2184,7 @@
     <Content Include="Views\Reservaciones_Usuarios\Index.cshtml" />
     <Content Include="Views\Reservaciones_Usuarios\Create.cshtml" />
     <Content Include="Views\Reservaciones_Usuarios\Create2.cshtml" />
+    <Content Include="Views\Reservaciones\Invitaciones.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

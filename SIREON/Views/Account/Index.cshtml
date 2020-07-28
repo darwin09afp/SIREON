@@ -127,31 +127,10 @@
                 {
                     <div class="grid">
                         <div class="grid-body">
-                            <h2 class="grid-title">Filtros</h2>
+                            <h2 class="grid-title">Acciones</h2>
                             <div class="item-wrapper">
-                                <div class="row" style="justify-content:space-between">
-                                    <div class="form-group input-rounded col-lg-4 col-md-4">
-                                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar"/>
-                                    </div>
-                                    <div class="btn-group mb-0" data-toggle="checkbox" hidden>
-                                        <label class="btn btn-info active" id="ch1">
-                                            <input type="checkbox" id="chh1" class="name" name="name" value="Administrador">
-                                            <i class="mdi mdi-human-greeting"></i>Admins
-                                        </label>
-                                        <label class="btn btn-info active" id="ch2">
-                                            <input type="checkbox" id="chh2" class="name" name="name" value="Operador">
-                                            <i class="mdi mdi-human-male"></i>Opers.
-                                        </label>
-                                        <label class="btn btn-info active" id="ch3">
-                                            <input type="checkbox" id="chh3" class="name" name="name" value="Usuario" checked>
-                                            <i class="mdi mdi-human-handsdown"></i>Usrs.
-                                        </label>
-                                    </div>
-                                    <div class="btn-group">
-                                        <a href="@Url.Action("Register", "Account")" class="btn btn-success has-icon pull-right"><i class="mdi mdi-account-plus-outline"></i>Crear nuevo usuario</a>
+                                <a href="@Url.Action("Register", "Account")" class="btn btn-success has-icon pull-right"><i class="mdi mdi-account-plus-outline"></i>Crear nuevo usuario</a>
 
-                                    </div>
-                                </div>
 
                             </div>
                         </div>
@@ -160,6 +139,11 @@
                         <div class="grid">
                             <p class="grid-header" style="border-left-color:green">Usuarios</p>
                             <div class="item-wrapper">
+                                
+                                <div class="form-group input-rounded col-lg-4 col-md-4">
+                                    
+                                    <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+                                </div>
                                 <div class="table-responsive">
                                     <table class="table table-hover" id="example">
                                         <thead>
@@ -187,7 +171,7 @@
                                                         @Html.DisplayFor(modelItem => item.Email)
                                                     </td>
                                                     <td>
-                                                        <input type="button" src="#" class = "btn btn-default" value="Detalles"/>
+                                                        <input type="button" src="#" class="btn btn-default" value="Detalles" />
                                                     </td>
                                                 </tr>
                                             }
@@ -196,7 +180,7 @@
                                     </table>
                                 </div>
 
-                            </div>
+                                </div>
                         </div>
                     </div>
                 }

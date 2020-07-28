@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SIREON.Reservaciones_Usuarios>
+
+@{
+    ViewBag.Title = "Mis invitaciones | SIREON";
+}
+
+<h2>Mis invitaciones</h2>
+
+<br />
+<div class="row">
+    @{
+        foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <h1 class="grid-title">
+                                Reservación de @Html.DisplayFor(modelItem => item.Reservacione.IdAspNetUsers)
+                            </h1>
+                            <a>
+                                <img class="profile-img img-lg img-rounded mr-2" src="@Url.Action("UserPhotos", "Reservaciones" )" alt="Imagen de usuario">
+
+                            </a>
+                            <a>
+                                
+                            </a>
+                            <p>
+                                Horario:
+                            </p>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Reservacione.HEntrada)  -  @Html.DisplayFor(modelItem => item.Reservacione.HSalida)
+
+                            </p>
+                            <div class="btn-group">
+                                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                            </div>
+                        </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reservacione.IdAspNetUsers)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reservacione.IdAspNetUsers)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+</table>*@

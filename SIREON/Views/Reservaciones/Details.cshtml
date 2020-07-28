@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Detalles | SIREON";
 }
-
+    <head>
+        <style>
+            table {
+                height: 300px;
+                overflow: auto;
+            }
+        </style>
+        
+    </head>
     <div>
         <h4>Detalles de reservacion</h4>
         <br />
@@ -112,18 +120,6 @@
             <div class="col-lg-8 col-md-8 col-sm-8 equel-grid" style="text-align:center">
                 <div class="grid">
                     <div class="grid-body">
-                        @*<a href="#">
-                            <div class="item-wrapper">
-                                <img class="img mt-1 mb-1 mr-2" src="~/Content/images/Cubiculos.jpg" alt="" width="100">
-
-                            </div>
-                        </a>
-                        <p>
-
-                        </p>
-                        <p>
-
-                        </p>*@
                         <div class="split-header">
                             <p class="card-title">
                                 <img class="img-sm mt-1 mb-1 mr-2" src="~/Content/images/Participantes.png" alt="" width="25">Participantes
@@ -155,7 +151,9 @@
                                                     hr20-0182
                                                 </p>
                                             </td>
-                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                            <td>
+                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex align-items-center border-top-0">
@@ -167,7 +165,9 @@
                                                     ep20-1132
                                                 </p>
                                             </td>
-                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                            <td>
+                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex align-items-center border-top-0">
@@ -179,7 +179,9 @@
                                                     mc19-3185
                                                 </p>
                                             </td>
-                                            <td><input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" /></td>
+                                            <td>
+                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                            </td>
                                         </tr>
                                         @*<div class="activity-log">
             <p class="log-name">Reporte 1</p>
@@ -279,81 +281,7 @@
             </div>
 
         </div>
-        @*<hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Fecha)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FechaSolicitada)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FechaSolicitada)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HSolicitada)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HSolicitada)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HEntrada)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HEntrada)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.HSalida)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.HSalida)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Estatus)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Estatus)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Cubiculo.Descripcion)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUser.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUser.Email)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUser1.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUser1.Email)
-            </dd>
-
-        </dl>*@
+        
     </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Reservacion }) |
