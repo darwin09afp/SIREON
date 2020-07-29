@@ -75,41 +75,63 @@
                         <h1 class="grid-title">
                             Estatus
                         </h1>
-                        @if ((Model.Estatus) == "Activa")
-                        {
-                            <a href="#">
-                                <div class="item-wrapper">
-                                </div>
-                            </a>
-                            <p>
-                                <input type="button" class="btn-primary" style="background-color:darkred" value="Cancelar" />
-                            </p>
-                        }
-                        else if ((Model.Estatus) == "Cancelada")
+                        @if ((Model.Estatus) == "Activa    ")
                         {
                             <br/>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
+                                </div>
+                            </a>
+                            <br/>
+                            <p>
+                                Activa
+                            </p>
+                            <br/>
+                            <p>
+                                <input type="button" class="btn btn-danger" style="background-color:darkred" value="Cancelar reservacion" />
+                            </p>
+                        }
+                        else if ((Model.Estatus) == "Cancelada ")
+                        {
+                            <br />
                             <a href="#">
                                 <div class="item-wrapper">
                                     <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/warning.png" alt="" width="200">
 
                                 </div>
                             </a>
+                            <br/>
                             <p>
                                 Cancelada
                             </p>
                         }
-                        else
+                        else if ((Model.Estatus) == "Rechazada ")
                         {
-                            <br/>
+                            <br />
                             <a href="#">
                                 <div class="item-wrapper" style="justify-content:center">
                                     <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Rechazada.png" alt="" width="200">
 
                                 </div>
                             </a>
-                            <br/>
+                            <br />
                             <p>
                                 Rechazada
+                            </p>
+                        }
+                        else
+                        {
+                            <br/>
+                            <a href="#">
+                                <div class="item-wrapper">
+                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
+
+                                </div>
+                            </a>
+                            <br/>
+                            <p>
+                                Completada
                             </p>
                         }
 

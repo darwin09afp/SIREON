@@ -37,47 +37,6 @@ namespace SIREON.Controllers
         }
 
 
-        public FileContentResult UserPhotos()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                String userId = User.Identity.GetUserId();
-
-                if (userId == null)
-                {
-                    string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
-
-                    byte[] imageData = null;
-                    FileInfo fileInfo = new FileInfo(fileName);
-                    long imageFileLength = fileInfo.Length;
-                    FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                    BinaryReader br = new BinaryReader(fs);
-                    imageData = br.ReadBytes((int)imageFileLength);
-
-                    return File(imageData, "image/png");
-
-                }
-                // to get the user details to load user Image    
-                var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-                var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-
-                return new FileContentResult(userImage.UserPhoto, "image/jpeg");
-            }
-            else
-            {
-                string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
-
-                byte[] imageData = null;
-                FileInfo fileInfo = new FileInfo(fileName);
-                long imageFileLength = fileInfo.Length;
-                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                imageData = br.ReadBytes((int)imageFileLength);
-                return File(imageData, "image/png");
-
-            }
-        }
-
         // GET: Cola
         public ActionResult Cola()
         {
@@ -93,7 +52,17 @@ namespace SIREON.Controllers
             return View(ListaInvitados);
         }
 
+        public ActionResult ObtenerLista(int? id)
+        {
 
+            //var idres = db.Reservaciones.FirstOrDefault().ID_Reservacion;
+            var Participantes = db.Reservaciones.GroupJoin(db.Reservaciones_Usuarios, ru => ru.ID_Reservacion,
+                usr => usr.IdReservacion, (ru, usr) => new { ru, usr }).Where(x => x.ru.ID_Reservacion == 9);
+
+
+            return View(db.Reservaciones_Usuarios.ToList());
+
+        }
 
 
 
