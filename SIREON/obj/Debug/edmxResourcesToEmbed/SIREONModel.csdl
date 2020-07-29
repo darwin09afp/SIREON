@@ -70,7 +70,7 @@
     </Key>
     <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Descripcion" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Capacidad" Type="Decimal" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="Capacidad" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Cubiculos" ToRole="Reservaciones" />
     <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>

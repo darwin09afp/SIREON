@@ -22,7 +22,7 @@ namespace SIREON
     
         public int ID_Cubiculo { get; set; }
         public string Descripcion { get; set; }
-        public decimal Capacidad { get; set; }
+        public int Capacidad { get; set; }
         public string Estatus { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

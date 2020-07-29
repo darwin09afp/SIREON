@@ -17,7 +17,7 @@
     @{
         foreach (var item in Model)
         {
-            if (item.Estatus == "Disponible")
+            if (item.Estatus == "Libre     ")
             {
                 <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                     <div class="col-md-3 col-sm-3 grid">
@@ -25,22 +25,22 @@
                             <h1 class="grid-title">
                                 Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
                             </h1>
-                            <a href="#">
+                            <a href="@Url.Action("edit", "Cubiculos", new { id=item.ID_Cubiculo })">
                                 <div class="item-wrapper">
                                     <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Disponible.jpg" alt="" width="100">
                                 </div>
                             </a>
                             <p>
-                                Disponible
+                                Capacidad: @Html.DisplayFor(modelItem => item.Capacidad) Personas
                             </p>
                             <p>
-                               
+                                Estado: @Html.DisplayFor(modelItem => item.Estatus)
                             </p>
                         </div>
                     </div>
                 </div>
             }
-            else if (item.Estatus == "En uso")
+            else if (item.Estatus == "Ocupado   ")
             {
                 <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                     <div class="col-md-3 col-sm-3 grid">
@@ -48,16 +48,16 @@
                             <h1 class="grid-title">
                                 Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
                             </h1>
-                            <a href="#">
+                            <a href="@Url.Action("edit", "Cubiculos", new { id=item.ID_Cubiculo })">
                                 <div class="item-wrapper">
                                     <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/EnUso.jpg" alt="" width="100">
                                 </div>
                             </a>
                             <p>
-                                Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
+                                Personas dentro: @Html.DisplayFor(modelItem => item.Capacidad)
                             </p>
                             <p>
-                                Personas dentro: @Html.DisplayFor(modelItem => item.Descripcion)
+                                Hora de salida: 14:00
                             </p>
                         </div>
                     </div>
@@ -71,23 +71,22 @@
                             <h1 class="grid-title">
                                 Cubículo  @Html.DisplayFor(modelItem => item.Descripcion)
                             </h1>
-                            <a href="#">
+                            <a href="@Url.Action("edit", "Cubiculos", new { id=item.ID_Cubiculo })">
                                 <div class="item-wrapper">
                                     <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Reservado.jpg" alt="" width="100">
                                 </div>
                             </a>
                             <p>
-                                Tiempo restante: @Html.DisplayFor(modelItem => item.Descripcion)
+                                Capacidad: @Html.DisplayFor(modelItem => item.Capacidad) Personas
                             </p>
                             <p>
-                                Personas en reservación: @Html.DisplayFor(modelItem => item.Descripcion)
+                                Estado: @Html.DisplayFor(modelItem => item.Estatus)
                             </p>
                         </div>
                     </div>
                 </div>
 
             }
-
         }
     }
 </div>

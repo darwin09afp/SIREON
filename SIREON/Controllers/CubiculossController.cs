@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using SIREON;
 
+
 namespace SIREON.Controllers
 {
-    public class CubiculosController : Controller
+
+    public class CubiculossController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
 
@@ -20,10 +22,13 @@ namespace SIREON.Controllers
             return View(db.Cubiculos.ToList());
         }
 
+
+        // GET: Cubiculos
         public ActionResult Disponibilidad()
         {
             return View(db.Cubiculos.ToList());
         }
+
 
         // GET: Cubiculos/Details/5
         public ActionResult Details(int? id)
@@ -45,13 +50,13 @@ namespace SIREON.Controllers
         {
             return View();
         }
-
+         
         // POST: Cubiculos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad,Estatus")] Cubiculo cubiculo)
+        public ActionResult Create([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad")] Cubiculo cubiculo)
         {
             if (ModelState.IsValid)
             {
@@ -79,11 +84,11 @@ namespace SIREON.Controllers
         }
 
         // POST: Cubiculos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad,Estatus")] Cubiculo cubiculo)
+        public ActionResult Edit([Bind(Include = "ID_Cubiculo,Descripcion,Capacidad")] Cubiculo cubiculo)
         {
             if (ModelState.IsValid)
             {

@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
+    <Compile Include="Controllers\CubiculossController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegraController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
