@@ -21,10 +21,11 @@
         <EntityTypeShape EntityType="SIREONModel.sysdiagram" Width="1.5" PointX="8.375" PointY="7.75" />
         <AssociationConnector Association="SIREONModel.FK_ListaNegra_AspNetUsers" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_AspNetUsers" />
-        <EntityTypeShape EntityType="SIREONModel.Reservaciones_Usuarios" Width="2.25" PointX="16.25" PointY="2.875" />
+        <AssociationConnector Association="SIREONModel.FK_Reservaciones_AspNetUsers1" />
+        <EntityTypeShape EntityType="SIREONModel.Reservaciones_Usuarios" Width="1.5" PointX="16.25" PointY="3.125" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_AspNetUsers" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones" />
-        <AssociationConnector Association="SIREONModel.FK_Reservaciones_AspNetUsers1" />
+        <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

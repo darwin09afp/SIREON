@@ -16,9 +16,12 @@ namespace SIREON
     {
         public int Id { get; set; }
         public string IdAspNetUser { get; set; }
-        public Nullable<int> IdReservacion { get; set; }
+        public int IdReservacion { get; set; }
+        public string NombreInvitado { get; set; }
+        public string CedulaInvitado { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual Reservacione Reservacione { get; set; }
+        public virtual Reservacione Reservacione1 { get; set; }
     }
 }

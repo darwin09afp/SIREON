@@ -67,8 +67,8 @@
       <PropertyRef Name="ID_Cubiculo" />
     </Key>
     <Property Name="ID_Cubiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="Capacidad" Type="numeric" Precision="1" Scale="0" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Capacidad" Type="int" Nullable="false" />
     <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="ListaNegra">
@@ -94,13 +94,13 @@
     <Property Name="ID_Reservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="ID_Empleado" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
     <Property Name="ID_Cubiculo" Type="int" Nullable="false" />
-    <Property Name="FechaSolicitada" Type="date" />
-    <Property Name="HSolicitada" Type="time" Precision="7" />
-    <Property Name="HEntrada" Type="time" Precision="7" />
-    <Property Name="HSalida" Type="time" Precision="7" />
-    <Property Name="Estatus" Type="char" MaxLength="10" />
+    <Property Name="FechaSolicitada" Type="date" Nullable="false" />
+    <Property Name="HSolicitada" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HEntrada" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Reservaciones_Usuarios">
     <Key>
@@ -108,7 +108,9 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspNetUser" Type="nvarchar" MaxLength="128" />
-    <Property Name="IdReservacion" Type="int" />
+    <Property Name="IdReservacion" Type="int" Nullable="false" />
+    <Property Name="NombreInvitado" Type="char" MaxLength="30" />
+    <Property Name="CedulaInvitado" Type="varchar" MaxLength="13" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -237,7 +239,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Reservaciones_Usuarios_Reservaciones">
-    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="1" />
     <End Role="Reservaciones_Usuarios" Type="Self.Reservaciones_Usuarios" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Reservaciones">
@@ -249,7 +251,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Reservaciones_Usuarios_Reservaciones1">
-    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="0..1" />
+    <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="1" />
     <End Role="Reservaciones_Usuarios" Type="Self.Reservaciones_Usuarios" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Reservaciones">

@@ -123,6 +123,8 @@
     <EntitySetMapping Name="Reservaciones_Usuarios">
       <EntityTypeMapping TypeName="SIREONModel.Reservaciones_Usuarios">
         <MappingFragment StoreEntitySet="Reservaciones_Usuarios">
+          <ScalarProperty Name="CedulaInvitado" ColumnName="CedulaInvitado" />
+          <ScalarProperty Name="NombreInvitado" ColumnName="NombreInvitado" />
           <ScalarProperty Name="IdReservacion" ColumnName="IdReservacion" />
           <ScalarProperty Name="IdAspNetUser" ColumnName="IdAspNetUser" />
           <ScalarProperty Name="Id" ColumnName="Id" />

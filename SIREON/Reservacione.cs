@@ -18,23 +18,26 @@ namespace SIREON
         public Reservacione()
         {
             this.Reservaciones_Usuarios = new HashSet<Reservaciones_Usuarios>();
+            this.Reservaciones_Usuarios1 = new HashSet<Reservaciones_Usuarios>();
         }
     
         public int ID_Reservacion { get; set; }
         public string ID_Empleado { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
+        public System.DateTime Fecha { get; set; }
         public int ID_Cubiculo { get; set; }
-        public Nullable<System.DateTime> FechaSolicitada { get; set; }
-        public Nullable<System.TimeSpan> HSolicitada { get; set; }
-        public Nullable<System.TimeSpan> HEntrada { get; set; }
-        public Nullable<System.TimeSpan> HSalida { get; set; }
+        public System.DateTime FechaSolicitada { get; set; }
+        public System.TimeSpan HSolicitada { get; set; }
+        public System.TimeSpan HEntrada { get; set; }
+        public System.TimeSpan HSalida { get; set; }
         public string Estatus { get; set; }
         public string IdAspNetUsers { get; set; }
     
         public virtual Cubiculo Cubiculo { get; set; }
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
-        public virtual AspNetUser AspNetUser1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios1 { get; set; }
     }
 }

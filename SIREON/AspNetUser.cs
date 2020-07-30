@@ -22,8 +22,8 @@ namespace SIREON
             this.AspNetRoles = new HashSet<AspNetRole>();
             this.ListaNegras = new HashSet<ListaNegra>();
             this.Reservaciones = new HashSet<Reservacione>();
-            this.Reservaciones_Usuarios = new HashSet<Reservaciones_Usuarios>();
             this.Reservaciones1 = new HashSet<Reservacione>();
+            this.Reservaciones_Usuarios = new HashSet<Reservaciones_Usuarios>();
         }
     
         public string Id { get; set; }
@@ -51,8 +51,8 @@ namespace SIREON
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservacione> Reservaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservacione> Reservaciones1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
     }
 }

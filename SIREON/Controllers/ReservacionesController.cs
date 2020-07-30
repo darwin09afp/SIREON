@@ -112,6 +112,8 @@ namespace SIREON.Controllers
                 Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
                 Res.IdAspNetUser = item.IdAspNetUser;
                 Res.IdReservacion = model.ID_Reservacion;
+                Res.NombreInvitado = item.NombreInvitado;
+                Res.CedulaInvitado = item.CedulaInvitado;
                 db.Reservaciones_Usuarios.Add(Res);
                 db.SaveChanges();
             }
