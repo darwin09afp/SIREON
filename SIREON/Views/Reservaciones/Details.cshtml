@@ -89,7 +89,7 @@
                             </p>
                             <br/>
                             <p>
-                                <input type="button" class="btn btn-danger" style="background-color:darkred" value="Cancelar reservacion" />
+                                <input type="button" class="btn btn-danger" value="Cancelar reservación" />
                             </p>
                         }
                         else if ((Model.Estatus) == "Cancelada ")
@@ -162,6 +162,7 @@
                                             <th width="60"></th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         <tr>
                                             <td class="d-flex align-items-center border-top-0">
@@ -174,7 +175,17 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                                
+                                                @{
+                                                    if (Model.Estatus == "Activa    ")
+                                                    {
+                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                    }
+                                                    else
+                                                    {
+                                                       
+                                                    }
+                                                }
                                             </td>
                                         </tr>
                                         <tr>
@@ -188,7 +199,16 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                                @{
+                                                    if (Model.Estatus == "Activa    ")
+                                                    {
+                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                }
                                             </td>
                                         </tr>
                                         <tr>
@@ -202,97 +222,18 @@
                                                 </p>
                                             </td>
                                             <td>
-                                                <input type="button" class="btn btn-xs btn-primary" style="background-color:darkred" value="Eliminar" />
+                                                @{
+                                                    if (Model.Estatus == "Activa    ")
+                                                    {
+                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                    }
+                                                    else
+                                                    {
+
+                                                    }
+                                                }
                                             </td>
                                         </tr>
-                                        @*<div class="activity-log">
-            <p class="log-name">Reporte 1</p>
-            <div class="log-details">
-                Detalles de reporte 1
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Diario</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 2</p>
-            <div class="log-details">
-                Detalles de reporte 2
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Diario</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 3</p>
-            <div class="log-details">
-                Detalles de reporte 3
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Diario</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 4</p>
-            <div class="log-details">
-                Detalles de reporte 4
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Mensual</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 5</p>
-            <div class="log-details">
-                Detalles de reporte 5
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Mensual</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 6</p>
-            <div class="log-details">
-                Detalles de reporte 6
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Mensual</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 7</p>
-            <div class="log-details">
-                Detalles de reporte 7
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Anual</small>
-        </div>
-        <div class="activity-log">
-            <p class="log-name">Reporte 8</p>
-            <div class="log-details">
-                Detalles de reporte 8
-                <div class="wrapper mt-2">
-                    <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                    <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
-                </div>
-            </div>
-            <small class="log-time">Anual</small>
-        </div>*@
                                     </tbody>
                                 </table>
                             </div>
