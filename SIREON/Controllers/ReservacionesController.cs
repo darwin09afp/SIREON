@@ -83,6 +83,7 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
+
         [HttpPost]
         public ActionResult SaveOrder(TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
@@ -93,11 +94,14 @@ namespace SIREON.Controllers
             var SelHora = FechayHora.TimeOfDay;
             var usuario = User.Identity.GetUserId();
             var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
-            var disponibilidad = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
+            var disp = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
+            
+
+            //Agregar a tb reservaciones
             Reservacione model = new Reservacione();
             model.ID_Empleado = empleado;
             model.Fecha = SelFecha;
-            model.ID_Cubiculo = disponibilidad;
+            model.ID_Cubiculo = disp;
             model.FechaSolicitada = SelFecha;
             model.HSolicitada = HSolicitada;
             model.HEntrada = HEntrada;
@@ -105,8 +109,19 @@ namespace SIREON.Controllers
             model.Estatus = "Activa";
             model.IdAspNetUsers = usuario;
             db.Reservaciones.Add(model);
-            db.SaveChanges();
 
+            //Agregar a tb Disponibilidad
+            Disponibilidad model2 = new Disponibilidad();
+            model2.IdCubiculo = disp;
+            model2.HoraInicial = HEntrada;
+            model2.HoraFinal = HSalida;
+            model2.Fecha = SelFecha;
+            model2.Estatus = "Reservado";
+            db.Disponibilidads.Add(model2);
+            db.SaveChanges();
+            
+
+            //Agregar a Tb Reservaciones_usuarios
             foreach (var item in reservaciones_Usuarios)
             {
                 Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
@@ -125,42 +140,38 @@ namespace SIREON.Controllers
 
 
 
-
-        [HttpPost]
-        public ActionResult SaveOrder2(string IdAspNetUsers, TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
+        public ActionResult Disponibilidad2()
         {
-            string result = "Error! Datos no completados!";
-            List<Cubiculo> cubs = new List<Cubiculo>();
-            var FechayHora = DateTime.Now;
-            var SelFecha = FechayHora.Date;
-            var SelHora = FechayHora.TimeOfDay;
-            var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
-            var disponibilidad = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
-            Reservacione model = new Reservacione();
-            model.ID_Empleado = empleado;
-            model.Fecha = SelFecha;
-            model.ID_Cubiculo = disponibilidad;
-            model.FechaSolicitada = SelFecha;
-            model.HSolicitada = HSolicitada;
-            model.HEntrada = HEntrada;
-            model.HSalida = HSalida;
-            model.Estatus = "Activa";
-            model.IdAspNetUsers = IdAspNetUsers;
-            db.Reservaciones.Add(model);
-            db.SaveChanges();
+            List<int> CubNoDisp = new List<int>();
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+            TimeSpan HEntrada = new TimeSpan(10,0,0);
 
-            foreach (var item in reservaciones_Usuarios)
+            foreach (var item in db.Cubiculos)
             {
-                Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                Res.IdAspNetUser = item.IdAspNetUser;
-                Res.IdReservacion = model.ID_Reservacion;
-                db.Reservaciones_Usuarios.Add(Res);
-                db.SaveChanges();
+                var idcub = item.ID_Cubiculo;
+                foreach (var item2 in db.Disponibilidads)
+                {
+                    
+                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+                    {
+                        CubNoDisp.Add(idcub);
+                    }
+                    else
+                    {
+                        //sigue buscando
+                    }
+
+
+                }
+
+
             }
 
-            result = "Exito! Datos guardados!";
-            return Json(result, JsonRequestBehavior.AllowGet);
+            //return View(CubNoDisp);
+            return Json(CubNoDisp, JsonRequestBehavior.AllowGet);
         }
+
 
 
 

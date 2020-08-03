@@ -18,6 +18,7 @@ namespace SIREON
         public Cubiculo()
         {
             this.Reservaciones = new HashSet<Reservacione>();
+            this.Disponibilidads = new HashSet<Disponibilidad>();
         }
     
         public int ID_Cubiculo { get; set; }
@@ -27,5 +28,7 @@ namespace SIREON
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservacione> Reservaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Disponibilidad> Disponibilidads { get; set; }
     }
 }

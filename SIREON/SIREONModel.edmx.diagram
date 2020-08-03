@@ -26,6 +26,8 @@
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_AspNetUsers" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones" />
         <AssociationConnector Association="SIREONModel.FK_Reservaciones_Usuarios_Reservaciones1" />
+        <EntityTypeShape EntityType="SIREONModel.Disponibilidad" Width="1.5" PointX="6" PointY="0.75" />
+        <AssociationConnector Association="SIREONModel.FK_Disponibilidad_Cubiculos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

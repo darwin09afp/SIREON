@@ -183,6 +183,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CubiculosController.cs" />
+    <Compile Include="Controllers\DisponibilidadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListaNegraController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -194,6 +195,9 @@
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Disponibilidad.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -219,6 +223,7 @@
     <Compile Include="Reservaciones_Usuarios.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Servicios\ResEstatus.cs" />
     <Compile Include="SIREONModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2185,6 +2190,12 @@
     <Content Include="Views\Reservaciones_Usuarios\Create2.cshtml" />
     <Content Include="Views\Reservaciones\Invitaciones.cshtml" />
     <Content Include="Views\Reservaciones\ObtenerLista.cshtml" />
+    <Content Include="Views\Disponibilidad\Create.cshtml" />
+    <Content Include="Views\Disponibilidad\Delete.cshtml" />
+    <Content Include="Views\Disponibilidad\Details.cshtml" />
+    <Content Include="Views\Disponibilidad\Edit.cshtml" />
+    <Content Include="Views\Disponibilidad\Index.cshtml" />
+    <Content Include="Views\Reservaciones\Disponibilidad2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

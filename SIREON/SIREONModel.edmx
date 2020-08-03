@@ -76,6 +76,17 @@
           <Property Name="Capacidad" Type="int" Nullable="false" />
           <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="Disponibilidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCubiculo" Type="int" Nullable="false" />
+          <Property Name="HoraInicial" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HoraFinal" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="ListaNegra">
           <Key>
             <PropertyRef Name="ID_ListaN" />
@@ -183,6 +194,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Disponibilidad_Cubiculos">
+          <End Role="Cubiculos" Type="Self.Cubiculos" Multiplicity="1" />
+          <End Role="Disponibilidad" Type="Self.Disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cubiculos">
+              <PropertyRef Name="ID_Cubiculo" />
+            </Principal>
+            <Dependent Role="Disponibilidad">
+              <PropertyRef Name="IdCubiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ListaNegra_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
@@ -275,6 +298,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disponibilidad" EntityType="Self.Disponibilidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
@@ -295,6 +319,10 @@
           <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disponibilidad_Cubiculos" Association="Self.FK_Disponibilidad_Cubiculos">
+            <End Role="Cubiculos" EntitySet="Cubiculos" />
+            <End Role="Disponibilidad" EntitySet="Disponibilidad" />
           </AssociationSet>
           <AssociationSet Name="FK_ListaNegra_AspNetUsers" Association="Self.FK_ListaNegra_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -402,6 +430,7 @@
           <Property Name="Capacidad" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Reservaciones" Relationship="Self.FK_Reservaciones_Cubiculos" FromRole="Cubiculos" ToRole="Reservaciones" />
           <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Disponibilidads" Relationship="SIREONModel.FK_Disponibilidad_Cubiculos" FromRole="Cubiculo" ToRole="Disponibilidad" />
         </EntityType>
         <EntityType Name="ListaNegra">
           <Key>
@@ -536,6 +565,11 @@
             <End Role="Reservacione" EntitySet="Reservaciones" />
             <End Role="Reservaciones_Usuarios" EntitySet="Reservaciones_Usuarios" />
           </AssociationSet>
+          <EntitySet Name="Disponibilidads" EntityType="SIREONModel.Disponibilidad" />
+          <AssociationSet Name="FK_Disponibilidad_Cubiculos" Association="SIREONModel.FK_Disponibilidad_Cubiculos">
+            <End Role="Cubiculo" EntitySet="Cubiculos" />
+            <End Role="Disponibilidad" EntitySet="Disponibilidads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -629,6 +663,30 @@
             </Principal>
             <Dependent Role="Reservaciones_Usuarios">
               <PropertyRef Name="IdReservacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Disponibilidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCubiculo" Type="Int32" Nullable="false" />
+          <Property Name="HoraInicial" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HoraFinal" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Cubiculo" Relationship="SIREONModel.FK_Disponibilidad_Cubiculos" FromRole="Disponibilidad" ToRole="Cubiculo" />
+        </EntityType>
+        <Association Name="FK_Disponibilidad_Cubiculos">
+          <End Type="SIREONModel.Cubiculo" Role="Cubiculo" Multiplicity="1" />
+          <End Type="SIREONModel.Disponibilidad" Role="Disponibilidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cubiculo">
+              <PropertyRef Name="ID_Cubiculo" />
+            </Principal>
+            <Dependent Role="Disponibilidad">
+              <PropertyRef Name="IdCubiculo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -764,6 +822,18 @@
                 <ScalarProperty Name="NombreInvitado" ColumnName="NombreInvitado" />
                 <ScalarProperty Name="IdReservacion" ColumnName="IdReservacion" />
                 <ScalarProperty Name="IdAspNetUser" ColumnName="IdAspNetUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disponibilidads">
+            <EntityTypeMapping TypeName="SIREONModel.Disponibilidad">
+              <MappingFragment StoreEntitySet="Disponibilidad">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="HoraFinal" ColumnName="HoraFinal" />
+                <ScalarProperty Name="HoraInicial" ColumnName="HoraInicial" />
+                <ScalarProperty Name="IdCubiculo" ColumnName="IdCubiculo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

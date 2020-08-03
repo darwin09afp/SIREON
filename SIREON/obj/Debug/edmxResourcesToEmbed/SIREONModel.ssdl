@@ -71,6 +71,17 @@
     <Property Name="Capacidad" Type="int" Nullable="false" />
     <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
   </EntityType>
+  <EntityType Name="Disponibilidad">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCubiculo" Type="int" Nullable="false" />
+    <Property Name="HoraInicial" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HoraFinal" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
+  </EntityType>
   <EntityType Name="ListaNegra">
     <Key>
       <PropertyRef Name="ID_ListaN" />
@@ -178,6 +189,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Disponibilidad_Cubiculos">
+    <End Role="Cubiculos" Type="Self.Cubiculos" Multiplicity="1" />
+    <End Role="Disponibilidad" Type="Self.Disponibilidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cubiculos">
+        <PropertyRef Name="ID_Cubiculo" />
+      </Principal>
+      <Dependent Role="Disponibilidad">
+        <PropertyRef Name="IdCubiculo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ListaNegra_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
@@ -270,6 +293,7 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cubiculos" EntityType="Self.Cubiculos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Disponibilidad" EntityType="Self.Disponibilidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ListaNegra" EntityType="Self.ListaNegra" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
@@ -290,6 +314,10 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Disponibilidad_Cubiculos" Association="Self.FK_Disponibilidad_Cubiculos">
+      <End Role="Cubiculos" EntitySet="Cubiculos" />
+      <End Role="Disponibilidad" EntitySet="Disponibilidad" />
     </AssociationSet>
     <AssociationSet Name="FK_ListaNegra_AspNetUsers" Association="Self.FK_ListaNegra_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

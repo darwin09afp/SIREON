@@ -131,5 +131,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Disponibilidads">
+      <EntityTypeMapping TypeName="SIREONModel.Disponibilidad">
+        <MappingFragment StoreEntitySet="Disponibilidad">
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="HoraFinal" ColumnName="HoraFinal" />
+          <ScalarProperty Name="HoraInicial" ColumnName="HoraInicial" />
+          <ScalarProperty Name="IdCubiculo" ColumnName="IdCubiculo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
