@@ -23,6 +23,42 @@ namespace SIREON.Controllers
 
 
         // GET: Disponibilidad
+        public ActionResult Disponibilidad2()
+        {
+            List<int> CubNoDisp = new List<int>();
+            List<int> Cubs = new List<int>();
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+            TimeSpan HEntrada = new TimeSpan(10, 0, 0);
+
+            foreach (var item in db.Cubiculos)
+            {
+                var idcub = item.ID_Cubiculo;
+                Cubs.Add(idcub);
+                foreach (var item2 in db.Disponibilidads)
+                {
+
+                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+                    {
+                        CubNoDisp.Add(idcub);
+                    }
+                    else
+                    {
+                        //sigue buscando
+                    }
+
+                }
+
+            }
+            var CubDisp = Cubs.Except(CubNoDisp).ToList();
+            return View(CubNoDisp);
+            //return Json(CubDisp, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
         public ActionResult Disponibilidad(TimeSpan? HoraInicial, TimeSpan? HoraFinal , DateTime? Fecha)
         {
            

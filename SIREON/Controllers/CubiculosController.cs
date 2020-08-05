@@ -22,8 +22,44 @@ namespace SIREON.Controllers
 
         public ActionResult Disponibilidad()
         {
-            return View(db.Cubiculos.ToList());
+            List<int> CubNoDisp = new List<int>();
+            List<int> Cubs = new List<int>();
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+            TimeSpan HEntrada = new TimeSpan(10, 0, 0);
+
+            foreach (var item in db.Cubiculos)
+            {
+                var idcub = item.ID_Cubiculo;
+                Cubs.Add(idcub);
+                foreach (var item2 in db.Disponibilidads)
+                {
+
+                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+                    {
+                        CubNoDisp.Add(idcub);
+                    }
+                    else
+                    {
+                        //sigue buscando
+                    }
+
+                }
+
+            }
+            var CubDisp = Cubs.Except(CubNoDisp).ToList();
+            
+
+            var Disponib = db.Cubiculos
+                            .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
+                            .OrderBy(cubi => cubi.ID_Cubiculo)
+                            .ToList();
+
+            return View(Disponib);
         }
+
+
+
 
         // GET: Cubiculos/Details/5
         public ActionResult Details(int? id)
