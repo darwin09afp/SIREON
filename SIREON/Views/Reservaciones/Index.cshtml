@@ -44,7 +44,7 @@
                             <h2 class="grid-title">Acciones</h2>
                             <div class="item-wrapper">
                                 <div class="row" style="justify-content:space-evenly">
-                                    <a href="@Url.Action("CreateOP", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar-plus"></i>Nueva reservación</a>
+                                    <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar-plus"></i>Nueva reservación</a>
                                     <a href='@Url.Action("Cola", "Reservaciones")' class="btn btn-warning has-icon"><i class="mdi mdi-clock-alert"></i>En espera</a>
                                     <a href='@Url.Action("Index", "ListaNegra")' class="btn btn-danger has-icon"><i class="mdi mdi-account-off"></i>Lista Negra</a>
                                 </div>
@@ -118,6 +118,10 @@
                                                 else if (item.Estatus == "Rechazada ")
                                                 {
                                                     <label class="badge badge-danger">Rechazada</label>
+                                                }
+                                                else if (item.Estatus == "En espera ")
+                                                {
+                                                    <label class="badge badge-warning">En espera</label>
                                                 }
                                                 else
                                                 {
@@ -472,6 +476,10 @@
                                                         else if (item.Estatus == "Rechazada ")
                                                         {
                                                             <label class="badge badge-danger">Rechazada</label>
+                                                        }
+                                                        else if (item.Estatus == "En espera ")
+                                                        {
+                                                            <label class="badge badge-warning">En espera</label>
                                                         }
                                                         else
                                                         {

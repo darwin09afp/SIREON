@@ -50,9 +50,22 @@ namespace SIREON.Controllers
                 }
 
             }
+
+
+
             var CubDisp = Cubs.Except(CubNoDisp).ToList();
-            return View(CubNoDisp);
-            //return Json(CubDisp, JsonRequestBehavior.AllowGet);
+
+
+
+            var Disponib = db.Cubiculos.ToList()
+                            .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
+                            .OrderBy(cubi => cubi.ID_Cubiculo)
+                            .First().ID_Cubiculo;
+
+
+
+            //return View(CubNoDisp);
+            return Json(CubDisp, JsonRequestBehavior.AllowGet);
         }
 
 

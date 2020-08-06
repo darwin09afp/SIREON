@@ -19,6 +19,7 @@
                             <div class="form-row align-items-center justify-content-between">
 
                                 @{
+
                                     var FechayHora = DateTime.Now;
                                     var SelFecha = FechayHora.ToString("dd/MM/yyyy");
                                 }
@@ -29,53 +30,61 @@
                                 </div>
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de entrada:</label>
-                                    <input type="time" class="form-control" id="Horaentrada" min="08:00" max="20:30" step="900" placeholder="HH:MM" value="" required>
-                                    @*<select class="custom-select my-1 mr-sm-2" id="Horaentrada" required>
-                                            <option value="" disabled selected>Elige...</option>
-                                            <option value="08:00:00">08:00 AM</option>
-                                            <option value="08:30:00">08:30 AM</option>
-                                            <option value="09:00:00">09:00 AM</option>
-                                            <option value="09:30:00">09:30 AM</option>
-                                            <option value="10:00:00">10:00 AM</option>
-                                            <option value="10:30:00">10:30 AM</option>
-                                            <option value="11:00:00">11:00 AM</option>
-                                            <option value="11:30:00">11:30 AM</option>
-                                            <option value="12:00:00">12:00 PM</option>
-                                            <option value="12:30:00">12:30 PM</option>
-                                            <option value="13:00:00">01:00 PM</option>
-                                            <option value="13:30:00">01:30 PM</option>
-                                            <option value="14:00:00">02:00 PM</option>
-                                            <option value="14:30:00">02:30 PM</option>
-                                            <option value="15:00:00">03:00 PM</option>
-                                            <option value="15:30:00">03:30 PM</option>
-                                            <option value="16:00:00">04:00 PM</option>
-                                            <option value="16:30:00">04:30 PM</option>
-                                            <option value="17:00:00">05:00 PM</option>
-                                            <option value="17:30:00">05:30 PM</option>
-                                            <option value="18:00:00">06:00 PM</option>
-                                            <option value="18:30:00">06:30 PM</option>
-                                            <option value="19:00:00">07:00 PM</option>
-                                            <option value="19:30:00">07:30 PM</option>
-                                            <option value="20:00:00">08:00 PM</option>
-                                            <option value="20:30:00">08:30 PM</option>
-                                        </select>*@
+                                    @*<input type="time" class="form-control" id="Horaentrada" min="08:00" max="20:30" step="900" placeholder="HH:MM" value="10:00:00" required>*@
+                                    
+                                    <select class="custom-select my-1 mr-sm-2" id="Horaentrada" required>
+                                        <option value="" disabled selected>Elige...</option>
+                                        <option value="08:00:00">08:00 AM</option>
+                                        <option value="08:30:00">08:30 AM</option>
+                                        <option value="09:00:00">09:00 AM</option>
+                                        <option value="09:30:00">09:30 AM</option>
+                                        <option value="10:00:00">10:00 AM</option>
+                                        <option value="10:30:00">10:30 AM</option>
+                                        <option value="11:00:00">11:00 AM</option>
+                                        <option value="11:30:00">11:30 AM</option>
+                                        <option value="12:00:00">12:00 PM</option>
+                                        <option value="12:30:00">12:30 PM</option>
+                                        <option value="13:00:00">01:00 PM</option>
+                                        <option value="13:30:00">01:30 PM</option>
+                                        <option value="14:00:00">02:00 PM</option>
+                                        <option value="14:30:00">02:30 PM</option>
+                                        <option value="15:00:00">03:00 PM</option>
+                                        <option value="15:30:00">03:30 PM</option>
+                                        <option value="16:00:00">04:00 PM</option>
+                                        <option value="16:30:00">04:30 PM</option>
+                                        <option value="17:00:00">05:00 PM</option>
+                                        <option value="17:30:00">05:30 PM</option>
+                                        <option value="18:00:00">06:00 PM</option>
+                                        <option value="18:30:00">06:30 PM</option>
+                                        <option value="19:00:00">07:00 PM</option>
+                                        <option value="19:30:00">07:30 PM</option>
+                                        <option value="20:00:00">08:00 PM</option>
+                                        <option value="20:30:00">08:30 PM</option>
+                                    </select>
                                 </div>
 
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de salida:</label>
-                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM" value="" required>
+                                    <input type="time" class="form-control" id="Horasalida" placeholder="HH:MM" value="10:00:00" required>
 
                                 </div>
                                 <br />
-                                <label>Disponibilidad:</label>
-                                <img src="~/Content/images/check.png" alt="check" width="70" />
-                                <img src="~/Content/images/warning.png" alt="check" width="70" />
+                                
+                                    <label>Disponibilidad:</label>
+                                    <img src="~/Content/images/help.png" alt="check" id="help" width="70" style="display:block" />
+                                    <img src="~/Content/images/check.png" alt="check" id="check" width="70" style="display:none" />
+                                    <img src="~/Content/images/warning.png" alt="Advertencia" id="warn" width="70" style="display:none" />
+                                
                             </div>
 
                             <br />
+                            <div class="grid-title" style="text-align:center">
+                                <spam style="display:none;" id="Disp"></spam>
+                                <input type="text" id="msg" value="" style="display:none" />
+                            </div>
                             <div class="row" style="justify-content:space-between">
                                 <a href='@Url.Action("Index", "Reservaciones")' button type="button" class="btn btn-danger">Regresar</a>
-                                <button type="button" class="btn btn-success">Consultar disponibilidad</button>
+                                <button class="btn btn-success" id="Consultar">Consultar disponibilidad</button>
                             </div>
 
                         </form>
@@ -188,7 +197,7 @@
                         <br />
                         <br />
                         <div class="table-responsive">
-                            <table class="table table-striped" id="detailsTable">
+                            <table class="table table-striped" id="detailsTable" style="display:none">
 
                                 <thead>
                                     <tr>
@@ -203,8 +212,8 @@
                         </div>
                         <br />
                         <br />
-                        <div class="col-auto my-1">
-                            <button class="btn btn-success" id="saveOrder">Reservar</button>
+                        <div class="row" style="text-align:center">
+                            <button class="btn btn-success" id="saveOrder" style="display:none; text-align:center">Reservar</button>
                         </div>
 
                     </div>
@@ -215,105 +224,6 @@
 
     </div>
     <br />
-
-    @*<script>
-        //Show Modal.
-        function addNewOrder() {
-            $("#newOrderModal").modal();
-        }
-        //Add Multiple Order.
-        $("#addToList").click(function (e) {
-            e.preventDefault();
-
-            if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado").val()) == "" || $.trim($("#UsuarioInvitado").val()) == "") return;
-
-            var TipoInvitado = $("#TipoInvitado").val(),
-                NombreInvitado = $("#NombreInvitado").val(),
-                IdAspNetUser = $("#UsuarioInvitado").val(),
-                detailsTableBody = $("#detailsTable tbody");
-
-            var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + IdAspNetUser + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
-            detailsTableBody.append(productItem);
-            clearItem();
-
-        });
-        //After Add A New Order In The List, Clear Clean The Form For Add More Order.
-        function clearItem() {
-            $("#NombreInvitado").val('');
-            $("#UsuarioInvitado").val('');
-        }
-        // After Add A New Order In The List, If You Want, You Can Remove It.
-        $(document).on('click', 'a.deleteItem', function (e) {
-            e.preventDefault();
-            var $self = $(this);
-            if ($(this).attr('data-itemId') == "0") {
-                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
-                    $(this).remove();
-                });
-            }
-        });
-
-
-        console.log
-
-
-
-        //After Click Save Button Pass All Data View To Controller For Save Database
-        function saveOrder(data) {
-
-            return $.ajax({
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                type: 'POST',
-                url: "/Reservaciones/SaveOrder",
-                data: data,
-                success: function (result) {
-                    alert(result);
-                    location.reload();
-                },
-                error: function () {
-                    alert("Error!")
-                }
-            });
-        }
-
-
-        ////Collect Multiple Order List For Pass To Controller
-        $("#saveOrder").click(function (e) {
-            e.preventDefault();
-
-            //alert($("#fecha").val());
-
-
-            var orderArr = [];
-            orderArr.length = 0;
-
-            $.each($("#detailsTable tbody tr"), function () {
-                orderArr.push({
-                    IdAspNetUser: $(this).find('td:eq(2)').html(),
-                    IdReservacion: $().val()
-                });
-            });
-
-
-            var data = JSON.stringify({
-                HSolicitada: $("#Horaentrada").val(),
-                HEntrada: $("#Horaentrada").val(),
-                HSalida: $("#Horasalida").val(),
-                reservaciones_Usuarios: orderArr
-            });
-
-            console.log(data);
-
-            $.when(saveOrder(data)).then(function (response) {
-                console.log(response);
-            }).fail(function (err) {
-                console.log(err);
-            });
-        });
-    </script>*@
-
-
 
 
 
@@ -330,9 +240,10 @@
         if (selectedValue == "Invitado") {
             $("#addToList").click(function (e) {
                 e.preventDefault();
-
+                
                 if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado2").val()) == "" || $.trim($("#CedulaInvitado").val()) == "") return;
-
+                $("#detailsTable").show(0);
+                $("#saveOrder").show(0);
                 var TipoInvitado = $("#TipoInvitado").val(),
                     NombreInvitado2 = $("#NombreInvitado2").val(),
                     CedulaInvitado = $("#CedulaInvitado").val(),
@@ -361,7 +272,8 @@
 
                 if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado").val()) == "" || $.trim($("#UsuarioInvitado").val()) == "") return;
 
-
+                $("#detailsTable").show(0);
+                $("#saveOrder").show(0);
                 var TipoInvitado = $("#TipoInvitado").val(),
                     NombreInvitado = $("#NombreInvitado").val(),
                     IdAspNetUser = $("#UsuarioInvitado").val();
@@ -423,7 +335,7 @@
                 location.reload();
             },
             error: function () {
-                alert("Error!")
+                alert("Error! Verificar datos")
             }
         });
     }
@@ -440,7 +352,6 @@
         $.each($("#detailsTable tbody tr"), function () {
 
             var selectedValue = $("#TipoInvitado").val();
-
             if ($(this).find('td:eq(0)').html() == "Invitado") {
                 orderArr.push({
                     IdAspNetUser: $("#UsuarioInvitado").val(''),
@@ -458,6 +369,7 @@
                     IdReservacion: $().val()
                 });
             }
+            
 
             
         });
@@ -540,7 +452,69 @@
 
 
 
+<script>
+    //Show Modal.
+    function addNewOrder() {
+        $("#newOrderModal").modal();
+    }
 
+
+    //After Click Save Button Pass All Data View To Controller For Save Database
+    function Consultar(data) {
+        return $.ajax({
+            
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Consultar",
+            data: data,
+            success: function (result2) {
+                
+                $('#Disp').append(result2);
+                $('#msg').val(result2);
+                $('#Disp').show(0);
+                if ($("#msg").val() == "¡Cubículos disponibles!") {
+                    $('#help').hide(0);
+                    $('#check').show(0);
+                }
+                else {
+                    $('#help').hide(0);
+                    $('#warn').show(0);
+                    
+                }
+                
+            },
+            error: function () {
+                alert("Error! Verificar datos")
+            }
+        });
+    }
+
+
+    ////Collect Multiple Order List For Pass To Controller
+    $("#Consultar").one('click',function (e) {
+        e.preventDefault();
+        
+        if ($.trim($("#Horaentrada").val()) == "") return;
+
+        var data = JSON.stringify({
+            HEntrada: $("#Horaentrada").val(),
+
+        });
+
+        console.log(data);
+
+        $.when(Consultar(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+
+
+
+</script>
 
 
 

@@ -83,6 +83,58 @@ namespace SIREON.Controllers
             return View(reservacione);
         }
 
+        [HttpPost]
+        public ActionResult Consultar(TimeSpan HEntrada)
+        {
+            string result2 = "";
+            List<Cubiculo> cubs = new List<Cubiculo>();
+
+            //Disponibilidad
+            #region disponibilidad
+            List<int> CubNoDisp = new List<int>();
+            List<int> Cubs = new List<int>();
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+
+            foreach (var item in db.Cubiculos)
+            {
+                var idcub = item.ID_Cubiculo;
+                Cubs.Add(idcub);
+                foreach (var item2 in db.Disponibilidads)
+                {
+
+                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+                    {
+                        CubNoDisp.Add(idcub);
+                    }
+                    else
+                    {
+                        //sigue buscando en tabla disponibilidad
+                    }
+
+                }
+
+            }
+            var CubDisp = Cubs.Except(CubNoDisp).ToList();
+            bool isEmpty = !CubDisp.Any();
+
+            if (isEmpty == true)
+            {
+                result2 = "No hay cubículos disponibles para la hora seleccionada, aun así puede realizar su reservación y entrar a la lista de espera.";
+
+            }
+            else
+            {
+                
+                result2 = "¡Cubículos disponibles!";
+            }
+            #endregion
+            
+
+            return Json(result2, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         [HttpPost]
         public ActionResult SaveOrder(TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
@@ -94,7 +146,7 @@ namespace SIREON.Controllers
             var SelHora = FechayHora.TimeOfDay;
             var usuario = User.Identity.GetUserId();
             var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
-            var disp = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
+            //var disp = db.Cubiculos.ToList()/*.Where(x => x.Estatus == "Libre")*/.FirstOrDefault().ID_Cubiculo;
 
 
             //Disponibilidad
@@ -103,7 +155,6 @@ namespace SIREON.Controllers
             List<int> Cubs = new List<int>();
             var Fechaa = DateTime.Now;
             var Fecha = Fechaa.Date;
-            
 
             foreach (var item in db.Cubiculos)
             {
@@ -125,37 +176,53 @@ namespace SIREON.Controllers
 
             }
             var CubDisp = Cubs.Except(CubNoDisp).ToList();
+            bool isEmpty = !CubDisp.Any();
 
 
-            var Disponib = db.Cubiculos
-                            .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
-                            .OrderBy(cubi => cubi.ID_Cubiculo)
-                            .First().ID_Cubiculo;
+
             #endregion
+
+
 
 
             //Agregar a tb reservaciones
             Reservacione model = new Reservacione();
             model.ID_Empleado = empleado;
             model.Fecha = SelFecha;
-            model.ID_Cubiculo = Disponib;
+
+            if (isEmpty == true)
+            {
+                model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
+                model.Estatus = "En espera";
+                result = "Reservación realizada! Se colocó su reservación en la lista de espera para la hora seleccionada";
+                
+            }
+            else
+            {
+                model.ID_Cubiculo = db.Cubiculos.ToList()
+                            .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
+                            .OrderBy(cubi => cubi.ID_Cubiculo)
+                            .First().ID_Cubiculo;
+                model.Estatus = "Activa";
+                result = "Reservación realizada!";
+            }
+
             model.FechaSolicitada = SelFecha;
-            model.HSolicitada = HSolicitada;
+            model.HSolicitada = SelHora;
             model.HEntrada = HEntrada;
             model.HSalida = HSalida;
-            model.Estatus = "Activa";
             model.IdAspNetUsers = usuario;
             db.Reservaciones.Add(model);
 
             //Agregar a tb Disponibilidad
             Disponibilidad model2 = new Disponibilidad();
-            model2.IdCubiculo = disp;
+            model2.IdCubiculo = model.ID_Cubiculo;
             model2.HoraInicial = HEntrada;
             model2.HoraFinal = HSalida;
             model2.Fecha = SelFecha;
             model2.Estatus = "Reservado";
             db.Disponibilidads.Add(model2);
-            db.SaveChanges();
+            
             
 
             //Agregar a Tb Reservaciones_usuarios
@@ -169,8 +236,8 @@ namespace SIREON.Controllers
                 db.Reservaciones_Usuarios.Add(Res);
                 db.SaveChanges();
             }
+            db.SaveChanges();
 
-            result = "Exito! Datos guardados!";
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
