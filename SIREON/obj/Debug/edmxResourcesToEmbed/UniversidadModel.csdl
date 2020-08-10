@@ -44,13 +44,17 @@
     <Property Name="ID_Entidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="Apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="Cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Documento" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Correo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Celular" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CorreoInst" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="CodigoInst" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
     <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <Property Name="idlogin" Type="Int32" />
     <NavigationProperty Name="Directores" Relationship="Self.FK_Directores_Entidad" FromRole="Entidad" ToRole="Directores" />
     <NavigationProperty Name="Empleados" Relationship="Self.FK_Empleados_Entidad" FromRole="Entidad" ToRole="Empleados" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Entidad_Login" FromRole="Entidad" ToRole="Login" />
     <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_Entidad" FromRole="Entidad" ToRole="Estudiantes" />
     <NavigationProperty Name="Profesores" Relationship="Self.FK_Profesores_Entidad" FromRole="Entidad" ToRole="Profesores" />
   </EntityType>
@@ -84,6 +88,15 @@
     <Property Name="ID_Facultad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Escuelas" Relationship="Self.FK_Escuelas_Facultades" FromRole="Facultades" ToRole="Escuelas" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="usuario" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cont" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Entidads" Relationship="Self.FK_Entidad_Login" FromRole="Login" ToRole="Entidad" />
   </EntityType>
   <EntityType Name="Profesore">
     <Key>
@@ -177,6 +190,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Entidad_Login">
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <End Role="Entidad" Type="Self.Entidad" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Login">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Entidad">
+        <PropertyRef Name="idlogin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Estudiantes_Entidad">
     <End Role="Entidad" Type="Self.Entidad" Multiplicity="1" />
     <End Role="Estudiantes" Type="Self.Estudiante" Multiplicity="*" />
@@ -234,6 +259,7 @@
     <EntitySet Name="Escuelas" EntityType="Self.Escuela" />
     <EntitySet Name="Estudiantes" EntityType="Self.Estudiante" />
     <EntitySet Name="Facultades" EntityType="Self.Facultade" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
     <EntitySet Name="Profesores" EntityType="Self.Profesore" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <AssociationSet Name="FK_Empleados_Cargos" Association="Self.FK_Empleados_Cargos">
@@ -260,6 +286,10 @@
       <End Role="Entidad" EntitySet="Entidads" />
       <End Role="Empleados" EntitySet="Empleados" />
     </AssociationSet>
+    <AssociationSet Name="FK_Entidad_Login" Association="Self.FK_Entidad_Login">
+      <End Role="Login" EntitySet="Logins" />
+      <End Role="Entidad" EntitySet="Entidads" />
+    </AssociationSet>
     <AssociationSet Name="FK_Estudiantes_Entidad" Association="Self.FK_Estudiantes_Entidad">
       <End Role="Entidad" EntitySet="Entidads" />
       <End Role="Estudiantes" EntitySet="Estudiantes" />
@@ -276,46 +306,5 @@
       <End Role="Escuelas" EntitySet="Escuelas" />
       <End Role="Profesores" EntitySet="Profesores" />
     </AssociationSet>
-    <FunctionImport Name="sp_alterdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_creatediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="version" Mode="In" Type="Int32" />
-      <Parameter Name="definition" Mode="In" Type="Binary" />
-    </FunctionImport>
-    <FunctionImport Name="sp_dropdiagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(UniversidadModel.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(UniversidadModel.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
-  </ComplexType>
 </Schema>

@@ -22,6 +22,7 @@ namespace SIREON.Controllers
         private ApplicationUserManager _userManager;
         private SIREONEntitiess context = new SIREONEntitiess();
         private SIREONEntitiess db = new SIREONEntitiess();
+        private UniversidadEntities db2 = new UniversidadEntities();
 
 
         public AccountController()
@@ -44,6 +45,69 @@ namespace SIREON.Controllers
             { 
                 _signInManager = value; 
             }
+        }
+
+
+        public JsonResult Usuario()
+        {
+            var usr = User.Identity.GetUserId();
+            var usrname = User.Identity.GetUserName();
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //var BuscarMatricula = (from table1 in db2.Entidads
+            //                       join table2 in db.AspNetUsers on table1.CorreoInst equals table2.Email
+            //                       where table2.Id == usr
+            //                       select new { Nombre = table1.Nombre, Apellido = table1.Apellido }).ToArray();
+
+
+            var BuscarEmail = (from table1 in db.AspNetUsers
+                               where table1.Id == usr
+                               select new
+                               {
+                                   email = table1.Email
+                               }).AsEnumerable();
+
+
+            var query = from table2 in db2.Entidads
+                        where table2.CorreoInst == usrname
+                        select new
+                        {
+                            Nombr = table2.Nombre,
+                            Apellid = table2.Apellido,
+                            Matricul = table2.CodigoInst
+                        };
+
+
+
+
+            //var json = JsonConvert.SerializeObject(query);
+
+
+            return Json(query, JsonRequestBehavior.AllowGet);
+            //if (User.IsInRole("Usuario"))
+            //{
+
+            //}
+            //else
+            //{
+            //    //var Mat = Matricula;
+            //    ////Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //    //var BuscarMatricula = from table1 in db2.Entidads
+            //    //                      join table2 in db.AspNetUsers on table1.CodigoInst equals table2.Email
+            //    //                      where table1.CodigoInst == Mat
+            //    //                      select new
+            //    //                      {
+            //    //                          Nombre = table1.Nombre,
+            //    //                          Apellido = table1.Apellido
+            //    //                      };
+            //    //var json = JsonConvert.SerializeObject(BuscarMatricula);
+
+
+            //    //return Json(json, JsonRequestBehavior.AllowGet);
+            //}
+
+
+
+
         }
 
         public ApplicationUserManager UserManager

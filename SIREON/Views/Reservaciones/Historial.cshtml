@@ -1,0 +1,220 @@
+﻿@model IEnumerable<SIREON.Reservacione>
+
+@{
+    ViewBag.Title = "Historial";
+}
+    <head>
+        @if ((User.IsInRole("Operador")))
+        {
+            <style>
+
+                table {
+                    display: block;
+                    height: 300px;
+                    overflow: auto;
+                }
+            </style>
+        }
+        else
+        {
+            <style>
+
+                table {
+                    display: block;
+                    height: 300px;
+                    overflow: auto;
+                }
+            </style>
+        }
+    </head>
+<body>
+    <div class="col-lg-12">
+        <div class="grid">
+            <p class="grid-header" style="border-left-color:green">Histórico</p>
+            <div class="item-wrapper">
+                <div class="row" style="justify-content:space-around">
+                    <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
+                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+                    </div>
+
+                    <div class="btn-group mb-0" data-toggle="checkbox">
+                        <label class="btn btn-success active" id="ch1">
+                            <input type="checkbox" id="chh1" class="name" name="name" value="Completada">
+                            <i class="mdi mdi-check"></i>Completada
+                        </label>
+                        <label class="btn btn-success active" id="ch2">
+                            <input type="checkbox" id="chh2" class="name" name="name" value="Cancelada">
+                            <i class="mdi mdi-delete-forever"></i>Cancelada
+                        </label>
+                        <label class="btn btn-success active" id="ch3">
+                            <input type="checkbox" id="chh3" class="name" name="name" value="Rechazada">
+                            <i class="mdi mdi-cancel"></i>Rechazada
+                        </label>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Solicitante
+                                </th>
+                                <th>
+                                    Operador
+                                </th>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Hora de entrada
+                                </th>
+                                <th>
+                                    Hora de salida
+                                </th>
+
+                                <th>
+                                    Cubículo No.
+                                </th>
+                                <th>
+                                    Estatus de Reservación
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdAspNetUsers)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ID_Empleado)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HEntrada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HSalida)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                    </td>
+                                    <td>
+
+                                        @{
+                                            if (item.Estatus == "Activa    ")
+                                            {
+                                                <label class="badge badge-info">Activa</label>
+                                            }
+                                            else if (item.Estatus == "Cancelada ")
+                                            {
+                                                <label class="badge badge-warning">Cancelada</label>
+                                            }
+                                            else if (item.Estatus == "Rechazada ")
+                                            {
+                                                <label class="badge badge-danger">Rechazada</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="badge badge-success">Completada</label>
+                                            }
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $(".name").on("click", function () {
+            name_list = []
+            $("#myTable tr").hide()
+            var flag = 1
+            $("input:checkbox[name=name]:checked").each(function () {
+                flag = 0;
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    if ($(this).text().toLowerCase().indexOf(value) > -1)
+                        $(this).show()
+
+                });
+
+
+            });
+            if (flag == 1) {
+                $("#myTable tr").show();
+            }
+
+
+        });
+    });
+
+
+    $(document).ready(function () {
+        $(".form-control").on('keyup change', function () {
+            name_list = []
+            $("#myTable tr").hide()
+            flag = 0;
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                if ($(this).text().toLowerCase().indexOf(value) > -1)
+                    $(this).show()
+
+            });
+            if (flag == 1) {
+                $("#myTable tr").show();
+            }
+
+
+        });
+    });
+
+    //$(document).ready(function () {
+
+    //    $('#chh1').change(function () {
+    //        if (this.checked) {
+    //            $("#ch1").addClass("btn btn-info active");
+    //        }
+    //        else{
+    //            $("#ch1").addClass("btn btn-info");
+    //        }
+
+    //    });
+    //    $('#chh2').change(function () {
+    //        if (this.checked) {
+    //            $("#ch2").addClass("btn btn-info active");
+    //        }
+    //        else {
+    //            $("#ch2").addClass("btn btn-info");
+    //        }
+
+    //    });
+    //    $('#chh3').change(function () {
+    //        if (this.checked) {
+    //            $("#ch3").addClass("btn btn-info active");
+    //        }
+    //        else {
+    //            $("#ch3").addClass("btn btn-info");
+    //        }
+
+    //    });
+    //});
+</script>   

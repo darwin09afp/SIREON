@@ -31,7 +31,7 @@
                                 <div class="col-lg-2 col-md-2 col-sm-2 showcase_text_area">
                                     <label>Hora de entrada:</label>
                                     @*<input type="time" class="form-control" id="Horaentrada" min="08:00" max="20:30" step="900" placeholder="HH:MM" value="10:00:00" required>*@
-                                    
+
                                     <select class="custom-select my-1 mr-sm-2" id="Horaentrada" required>
                                         <option value="" disabled selected>Elige...</option>
                                         <option value="08:00:00">08:00 AM</option>
@@ -69,12 +69,12 @@
 
                                 </div>
                                 <br />
-                                
-                                    <label>Disponibilidad:</label>
-                                    <img src="~/Content/images/help.png" alt="check" id="help" width="70" style="display:block" />
-                                    <img src="~/Content/images/check.png" alt="check" id="check" width="70" style="display:none" />
-                                    <img src="~/Content/images/warning.png" alt="Advertencia" id="warn" width="70" style="display:none" />
-                                
+
+                                <label>Disponibilidad:</label>
+                                <img src="~/Content/images/help.png" alt="check" id="help" width="70" style="display:block" />
+                                <img src="~/Content/images/check.png" alt="check" id="check" width="70" style="display:none" />
+                                <img src="~/Content/images/warning.png" alt="Advertencia" id="warn" width="70" style="display:none" />
+
                             </div>
 
                             <br />
@@ -100,23 +100,55 @@
                         <form>
                             <h4>Responsable</h4>
                             <br />
-                            <div class="form-row align-items-center justify-content-between">
-                                <div class="col-lg-5 col-md-5 col-sm-5 my-1">
-                                    <label class="sr-only" for="inlineFormInputName">Name</label>
-                                    <input type="text" class="form-control" id="inlineFormInputName" placeholder="Gabriela Marte" readonly>
-                                </div>
-                                <div class="col-lg-5 col-md-5 col-sm-5 my-1">
-                                    <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <img src="~/Content/images/at.png" alt="check" width="33" />
-                                        </div>
-                                        <input type="text" class="form-control" id="IdAspNetUsers" placeholder="gm20-0469" value="357a2e31-49b2-488b-82d3-9e029b243bd5">
+                            @if ((User.IsInRole("Operador")))
+                            {
+                                <div class="row" style="justify-content:space-around; justify-content:space-around">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 my-1">
+                                        <label class="sr-only" for="inlineFormInputName">Name</label>
+                                        <input type="text" class="form-control" id="IdAspNetNombre" placeholder="" value="" readonly>
 
                                     </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 my-1">
+                                        <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <img src="~/Content/images/at.png" alt="check" width="33" />
+                                            </div>
+
+                                            <input type="text" class="form-control" id="IdAspNetUsers" placeholder="" value="">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 my-1">
+                                        <div class="input-group">
+
+                                            <input type="button" class="btn btn-primary" onclick="BtnClick()" value="Consultar">
+
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="form-row align-items-center justify-content-between">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 my-1">
+                                        <label class="sr-only" for="inlineFormInputName">Name</label>
+                                        <input type="text" class="form-control" id="IdAspNetNombre" placeholder="" value="" readonly>
+
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 my-1">
+                                        <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <img src="~/Content/images/at.png" alt="check" width="33" />
+                                            </div>
+
+                                            <input type="text" class="form-control" id="IdAspNetUsers" placeholder="" value="" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             <br />
                             <br />
                             <br />
@@ -132,15 +164,15 @@
                                             <option value="Estudiante/Profesor" id="TipoInvitado2">Estudiante/Profesor</option>
                                             <option value="Invitado" id="TipoInvitado3">Invitado</option>
                                         </select>
-                                        
+
                                     </div>
                                     <!--Tipo de invitado-->
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1" style="display:block" id="NomInvitado">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
                                         <input type="text" class="form-control" id="NomInvitado" placeholder="Nombre de invitado" readonly>
                                     </div>
-                                    
-                                    
+
+
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1" style="display:block" id="IdInvitado">
                                         <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
                                         <div class="input-group">
@@ -151,7 +183,6 @@
                                         </div>
                                     </div>
                                     <!-- Fin Tipo de invitado-->
-
                                     <!--NombreEstudiante/Profesor-->
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1" style="display:none" id="NombreDeEstudiante">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
@@ -169,8 +200,6 @@
                                         </div>
                                     </div>
                                     <!--Fin UsuarioEstudiante/Profesor-->
-
-
                                     <!--NombreInvitado-->
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1" style="display:none" id="NombreDeInvitado">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
@@ -225,296 +254,334 @@
     </div>
     <br />
 
+    @if ((User.IsInRole("Operador")))
+    {
 
 
-<script>
-    //Show Modal.
-    function addNewOrder() {
-        $("#newOrderModal").modal();
+
+    }
+    else
+    {
+        <script>
+            window.onload = function () {
+                $.ajax({
+                    url: "/Reservaciones/Usuario",
+                    method: "GET",
+                    success: function (data) {
+                        //alert(data)
+                        //data = JSON.parse(data);
+                        console.log(data)
+                        for (var i = 0; i < data.length; i++) {
+
+                            $("#IdAspNetNombre").val(data[i].Nombr + "" + data[i].Apellid);
+                            $("#IdAspNetUsers").val(data[i].Matricul);
+                        }
+
+                        $.each(data, function (i, value) {
+                            console.log('Value of ' + i + ' is : ' + value);
+                        })
+                    },
+                    error: function () {
+                        alert(data)
+                    }
+                })
+            }
+
+        </script>
     }
 
 
-    $("#TipoInvitado").change(function () {
-        var selectedValue = $(this).val();
-
-        if (selectedValue == "Invitado") {
-            $("#addToList").click(function (e) {
-                e.preventDefault();
-                
-                if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado2").val()) == "" || $.trim($("#CedulaInvitado").val()) == "") return;
-                $("#detailsTable").show(0);
-                $("#saveOrder").show(0);
-                var TipoInvitado = $("#TipoInvitado").val(),
-                    NombreInvitado2 = $("#NombreInvitado2").val(),
-                    CedulaInvitado = $("#CedulaInvitado").val(),
-                    detailsTableBody = $("#detailsTable tbody");
 
 
-                var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado2 + '</td><td>' + CedulaInvitado + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
 
-                detailsTableBody.append(productItem);
-
-
-                $("#NombreInvitado").val('');
-                $("#UsuarioInvitado").val('');
-                $("#NombreInvitado2").val('');
-                $("#CedulaInvitado").val('');
-
-                clearItem();
-
-            });
-
-        }
-        else {
-            $("#addToList").click(function (e) {
-                e.preventDefault();
-
-
-                if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado").val()) == "" || $.trim($("#UsuarioInvitado").val()) == "") return;
-
-                $("#detailsTable").show(0);
-                $("#saveOrder").show(0);
-                var TipoInvitado = $("#TipoInvitado").val(),
-                    NombreInvitado = $("#NombreInvitado").val(),
-                    IdAspNetUser = $("#UsuarioInvitado").val();
-                    detailsTableBody = $("#detailsTable tbody");
-
-                var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + IdAspNetUser + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
-
-                detailsTableBody.append(productItem);
-
-                $("#NombreInvitado").val('');
-                $("#UsuarioInvitado").val('');
-                $("#NombreInvitado2").val('');
-                $("#CedulaInvitado").val('');
-
-                clearItem();
-
-            });
-
+    <script>
+        //Show Modal.
+        function addNewOrder() {
+            $("#newOrderModal").modal();
         }
 
 
-    });
-
-    //Add Multiple Order.
-    //After Add A New Order In The List, Clear Clean The Form For Add More Order.
-    function clearItem() {
-        $("#NombreInvitado").val('');
-        $("#UsuarioInvitado").val('');
-        $("#NombreInvitado2").val('');
-        $("#CedulaInvitado").val('');
-    }
-    // After Add A New Order In The List, If You Want, You Can Remove It.
-    $(document).on('click', 'a.deleteItem', function (e) {
-        e.preventDefault();
-        var $self = $(this);
-        if ($(this).attr('data-itemId') == "0") {
-            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
-                $(this).remove();
-            });
-        }
-    });
-
-
-    console.log
-
-
-
-    //After Click Save Button Pass All Data View To Controller For Save Database
-    function saveOrder(data) {
-
-        return $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: "/Reservaciones/SaveOrder",
-            data: data,
-            success: function (result) {
-                alert(result);
-                location.reload();
-            },
-            error: function () {
-                alert("Error! Verificar datos")
-            }
-        });
-    }
-
-
-    ////Collect Multiple Order List For Pass To Controller
-    $("#saveOrder").click(function (e) {
-        e.preventDefault();
-
-       
-        var orderArr = [];
-        orderArr.length = 0;
-
-        $.each($("#detailsTable tbody tr"), function () {
-
-            var selectedValue = $("#TipoInvitado").val();
-            if ($(this).find('td:eq(0)').html() == "Invitado") {
-                orderArr.push({
-                    IdAspNetUser: $("#UsuarioInvitado").val(''),
-                    NombreInvitado: $(this).find('td:eq(1)').html(),
-                    CedulaInvitado: $(this).find('td:eq(2)').html(),
-                    IdReservacion: $().val()
-                });
-
-            }
-            else {
-                orderArr.push({
-                    IdAspNetUser: $(this).find('td:eq(2)').html(),
-                    NombreInvitado: $("#NombreInvitado2").val(''),
-                    CedulaInvitado: $("#CedulaInvitado").val(''),
-                    IdReservacion: $().val()
-                });
-            }
-            
-
-            
-        });
-
-
-
-
-
-        var data = JSON.stringify({
-            HSolicitada: $("#Horaentrada").val(),
-            HEntrada: $("#Horaentrada").val(),
-            HSalida: $("#Horasalida").val(),
-            IdAspNetUsers: $("#IdAspNetUsers").val(),
-            NombreInvitado2: $("#NombreInvitado2").val(),
-            CedulaInvitado: $("#CedulaInvitado").val(),
-            reservaciones_Usuarios: orderArr
-        });
-
-        console.log(data);
-
-        $.when(saveOrder(data)).then(function (response) {
-            console.log(response);
-        }).fail(function (err) {
-            console.log(err);
-        });
-    });
-
-
-    $(document).ready(
         $("#TipoInvitado").change(function () {
             var selectedValue = $(this).val();
-            if (selectedValue == "TipoInvitado1") {
 
-                $("#UsuarioDeEstudiante").hide(0);
-                $("#NombreDeEstudiante").hide(0);
-                $("#NombreDeInvitado").hide(0);
-                $("#CedulaDeInvitado").hide(0);
-                $("#NomInvitado").show(0);
-                $("#IdInvitado").show(0);
-                $("#NombreInvitado").val('');
-                $("#UsuarioInvitado").val('');
-                $("#NombreInvitado2").val('');
-                $("#CedulaInvitado").val('');
+            if (selectedValue == "Invitado") {
+                $("#addToList").click(function (e) {
+                    e.preventDefault();
 
+                    if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado2").val()) == "" || $.trim($("#CedulaInvitado").val()) == "") return;
+                    $("#detailsTable").show(0);
+                    $("#saveOrder").show(0);
+                    var TipoInvitado = $("#TipoInvitado").val(),
+                        NombreInvitado2 = $("#NombreInvitado2").val(),
+                        CedulaInvitado = $("#CedulaInvitado").val(),
+                        detailsTableBody = $("#detailsTable tbody");
+
+
+                    var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado2 + '</td><td>' + CedulaInvitado + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
+
+                    detailsTableBody.append(productItem);
+
+
+                    $("#NombreInvitado").val('');
+                    $("#UsuarioInvitado").val('');
+                    $("#NombreInvitado2").val('');
+                    $("#CedulaInvitado").val('');
+
+                    clearItem();
+
+                });
 
             }
             else {
-                if (selectedValue == "Invitado") {
+                $("#addToList").click(function (e) {
+                    e.preventDefault();
+
+
+                    if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado").val()) == "" || $.trim($("#UsuarioInvitado").val()) == "") return;
+
+                    $("#detailsTable").show(0);
+                    $("#saveOrder").show(0);
+                    var TipoInvitado = $("#TipoInvitado").val(),
+                        NombreInvitado = $("#NombreInvitado").val(),
+                        IdAspNetUser = $("#UsuarioInvitado").val();
+                    detailsTableBody = $("#detailsTable tbody");
+
+                    var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado + '</td><td>' + IdAspNetUser + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
+
+                    detailsTableBody.append(productItem);
+
+                    $("#NombreInvitado").val('');
+                    $("#UsuarioInvitado").val('');
+                    $("#NombreInvitado2").val('');
+                    $("#CedulaInvitado").val('');
+
+                    clearItem();
+
+                });
+
+            }
+
+
+        });
+
+        //Add Multiple Order.
+        //After Add A New Order In The List, Clear Clean The Form For Add More Order.
+        function clearItem() {
+            $("#NombreInvitado").val('');
+            $("#UsuarioInvitado").val('');
+            $("#NombreInvitado2").val('');
+            $("#CedulaInvitado").val('');
+        }
+        // After Add A New Order In The List, If You Want, You Can Remove It.
+        $(document).on('click', 'a.deleteItem', function (e) {
+            e.preventDefault();
+            var $self = $(this);
+            if ($(this).attr('data-itemId') == "0") {
+                $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                    $(this).remove();
+                });
+            }
+        });
+
+
+        console.log
+
+
+
+        //After Click Save Button Pass All Data View To Controller For Save Database
+        function saveOrder(data) {
+
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Reservaciones/SaveOrder",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error! Verificar datos")
+                }
+            });
+        }
+
+
+        ////Collect Multiple Order List For Pass To Controller
+        $("#saveOrder").click(function (e) {
+            e.preventDefault();
+
+
+            var orderArr = [];
+            orderArr.length = 0;
+
+            $.each($("#detailsTable tbody tr"), function () {
+
+                var selectedValue = $("#TipoInvitado").val();
+                if ($(this).find('td:eq(0)').html() == "Invitado") {
+                    orderArr.push({
+                        IdAspNetUser: $("#UsuarioInvitado").val(''),
+                        NombreInvitado: $(this).find('td:eq(1)').html(),
+                        CedulaInvitado: $(this).find('td:eq(2)').html(),
+                        IdReservacion: $().val()
+                    });
+
+                }
+                else {
+                    orderArr.push({
+                        IdAspNetUser: $(this).find('td:eq(2)').html(),
+                        NombreInvitado: $("#NombreInvitado2").val(''),
+                        CedulaInvitado: $("#CedulaInvitado").val(''),
+                        IdReservacion: $().val()
+                    });
+                }
+
+
+
+            });
+
+
+
+
+
+            var data = JSON.stringify({
+                HSolicitada: $("#Horaentrada").val(),
+                HEntrada: $("#Horaentrada").val(),
+                HSalida: $("#Horasalida").val(),
+                IdAspNetUsers: $("#IdAspNetUsers").val(),
+                NombreInvitado2: $("#NombreInvitado2").val(),
+                CedulaInvitado: $("#CedulaInvitado").val(),
+                reservaciones_Usuarios: orderArr
+            });
+
+            console.log(data);
+
+            $.when(saveOrder(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+        });
+
+
+        $(document).ready(
+            $("#TipoInvitado").change(function () {
+                var selectedValue = $(this).val();
+                if (selectedValue == "TipoInvitado1") {
 
                     $("#UsuarioDeEstudiante").hide(0);
                     $("#NombreDeEstudiante").hide(0);
-                    $("#NombreDeInvitado").show(0);
-                    $("#CedulaDeInvitado").show(0);
-                    $("#NomInvitado").hide(0);
-                    $("#IdInvitado").hide(0);
-                    $("#NombreInvitado").val('');
-                    $("#UsuarioInvitado").val('');
-                    
-
-                }
-                else {
-
-                    $("#UsuarioDeEstudiante").show(0);
-                    $("#NombreDeEstudiante").show(0);
                     $("#NombreDeInvitado").hide(0);
                     $("#CedulaDeInvitado").hide(0);
-                    $("#NomInvitado").hide(0);
-                    $("#IdInvitado").hide(0);
+                    $("#NomInvitado").show(0);
+                    $("#IdInvitado").show(0);
+                    $("#NombreInvitado").val('');
+                    $("#UsuarioInvitado").val('');
                     $("#NombreInvitado2").val('');
                     $("#CedulaInvitado").val('');
-                }
-            }
-        })
-    );
 
 
-</script>
-
-
-
-
-
-<script>
-    //Show Modal.
-    function addNewOrder() {
-        $("#newOrderModal").modal();
-    }
-
-
-    //After Click Save Button Pass All Data View To Controller For Save Database
-    function Consultar(data) {
-        return $.ajax({
-            
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: "/Reservaciones/Consultar",
-            data: data,
-            success: function (result2) {
-                
-                $('#Disp').append(result2);
-                $('#msg').val(result2);
-                $('#Disp').show(0);
-                if ($("#msg").val() == "¡Cubículos disponibles!") {
-                    $('#help').hide(0);
-                    $('#check').show(0);
                 }
                 else {
-                    $('#help').hide(0);
-                    $('#warn').show(0);
-                    
+                    if (selectedValue == "Invitado") {
+
+                        $("#UsuarioDeEstudiante").hide(0);
+                        $("#NombreDeEstudiante").hide(0);
+                        $("#NombreDeInvitado").show(0);
+                        $("#CedulaDeInvitado").show(0);
+                        $("#NomInvitado").hide(0);
+                        $("#IdInvitado").hide(0);
+                        $("#NombreInvitado").val('');
+                        $("#UsuarioInvitado").val('');
+
+
+                    }
+                    else {
+
+                        $("#UsuarioDeEstudiante").show(0);
+                        $("#NombreDeEstudiante").show(0);
+                        $("#NombreDeInvitado").hide(0);
+                        $("#CedulaDeInvitado").hide(0);
+                        $("#NomInvitado").hide(0);
+                        $("#IdInvitado").hide(0);
+                        $("#NombreInvitado2").val('');
+                        $("#CedulaInvitado").val('');
+                    }
                 }
-                
-            },
-            error: function () {
-                alert("Error! Verificar datos")
-            }
+            })
+        );
+
+
+    </script>
+
+
+
+
+
+    <script>
+        //Show Modal.
+        function addNewOrder() {
+            $("#newOrderModal").modal();
+        }
+
+
+        //After Click Save Button Pass All Data View To Controller For Save Database
+        function Consultar(data) {
+            return $.ajax({
+
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Reservaciones/Consultar",
+                data: data,
+                success: function (result2) {
+
+                    $('#Disp').append(result2);
+                    $('#msg').val(result2);
+                    $('#Disp').show(0);
+                    if ($("#msg").val() == "¡Cubículos disponibles!") {
+                        $('#help').hide(0);
+                        $('#check').show(0);
+                    }
+                    else {
+                        $('#help').hide(0);
+                        $('#warn').show(0);
+
+                    }
+
+                },
+                error: function () {
+                    alert("Error! Verificar datos")
+                }
+            });
+        }
+
+
+        ////Collect Multiple Order List For Pass To Controller
+        $("#Consultar").one('click', function (e) {
+            e.preventDefault();
+
+            if ($.trim($("#Horaentrada").val()) == "") return;
+
+            var data = JSON.stringify({
+                HEntrada: $("#Horaentrada").val(),
+
+            });
+
+            console.log(data);
+
+            $.when(Consultar(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
         });
-    }
-
-
-    ////Collect Multiple Order List For Pass To Controller
-    $("#Consultar").one('click',function (e) {
-        e.preventDefault();
-        
-        if ($.trim($("#Horaentrada").val()) == "") return;
-
-        var data = JSON.stringify({
-            HEntrada: $("#Horaentrada").val(),
-
-        });
-
-        console.log(data);
-
-        $.when(Consultar(data)).then(function (response) {
-            console.log(response);
-        }).fail(function (err) {
-            console.log(err);
-        });
-    });
 
 
 
 
-</script>
+    </script>
 
 
 

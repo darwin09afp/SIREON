@@ -1,21 +1,16 @@
 ﻿@using Microsoft.AspNet.Identity
 <div class="sidebar" style="position: fixed; top:0  ">
     <div class="user-profile" style="padding:10px;">
-        @*<div class="display-avatar">
-            <img src="@Url.Action("UserPhotos", "Home" )" style="width:110px;height:110px; background: #FFFFFF;
-                                                            margin: auto;
-                                                            -moz-border-radius: 60px;
-                                                            border-radius: 100px;
-                                                            padding: 4px;
-                                                            box-shadow: 0px 0px 20px #888;" />
-        </div>*@
         <div class="display-avatar animated-avatar">
             <img class="profile-img img-lg rounded-circle" src="@Url.Action("UserPhotos", "Home" )" alt="profile image" style="width: 110px; height: 110px;">
         </div>
-        <div class="info-wrapper" >
-            <p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>
-            <h6 class="display-income">Bienvenido/a</h6>
-        </div>
+        <div class="info-wrapper">
+            @*<p class="user-name">@Html.ActionLink(User.Identity.GetUserName() + ".", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</p>
+            *@
+
+            <p class="user-name" id="IdAspNetNombres"></p>
+            <h6 class="display-income">Estudiante</h6>
+</div>
     </div>
     <ul class="navigation-menu">
         <li>
@@ -87,4 +82,31 @@
     </ul>
 
 </div>
+<script>
 
+    window.onload = function () {
+        $.ajax({
+            url: "/Account/Usuario",
+            method: "GET",
+            success: function (data) {
+
+                //alert(data)
+                //data = JSON.parse(data);
+                console.log(data)
+                for (var i = 0; i < data.length; i++) {
+
+                    $("#IdAspNetNombres").text(data[i].Nombr + "" + data[i].Apellid);
+                    
+                }
+
+                $.each(data, function (i, value) {
+                    console.log('Value of ' + i + ' is : ' + value);
+                })
+            },
+            error: function () {
+                alert(data)
+            }
+        })
+    }
+
+</script>

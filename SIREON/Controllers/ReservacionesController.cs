@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Newtonsoft.Json;
 using SIREON;
 using SIREON.Models;
 
@@ -18,6 +19,7 @@ namespace SIREON.Controllers
     public class ReservacionesController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
+        private UniversidadEntities db2 = new UniversidadEntities();
 
         // GET: Reservaciones
         public ActionResult Index()
@@ -44,6 +46,12 @@ namespace SIREON.Controllers
             return View(reservaciones.ToList());
         }
 
+        // GET: historial
+        public ActionResult Historial()
+        {
+            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            return View(reservaciones.ToList());
+        }
 
 
         public ActionResult Create2()
@@ -82,6 +90,7 @@ namespace SIREON.Controllers
             }
             return View(reservacione);
         }
+
 
         [HttpPost]
         public ActionResult Consultar(TimeSpan HEntrada)
@@ -135,6 +144,67 @@ namespace SIREON.Controllers
         }
 
 
+        public JsonResult Usuario()
+        {
+            var usr = User.Identity.GetUserId();
+            var usrname = User.Identity.GetUserName();
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //var BuscarMatricula = (from table1 in db2.Entidads
+            //                       join table2 in db.AspNetUsers on table1.CorreoInst equals table2.Email
+            //                       where table2.Id == usr
+            //                       select new { Nombre = table1.Nombre, Apellido = table1.Apellido }).ToArray();
+
+
+            var BuscarEmail = (from table1 in db.AspNetUsers
+                               where table1.Id == usr
+                               select new
+                               {
+                                   email = table1.Email
+                               }).AsEnumerable();
+
+
+            var query = from table2 in db2.Entidads
+                        where table2.CorreoInst == usrname
+                        select new
+                        {
+                            Nombr = table2.Nombre,
+                            Apellid = table2.Apellido,
+                            Matricul = table2.CodigoInst
+                        };
+
+
+
+
+            //var json = JsonConvert.SerializeObject(query);
+
+
+            return Json(query, JsonRequestBehavior.AllowGet);
+            //if (User.IsInRole("Usuario"))
+            //{
+
+            //}
+            //else
+            //{
+            //    //var Mat = Matricula;
+            //    ////Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //    //var BuscarMatricula = from table1 in db2.Entidads
+            //    //                      join table2 in db.AspNetUsers on table1.CodigoInst equals table2.Email
+            //    //                      where table1.CodigoInst == Mat
+            //    //                      select new
+            //    //                      {
+            //    //                          Nombre = table1.Nombre,
+            //    //                          Apellido = table1.Apellido
+            //    //                      };
+            //    //var json = JsonConvert.SerializeObject(BuscarMatricula);
+
+
+            //    //return Json(json, JsonRequestBehavior.AllowGet);
+            //}
+            
+
+
+
+        }
 
         [HttpPost]
         public ActionResult SaveOrder(TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
@@ -195,7 +265,17 @@ namespace SIREON.Controllers
                 model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
                 model.Estatus = "En espera";
                 result = "Reservación realizada! Se colocó su reservación en la lista de espera para la hora seleccionada";
-                
+
+
+                //Agregar a tb Disponibilidad
+                Disponibilidad model2 = new Disponibilidad();
+                model2.IdCubiculo = model.ID_Cubiculo;
+                model2.HoraInicial = HEntrada;
+                model2.HoraFinal = HSalida;
+                model2.Fecha = SelFecha;
+                model2.Estatus = "En Espera";
+                db.Disponibilidads.Add(model2);
+
             }
             else
             {
@@ -204,6 +284,17 @@ namespace SIREON.Controllers
                             .OrderBy(cubi => cubi.ID_Cubiculo)
                             .First().ID_Cubiculo;
                 model.Estatus = "Activa";
+
+                //Agregar a tb Disponibilidad
+                Disponibilidad model2 = new Disponibilidad();
+                model2.IdCubiculo = model.ID_Cubiculo;
+                model2.HoraInicial = HEntrada;
+                model2.HoraFinal = HSalida;
+                model2.Fecha = SelFecha;
+                model2.Estatus = "Reservado";
+                db.Disponibilidads.Add(model2);
+
+
                 result = "Reservación realizada!";
             }
 
@@ -214,14 +305,7 @@ namespace SIREON.Controllers
             model.IdAspNetUsers = usuario;
             db.Reservaciones.Add(model);
 
-            //Agregar a tb Disponibilidad
-            Disponibilidad model2 = new Disponibilidad();
-            model2.IdCubiculo = model.ID_Cubiculo;
-            model2.HoraInicial = HEntrada;
-            model2.HoraFinal = HSalida;
-            model2.Fecha = SelFecha;
-            model2.Estatus = "Reservado";
-            db.Disponibilidads.Add(model2);
+            
             
             
 
@@ -243,38 +327,67 @@ namespace SIREON.Controllers
 
 
 
+        #region 
+        //public ActionResult Disponibilidad2()
+        //{
+        //    List<int> CubNoDisp = new List<int>();
+        //    List<int> Cubs = new List<int>();
+        //    var Fechaa = DateTime.Now;
+        //    var Fecha = Fechaa.Date;
+        //    TimeSpan HEntrada = new TimeSpan(10,0,0);
 
-        public ActionResult Disponibilidad2()
-        {
-            List<int> CubNoDisp = new List<int>();
-            List<int> Cubs = new List<int>();
-            var Fechaa = DateTime.Now;
-            var Fecha = Fechaa.Date;
-            TimeSpan HEntrada = new TimeSpan(10,0,0);
+        //    foreach (var item in db.Cubiculos)
+        //    {
+        //        var idcub = item.ID_Cubiculo;
+        //        Cubs.Add(idcub);
+        //        foreach (var item2 in db.Disponibilidads)
+        //        {
 
-            foreach (var item in db.Cubiculos)
-            {
-                var idcub = item.ID_Cubiculo;
-                Cubs.Add(idcub);
-                foreach (var item2 in db.Disponibilidads)
-                {
-                    
-                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
-                    {
-                        CubNoDisp.Add(idcub);
-                    }
-                    else 
-                    {
-                        //sigue buscando
-                    }
-                    
-                }
+        //            if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+        //            {
+        //                CubNoDisp.Add(idcub);
+        //            }
+        //            else 
+        //            {
+        //                //sigue buscando
+        //            }
 
-            }
-            var CubDisp = Cubs.Except(CubNoDisp).ToList();
-            //return View(CubNoDisp);
-            return Json(CubDisp, JsonRequestBehavior.AllowGet);
-        }
+        //        }
+
+        //    }
+        //    var CubDisp = Cubs.Except(CubNoDisp).ToList();
+        //    //return View(CubNoDisp);
+        //    return Json(CubDisp, JsonRequestBehavior.AllowGet);
+        //}
+
+
+
+
+        //public ActionResult ActStatus()
+        //{
+        //    var a = 10;
+        //    List<int> Reservaciones = new List<int>();
+        //    List<int> Cubs = new List<int>();
+        //    var Fechaa = DateTime.Now;
+        //    var Fecha = Fechaa.Date;
+        //    TimeSpan HEntrada = new TimeSpan(a, 0, 0);
+        //    TimeSpan HSalida = new TimeSpan(a, 15, 0)  ;
+
+
+        //    var dif = HEntrada + HSalida;
+        //    var msg = "";
+        //    if (dif == null)
+        //    {
+        //        msg = "Rechazada";
+        //    }
+        //    else
+        //    {
+        //        msg = "Nothing";
+        //    }
+
+        //    return Json(HEntrada, JsonRequestBehavior.AllowGet);
+        //}
+        #endregion
 
 
 
