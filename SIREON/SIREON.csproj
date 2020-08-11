@@ -2262,6 +2262,7 @@
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Cubiculos\Usuario.cshtml" />
+    <Content Include="Views\Reservaciones\Invitaciones2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

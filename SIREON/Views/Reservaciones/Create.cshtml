@@ -5,7 +5,9 @@
 }
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 
 </head>
 <body>
@@ -105,7 +107,7 @@
                                 <div class="row" style="justify-content:space-around; justify-content:space-around">
                                     <div class="col-lg-4 col-md-4 col-sm-4 my-1">
                                         <label class="sr-only" for="inlineFormInputName">Name</label>
-                                        <input type="text" class="form-control" id="IdAspNetNombre" placeholder="" value="" readonly>
+                                        <input type="text" class="form-control" id="IdAspNetNombre2" placeholder="" value="" readonly>
 
                                     </div>
                                     <div class="col-lg-3 col-md-3 col-sm-3 my-1">
@@ -115,7 +117,7 @@
                                                 <img src="~/Content/images/at.png" alt="check" width="33" />
                                             </div>
 
-                                            <input type="text" class="form-control" id="IdAspNetUsers" placeholder="" value="">
+                                            <input type="text" class="form-control" id="IdAspNetUsers2" placeholder="" value="" required>
 
                                         </div>
                                     </div>
@@ -196,7 +198,7 @@
                                             <div class="input-group-prepend">
                                                 <img src="~/Content/images/at.png" alt="check" width="33" />
                                             </div>
-                                            <input type="text" class="form-control" id="UsuarioInvitado" placeholder="gm20-0469" value="357a2e31-49b2-488b-82d3-9e029b243bd5">
+                                            <input type="text" class="form-control" id="UsuarioInvitado" placeholder="gm20-0469" value="df16-0469">
                                         </div>
                                     </div>
                                     <!--Fin UsuarioEstudiante/Profesor-->
@@ -254,9 +256,37 @@
     </div>
     <br />
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
     @if ((User.IsInRole("Operador")))
     {
+        <script>
+            function BtnClick() {
+                $.ajax({
+                    url: "/Reservaciones/Usuario",
+                    method: "GET",
+                    success: function (data) {
+                        //alert(data)
+                        //data = JSON.parse(data);
+                        console.log(data)
+                        for (var i = 0; i < data.length; i++) {
 
+                            $("#IdAspNetNombre2").val($.trim(data[i].Nombr) + " " + data[i].Apellid);
+                            $("#IdAspNetUsers2").val(data[i].Matricul);
+                        }
+
+                        $.each(data, function (i, value) {
+                            console.log('Value of ' + i + ' is : ' + value);
+                        })
+                    },
+                    error: function () {
+                        alert(data)
+                    }
+                })
+            }
+
+        </script>
 
 
     }
@@ -273,7 +303,7 @@
                         console.log(data)
                         for (var i = 0; i < data.length; i++) {
 
-                            $("#IdAspNetNombre").val(data[i].Nombr + "" + data[i].Apellid);
+                            $("#IdAspNetNombre").val($.trim(data[i].Nombr) + " " + data[i].Apellid);
                             $("#IdAspNetUsers").val(data[i].Matricul);
                         }
 
@@ -289,10 +319,6 @@
 
         </script>
     }
-
-
-
-
 
     <script>
         //Show Modal.
@@ -390,21 +416,38 @@
 
         //After Click Save Button Pass All Data View To Controller For Save Database
         function saveOrder(data) {
+            swal({
+                title: "¿Estás seguro?",
+                text: "Al seleccionar OK se guardarán los datos",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        return $.ajax({
+                            contentType: 'application/json; charset=utf-8',
+                            dataType: 'json',
+                            type: 'POST',
+                            url: "/Reservaciones/SaveOrder",
+                            data: data,
+                            success: function (result) {
+                                //alert(result);
+                                swal();
+                                swal("¡Reservación realizada!", result, "success")
+                                    .then((value) => {
+                                        location.reload();
+                                    });
 
-            return $.ajax({
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json',
-                type: 'POST',
-                url: "/Reservaciones/SaveOrder",
-                data: data,
-                success: function (result) {
-                    alert(result);
-                    location.reload();
-                },
-                error: function () {
-                    alert("Error! Verificar datos")
-                }
-            });
+
+                            },
+                            error: function () {
+                                swal("¡Error!", "Favor verificar los datos", "warning");
+                            }
+                        });
+                    } 
+                });
+            
         }
 
 
@@ -450,6 +493,7 @@
                 HEntrada: $("#Horaentrada").val(),
                 HSalida: $("#Horasalida").val(),
                 IdAspNetUsers: $("#IdAspNetUsers").val(),
+                IdAspNetUsers2: $("#IdAspNetUsers2").val(),
                 NombreInvitado2: $("#NombreInvitado2").val(),
                 CedulaInvitado: $("#CedulaInvitado").val(),
                 reservaciones_Usuarios: orderArr

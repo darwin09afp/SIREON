@@ -24,26 +24,79 @@ namespace SIREON.Controllers
         // GET: Reservaciones
         public ActionResult Index()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
+
+            if (User.IsInRole("Operador"))
+            {
+
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var reservaciones = db.Reservaciones
+                    .Where(x => x.Estatus != "Completada" || x.Estatus != "Rechazada" || x.Estatus != "Cancelada" || x.Estatus != "En Espera")
+                    .Where(x => x.HSalida >= hora)
+                    .Where(x => x.Fecha == fechaa).ToList();
+                
+                return View(reservaciones.ToList());
+
+            }
+            else
+            {
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var user = User.Identity.GetUserId();
+                var reservaciones = db.Reservaciones
+                    .Where(x => x.IdAspNetUsers == user)
+                    .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
+                    .Where(x => x.HEntrada >= hora)
+                    .Where(x => x.Fecha == fechaa).ToList();
+
+                return View(reservaciones.ToList());
+                
+            }
+
+
+
+
         }
 
 
         // GET: Reservaciones
-        public ActionResult Invitaciones()
+        public ActionResult Invitaciones2()
         {
+           
+            var fecha = DateTime.Now;
+            var fechaa = fecha.Date;
+            var hora = fecha.TimeOfDay;
             var user = User.Identity.GetUserId();
-            //var reservaciones = (db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1));
-            var invitaciones = db.Reservaciones_Usuarios.Where(x => x.IdAspNetUser == user);
-            return View(invitaciones.ToList());
+
+            var Salas = db.Reservaciones_Usuarios.Where(x => x.IdAspNetUser == user).ToList();
+            
+            var Inv = db.Reservaciones
+                .Where(x => x.Reservaciones_Usuarios.All(p => p.IdAspNetUser == user))
+                .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
+                .Where(x => x.HEntrada >= hora)
+                .Where(x => x.Fecha == fechaa).ToList();
+
+
+            return View(Inv);
+
         }
 
 
         // GET: Cola
         public ActionResult Cola()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+            var fecha = DateTime.Now;
+            var fechaa = fecha.Date;
+            var hora = fecha.TimeOfDay;
+            var reservaciones = db.Reservaciones
+                .Where(x => x.Estatus == "En Espera")
+                //.Where(x => x.HEntrada >= hora)
+                /*.Where(x => x.Fecha == fechaa)*/.ToList();
+            
             return View(reservaciones.ToList());
+            
         }
 
         // GET: historial
@@ -146,15 +199,10 @@ namespace SIREON.Controllers
 
         public JsonResult Usuario()
         {
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+
             var usr = User.Identity.GetUserId();
             var usrname = User.Identity.GetUserName();
-            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
-            //var BuscarMatricula = (from table1 in db2.Entidads
-            //                       join table2 in db.AspNetUsers on table1.CorreoInst equals table2.Email
-            //                       where table2.Id == usr
-            //                       select new { Nombre = table1.Nombre, Apellido = table1.Apellido }).ToArray();
-
-
             var BuscarEmail = (from table1 in db.AspNetUsers
                                where table1.Id == usr
                                select new
@@ -179,37 +227,13 @@ namespace SIREON.Controllers
 
 
             return Json(query, JsonRequestBehavior.AllowGet);
-            //if (User.IsInRole("Usuario"))
-            //{
-
-            //}
-            //else
-            //{
-            //    //var Mat = Matricula;
-            //    ////Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
-            //    //var BuscarMatricula = from table1 in db2.Entidads
-            //    //                      join table2 in db.AspNetUsers on table1.CodigoInst equals table2.Email
-            //    //                      where table1.CodigoInst == Mat
-            //    //                      select new
-            //    //                      {
-            //    //                          Nombre = table1.Nombre,
-            //    //                          Apellido = table1.Apellido
-            //    //                      };
-            //    //var json = JsonConvert.SerializeObject(BuscarMatricula);
-
-
-            //    //return Json(json, JsonRequestBehavior.AllowGet);
-            //}
-            
-
-
 
         }
 
         [HttpPost]
-        public ActionResult SaveOrder(TimeSpan HSolicitada, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
+        public ActionResult SaveOrder(string IdAspNetUsers2, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
-            string result = "Error! Datos no completados!";
+            string result = "";
             List<Cubiculo> cubs = new List<Cubiculo>();
             var FechayHora = DateTime.Now;
             var SelFecha = FechayHora.Date;
@@ -247,24 +271,25 @@ namespace SIREON.Controllers
             }
             var CubDisp = Cubs.Except(CubNoDisp).ToList();
             bool isEmpty = !CubDisp.Any();
-
-
-
             #endregion
 
-
-
-
+ 
             //Agregar a tb reservaciones
             Reservacione model = new Reservacione();
-            model.ID_Empleado = empleado;
+            if (User.IsInRole("Operador"))
+            {
+                model.ID_Empleado = usuario;
+            }
+            else
+            {
+                model.ID_Empleado = empleado;
+            }
             model.Fecha = SelFecha;
-
             if (isEmpty == true)
             {
                 model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
                 model.Estatus = "En espera";
-                result = "Reservación realizada! Se colocó su reservación en la lista de espera para la hora seleccionada";
+                result = "Se colocó su reservación en la lista de espera para la hora seleccionada";
 
 
                 //Agregar a tb Disponibilidad
@@ -295,25 +320,41 @@ namespace SIREON.Controllers
                 db.Disponibilidads.Add(model2);
 
 
-                result = "Reservación realizada!";
+                result = "";
             }
 
             model.FechaSolicitada = SelFecha;
             model.HSolicitada = SelHora;
             model.HEntrada = HEntrada;
             model.HSalida = HSalida;
-            model.IdAspNetUsers = usuario;
-            db.Reservaciones.Add(model);
+            if (User.IsInRole("Operador"))
+            {
+                //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
 
-            
-            
-            
+                var UsrMat = IdAspNetUsers2;
+                var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == UsrMat).FirstOrDefault().CorreoInst;
+                var query = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
+                model.IdAspNetUsers = query;
+
+            }
+            else
+            {
+                model.IdAspNetUsers = usuario;
+            }           
+            db.Reservaciones.Add(model);
+        
 
             //Agregar a Tb Reservaciones_usuarios
             foreach (var item in reservaciones_Usuarios)
             {
                 Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                Res.IdAspNetUser = item.IdAspNetUser;
+                if (item.CedulaInvitado == "")
+                {
+                    var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == item.IdAspNetUser).FirstOrDefault().CorreoInst;
+                    var query2 = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
+
+                    Res.IdAspNetUser = query2;
+                }
                 Res.IdReservacion = model.ID_Reservacion;
                 Res.NombreInvitado = item.NombreInvitado;
                 Res.CedulaInvitado = item.CedulaInvitado;
