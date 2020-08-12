@@ -230,6 +230,58 @@ namespace SIREON.Controllers
 
         }
 
+
+
+        public JsonResult Usuario2(string IdAspNetUsers2)
+        {
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+
+
+            var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().Nombre;
+            var BuscarApellido = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().Apellido;
+
+            var result3 = new string[] { BuscarNombre, BuscarApellido };
+            //string str1 = strArr[0], str2 = strArr[1];
+
+            //var json = JsonConvert.SerializeObject(query);
+
+
+            return Json(result3, JsonRequestBehavior.AllowGet);
+
+        }
+
+        public JsonResult Usuario3(string IdAspNetUser)
+        {
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUser).FirstOrDefault().Nombre;
+            if (BuscarNombre == null)
+            {
+                var result3 = "";
+                return Json(result3, JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                var BuscarApellido = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUser).FirstOrDefault().Apellido;
+                var result3 = new string[] { BuscarNombre, BuscarApellido };
+                return Json(result3, JsonRequestBehavior.AllowGet);
+
+            }
+
+            //string str1 = strArr[0], str2 = strArr[1];
+
+            //var json = JsonConvert.SerializeObject(query);
+
+
+
+
+        }
+
+
+
+
+
+
         [HttpPost]
         public ActionResult SaveOrder(string IdAspNetUsers2, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
@@ -329,7 +381,7 @@ namespace SIREON.Controllers
             model.HSalida = HSalida;
             if (User.IsInRole("Operador"))
             {
-                //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+                //Metodo solo para enviar el nombre en la reservacion la matricula del estudiante ingresado 
 
                 var UsrMat = IdAspNetUsers2;
                 var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == UsrMat).FirstOrDefault().CorreoInst;
@@ -348,18 +400,28 @@ namespace SIREON.Controllers
             foreach (var item in reservaciones_Usuarios)
             {
                 Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                if (item.CedulaInvitado == "")
+                if (item.CedulaInvitado == null)
                 {
                     var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == item.IdAspNetUser).FirstOrDefault().CorreoInst;
                     var query2 = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
 
                     Res.IdAspNetUser = query2;
+                    Res.IdReservacion = model.ID_Reservacion;
+                    Res.NombreInvitado = item.NombreInvitado;
+                    Res.CedulaInvitado = item.CedulaInvitado;
+                    db.Reservaciones_Usuarios.Add(Res);
+                    db.SaveChanges();
                 }
-                Res.IdReservacion = model.ID_Reservacion;
-                Res.NombreInvitado = item.NombreInvitado;
-                Res.CedulaInvitado = item.CedulaInvitado;
-                db.Reservaciones_Usuarios.Add(Res);
-                db.SaveChanges();
+                else
+                {
+                    Res.IdAspNetUser = item.IdAspNetUser;
+                    Res.IdReservacion = model.ID_Reservacion;
+                    Res.NombreInvitado = item.NombreInvitado;
+                    Res.CedulaInvitado = item.CedulaInvitado;
+                    db.Reservaciones_Usuarios.Add(Res);
+                    db.SaveChanges();
+                }
+
             }
             db.SaveChanges();
 
