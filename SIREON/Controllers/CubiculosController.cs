@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Dynamic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using EO.Internal;
 using Microsoft.AspNet.Identity;
 using SIREON;
+using SIREON.Models;
 
 namespace SIREON.Controllers
 {
@@ -24,83 +27,21 @@ namespace SIREON.Controllers
 
         
 
-        public ActionResult Disponibilidad()
+        public ActionResult Disponibilidad(TimeSpan HEntrada)
         {
-            
-            List<int> TotCubs = new List<int>();
-            List<int> CubNoDisp = new List<int>();
-            List<int> Cubs = new List<int>();
-            
             var Fechaa = DateTime.Now;
             var Fecha = Fechaa.Date;
             var hora = Fechaa.TimeOfDay.Hours;
-            TimeSpan HEntrada = new TimeSpan(10, 0, 0);
+            //TimeSpan HEntrada = new TimeSpan(08, 0, 0);
+            CustomModel2cs mymodel = new CustomModel2cs();
 
+            var nodisp = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any());
 
-            var els = 0;
-            string[] prueba2 = new string[els];
-            foreach (var item in db.Cubiculos)
-            {
-                var idcub = item.ID_Cubiculo;
-                Cubs.Add(idcub);
+            mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
+            mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any()).ToList();
 
-                string[] prueba = { Convert.ToString(item.ID_Cubiculo), Convert.ToString(item.Descripcion), Convert.ToString(item.Capacidad) };
-                els = els + 1;
+            return View(mymodel);
 
-                prueba2[10] = prueba[0];
-
-
-            }
-            //    foreach (var item2 in db.Disponibilidads)
-            //    {
-
-            //        if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
-            //        {
-            //            CubNoDisp.Add(idcub);
-            //        }
-            //        else
-            //        {
-            //            //sigue buscando
-            //        }
-
-            //    }
-
-            //}
-            //var CubDisp = Cubs.Except(CubNoDisp).ToList();
-            
-            //var a = 0;
-            //foreach (var item in CubDisp)
-            //{  
-            //    TotCubs.Add(CubDisp.ElementAt(a));
-            //    a = a + 1;
-            //}
-            //a = 0;
-            //foreach (var item in CubNoDisp)
-            //{
-            //    TotCubs.Add(CubNoDisp.ElementAt(a));
-            //    a = a + 1;
-            //}
-
-            //var Disponib = db.Cubiculos
-            //                .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
-            //                .OrderBy(cubi => cubi.ID_Cubiculo)
-            //                .ToList();
-
-
-            //var Busc = from table1 in db.Cubiculos.AsEnumerable()
-            //           join table2 in db.Disponibilidads.AsEnumerable() on table1.ID_Cubiculo equals table2.IdCubiculo
-            //           where table2.Fecha == Fecha && table2.HoraInicial == HEntrada && table2.Estatus == "Reservado "
-            //           select new
-            //           {
-            //               Id = table1.ID_Cubiculo,
-            //               Desc = table1.Descripcion,
-            //               Cap = table1.Capacidad,
-            //               HE = table2.HoraInicial,
-            //               Est = table2.Estatus
-            //           };
-
-            return Json(prueba2.ToList(), JsonRequestBehavior.AllowGet);
-            //return View();
         }
 
         public ActionResult Disp2()
