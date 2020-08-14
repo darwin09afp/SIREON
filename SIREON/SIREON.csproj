@@ -2259,9 +2259,7 @@
     <Content Include="Views\Disponibilidad\Details.cshtml" />
     <Content Include="Views\Disponibilidad\Edit.cshtml" />
     <Content Include="Views\Disponibilidad\Index.cshtml" />
-    <Content Include="Views\Reservaciones\Disponibilidad2.cshtml" />
     <Content Include="Views\Reservaciones\Historial.cshtml" />
-    <Content Include="Views\Reservaciones\ActStatus.cshtml" />
     <Content Include="Views\Cubiculos\Disp2.cshtml" />
     <EntityDeploy Include="UniversidadModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

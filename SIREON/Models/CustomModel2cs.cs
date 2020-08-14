@@ -9,7 +9,6 @@ namespace SIREON.Models
     {
         public IEnumerable<Cubiculo> cubiculos { get; set; }
         public IEnumerable<Cubiculo> disponibilidads { get; set; }
-
-
+        public IEnumerable<Cubiculo> Ocupado { get; set; }
     }
 }

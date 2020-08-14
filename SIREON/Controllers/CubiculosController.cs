@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using EO.Internal;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
 using SIREON;
 using SIREON.Models;
 
@@ -27,22 +28,48 @@ namespace SIREON.Controllers
 
         
 
-        public ActionResult Disponibilidad(TimeSpan HEntrada)
+        public ActionResult Disponibilidad()
         {
             var Fechaa = DateTime.Now;
             var Fecha = Fechaa.Date;
             var hora = Fechaa.TimeOfDay.Hours;
-            //TimeSpan HEntrada = new TimeSpan(08, 0, 0);
+            TimeSpan HEntrada = new TimeSpan(hora, 0, 0);
             CustomModel2cs mymodel = new CustomModel2cs();
 
             var nodisp = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any());
 
             mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
-            mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any()).ToList();
-
+            mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Reservado").Any()).ToList();
+            mymodel.Ocupado = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Ocupado").Any()).ToList();
             return View(mymodel);
 
         }
+
+
+        public JsonResult Disponibilidad2(TimeSpan? HEntrada)
+        {
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+            var hora = Fechaa.TimeOfDay.Hours;
+            //TimeSpan HEntrada = new TimeSpan(08, 0, 0);
+            db.Configuration.ProxyCreationEnabled = false;
+
+            CustomModel2cs mymodel = new CustomModel2cs();
+
+            var nodisp = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any());
+            var disp = db.Cubiculos.Except(nodisp).ToList();
+            mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
+            mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Reservado").Any()).ToList();
+            mymodel.Ocupado = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Ocupado").Any()).ToList();
+            
+            
+            //var json = JsonConvert.SerializeObject(mymodel);
+            return Json(mymodel, JsonRequestBehavior.AllowGet);
+
+        }
+
+
+
 
         public ActionResult Disp2()
         {
