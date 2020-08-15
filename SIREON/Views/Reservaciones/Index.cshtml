@@ -113,7 +113,8 @@
                                     <tr>
 
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                            @*@Html.DisplayFor(modelItem => item.FechaSolicitada)*@
+                                            Hoy
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.HSolicitada)
@@ -136,7 +137,7 @@
                                                 }
                                                 else if (item.Estatus == "Cancelada ")
                                                 {
-                                                    <label class="badge badge-warning">Cancelada</label>
+                                                    <label class="badge badge-danger">Cancelada</label>
                                                 }
                                                 else if (item.Estatus == "Rechazada ")
                                                 {
@@ -145,6 +146,10 @@
                                                 else if (item.Estatus == "En espera ")
                                                 {
                                                     <label class="badge badge-warning">En espera</label>
+                                                }
+                                                else if (item.Estatus == "EnCurso   ")
+                                                {
+                                                    <label class="badge badge-warning">En curso</label>
                                                 }
                                                 else
                                                 {
@@ -167,6 +172,14 @@
                                                     @Html.ActionLink("Dar entrada", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-success" })
 
                                                 }
+                                                else if (item.Estatus == "EnCurso   ")
+                                                {
+                                                    <button class="btn btn-success" disabled>Dar entrada</button>
+                                                }
+                                                else if (item.Estatus == "Activa    ")
+                                                {
+                                                    <button class="btn btn-success">Dar entrada</button>
+                                                }
                                                 else
                                                 {
                                                     <button class="btn btn-success" disabled>Dar entrada</button>
@@ -181,8 +194,12 @@
                                             @{
                                                 if (item.Estatus == "Activa    ")
                                                 {
-                                                    @Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
-
+                                                    //@Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                    <a data-itemId="0" href="#" class="btn btn-danger">Rechazar</a>
+                                                }
+                                                else if (item.Estatus == "EnCurso   ")
+                                                {
+                                                    <button class="btn btn-danger" disabled>Rechazar</button>
                                                 }
                                                 else
                                                 {
@@ -316,6 +333,7 @@
                                         <th>
                                             Fecha
                                         </th>
+                                        <th></th>
                                         <th>
                                             Hora solicitada
                                         </th>
@@ -334,6 +352,8 @@
 
                                         <th></th>
                                         <th></th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -345,8 +365,10 @@
                                             <tr>
 
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.FechaSolicitada)
+                                                    @*@Html.DisplayFor(modelItem => item.FechaSolicitada)*@
+                                                    Hoy
                                                 </td>
+                                                <td></td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.HSolicitada)
                                                 </td>
@@ -377,6 +399,10 @@
                                                         {
                                                             <label class="badge badge-warning">En espera</label>
                                                         }
+                                                        else if (item.Estatus == "EnCurso   ")
+                                                        {
+                                                            <label class="badge badge-warning">En curso</label>
+                                                        }
                                                         else
                                                         {
                                                             <label class="badge badge-success">Completada</label>
@@ -386,6 +412,8 @@
 
 
                                                 </td>
+                                                <td></td>
+                                                <td></td>
                                                 <td>
 
                                                     @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
@@ -397,6 +425,10 @@
                                                         {
                                                             @Html.ActionLink("Cancelar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
 
+                                                        }
+                                                        else if (item.Estatus == "EnCurso   ")
+                                                        {
+                                                            <button class="btn btn-danger" disabled>Cancelar</button>
                                                         }
                                                         else
                                                         {
@@ -430,6 +462,66 @@
 </body>
 </html>
 
+
+<script>
+    function Consultar(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Consultar",
+            data: data,
+            success: function (result2) {
+
+            },
+            error: function () {
+                alert("Error! Verificar datos")
+            }
+        });
+    }
+    $("#Consultar").one('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#Horaentrada").val()) == "") return;
+
+        var data = JSON.stringify({
+            HEntrada: $("#Horaentrada").val(),
+
+        });
+
+        console.log(data);
+
+        $.when(Consultar(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+</script>
+
+
+
+<script>
+    // After Add A New Order In The List, If You Want, You Can Remove It.
+    $(document).on('click', 'a.btn.btn-danger', function (e) {
+        var $self = $(this);
+        if ($(this).attr('data-itemId') == "0") {
+
+            $(this).parents('tr').css("background-color", "#ff6347").fadeOut(800, function () {
+                $(this).remove();
+                cantidad = cantidad - 1;
+            });
+
+        }
+
+    });
+
+
+
+</script>
+
+
+@*FILTROS DE BUSQUEDA*@
 <script>
     $(document).ready(function () {
         $(".name").on("click", function () {

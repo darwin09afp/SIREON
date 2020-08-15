@@ -33,7 +33,7 @@ namespace SIREON.Controllers
                 var hora = fecha.TimeOfDay;
                 var reservaciones = db.Reservaciones
                     .Where(x => x.Estatus != "Completada" || x.Estatus != "Rechazada" || x.Estatus != "Cancelada" || x.Estatus != "En Espera")
-                    .Where(x => x.HSalida >= hora)
+                    //.Where(x => x.HSalida >= hora)
                     .Where(x => x.Fecha == fechaa).ToList();
                 
                 return View(reservaciones.ToList());
@@ -48,7 +48,7 @@ namespace SIREON.Controllers
                 var reservaciones = db.Reservaciones
                     .Where(x => x.IdAspNetUsers == user)
                     .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
-                    .Where(x => x.HEntrada >= hora)
+                    //.Where(x => x.HEntrada >= hora)
                     .Where(x => x.Fecha == fechaa).ToList();
 
                 return View(reservaciones.ToList());
@@ -195,6 +195,51 @@ namespace SIREON.Controllers
 
             return Json(result2, JsonRequestBehavior.AllowGet);
         }
+
+
+        [HttpPost]
+        public ActionResult DarEntrada(Int32? idres, Int32? idcub, TimeSpan? HEntrada, DateTime? Fecha)
+        {
+
+            var query = db.Reservaciones.Where(x => x.ID_Reservacion == idres).FirstOrDefault();
+            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Reservado").First();
+            query.Estatus = "EnCurso";
+            cub.Estatus = "Ocupado";
+            db.SaveChanges();
+            var res = "Listo";
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Rechazar(Int32? idres, Int32? idcub, TimeSpan? HEntrada, DateTime? Fecha)
+        {
+
+            var query = db.Reservaciones.Where(x => x.ID_Reservacion == idres).FirstOrDefault();
+            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Reservado").First();
+            query.Estatus = "Rechazada";
+            cub.Estatus = "Disponible";
+            db.SaveChanges();
+            var res = "Listo";
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public ActionResult Cancelar(Int32? idres, Int32? idcub, TimeSpan? HEntrada, DateTime? Fecha)
+        {
+
+            var query = db.Reservaciones.Where(x => x.ID_Reservacion == idres).FirstOrDefault();
+            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Reservado").First();
+            query.Estatus = "Cancelada";
+            cub.Estatus = "Disponible";
+            db.SaveChanges();
+            var res = "Listo";
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
 
 
         public JsonResult Usuario()

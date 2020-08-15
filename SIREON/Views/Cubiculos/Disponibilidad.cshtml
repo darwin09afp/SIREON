@@ -1,8 +1,7 @@
 ﻿@model SIREON.Models.CustomModel2cs
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Disponibilidad | SIREON";
 }
-<h2>@ViewBag.Message</h2>
 
 <div class="row">
     
@@ -52,7 +51,6 @@
         </div>
     </div>
 </div>
-<br />
 <div class="row" id="Cubiculos2" style="display:none">
 
 </div>
@@ -136,10 +134,7 @@
 
 
 <script>
-
-
-
-    //cosnultar cubículos
+    //consultar cubículos
     function Consultar(data) {
         return $.ajax({
             contentType: 'application/json; charset=utf-8',
@@ -176,7 +171,7 @@
                 $.each(mymodel.disponibilidads, function (i, value) {
                     //alert('Value of ' + i + ' is : ' + value.Estatus);
 
-                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Reservado.jpg"></div></a><p>Estado: Reservado</p></div></div></div>');
+                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Reservado.jpg"></div><br/></a><p>Estado: Reservado</p></div></div></div>');
 
                 })
 
@@ -189,7 +184,7 @@
                 $.each(mymodel.Ocupado, function (i, value) {
                     //alert('Value of ' + i + ' is : ' + value.Estatus);
 
-                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/EnUso.jpg" alt="" width="100"></div></a><p>Estado: Ocupado</p></div></div></div>');
+                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/EnUso.jpg"></div><br/></a><p>Estado: Ocupado</p></div></div></div>');
 
                 })
 

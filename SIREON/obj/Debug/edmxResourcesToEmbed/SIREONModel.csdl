@@ -98,7 +98,7 @@
     </Key>
     <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ID_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Fecha" Type="DateTime" Precision="3" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" />
     <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
     <Property Name="FechaSolicitada" Type="DateTime" Precision="0" Nullable="false" />
     <Property Name="HSolicitada" Type="Time" Precision="7" Nullable="false" />

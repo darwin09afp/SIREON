@@ -161,10 +161,10 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.Co
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csproj.CopyComplete
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.pdb
-C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.Base.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebBrowser.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebEngine.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.Base.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebBrowser.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebEngine.xml
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache

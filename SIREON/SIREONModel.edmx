@@ -110,7 +110,7 @@
           <Property Name="ID_Reservacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="ID_Empleado" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Fecha" Type="datetime" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
           <Property Name="ID_Cubiculo" Type="int" Nullable="false" />
           <Property Name="FechaSolicitada" Type="date" Nullable="false" />
           <Property Name="HSolicitada" Type="time" Precision="7" Nullable="false" />
@@ -455,7 +455,7 @@
           </Key>
           <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
           <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
           <Property Name="FechaSolicitada" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="HSolicitada" Type="Time" Precision="7" Nullable="false" />

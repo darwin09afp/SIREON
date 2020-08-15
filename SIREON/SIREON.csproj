@@ -281,7 +281,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="sysdiagram.cs">
-      <DependentUpon>UniversidadModel.tt</DependentUpon>
+      <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UniversidadModel.Context.cs">
       <AutoGen>True</AutoGen>

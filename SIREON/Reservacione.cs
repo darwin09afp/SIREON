@@ -37,12 +37,6 @@ namespace SIREON
         public virtual AspNetUser AspNetUser1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
-
-        internal static object AsEnumerable()
-        {
-            throw new NotImplementedException();
-        }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios1 { get; set; }
     }

@@ -3,264 +3,470 @@
 @{
     ViewBag.Title = "Detalles | SIREON";
 }
-    <head>
-        <style>
-            table {
-                height: 300px;
-                overflow: auto;
-            }
-        </style>
-        
-    </head>
-    <div>
-        <h4>Detalles de reservacion</h4>
-        <br />
-        <div class="row">
-            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
-                    <div class="grid-body">
-                        <h1 class="grid-title">
-                            Fecha
-                        </h1>
-                        <a href="#">
-                            <div class="item-wrapper">
+<head>
+    <style>
+        table {
+            height: 300px;
+            overflow: auto;
+        }
+    </style>
 
-                            </div>
-                        </a>
-                        <p>
+</head>
+<div>
+    <h4>Detalles de reservación</h4>
+    <br />
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Fecha
+                    </h1>
+                    <a href="#">
+                        <div class="item-wrapper">
 
-                        </p>
-                        <p>
-                            @Html.DisplayFor(model => model.Fecha)
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
-                    <div class="grid-body">
-                        <h1 class="grid-title">
-                            Horario
-                        </h1>
-                        <a href="#">
-                            <div class="item-wrapper">
-                            </div>
-                        </a>
-                        <p>
-                            @Html.DisplayFor(model => model.HEntrada)  -  @Html.DisplayFor(model => model.HSalida)
-
-                        </p>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
-                    <div class="grid-body">
-                        <h1 class="grid-title">
-                            Cubículo No.
-                        </h1>
-                        <h1>
-                            @Html.DisplayFor(model => model.Cubiculo.Descripcion)
-                        </h1>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
-                    <div class="grid-body">
-                        <h1 class="grid-title">
-                            Estatus
-                        </h1>
-                        @if ((Model.Estatus) == "Activa    ")
-                        {
-                            <br />
-                            <a href="#">
-                                <div class="item-wrapper">
-                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
-                                </div>
-                            </a>
-                            <br />
-                            <p>
-                                Proxima 
-                            </p>
-                            <br />
-                            <p>
-                                <input type="button" class="btn btn-danger" value="Cancelar reservación" />
-                            </p>
-                        }
-                        else if ((Model.Estatus) == "Cancelada ")
-                        {
-                            <br />
-                            <a href="#">
-                                <div class="item-wrapper">
-                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/warning.png" alt="" width="200">
-
-                                </div>
-                            </a>
-                            <br />
-                            <p>
-                                Cancelada
-                            </p>
-                        }
-                        else if ((Model.Estatus) == "Rechazada ")
-                        {
-                            <br />
-                            <a href="#">
-                                <div class="item-wrapper" style="justify-content:center">
-                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Rechazada.png" alt="" width="200">
-
-                                </div>
-                            </a>
-                            <br />
-                            <p>
-                                Rechazada
-                            </p>
-                        }
-                        else if ((Model.Estatus) == "En espera ")
-                        {
-                            <br />
-                            <a href="#">
-                                <div class="item-wrapper" style="justify-content:center">
-                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Wait.png" alt="" width="200">
-
-                                </div>
-                            </a>
-                            <br />
-                            <p>
-                                En espera de disponibilidad
-                            </p>
-                        }
-                        else
-                        {
-                            <br />
-                            <a href="#">
-                                <div class="item-wrapper">
-                                    <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
-
-                                </div>
-                            </a>
-                            <br />
-                            <p>
-                                Completada
-                            </p>
-                        }
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8 col-sm-8 equel-grid" style="text-align:center">
-                <div class="grid">
-                    <div class="grid-body">
-                        <div class="split-header">
-                            <p class="card-title">
-                                <img class="img-sm mt-1 mb-1 mr-2" src="~/Content/images/Participantes.png" alt="" width="25">Participantes
-                            </p>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-trasnparent action-btn btn-xs component-flat pr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="mdi mdi-dots-vertical"></i>
-                                </button>
-                            </div>
                         </div>
-                        <div class="vertical-timeline-wrapper">
-                            <div class="timeline-vertical dashboard-timeline">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th width="20" style="text-align:left">Nombre</th>
-                                            <th width="20">Matricula/Cédula</th>
-                                            <th width="60"></th>
-                                        </tr>
-                                    </thead>
+                    </a>
+                    <p>
 
-                                    <tbody>
-                                        <tr>
-                                            <td class="d-flex align-items-center border-top-0">
-                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">
-                                                <span>Herman Rosado</span>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    hr20-0182
-                                                </p>
-                                            </td>
-                                            <td>
-                                                
-                                                @{
-                                                    if (Model.Estatus == "Activa    ")
-                                                    {
-                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                    }
-                                                    else
-                                                    {
-                                                       
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="d-flex align-items-center border-top-0">
-                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">
-                                                <span>Elena Peralta</span>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    ep20-1132
-                                                </p>
-                                            </td>
-                                            <td>
-                                                @{
-                                                    if (Model.Estatus == "Activa    ")
-                                                    {
-                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                    }
-                                                    else
-                                                    {
+                    </p>
+                    <p>
+                        @Html.DisplayFor(model => model.Fecha)
 
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="d-flex align-items-center border-top-0">
-                                                <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">
-                                                <span>Maria Castillo</span>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    mc19-3185
-                                                </p>
-                                            </td>
-                                            <td>
-                                                @{
-                                                    if (Model.Estatus == "Activa    ")
-                                                    {
-                                                        <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                    }
-                                                    else
-                                                    {
-
-                                                    }
-                                                }
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                              
-                    </div>
+                    </p>
                 </div>
             </div>
-
         </div>
-        
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center; display:none ">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <p>
+                        <input type="text" id="idres" value="@Html.DisplayFor(model => model.ID_Reservacion)" />
+                        <input type="text" id="idcub" value="@Html.DisplayFor(model => model.ID_Cubiculo)" />
+                        <input type="text" id="HEntrada" value="@Html.DisplayFor(model => model.HEntrada)" />
+                        <input type="text" id="Fecha" value="@Html.DisplayFor(model => model.Fecha)" />
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Horario
+                    </h1>
+                    <a href="#">
+                        <div class="item-wrapper">
+                        </div>
+                    </a>
+                    <p>
+                        @Html.DisplayFor(model => model.HEntrada)  -  @Html.DisplayFor(model => model.HSalida)
+
+                    </p>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Cubículo No.
+                    </h1>
+                    <h1>
+                        @Html.DisplayFor(model => model.Cubiculo.Descripcion)
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Estatus
+                    </h1>
+                    @if ((Model.Estatus) == "Activa    ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            Próxima
+                        </p>
+                        <br />
+                        <p>
+
+                            @if (User.IsInRole("Operador"))
+                            {
+                                <div class="row" style="justify-content:space-around">
+                                    <input type="button" class="btn btn-success" id="DarEntrada" value="Dar entrada" />
+                                    <input type="button" class="btn btn-danger" id="Rechazar" value="Rechazar reservación" />
+                                </div>
+
+                            }
+                            else
+                            {
+                                <input type="button" class="btn btn-danger" id="Cancelar" value="Cancelar reservación" />
+
+                            }
+                        </p>
+                    }
+                    else if ((Model.Estatus) == "Cancelada ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/warning.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            Cancelada
+                        </p>
+                    }
+                    else if ((Model.Estatus) == "Rechazada ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper" style="justify-content:center">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Rechazada.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            Rechazada
+                        </p>
+                    }
+                    else if ((Model.Estatus) == "En espera ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper" style="justify-content:center">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Wait.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            En espera de disponibilidad
+                        </p>
+                        <br />
+                        <p>
+
+                            @if (User.IsInRole("Operador"))
+                            {
+                                <div class="row" style="justify-content:space-around">
+                                    <input type="button" class="btn btn-success" id="DarEntrada2" value="Dar entrada"/>
+                                    <input type="button" class="btn btn-danger" id="Rechazar" value="Rechazar reservación" />
+                                </div>
+
+                            }
+                            else
+                            {
+                                <input type="button" class="btn btn-danger" id="Cancelar" value="Cancelar reservación" />
+
+                            }
+                        </p>
+                    }
+                    else if ((Model.Estatus) == "EnCurso   ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper" style="justify-content:center">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/EnCurso.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            En curso
+                        </p>
+                    }
+                    else
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <p>
+                            Completada
+                        </p>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 equel-grid" style="text-align:center">
+            <div class="grid">
+                <div class="grid-body">
+                    <div class="split-header">
+                        <p class="card-title">
+                            <img class="img-sm mt-1 mb-1 mr-2" src="~/Content/images/Participantes.png" alt="" width="25">Participantes
+                        </p>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-trasnparent action-btn btn-xs component-flat pr-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-dots-vertical"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="vertical-timeline-wrapper">
+                        <div class="timeline-vertical dashboard-timeline">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="20" style="text-align:left">Nombre</th>
+                                        <th width="20">Matricula/Cédula</th>
+                                        <th width="60"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td class="d-flex align-items-center border-top-0">
+                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">
+                                            <span>Herman Rosado</span>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                hr20-0182
+                                            </p>
+                                        </td>
+                                        <td>
+
+                                            @{
+                                                if (Model.Estatus == "Activa    ")
+                                                {
+                                                    <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                }
+                                                else
+                                                {
+
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex align-items-center border-top-0">
+                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">
+                                            <span>Elena Peralta</span>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                ep20-1132
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (Model.Estatus == "Activa    ")
+                                                {
+                                                    <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                }
+                                                else
+                                                {
+
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="d-flex align-items-center border-top-0">
+                                            <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">
+                                            <span>Maria Castillo</span>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                mc19-3185
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @{
+                                                if (Model.Estatus == "Activa    ")
+                                                {
+                                                    <input type="button" class="btn-sm btn-danger" value="Eliminar" />
+                                                }
+                                                else
+                                                {
+
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </div>
+
+</div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Reservacion }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    //Dar entrada
+    function DarEntrada(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/DarEntrada",
+            data: data,
+            success: function (res) {
+                swal("¡Listo!", "Reservacion en curso", "success")
+                    .then((value) => {
+                        location.reload();
+                    });
+            },
+            error: function () {
+                swal("Error", "Datos erróneos", "danger")
+                    .then((value) => {
+                        location.reload();
+                    });
+            }
+        });
+    }
+    $("#DarEntrada").one('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#idres").val()) == "") return;
+
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+            idcub: $("#idcub").val(),
+            HEntrada: $("#HEntrada").val(),
+            Fecha: $("#Fecha").val(),
+        });
+
+        console.log(data);
+
+        $.when(DarEntrada(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+</script>
+
+
+<script>
+    //Rechazar
+    function Rechazar(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Rechazar",
+            data: data,
+            success: function (res) {
+                swal("¡Listo!", "Reservación rechazada", "success")
+                    .then((value) => {
+                        location.reload();
+                    });
+            },
+            error: function () {
+                swal("Error", "Datos erróneos", "danger")
+                    .then((value) => {
+                        location.reload();
+                    });
+            }
+        });
+    }
+    $("#Rechazar").one('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#idres").val()) == "") return;
+
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+            idcub: $("#idcub").val(),
+            HEntrada: $("#HEntrada").val(),
+            Fecha: $("#Fecha").val(),
+        });
+
+        console.log(data);
+
+        $.when(Rechazar(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+</script>
+
+
+<script>
+    //Cancelar 
+    function Cancelar(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Cancelar",
+            data: data,
+            success: function (res) {
+                swal("¡Listo!", "Reservación cancelada", "success")
+                    .then((value) => {
+                        location.reload();
+                    });
+            },
+            error: function () {
+                swal("Error", "Datos erróneos", "danger")
+                    .then((value) => {
+                        location.reload();
+                    });
+            }
+        });
+    }
+    $("#Cancelar").one('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#idres").val()) == "") return;
+
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+            idcub: $("#idcub").val(),
+            HEntrada: $("#HEntrada").val(),
+            Fecha: $("#Fecha").val(),
+        });
+
+        console.log(data);
+
+        $.when(Cancelar(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+</script>
