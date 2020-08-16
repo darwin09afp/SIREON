@@ -60,7 +60,7 @@
                                     Solicitante
                                 </th>
                                 <th>
-                                    Operador
+                                    Auxiliar
                                 </th>
                                 <th>
                                     Fecha
@@ -131,10 +131,9 @@
 
                                     </td>
                                     <td>
-                                        @*@Html.ActionLink("Edit", "Edit", new { id = item.ID_Reservacion }) |*@
                                         @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID_Reservacion })*@
                                     </td>
+                                    <td></td>
                                 </tr>
                             }
                         </tbody>

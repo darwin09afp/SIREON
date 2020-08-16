@@ -26,6 +26,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    Solicitante
+                                </th>
+                                <th>
                                     Fecha
                                 </th>
                                 <th>
@@ -44,15 +47,15 @@
                                     Estatus de reservación
                                 </th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="myTable">
                             @foreach (var item in Model)
                             {
                                 <tr>
-
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IdAspNetUsers)
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.FechaSolicitada)
                                     </td>
@@ -69,7 +72,6 @@
                                         @Html.DisplayFor(modelItem => item.ID_Cubiculo)
                                     </td>
                                     <td>
-
                                         @{
                                             if (item.Estatus == "Activa    ")
                                             {
@@ -92,15 +94,14 @@
                                                 <label class="badge badge-success">Completada</label>
                                             }
                                         }
-
-
                                     </td>
                                     <td>
 
                                         @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
 
                                     </td>
-                                    <td>
+                                    <td></td>
+                                    @*<td>
 
                                         @{
                                             if (item.Estatus == "En espera ")
@@ -116,7 +117,7 @@
                                         }
 
 
-                                    </td>
+                                    </td>*@
                                     
 
                                 </tr>

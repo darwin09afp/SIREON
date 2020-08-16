@@ -32,7 +32,7 @@ namespace SIREON.Controllers
                 var fechaa = fecha.Date;
                 var hora = fecha.TimeOfDay;
                 var reservaciones = db.Reservaciones
-                    .Where(x => x.Estatus != "Completada" || x.Estatus != "Rechazada" || x.Estatus != "Cancelada" || x.Estatus != "En Espera")
+                    .Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")
                     //.Where(x => x.HSalida >= hora)
                     .Where(x => x.Fecha == fechaa).ToList();
                 
@@ -54,9 +54,6 @@ namespace SIREON.Controllers
                 return View(reservaciones.ToList());
                 
             }
-
-
-
 
         }
 
@@ -295,6 +292,8 @@ namespace SIREON.Controllers
 
         }
 
+
+
         public JsonResult Usuario3(string IdAspNetUser)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
@@ -322,9 +321,107 @@ namespace SIREON.Controllers
 
         }
 
+        public JsonResult Usuario4(string IdAspNetUsers2)
+        {
+            //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            var BuscarCorreo = db.AspNetUsers.Where(x => x.Id == IdAspNetUsers2).FirstOrDefault().Email;
+            var BuscarNombre = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Nombre;
+            var BuscarApellido = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Apellido;
+
+            var result3 = new string[] { BuscarNombre, BuscarApellido };
+            //string str1 = strArr[0], str2 = strArr[1];
+
+            //var json = JsonConvert.SerializeObject(query);
 
 
+            return Json(result3, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public JsonResult AsignarCubiculo(string IdAspNetUsers2, Int32 idres, TimeSpan HEntrada, TimeSpan HSalida)
+        {
+            //Disponibilidad
+            //#region disponibilidad
+            List<int> CubNoDisp = new List<int>();
+            List<int> Cubs = new List<int>();
+            var Fechaa = DateTime.Now;
+            var Fecha = Fechaa.Date;
+            var SelHora = Fechaa.TimeOfDay;
+
+            //foreach (var item in db.Cubiculos)
+            //{
+            //    var idcub = item.ID_Cubiculo;
+            //    Cubs.Add(idcub);
+            //    foreach (var item2 in db.Disponibilidads)
+            //    {
+
+            //        if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+            //        {
+            //            CubNoDisp.Add(idcub);
+            //        }
+            //        else
+            //        {
+            //            //sigue buscando
+            //        }
+
+
+            //    }
+
+            //}
+
+            //var CubDisp = Cubs.Except(CubNoDisp).ToList();
+            //bool isEmpty = !CubDisp.Any();
+            //#endregion
+
+
+            //if (isEmpty == true)
+            //{
+            //    //model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
+            //    //model.Estatus = "En espera";
+            //    //result = "Se colocó su reservación en la lista de espera para la hora seleccionada";
+
+            //    ////Agregar a tb Disponibilidad
+            //    //Disponibilidad model2 = new Disponibilidad();
+            //    //model2.IdCubiculo = model.ID_Cubiculo;
+            //    //model2.HoraInicial = HEntrada;
+            //    //model2.HoraFinal = HSalida;
+            //    //model2.Fecha = SelFecha;
+            //    //model2.Estatus = "En Espera";
+            //    //db.Disponibilidads.Add(model2);
+
+            //}
+            //else
+            //{
+            //    var cubiculo = db.Cubiculos.ToList()
+            //                .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
+            //                .OrderBy(cubi => cubi.ID_Cubiculo)
+            //                .First().ID_Cubiculo;
+
+            var cubiculoo = db.Disponibilidads.Where(x => x.Fecha == Fecha && x.HoraInicial == HEntrada && x.Estatus == "Disponible").First();
+            var res = db.Reservaciones.Where(x => x.ID_Reservacion == idres).First();
+            
+            res.ID_Cubiculo = cubiculoo.IdCubiculo; ;
+            res.Estatus = "EnCurso";
+            cubiculoo.Estatus = "Ocupado";
+            db.SaveChanges();
+
+                ////Agregar a tb Disponibilidad
+                //Disponibilidad model2 = new Disponibilidad();
+                //model2.IdCubiculo = cubiculo;
+                //model2.HoraInicial = HEntrada;
+                //model2.HoraFinal = HSalida;
+                //model2.Fecha = Fecha;
+                //model2.Estatus = "Ocupado";
+                //db.Disponibilidads.Add(model2);
+                //db.SaveChanges();
+
+
+            //}
+            var result2 = "a";
+
+            return Json(result2, JsonRequestBehavior.AllowGet);
+
+        }
 
 
         [HttpPost]
@@ -472,9 +569,6 @@ namespace SIREON.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-
-
         #region 
         //public ActionResult Disponibilidad2()
         //{
