@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SIREON;
 
 namespace SIREON.Controllers
@@ -17,9 +18,33 @@ namespace SIREON.Controllers
         // GET: ListaNegra
         public ActionResult Index()
         {
-            var ListaNegra = db.ListaNegras.Include(l => l.AspNetUser);
-            return View(ListaNegra.ToList());
+            var listaNegras = db.ListaNegras.Include(l => l.AspNetUser).Include(l => l.AspNetUser1);
+            return View(listaNegras.ToList());
         }
+
+
+
+        [HttpPost]
+        public ActionResult Agregar(string iduser, DateTime? FechaSalida, string Motivo)
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+
+            ListaNegra listaNegra = new ListaNegra();
+            listaNegra.IdAspNetUsers = iduser;
+            listaNegra.Id_Empleado = User.Identity.GetUserId();
+            listaNegra.FechaEntrada = fecha;
+            listaNegra.FechaSalida = FechaSalida;
+            listaNegra.Descripcion = Motivo;
+            listaNegra.Estatus = "Bloqueado";
+            db.ListaNegras.Add(listaNegra);
+            db.SaveChanges();
+            var res = "Listo";
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         // GET: ListaNegra/Details/5
         public ActionResult Details(int? id)
@@ -40,15 +65,16 @@ namespace SIREON.Controllers
         public ActionResult Create()
         {
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Id_Empleado = new SelectList(db.AspNetUsers, "Id", "Email");
             return View();
         }
 
         // POST: ListaNegra/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers")] ListaNegra listaNegra)
+        public ActionResult Create([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers,FechaEntrada,FechaSalida,Estatus,Id_Empleado")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +84,7 @@ namespace SIREON.Controllers
             }
 
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.Id_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.Id_Empleado);
             return View(listaNegra);
         }
 
@@ -74,15 +101,16 @@ namespace SIREON.Controllers
                 return HttpNotFound();
             }
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.Id_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.Id_Empleado);
             return View(listaNegra);
         }
 
         // POST: ListaNegra/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers")] ListaNegra listaNegra)
+        public ActionResult Edit([Bind(Include = "ID_ListaN,Descripcion,IdAspNetUsers,FechaEntrada,FechaSalida,Estatus,Id_Empleado")] ListaNegra listaNegra)
         {
             if (ModelState.IsValid)
             {
@@ -91,6 +119,7 @@ namespace SIREON.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.IdAspNetUsers);
+            ViewBag.Id_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", listaNegra.Id_Empleado);
             return View(listaNegra);
         }
 

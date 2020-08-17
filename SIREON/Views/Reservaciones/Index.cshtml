@@ -39,7 +39,7 @@
         {
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 equel-grid">
-                <div class="grid">
+                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                     <div class="grid-body">
                         <h2 class="grid-title">Acciones</h2>
                         <div class="row"  style="justify-content:space-around">
@@ -57,48 +57,46 @@
                     </div>
                 </div>
             </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-                    <div class="col-md-3 col-sm-3 grid">
-                        <div class="grid-body">
-                            <p>
-                                <a>
+            <div class="col-lg-3 col-md-3 col-sm-3 grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
+                <div class="grid-body">
+                    <p>
+                        <a>
 
-                                </a>
-                            </p>
+                        </a>
+                    </p>
 
-                            @{
-                                var CantRes = 0;
-                                foreach (var itemm in Model)
-                                {
-                                    CantRes = CantRes + 1;
-                                }
-                                <h1>
-                                    @CantRes
-                                </h1>
+                    @{
+                        var CantRes = 0;
+                        foreach (var itemm in Model)
+                        {
+                            CantRes = CantRes + 1;
+                        }
+                        <h1>
+                            @CantRes
+                        </h1>
 
-                            }
+                    }
 
 
-                            <p>
-                                <a>
+                    <p>
+                        <a>
 
-                                </a>
-                            </p>
-                            <p>
-                                Reservaciones en espera
-                            </p>
-                            <p>
-                                <a>
+                        </a>
+                    </p>
+                    <p>
+                        Reservaciones en espera
+                    </p>
+                    <p>
+                        <a>
 
-                                </a>
-                            </p>
-                        </div>
-                    </div>
+                        </a>
+                    </p>
                 </div>
+            </div>
         </div>
         <br />
         <div class="col-lg-12">
-            <div class="grid">
+            <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                 <p class="grid-header" style="border-left-color:green">Reservaciones activas</p>
                 <div class="item-wrapper">
                     <div class="row" style="justify-content:space-around">
@@ -159,11 +157,22 @@
                                         @Html.DisplayFor(modelItem => item.IdAspNetUsers)
                                     </td>
                                     <td>
-                                        @*@Html.DisplayFor(modelItem => item.FechaSolicitada)*@
-                                        Hoy
+                                        @{
+
+                                            var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                            @Html.DisplayFor(m => fecha)
+
+
+                                        }
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.HSolicitada)
+                                        @{
+
+                                            var Hora = item.HSolicitada;
+                                            @Html.DisplayFor(m => Hora)
+
+
+                                        }
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.HEntrada)
@@ -285,7 +294,7 @@
         else
         {
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center;box-shadow: 0 0 10px -5px #bcbebf;">
                 <div class="col-md-3 col-sm-3 grid">
                     <div class="grid-body">
                         <p>
@@ -325,7 +334,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6 equel-grid">
-                <div class="grid">
+                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                     <div class="grid-body">
                         <h2 class="grid-title">Acciones</h2>
                         <div class="item-wrapper">
@@ -339,7 +348,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
                 <div class="col-md-3 col-sm-3 grid">
                     <div class="grid-body">
                         <p>
@@ -381,7 +390,7 @@
         </div>
         <br />
         <div class="col-lg-12">
-            <div class="grid">
+            <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                 <p class="grid-header" style="border-left-color:green">Mis reservaciones para hoy</p>
                 <div class="item-wrapper">
                     <div class="table-responsive">
@@ -422,8 +431,13 @@
                                     <tr>
                                     
                                         <td>
-                                            @*@Html.DisplayFor(modelItem => item.FechaSolicitada)*@
-                                            Hoy
+                                             @{
+
+                                            var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                            @Html.DisplayFor(m => fecha)
+
+
+                                        }
                                         </td>
                                         <td></td>
                                         <td>

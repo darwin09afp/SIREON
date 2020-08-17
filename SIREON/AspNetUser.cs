@@ -24,6 +24,7 @@ namespace SIREON
             this.Reservaciones = new HashSet<Reservacione>();
             this.Reservaciones1 = new HashSet<Reservacione>();
             this.Reservaciones_Usuarios = new HashSet<Reservaciones_Usuarios>();
+            this.ListaNegras1 = new HashSet<ListaNegra>();
         }
     
         public string Id { get; set; }
@@ -54,5 +55,7 @@ namespace SIREON
         public virtual ICollection<Reservacione> Reservaciones1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ListaNegra> ListaNegras1 { get; set; }
     }
 }

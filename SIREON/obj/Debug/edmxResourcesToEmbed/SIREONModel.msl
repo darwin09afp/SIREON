@@ -70,6 +70,10 @@
     <EntitySetMapping Name="ListaNegras">
       <EntityTypeMapping TypeName="SIREONModel.ListaNegra">
         <MappingFragment StoreEntitySet="ListaNegra">
+          <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
           <ScalarProperty Name="IdAspNetUsers" ColumnName="IdAspNetUsers" />
           <ScalarProperty Name="ID_ListaN" ColumnName="ID_ListaN" />
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

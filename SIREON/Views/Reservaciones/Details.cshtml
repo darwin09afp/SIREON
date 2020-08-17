@@ -54,8 +54,13 @@
 
                         </p>
                         <p>
-                            @Html.DisplayFor(model => model.Fecha)
+                            @{
 
+                                    var fecha = Model.Fecha.Date.ToShortDateString();
+                                    @Html.DisplayFor(m => fecha)
+
+
+                            }
                         </p>
                     </div>
                 </div>
@@ -379,7 +384,13 @@
 
                         </p>
                         <p>
-                            @Html.DisplayFor(model => model.Fecha)
+                            @{
+
+                                var fecha = Model.Fecha.Date.ToShortDateString();
+                                @Html.DisplayFor(m => fecha)
+
+
+                            }
 
                         </p>
                     </div>

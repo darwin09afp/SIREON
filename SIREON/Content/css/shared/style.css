@@ -9273,7 +9273,7 @@ table {
 .grid {
   background: #fff;
   border-radius: 6px;
-  box-shadow: 0 0 10px -5px rgba(183, 192, 206, 0.15);
+  box-shadow: 0 0 10px -5px #bcbebf;
   margin-bottom: 15px;
   border: 1px solid rgba(238, 238, 238, 0); }
 

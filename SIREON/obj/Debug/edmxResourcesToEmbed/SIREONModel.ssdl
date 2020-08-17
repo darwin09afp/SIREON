@@ -88,7 +88,11 @@
     </Key>
     <Property Name="ID_ListaN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Id_Empleado" Type="nvarchar" MaxLength="128" />
+    <Property Name="FechaEntrada" Type="date" />
+    <Property Name="FechaSalida" Type="date" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Estatus" Type="nchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Parametros">
     <Key>
@@ -213,6 +217,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ListaNegra_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListaNegra">
+        <PropertyRef Name="Id_Empleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Reservaciones_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
@@ -320,6 +336,10 @@
       <End Role="Disponibilidad" EntitySet="Disponibilidad" />
     </AssociationSet>
     <AssociationSet Name="FK_ListaNegra_AspNetUsers" Association="Self.FK_ListaNegra_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ListaNegra" EntitySet="ListaNegra" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListaNegra_AspNetUsers1" Association="Self.FK_ListaNegra_AspNetUsers1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="ListaNegra" EntitySet="ListaNegra" />
     </AssociationSet>

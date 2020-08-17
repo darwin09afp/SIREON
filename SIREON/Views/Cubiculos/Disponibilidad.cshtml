@@ -144,10 +144,23 @@
             data: data,
             success: function (mymodel) {
                 $('#Cubiculos1').hide(0)
+                
                 $('#Cubiculos2').show(0)
                 //console.log(mymodel.disponibilidads)
                 //console.log(mymodel.Ocupado)
                 //console.log(mymodel.cubiculos)
+                
+                var total = 0;
+                total = mymodel.cubiculos.length + mymodel.disponibilidads.length + mymodel.Ocupado.length;
+
+                for (var i = 0; i < total; i++) {
+                    $('#Dis' + i +'').hide(0)
+                    $('#Cub' + i + '').hide(0)
+                    $('#Ocs' + i + '').hide(0)
+                }
+
+
+
 
                 //Muestra Disponibles
                 for (var i = 0; i < mymodel.cubiculos.length; i++) {
@@ -158,7 +171,7 @@
                 $.each(mymodel.cubiculos, function (i, value) {
                     //alert('Value of ' + i + ' is : ' + value.Estatus);
 
-                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Disponible.jpg"></div></a><p>Capacidad: ' + value.Capacidad + ' Personas</p><p>Estado: Disponible</p></div></div></div>');
+                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; display:block" id="Cub' + i + '"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Disponible.jpg"></div></a><p>Capacidad: ' + value.Capacidad + ' Personas</p><p>Estado: Disponible</p></div></div></div>');
 
                 })
 
@@ -171,7 +184,7 @@
                 $.each(mymodel.disponibilidads, function (i, value) {
                     //alert('Value of ' + i + ' is : ' + value.Estatus);
 
-                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Reservado.jpg"></div><br/></a><p>Estado: Reservado</p></div></div></div>');
+                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; display:block" id="Dis' + i + '"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Reservado.jpg"></div><br/></a><p>Estado: Reservado</p></div></div></div>');
 
                 })
 
@@ -184,7 +197,7 @@
                 $.each(mymodel.Ocupado, function (i, value) {
                     //alert('Value of ' + i + ' is : ' + value.Estatus);
 
-                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/EnUso.jpg"></div><br/></a><p>Estado: Ocupado</p></div></div></div>');
+                    $('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; display:block" id="Ocs' + i + '"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/EnUso.jpg"></div><br/></a><p>Estado: Ocupado</p></div></div></div>');
 
                 })
 

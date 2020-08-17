@@ -47,7 +47,13 @@
             @Html.DisplayFor(modelItem => item.Fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FechaSolicitada)
+            @{
+
+                var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                @Html.DisplayFor(m => fecha)
+
+
+            }
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.HSolicitada)

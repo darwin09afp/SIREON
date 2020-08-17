@@ -17,7 +17,12 @@ namespace SIREON
         public int ID_ListaN { get; set; }
         public string Descripcion { get; set; }
         public string IdAspNetUsers { get; set; }
+        public Nullable<System.DateTime> FechaEntrada { get; set; }
+        public Nullable<System.DateTime> FechaSalida { get; set; }
+        public string Estatus { get; set; }
+        public string Id_Empleado { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }

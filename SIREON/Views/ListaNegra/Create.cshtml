@@ -1,45 +1,251 @@
 ﻿@model SIREON.ListaNegra
 
 @{
-
+    ViewBag.Title = "Agregar a lista negra | SIREON";
+    var fechaa = DateTime.Now;
+    var fecha = fechaa.Date.ToShortDateString();
 }
 
-<!DOCTYPE html>
-
 <body>
-    @using (Html.BeginForm()) 
-    {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>ListaNegra</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdAspNetUsers, "IdAspNetUsers", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("IdAspNetUsers", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.IdAspNetUsers, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+    <div class="col-lg-12">
+        <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+            <p class="grid-header" style="border-left-color:orange">Agregar usuario a la lista negra</p>
+            <div class="grid-body">
+                <div class="item-wrapper">
+                    <div class="row mb-3">
+                        <div class="col-md-8 mx-auto">
+                            <div class="form-group row showcase_row_area">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="IdAspNetUsers2">Matrícula/Código</label>
+                                </div>
+                                <div class="col-md-6 showcase_content_area">
+                                    <input type="text" class="form-control" id="IdAspNetUsers2" value="" placeholder="gm00-0000" maxlength="9" required>
+                                </div>
+                                <div class="col-md-3 col-sm-3 showcase_content_area">
+                                    <input type="button" class="btn btn-success" onclick="BtnClick()" value="Consultar">
+                                </div>
+
+                            </div>
+                            <div class="form-group row showcase_row_area">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="IdAspNetNombre2">Nombre</label>
+                                </div>
+                                <div class="col-md-9 showcase_content_area">
+                                    <input type="text" class="form-control" id="IdAspNetNombre2" value="" placeholder="Gabriela Marte" disabled required>
+                                </div>
+                            </div>
+                            <div class="form-group row showcase_row_area">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="inputType12">Correo</label>
+                                </div>
+                                <div class="col-md-9 showcase_content_area">
+                                    <input type="email" class="form-control" id="Correo" placeholder="gm00-0000@unphu.edu.do" disabled required>
+                                </div>
+                            </div>
+                            <div class="form-group row showcase_row_area" style="justify-content:center">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label></label>
+                                </div>
+                                <div class="col-md-4 row showcase_row_area">
+                                    <div class="col-md-3">
+                                        <label for="FechaEntrada">Desde</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" id="FechaEntrada" value="@fecha" disabled>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5 row showcase_row_area">
+                                    <div class="col-md-2">
+                                        <label for="FechaSalida">Hasta</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="date" class="form-control" id="FechaSalida" value="" required>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5 row showcase_row_area" style="display:none">
+                                    <input type="text" id="iduser" value="" />
+
+                                </div>
+                            </div>
+
+
+                            @*<div class="form-group row showcase_row_area">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="inputType1">Fecha de salida</label>
+                                </div>
+                                <div class="col-md-5 showcase_content_area">
+                                    <input type="date" class="form-control" id="FechaSalida" value="">
+                                </div>
+                            </div>*@
+                            <div class="form-group row showcase_row_area">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="Motivo">Motivo</label>
+                                </div>
+                                <div class="col-md-9 showcase_content_area">
+                                    <textarea class="form-control" id="Motivo" cols="12" rows="5" maxlength="100" required></textarea>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group row showcase_row_area" style="justify-content:center">
+                                <div class="col-md-3 showcase_text_area">
+                                    <label for="Agregar"></label>
+                                </div>
+                                <input type="button" class="btn btn-lg btn-warning" value="Agregar" id="Agregar" style="display:none"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
     </div>
 </body>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    //Insertar en Lista negra
+    function ListaN(data) {
+        var fechasal = $("#FechaSalida").val();
+        swal({
+            title: "¿Estás seguro?",
+            text: "Al seleccionar OK este usuario no podrá realizar reservaciones hasta "+ fechasal +".",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                return $.ajax({
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    type: 'POST',
+                    url: "/ListaNegra/Agregar",
+                    data: data,
+                    success: function (res) {
+                        swal("¡Listo!", "Usuario agregado a la lista", "success")
+                            .then((value) => {
+                                location.reload();
+                            });
+                    },
+                    error: function () {
+                        swal("Error", "Favor verificar los datos ingresados", "danger")
+                            .then((value) => {
+                                location.reload();
+                            });
+                    }
+                });
+            }
+        });
+    }
+    $("#Agregar").on('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#Motivo").val()) == "" || $.trim($("#FechaSalida").val()) == "") return;
+
+        var data = JSON.stringify({
+            iduser: $("#iduser").val(),
+            FechaSalida: $("#FechaSalida").val(),
+            Motivo: $("#Motivo").val(),
+        });
+
+        console.log(data);
+
+        $.when(ListaN(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+   
+</Script>
+
+
+<script>
+    //Consultar datos del estudiante
+    function BtnClick() {
+        var data = JSON.stringify({
+            IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+        });
+
+        console.log(data);
+
+        $.when(ConsMat(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+
+    }
+
+    function ConsMat(data) {
+        return $.ajax({
+
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Usuario2",
+            data: data,
+            success: function (result3) {
+                //alert(data)
+                //data = JSON.parse(data);
+                console.log(result3)
+                $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                $("#Correo").val($.trim(result3[2]));
+                $("#iduser").val($.trim(result3[3]));
+                $("#Agregar").show(0)
+            },
+            error: function () {
+                swal("¡Error!", "Favor verificar los datos", "warning");
+            }
+        });
+
+    }
+
+</script>
+
+
+
+
+
+@*<!DOCTYPE html>
+
+    <body>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>ListaNegra</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdAspNetUsers, "IdAspNetUsers", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("IdAspNetUsers", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdAspNetUsers, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </body>*@

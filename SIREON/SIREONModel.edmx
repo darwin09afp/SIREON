@@ -93,7 +93,11 @@
           </Key>
           <Property Name="ID_ListaN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Id_Empleado" Type="nvarchar" MaxLength="128" />
+          <Property Name="FechaEntrada" Type="date" />
+          <Property Name="FechaSalida" Type="date" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estatus" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Parametros">
           <Key>
@@ -218,6 +222,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ListaNegra_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaNegra">
+              <PropertyRef Name="Id_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Reservaciones_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Reservaciones" Type="Self.Reservaciones" Multiplicity="*" />
@@ -328,6 +344,10 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="ListaNegra" EntitySet="ListaNegra" />
           </AssociationSet>
+          <AssociationSet Name="FK_ListaNegra_AspNetUsers1" Association="Self.FK_ListaNegra_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="ListaNegra" EntitySet="ListaNegra" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reservaciones_AspNetUsers" Association="Self.FK_Reservaciones_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Reservaciones" EntitySet="Reservaciones" />
@@ -420,6 +440,7 @@
           <NavigationProperty Name="Reservaciones" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers" FromRole="AspNetUser" ToRole="Reservacione" />
           <NavigationProperty Name="Reservaciones1" Relationship="SIREONModel.FK_Reservaciones_AspNetUsers1" FromRole="AspNetUser" ToRole="Reservacione" />
           <NavigationProperty Name="Reservaciones_Usuarios" Relationship="SIREONModel.FK_Reservaciones_Usuarios_AspNetUsers" FromRole="AspNetUser" ToRole="Reservaciones_Usuarios" />
+          <NavigationProperty Name="ListaNegras1" Relationship="SIREONModel.FK_ListaNegra_AspNetUsers1" FromRole="AspNetUser" ToRole="ListaNegra" />
         </EntityType>
         <EntityType Name="Cubiculo">
           <Key>
@@ -437,9 +458,14 @@
             <PropertyRef Name="ID_ListaN" />
           </Key>
           <Property Name="ID_ListaN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descripcion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdAspNetUsers" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetUser" Relationship="SIREONModel.FK_ListaNegra_AspNetUsers" FromRole="ListaNegra" ToRole="AspNetUser" />
+          <Property Name="FechaEntrada" Type="DateTime" Precision="0" />
+          <Property Name="FechaSalida" Type="DateTime" Precision="0" />
+          <Property Name="Estatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Id_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser1" Relationship="SIREONModel.FK_ListaNegra_AspNetUsers1" FromRole="ListaNegra" ToRole="AspNetUser" />
         </EntityType>
         <EntityType Name="Parametro">
           <Key>
@@ -455,7 +481,7 @@
           </Key>
           <Property Name="ID_Reservacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_Empleado" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ID_Cubiculo" Type="Int32" Nullable="false" />
           <Property Name="FechaSolicitada" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="HSolicitada" Type="Time" Precision="7" Nullable="false" />
@@ -569,6 +595,10 @@
           <AssociationSet Name="FK_Disponibilidad_Cubiculos" Association="SIREONModel.FK_Disponibilidad_Cubiculos">
             <End Role="Cubiculo" EntitySet="Cubiculos" />
             <End Role="Disponibilidad" EntitySet="Disponibilidads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListaNegra_AspNetUsers1" Association="SIREONModel.FK_ListaNegra_AspNetUsers1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="ListaNegra" EntitySet="ListaNegras" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
@@ -690,6 +720,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ListaNegra_AspNetUsers1">
+          <End Type="SIREONModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="SIREONModel.ListaNegra" Role="ListaNegra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListaNegra">
+              <PropertyRef Name="Id_Empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -765,6 +807,10 @@
           <EntitySetMapping Name="ListaNegras">
             <EntityTypeMapping TypeName="SIREONModel.ListaNegra">
               <MappingFragment StoreEntitySet="ListaNegra">
+                <ScalarProperty Name="Id_Empleado" ColumnName="Id_Empleado" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
                 <ScalarProperty Name="IdAspNetUsers" ColumnName="IdAspNetUsers" />
                 <ScalarProperty Name="ID_ListaN" ColumnName="ID_ListaN" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

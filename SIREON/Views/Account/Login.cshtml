@@ -14,7 +14,7 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-7 col-11 mx-auto">
-                <div class="grid">
+                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                     <div class="grid-body">
                         <section id="loginForm">
                             <div class="row">
@@ -37,7 +37,8 @@
                                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                             </div>
                                             <div class="form-group" style="text-align:center">
-                                                @Html.ActionLink("Olvidé mi contraseña", "ForgotPassword")
+                                                @*@Html.ActionLink("Olvidé mi contraseña", "ForgotPassword")*@
+                                                <a href="http://virtual.unphu.edu.do/login/forgot_password.php">¿Olvidó su contraseña?</a>
                                             </div>
                                         </div>
                                         @*<div class="form-group">
@@ -45,13 +46,13 @@
                                             @Html.LabelFor(m => m.RememberMe)
                                         </div>*@
 
-                                        <div class="form-group input-rounded">
-                                            <button type="submit" class="btn btn-primary btn-block" style="background-color:green"> Iniciar sesión </button>
+                                        <div class="form-group input-rounded" style="text-align:center">
+                                            <button type="submit" class="btn btn-success"  style="text-align:center"> Iniciar sesión </button>
                                         </div>
-                                        <div class="signup-link">
+                                        @*<div class="signup-link">
                                             <p>¿No tienes una cuenta aún?</p>
                                             @Html.ActionLink("Regístrate", "Register")
-                                        </div>
+                                        </div>*@
 
                                     }
                                 </div>
