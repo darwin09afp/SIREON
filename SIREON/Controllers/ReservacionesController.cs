@@ -58,6 +58,49 @@ namespace SIREON.Controllers
         }
 
 
+        public ActionResult Index2()
+        {
+
+            if (User.IsInRole("Operador"))
+            {
+
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var reservaciones = db.Reservaciones.Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")/*.Where(x => x.HSalida >= hora)*/.Where(x => x.Fecha == fechaa).ToList();
+                //var solicitante = db.Reservaciones.Contains(reservaciones).
+
+                return View(reservaciones.ToList());
+
+            }
+            else
+            {
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var user = User.Identity.GetUserId();
+                var reservaciones = db.Reservaciones
+                    .Where(x => x.IdAspNetUsers == user)
+                    .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
+                    //.Where(x => x.HEntrada >= hora)
+                    .Where(x => x.Fecha == fechaa).ToList();
+
+                return View(reservaciones.ToList());
+
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+
         // GET: Reservaciones
         public ActionResult Invitaciones2()
         {
@@ -311,7 +354,7 @@ namespace SIREON.Controllers
         public JsonResult Usuario2(string IdAspNetUsers2)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
-
+            //Espera una Matricula
 
             var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().Nombre;
             var BuscarApellido = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().Apellido;
@@ -346,6 +389,7 @@ namespace SIREON.Controllers
         public JsonResult Usuario3(string IdAspNetUser)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //Espera una Matricula
             var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUser).FirstOrDefault().Nombre;
             if (BuscarNombre == null)
             {
@@ -373,6 +417,7 @@ namespace SIREON.Controllers
         public JsonResult Usuario4(string IdAspNetUsers2)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
+            //Espera un ID
             var BuscarCorreo = db.AspNetUsers.Where(x => x.Id == IdAspNetUsers2).FirstOrDefault().Email;
             var BuscarNombre = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Nombre;
             var BuscarApellido = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Apellido;

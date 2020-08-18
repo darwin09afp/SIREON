@@ -2223,7 +2223,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
@@ -2270,6 +2269,8 @@
     </Content>
     <Content Include="Views\Cubiculos\Usuario.cshtml" />
     <Content Include="Views\Reservaciones\Invitaciones2.cshtml" />
+    <Content Include="Views\ListaNegra\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -2324,7 +2325,6 @@
     <Content Include="Views\ListaNegra\Delete.cshtml" />
     <Content Include="Views\ListaNegra\Details.cshtml" />
     <Content Include="Views\ListaNegra\Edit.cshtml" />
-    <Content Include="Views\ListaNegra\Index.cshtml" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
   </ItemGroup>

@@ -152,133 +152,203 @@
                             <tbody id="myTable">
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.IdAspNetUsers)
-                                    </td>
-                                    <td>
-                                        @{
+                                <script>
 
-                                            var fecha = item.FechaSolicitada.Date.ToShortDateString();
-                                            @Html.DisplayFor(m => fecha)
+                                            //$("#IdSolicitante").val(" ")
+                                            //$("#integrantes").hide(0)
+                                            //$("#est").remove();
+                                            //$("#est2").remove();
 
+
+                                        //Consultar usuario en OPERADOR
+
+                                        window.onload = function () {
+                                            //$("#est").remove();
+                                            var data = JSON.stringify({
+                                                IdAspNetUsers2: $("#IdSolicitante").val()
+                                            });
+
+                                            console.log(data);
+
+                                            $.when(ConsMat(data)).then(function (response) {
+                                                console.log(response);
+                                            }).fail(function (err) {
+                                                console.log(err);
+                                            });
 
                                         }
-                                    </td>
-                                    <td>
-                                        @{
 
-                                            var Hora = item.HSolicitada;
-                                            @Html.DisplayFor(m => Hora)
+                                        function ConsMat(data) {
+                                            return $.ajax({
 
+                                                contentType: 'application/json; charset=utf-8',
+                                                dataType: 'json',
+                                                type: 'POST',
+                                                url: "/Reservaciones/Usuario4",
+                                                data: data,
+                                                success: function (result3) {
+                                                    //alert(data)
+                                                    //data = JSON.parse(data);
+                                                    console.log(result3)
+                                                    $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                                                    $('#tr').prepend('<td>' + $.trim(result3[0]) + " " + result3[1] + '</td>');
+                                                    
+
+
+                                                    //if (result3[4] == "El usuario no tiene límites de uso") {
+                                                    //    $("#integrantes").show(0)
+                                                    //}
+                                                    //else {
+                                                    //    $("#integrantes").hide(0)
+                                                    //    $("#msg2").append('<br /><p id="est">' + result3[4] + '</p>')
+                                                    //    swal("¡Ups!", result3[4], "warning");
+                                                    //}
+                                                },
+                                                error: function () {
+                                                    swal("¡Error!", "Favor verificar los datos", "warning");
+                                                }
+                                            });
 
                                         }
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HEntrada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.HSalida)
-                                    </td>
 
-                                    @if (item.Estatus == "En espera ")
-                                    {
+                                </script>
+                                    var Id = @Html.DisplayFor(modelItem => item.IdAspNetUsers);
+
+                                    var prueba = "Prueba";
+
+                                    <input type="text" id="IdSolicitante" value="@Id" style="display:block" />
+
+                                    <input type="text" id="IdAspNetNombre2" value="" />
+
+                                    <tr id="tr">
+
+                                        @*<td>
+
+                </td>*@
+
                                         <td>
-                                            N/A
+                                            @{
+
+                                                var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                                @Html.DisplayFor(m => fecha)
+
+
+                                            }
                                         </td>
-                                    }
-                                    else
-                                    {
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ID_Cubiculo)
+                                            @{
+
+                                                var Hora = item.HSolicitada;
+                                                @Html.DisplayFor(m => Hora)
+
+
+                                            }
                                         </td>
-                                    }
-                                    <td></td>
-                                    <td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HEntrada)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.HSalida)
+                                        </td>
 
-                                        @{
-                                            if (item.Estatus == "Activa    ")
-                                            {
-                                                <label class="badge badge-info">Próxima</label>
-                                            }
-                                            else if (item.Estatus == "Cancelada ")
-                                            {
-                                                <label class="badge badge-danger">Cancelada</label>
-                                            }
-                                            else if (item.Estatus == "Rechazada ")
-                                            {
-                                                <label class="badge badge-danger">Rechazada</label>
-                                            }
-                                            else if (item.Estatus == "En espera ")
-                                            {
-                                                <label class="badge badge-warning">En espera</label>
-                                            }
-                                            else if (item.Estatus == "EnCurso   ")
-                                            {
-                                                <label class="badge badge-warning">En curso</label>
-                                            }
-                                            else
-                                            {
-                                                <label class="badge badge-success">Completada</label>
-                                            }
+                                        @if (item.Estatus == "En espera ")
+                                        {
+                                            <td>
+                                                N/A
+                                            </td>
                                         }
+                                        else
+                                        {
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ID_Cubiculo)
+                                            </td>
+                                        }
+                                        <td></td>
+                                        <td>
+
+                                            @{
+                                                if (item.Estatus == "Activa    ")
+                                                {
+                                                    <label class="badge badge-info">Próxima</label>
+                                                }
+                                                else if (item.Estatus == "Cancelada ")
+                                                {
+                                                    <label class="badge badge-danger">Cancelada</label>
+                                                }
+                                                else if (item.Estatus == "Rechazada ")
+                                                {
+                                                    <label class="badge badge-danger">Rechazada</label>
+                                                }
+                                                else if (item.Estatus == "En espera ")
+                                                {
+                                                    <label class="badge badge-warning">En espera</label>
+                                                }
+                                                else if (item.Estatus == "EnCurso   ")
+                                                {
+                                                    <label class="badge badge-warning">En curso</label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="badge badge-success">Completada</label>
+                                                }
+                                            }
 
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                            @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
 
-                                    </td>
-                                    <td></td>
-                                    @*<td>
+                                        </td>
+                                        <td></td>
+                                        @*<td>
 
-            @{
-                if (item.Estatus == "En espera ")
-                {
-                    @Html.ActionLink("Dar entrada", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-success" })
+                    @{
+                        if (item.Estatus == "En espera ")
+                        {
+                            @Html.ActionLink("Dar entrada", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-success" })
 
-                }
-                else if (item.Estatus == "EnCurso   ")
-                {
-                    <button class="btn btn-success" disabled>Dar entrada</button>
-                }
-                else if (item.Estatus == "Activa    ")
-                {
-                    <button class="btn btn-success">Dar entrada</button>
-                }
-                else
-                {
-                    <button class="btn btn-success" disabled>Dar entrada</button>
+                        }
+                        else if (item.Estatus == "EnCurso   ")
+                        {
+                            <button class="btn btn-success" disabled>Dar entrada</button>
+                        }
+                        else if (item.Estatus == "Activa    ")
+                        {
+                            <button class="btn btn-success">Dar entrada</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-success" disabled>Dar entrada</button>
 
-                }
-            }
-
-
-        </td>
-        <td>
-
-            @{
-                if (item.Estatus == "Activa    ")
-                {
-                    //@Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
-                    <a data-itemId="0" href="#" class="btn btn-danger">Rechazar</a>
-                }
-                else if (item.Estatus == "EnCurso   ")
-                {
-                    <button class="btn btn-danger" disabled>Rechazar</button>
-                }
-                else
-                {
-                    <button class="btn btn-danger" disabled>Rechazar</button>
-
-                }
-            }
+                        }
+                    }
 
 
-        </td>*@
+                </td>
+                <td>
 
-                                </tr>
+                    @{
+                        if (item.Estatus == "Activa    ")
+                        {
+                            //@Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
+                            <a data-itemId="0" href="#" class="btn btn-danger">Rechazar</a>
+                        }
+                        else if (item.Estatus == "EnCurso   ")
+                        {
+                            <button class="btn btn-danger" disabled>Rechazar</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-danger" disabled>Rechazar</button>
+
+                        }
+                    }
+
+
+                </td>*@
+
+                                    </tr>
                                 }
                             </tbody>
 
@@ -294,8 +364,8 @@
         else
         {
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center;box-shadow: 0 0 10px -5px #bcbebf;">
-                <div class="col-md-3 col-sm-3 grid">
+            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid" style="box-shadow: 0 0 10px -5px #bcbebf;">
                     <div class="grid-body">
                         <p>
                             <a>
@@ -334,7 +404,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6 equel-grid">
-                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+                <div class="grid" >
                     <div class="grid-body">
                         <h2 class="grid-title">Acciones</h2>
                         <div class="item-wrapper">
@@ -348,7 +418,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
+            <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                 <div class="col-md-3 col-sm-3 grid">
                     <div class="grid-body">
                         <p>
@@ -533,17 +603,26 @@
         <br />
         }
 
-        }
-        else
-        {
+    }
+    else
+    {
 
-        }
+    }
 
 
 
 
         </body>
 </html>
+
+
+
+@*Consultar nombre de solicitante*@
+
+
+
+
+
 
 
 <script>

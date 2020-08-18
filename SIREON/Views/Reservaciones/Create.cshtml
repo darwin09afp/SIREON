@@ -165,27 +165,27 @@
                             }
                             else
                             {
-                        <div class="form-row align-items-center justify-content-between">
-                            <div class="col-lg-5 col-md-5 col-sm-5 my-1">
-                                <label class="sr-only" for="inlineFormInputName">Name</label>
-                                <input type="text" class="form-control" id="IdAspNetNombre" placeholder="" value="" readonly>
+                                <div class="form-row align-items-center justify-content-between">
+                                    <div class="col-lg-5 col-md-5 col-sm-5 my-1">
+                                        <label class="sr-only" for="inlineFormInputName">Name</label>
+                                        <input type="text" class="form-control" id="IdAspNetNombre" placeholder="" value="" readonly>
 
-                            </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 my-1">
-                                <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <img src="~/Content/images/at.png" alt="check" width="33" />
                                     </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 my-1">
+                                        <label class="sr-only" for="inlineFormInputGroupUsername">Usuario</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <img src="~/Content/images/at.png" alt="check" width="33" />
+                                            </div>
 
-                                    <input type="text" class="form-control" id="IdAspNetUsers" placeholder="" value="" readonly>
+                                            <input type="text" class="form-control" id="IdAspNetUsers" placeholder="" value="" readonly>
 
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="col-lg-12 col-md-12 col-sm-2" id="msg2" style="text-align:center">
+                                    </div>
                                 </div>
-                            </div>
-                            <br/>
-                            <div class="col-lg-12 col-md-12 col-sm-2" id="msg2" style="text-align:center">
-                            </div>
-                        </div>
                             }
                             <div id="integrantes" style="display:none">
                                 <hr />
@@ -332,7 +332,7 @@
                         //data = JSON.parse(data);
                         console.log(result3)
                         $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
-                        
+
                         if (result3[4] == "El usuario no tiene límites de uso") {
                             $("#integrantes").show(0)
                         }
@@ -355,10 +355,10 @@
     else
     {
         <script>
-            
+
             window.onload = function () {
                 $.ajax({
-                    
+
                     url: "/Reservaciones/Usuario5",
                     method: "GET",
                     success: function (result3) {
@@ -367,7 +367,7 @@
                         console.log(result3)
                         $("#IdAspNetNombre").val($.trim(result3[0]) + " " + result3[1]);
                         $("#IdAspNetUsers").val($.trim(result3[2]));
-                        
+
 
                         if (result3[3] == "El usuario no tiene límites de uso") {
                             $("#integrantes").show(0)
@@ -389,32 +389,32 @@
 
         </script>
         @*<script>
-            //Consultar usuario de estudiante
-            window.onload = function () {
-                $.ajax({
-                    url: "/Reservaciones/Usuario",
-                    method: "GET",
-                    success: function (data) {
-                        //alert(data)
-                        //data = JSON.parse(data);
-                        console.log(data)
-                        for (var i = 0; i < data.length; i++) {
+                //Consultar usuario de estudiante
+                window.onload = function () {
+                    $.ajax({
+                        url: "/Reservaciones/Usuario",
+                        method: "GET",
+                        success: function (data) {
+                            //alert(data)
+                            //data = JSON.parse(data);
+                            console.log(data)
+                            for (var i = 0; i < data.length; i++) {
 
-                            $("#IdAspNetNombre").val($.trim(data[i].Nombr) + " " + data[i].Apellid);
-                            $("#IdAspNetUsers").val(data[i].Matricul);
+                                $("#IdAspNetNombre").val($.trim(data[i].Nombr) + " " + data[i].Apellid);
+                                $("#IdAspNetUsers").val(data[i].Matricul);
+                            }
+
+                            $.each(data, function (i, value) {
+                                console.log('Value of ' + i + ' is : ' + value);
+                            })
+                        },
+                        error: function () {
+                            alert("Error, Usuario no detectado")
                         }
+                    })
+                }
 
-                        $.each(data, function (i, value) {
-                            console.log('Value of ' + i + ' is : ' + value);
-                        })
-                    },
-                    error: function () {
-                        alert("Error, Usuario no detectado")
-                    }
-                })
-            }
-
-        </script>*@
+            </script>*@
     }
 
     <script>
