@@ -127,17 +127,17 @@
                         <div class="vertical-timeline-wrapper">
                             <div class="timeline-vertical dashboard-timeline">
                                 <div class="activity-log">
-                                    <p class="log-name">Reporte 1</p>
+                                    <p class="log-name">Rerservaciones del día</p>
                                     <div class="log-details">
-                                        Detalles de reporte 1
+                                        <small>Reservaciones realizadas hasta el momento de la generación</small>
                                         <div class="wrapper mt-2">
-                                            <button type="button" class="btn btn-xs btn-primary">Generar</button>
-                                            <button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>
+                                            <a href="@Url.Action("Reportes", "Reservaciones", new { ReportType = "PDF"})"  type="button" class="btn btn-xs btn-primary">Generar PDF</a>
+                                             @*<button type="button" class="btn btn-xs btn-inverse-primary">Ver</button>*@
                                         </div>
                                     </div>
                                     <small class="log-time">Diario</small>
                                 </div>
-                                <div class="activity-log">
+                                @*<div class="activity-log">
                                     <p class="log-name">Reporte 2</p>
                                     <div class="log-details">
                                         Detalles de reporte 2
@@ -213,7 +213,7 @@
                                         </div>
                                     </div>
                                     <small class="log-time">Anual</small>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>

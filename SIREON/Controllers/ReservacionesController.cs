@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.MappingViews;
+using System.EnterpriseServices;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,6 +12,7 @@ using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Reporting.WebForms;
 using Newtonsoft.Json;
 using SIREON;
 using SIREON.Models;
@@ -57,7 +60,51 @@ namespace SIREON.Controllers
 
         }
 
+        public ActionResult Reportes(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/ResDia.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "Res1";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.Reservaciones.Where(x =>x.Fecha == fecha.Date && x.Estatus != "EnCurso" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada").ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
 
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension,out streams,out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_dia." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
 
         //public JsonResult Index2(TimeSpan? HEntrada)
         //{
