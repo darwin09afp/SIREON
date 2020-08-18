@@ -18,6 +18,25 @@ namespace SIREON.Controllers
             return View();
         }
 
+        public ActionResult Reglamento()
+        {
+            ViewBag.title = "Bienvenido | SIREON";
+           
+            if (User.IsInRole("Administrador"))
+            {
+
+                return View();
+            }
+            else
+            {
+
+
+                return View();
+            }
+
+
+        }
+
         public ActionResult About()
         {
             ViewBag.title = "Sobre nosotros | SIREON";

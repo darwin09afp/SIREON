@@ -167,4 +167,9 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebEngine.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.Base.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebBrowser.xml
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\EO.WebEngine.xml
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.ReportViewer.Common.dll
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.ReportViewer.DataVisualization.dll
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.ReportViewer.WebForms.dll
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Microsoft.ReportViewer.WinForms.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache

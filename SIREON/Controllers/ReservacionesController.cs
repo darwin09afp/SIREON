@@ -58,6 +58,31 @@ namespace SIREON.Controllers
         }
 
 
+
+        //public JsonResult Index2(TimeSpan? HEntrada)
+        //{
+        //    var Fechaa = DateTime.Now;
+        //    var Fecha = Fechaa.Date;
+        //    var hora = Fechaa.TimeOfDay.Hours;
+        //    //TimeSpan HEntrada = new TimeSpan(08, 0, 0);
+        //    db.Configuration.ProxyCreationEnabled = false;
+
+        //    CustomModel3 mymodel = new CustomModel3();
+
+        //    var reserv = db.Reservaciones.Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera").Any();
+        //    var resUid = reserv.
+        //    mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
+        //    mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Reservado").Any()).ToList();
+        //    mymodel.Ocupado = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Ocupado").Any()).ToList();
+
+
+        //    //var json = JsonConvert.SerializeObject(mymodel);
+        //    return Json(mymodel, JsonRequestBehavior.AllowGet);
+
+        //}
+
+
+
         public ActionResult Index2()
         {
 
