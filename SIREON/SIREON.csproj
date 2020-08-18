@@ -229,6 +229,7 @@
     <Compile Include="Controllers\ReservacionesController.cs" />
     <Compile Include="Controllers\Reservaciones_UsuariosController.cs" />
     <Compile Include="Controllers\StatsController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Cubiculo.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
@@ -2342,6 +2343,8 @@
     <Content Include="SIREONDataSet.xss">
       <DependentUpon>SIREONDataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="Views\Upload\UploadFile.cshtml" />
+    <Content Include="UploadedFiles\Normas uso estudio colectivo Biblioteca UNPHU.pdf" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
