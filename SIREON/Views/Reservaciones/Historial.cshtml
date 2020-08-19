@@ -57,7 +57,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    Solicitante
+                                    Titular
                                 </th>
                                 <th>
                                     Auxiliar
@@ -81,15 +81,21 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody id="myTable">
+                        <tbody id="myTable" style="text-align:center">
                             @foreach (var item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.IdAspNetUsers)
+                                        @{
+                                            string str = item.AspNetUser.Email.Substring(0, 9);
+                                        }
+                                        @str
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.ID_Empleado)
+                                        @{
+                                            string str2 = item.AspNetUser1.Email.Substring(0, 9);
+                                        }
+                                        @str2
                                     </td>
                                     <td>
                                         @{
@@ -119,7 +125,7 @@
                                             }
                                             else if (item.Estatus == "Cancelada ")
                                             {
-                                                <label class="badge badge-danger">Cancelada</label>
+                                                <label class="badge badge-warning">Cancelada</label>
                                             }
                                             else if (item.Estatus == "Rechazada ")
                                             {

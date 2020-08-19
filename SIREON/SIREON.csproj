@@ -2328,7 +2328,7 @@
       <DependentUpon>UniversidadModel.edmx</DependentUpon>
     </Content>
     <Content Include="Views\Cubiculos\Usuario.cshtml" />
-    <Content Include="Views\Reservaciones\Invitaciones2.cshtml" />
+    <Content Include="Views\Reservaciones\Invitaciones.cshtml" />
     <Content Include="Views\ListaNegra\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Reglamento.cshtml" />
@@ -2345,6 +2345,7 @@
     </Content>
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="UploadedFiles\Normas uso estudio colectivo Biblioteca UNPHU.pdf" />
+    <Content Include="Views\Reservaciones\Invitaciones2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

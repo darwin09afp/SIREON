@@ -121,12 +121,12 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped" id="example">
-                                <thead>
+                            <table class="table table-striped" id="example" style="text-align:center">
+                                <thead >
                                     <tr>
-                                        @*<th>
-                                            Solicitante
-                                        </th>*@
+                                        <th>
+                                            Titular
+                                        </th>
                                         <th>
                                             Fecha
                                         </th>
@@ -142,28 +142,25 @@
                                         <th>
                                             Cubículo No.
                                         </th>
-                                        <th></th>
                                         <th>
                                             Estatus de reservación
                                         </th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody id="myTable">
+                                <tbody id="myTable" style="text-align:center">
                                     @foreach (var item in Model)
                                     {
 
-                                        @*var Id = @Html.DisplayFor(modelItem => item.IdAspNetUsers);
-
-                                        <input type="text" id="IdSolicitante" value="@Id" style="display:block" />
-
-                                        <input type="text" id="IdAspNetNombre2" value="" />*@
 
                                         <tr id="tr">
 
-                                            @*<td>
-
-                                                </td>*@
+                                            <td>
+                                                @{
+                                                    string str = item.AspNetUser.Email.Substring(0, 9);
+                                                }
+                                                @str
+                                            </td>
 
                                             <td>
                                                 @{
@@ -176,12 +173,10 @@
                                             </td>
                                             <td>
                                                 @{
-
-                                                    var Hora = item.HSolicitada;
-                                                    @Html.DisplayFor(m => Hora)
-
-
+                                                    string Hora = item.HSolicitada.ToString();
+                                                    string str2 = Hora.Substring(0,8);
                                                 }
+                                                @str2
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.HEntrada)
@@ -199,10 +194,9 @@
                                             else
                                             {
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.ID_Cubiculo)
+                                                    @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
                                                 </td>
                                             }
-                                            <td></td>
                                             <td>
 
                                                 @{
@@ -349,7 +343,7 @@
                             <div class="item-wrapper">
                                 <div class="row" style="justify-content:space-evenly">
                                     <a href="@Url.Action("Create", "Reservaciones")" class="btn btn-success has-icon"><i class="mdi mdi-calendar-plus"></i>Nueva reservación</a>
-                                    <a href='@Url.Action("Invitaciones2", "Reservaciones")' class="btn btn-warning has-icon"><i class="mdi mdi-clock-alert"></i>Invitaciones</a>
+                                    <a href='@Url.Action("Invitaciones", "Reservaciones")' class="btn btn-warning has-icon"><i class="mdi mdi-clock-alert"></i>Invitaciones</a>
                                     <a href='@Url.Action("Historial", "Reservaciones")' class="btn btn-primary has-icon"><i class="mdi mdi-calendar"></i>Historial</a>
                                 </div>
                             </div>
@@ -404,134 +398,142 @@
                     <div class="item-wrapper">
                         <div class="table-responsive">
                             <table class="table info-table table-striped">
-                                <thead>
+                                <thead >
                                     <tr>
                                         <th>
                                             Fecha
                                         </th>
-                                        <th></th>
+
                                         <th>
-                                            Hora solicitada
+                                            Hora de reserva
                                         </th>
-                                        <th></th>
+
                                         <th>
                                             Hora de entrada
                                         </th>
-                                        <th></th>
+
                                         <th>
                                             Hora de salida
                                         </th>
-                                        <th></th>
+ 
                                         <th>
                                             Cubículo
                                         </th>
-                                        <th></th>
+
                                         <th>
                                             Estatus de reservación
                                         </th>
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @{
-                                        foreach (var item in Model)
-                                        {
+                                <tbody style="text-align:center">
+                                @{
+                                    foreach (var item in Model)
+                                    {
 
-                                            <tr>
+                                        <tr>
 
-                                                <td>
-                                                    @{
+                                            <td>
+                                                @{
 
-                                                        var fecha = item.FechaSolicitada.Date.ToShortDateString();
-                                                        @Html.DisplayFor(m => fecha)
+                                                    var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                                    @Html.DisplayFor(m => fecha)
 
-
-                                                    }
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.HSolicitada)
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.HEntrada)
-                                                </td>
-                                                <td></td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.HSalida)
-                                                </td>
-                                                <td></td>
-                                                @if (item.Estatus == "En espera ")
-                                                {
-                                                    <td>
-                                                        N/A
-                                                    </td>
                                                 }
-                                                else
-                                                {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.ID_Cubiculo)
-                                                    </td>
+                                            </td>
+
+                                            <td>
+                                                @{
+                                                    string Hora = item.HSolicitada.ToString();
+                                                    string str3 = Hora.Substring(0, 8);
                                                 }
-                                                <td></td>
+                                                @str3
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HEntrada)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.HSalida)
+                                            </td>
+
+                                            @if (item.Estatus == "En espera ")
+                                            {
                                                 <td>
-                                                    @{
-                                                        if (item.Estatus == "Activa    ")
-                                                        {
-                                                            <label class="badge badge-info">Activa</label>
-                                                        }
-                                                        else if (item.Estatus == "Cancelada ")
-                                                        {
-                                                            <label class="badge badge-warning">Cancelada</label>
-                                                        }
-                                                        else if (item.Estatus == "Rechazada ")
-                                                        {
-                                                            <label class="badge badge-danger">Rechazada</label>
-                                                        }
-                                                        else if (item.Estatus == "En espera ")
-                                                        {
-                                                            <label class="badge badge-warning">En espera</label>
-                                                        }
-                                                        else if (item.Estatus == "EnCurso   ")
-                                                        {
-                                                            <label class="badge badge-warning">En curso</label>
-                                                        }
-                                                        else
-                                                        {
-                                                            <label class="badge badge-success">Completada</label>
-                                                        }
+                                                    N/A
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ID_Cubiculo)
+                                                </td>
+                                            }
+
+                                            <td>
+                                                @{
+                                                    if (item.Estatus == "Activa    ")
+                                                    {
+                                                        <label class="badge badge-info">Activa</label>
                                                     }
+                                                    else if (item.Estatus == "Cancelada ")
+                                                    {
+                                                        <label class="badge badge-warning">Cancelada</label>
+                                                    }
+                                                    else if (item.Estatus == "Rechazada ")
+                                                    {
+                                                        <label class="badge badge-danger">Rechazada</label>
+                                                    }
+                                                    else if (item.Estatus == "En espera ")
+                                                    {
+                                                        <label class="badge badge-warning">En espera</label>
+                                                    }
+                                                    else if (item.Estatus == "EnCurso   ")
+                                                    {
+                                                        <label class="badge badge-warning">En curso</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="badge badge-success">Completada</label>
+                                                    }
+                                                }
 
-                                                </td>
+                                            </td>
 
-                                                <td></td>
-                                                <td>
 
-                                                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>
 
-                                                </td>
-                                                <td></td>
-                                                @*<td>
-                                                        @{
-                                                            if (item.Estatus == "Activa    ")
-                                                            {
-                                                                @Html.ActionLink("Cancelar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
 
-                                                            }
-                                                            else if (item.Estatus == "EnCurso   ")
-                                                            {
-                                                                <button class="btn btn-danger" disabled>Cancelar</button>
-                                                            }
-                                                            else
-                                                            {
-                                                                <button class="btn btn-danger" disabled>Cancelar</button>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            @*<td>
+@{
+if (item.Estatus == "Activa    ")
+{
+@Html.ActionLink("Cancelar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
 
-                                                            }
-                                                        }
-                                                    </td>*@
-                                            </tr>
-                                        }
+}
+else if (item.Estatus == "EnCurso   ")
+{
+<button class="btn btn-danger" disabled>Cancelar</button>
+}
+else
+{
+<button class="btn btn-danger" disabled>Cancelar</button>
+
+}
+}
+</td>*@
+                                        </tr>
                                     }
+                                }
                                 </tbody>
                             </table>
                         </div>
@@ -567,7 +569,7 @@
 
     //Consultar usuario en OPERADOR
 
-    window.onload = function () {
+    /*window.onload = */function uno () {
         //$("#est").remove();
         var data = JSON.stringify({
             IdAspNetUsers2: $("#IdSolicitante").val()

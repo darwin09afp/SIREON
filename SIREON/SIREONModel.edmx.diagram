@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2dadda5956bc4e65956efa3b7472afba" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="2dadda5956bc4e65956efa3b7472afba" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="SIREONModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.AspNetRole" Width="1.5" PointX="8.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SIREONModel.AspNetUserClaim" Width="1.5" PointX="13.25" PointY="1.375" IsExpanded="true" />

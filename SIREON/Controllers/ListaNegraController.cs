@@ -18,14 +18,14 @@ namespace SIREON.Controllers
         // GET: ListaNegra
         public ActionResult Index()
         {
-            var listaNegras = db.ListaNegras.Include(l => l.AspNetUser).Include(l => l.AspNetUser1);
+            var listaNegras = db.ListaNegras/*.Include(l => l.AspNetUser).Include(l => l.AspNetUser1)*/;
             return View(listaNegras.ToList());
         }
 
 
 
         [HttpPost]
-        public ActionResult Agregar(string iduser, DateTime? FechaSalida, string Motivo)
+        public ActionResult Agregar(string iduser, DateTime FechaSalida, string Motivo)
         {
             var fechaa = DateTime.Now;
             var fecha = fechaa.Date;

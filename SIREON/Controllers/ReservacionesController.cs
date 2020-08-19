@@ -37,7 +37,7 @@ namespace SIREON.Controllers
                 var reservaciones = db.Reservaciones
                     .Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")
                     //.Where(x => x.HSalida >= hora)
-                    .Where(x => x.Fecha == fechaa).ToList();
+                    .Where(x => x.Fecha == fechaa).ToList().OrderBy(x => x.HEntrada);
                 
                 return View(reservaciones.ToList());
 
@@ -52,7 +52,7 @@ namespace SIREON.Controllers
                     .Where(x => x.IdAspNetUsers == user)
                     .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
                     //.Where(x => x.HEntrada >= hora)
-                    .Where(x => x.Fecha == fechaa).ToList();
+                    .Where(x => x.Fecha == fechaa).ToList().OrderBy(x => x.HEntrada);
 
                 return View(reservaciones.ToList());
                 
@@ -67,7 +67,7 @@ namespace SIREON.Controllers
             ReportDataSource reportDataSource = new ReportDataSource();
             reportDataSource.Name = "Res1";
             var fecha = DateTime.Now;
-            reportDataSource.Value = db.Reservaciones.Where(x =>x.Fecha == fecha.Date && x.Estatus != "EnCurso" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada").ToList();
+            reportDataSource.Value = db.Reservaciones.Where(x =>x.Fecha == fecha.Date && x.Estatus != "EnCurso").ToList();
             localReport.DataSources.Add(reportDataSource);
             string RType = ReportType;
             string mimeType;
@@ -174,7 +174,7 @@ namespace SIREON.Controllers
 
 
         // GET: Reservaciones
-        public ActionResult Invitaciones2()
+        public ActionResult Invitaciones()
         {
            
             var fecha = DateTime.Now;
@@ -185,10 +185,28 @@ namespace SIREON.Controllers
             var Salas = db.Reservaciones_Usuarios.Where(x => x.IdAspNetUser == user).ToList();
             
             var Inv = db.Reservaciones
-                .Where(x => x.Reservaciones_Usuarios.All(p => p.IdAspNetUser == user))
+                .Where(x => x.Fecha == fechaa)
                 .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
-                .Where(x => x.HEntrada >= hora)
-                .Where(x => x.Fecha == fechaa).ToList();
+                //.Where(x => x.HEntrada >= hora)
+                .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
+                .ToList();
+
+
+            return View(Inv);
+
+        }
+
+        public ActionResult Invitaciones2()
+        {
+
+            var user = User.Identity.GetUserId();
+
+            var Salas = db.Reservaciones_Usuarios.Where(x => x.IdAspNetUser == user).ToList();
+
+            var Inv = db.Reservaciones
+                .Where(x => x.Estatus == "Completada" || x.Estatus == "Cancelada" || x.Estatus == "Rechazada")
+                .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
+                .ToList();
 
 
             return View(Inv);
@@ -214,8 +232,18 @@ namespace SIREON.Controllers
         // GET: historial
         public ActionResult Historial()
         {
-            var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
-            return View(reservaciones.ToList());
+            var usr = User.Identity.GetUserId();
+            if (User.IsInRole("Operador"))
+            {
+                var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+                return View(reservaciones.ToList());
+            }
+            else
+            {
+                var reservaciones = db.Reservaciones.Where(x => x.IdAspNetUsers == usr && x.Estatus != "EnCurso" && x.Estatus != "Activa").ToList() ;
+                return View(reservaciones.ToList());
+            }
+            
         }
 
 
@@ -237,8 +265,72 @@ namespace SIREON.Controllers
 
         }
 
-
-
+        //Aceptar invitacion
+        public ActionResult Aceptar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Reservacione reservacione = db.Reservaciones.Find(id);
+            if (reservacione == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.ID_Cubiculo = new SelectList(db.Reservaciones_Usuarios, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
+            //ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
+            //ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.ID_Empleado);
+            var usr = User.Identity.GetUserId();
+            var ResUsr = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.IdAspNetUser == usr).FirstOrDefault().Id;
+            var res = db.Reservaciones_Usuarios.Where(x => x.Id == ResUsr).FirstOrDefault();
+            var prueba = "";
+            if (res.Estatus == "Rechazada")
+            {  
+                prueba = "Esta invitación fue rechazada previamente, no podrá realizar esta acción";
+            }
+            else
+            {
+                res.Estatus = "Aceptada";
+                prueba = "Invitacion Aceptada";
+                db.SaveChanges();
+            }
+            
+            
+            
+            
+            return View(prueba);
+        }
+        //Rechazar invitacion       
+        public ActionResult Rechazar(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Reservacione reservacione = db.Reservaciones.Find(id);
+            if (reservacione == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.ID_Cubiculo = new SelectList(db.Reservaciones_Usuarios, "ID_Cubiculo", "Descripcion", reservacione.ID_Cubiculo);
+            //ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.IdAspNetUsers);
+            //ViewBag.ID_Empleado = new SelectList(db.AspNetUsers, "Id", "Email", reservacione.ID_Empleado);
+            var usr = User.Identity.GetUserId();
+            var ResUsr = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.IdAspNetUser == usr).FirstOrDefault().Id;
+            var res = db.Reservaciones_Usuarios.Where(x => x.Id == ResUsr).FirstOrDefault();
+            var prueba = "";
+            if (res.Estatus == "Aceptada")
+            {
+                prueba = "Esta invitación fue Aceptada previamente, no podrá realizar esta acción";
+            }
+            else
+            {
+                res.Estatus = "Rechazada";
+                prueba = "Invitación Rechazada";
+                db.SaveChanges();
+            }
+            return View(prueba);
+        }
 
 
         // GET: Reservaciones1/Details/5
@@ -355,7 +447,6 @@ namespace SIREON.Controllers
         }
 
 
-
         public JsonResult Usuario()
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
@@ -421,8 +512,6 @@ namespace SIREON.Controllers
             
         }
 
-
-
         public JsonResult Usuario2(string IdAspNetUsers2)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
@@ -455,8 +544,6 @@ namespace SIREON.Controllers
             return Json(result3, JsonRequestBehavior.AllowGet);
 
         }
-
-
 
         public JsonResult Usuario3(string IdAspNetUser)
         {

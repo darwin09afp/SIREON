@@ -88,11 +88,11 @@
     </Key>
     <Property Name="ID_ListaN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdAspNetUsers" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Id_Empleado" Type="nvarchar" MaxLength="128" />
-    <Property Name="FechaEntrada" Type="date" />
-    <Property Name="FechaSalida" Type="date" />
+    <Property Name="Id_Empleado" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FechaEntrada" Type="date" Nullable="false" />
+    <Property Name="FechaSalida" Type="date" Nullable="false" />
     <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Estatus" Type="nchar" MaxLength="10" />
+    <Property Name="Estatus" Type="nchar" MaxLength="10" Nullable="false" />
   </EntityType>
   <EntityType Name="Parametros">
     <Key>
@@ -126,6 +126,7 @@
     <Property Name="IdReservacion" Type="int" Nullable="false" />
     <Property Name="NombreInvitado" Type="char" MaxLength="30" />
     <Property Name="CedulaInvitado" Type="varchar" MaxLength="13" />
+    <Property Name="Estatus" Type="varchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
@@ -218,7 +219,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ListaNegra_AspNetUsers1">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="ListaNegra" Type="Self.ListaNegra" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUsers">

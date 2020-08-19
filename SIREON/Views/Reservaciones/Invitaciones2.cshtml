@@ -1,87 +1,161 @@
 ﻿@model IEnumerable<SIREON.Reservacione>
 
 @{
-    ViewBag.Title = "Invitaciones2";
+    ViewBag.Title = "Historial de invitaciones | SIREON";
 }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    @if ((User.IsInRole("Operador")))
+    {
+        <style>
 
-<h2>Invitaciones2</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Fecha)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FechaSolicitada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HSolicitada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HEntrada)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HSalida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser1.Email)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fecha)
-        </td>
-        <td>
-            @{
-
-                var fecha = item.FechaSolicitada.Date.ToShortDateString();
-                @Html.DisplayFor(m => fecha)
-
-
+            table {
+                display: block;
+                height: 300px;
+                overflow: auto;
             }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HSolicitada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HEntrada)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HSalida)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser1.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Reservacion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_Reservacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Reservacion })
-        </td>
-    </tr>
-}
+        </style>
+    }
+    else
+    {
+        <style>
 
-</table>
+            table {
+                display: block;
+                height: 300px;
+                overflow: auto;
+            }
+        </style>
+    }
+
+</head>
+<div class="col-lg-12">
+    <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+        <p class="grid-header" style="border-left-color:orange">Invitaciones a otras reservaciones</p>
+        <div class="item-wrapper">
+            <div class="row" style="justify-content:left">
+                <div class="form-group input-rounded col-lg-1 col-md-1 col-sm-1">
+
+                </div>
+                <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
+                    <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+                </div>
+
+                @*<div class="btn-group mb-0" data-toggle="checkbox">
+                        <label class="btn btn-success active" id="ch1">
+                            <input type="checkbox" id="chh1" class="name" name="name" value="Completada">
+                            <i class="mdi mdi-check"></i>Completada
+                        </label>
+                        <label class="btn btn-success active" id="ch2">
+                            <input type="checkbox" id="chh2" class="name" name="name" value="Cancelada">
+                            <i class="mdi mdi-delete-forever"></i>Cancelada
+                        </label>
+                        <label class="btn btn-success active" id="ch3">
+                            <input type="checkbox" id="chh3" class="name" name="name" value="Rechazada">
+                            <i class="mdi mdi-cancel"></i>Rechazada
+                        </label>
+                    </div>*@
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped" id="example">
+                    <tr>
+                        <th>
+                            Titular
+                        </th>
+                        <th>
+                            Fecha
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HEntrada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HSalida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Estatus)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cubiculo.Descripcion)
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    string str = item.AspNetUser.Email.Substring(0, 9);
+                                }
+                                @str
+                            </td>
+                            <td>
+                                @{
+
+                                    var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                    @Html.DisplayFor(m => fecha)
+
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HEntrada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HSalida)
+                            </td>
+                            <td>
+                                @{
+                                    if (item.Estatus == "Activa    ")
+                                    {
+                                        <label class="badge badge-info">Activa</label>
+                                    }
+                                    else if (item.Estatus == "Cancelada ")
+                                    {
+                                        <label class="badge badge-warning">Cancelada</label>
+                                    }
+                                    else if (item.Estatus == "Rechazada ")
+                                    {
+                                        <label class="badge badge-danger">Rechazada</label>
+                                    }
+                                    else if (item.Estatus == "En espera ")
+                                    {
+                                        <label class="badge badge-warning">En espera</label>
+                                    }
+                                    else if (item.Estatus == "EnCurso   ")
+                                    {
+                                        <label class="badge badge-warning">En curso</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="badge badge-success">Completada</label>
+                                    }
+                                }
+
+                            </td>
+                            @if (item.Estatus == "En espera ")
+                            {
+                                <td>
+                                    N/A
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                </td>
+                            }
+
+                            <td>
+                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
