@@ -182,17 +182,14 @@ namespace SIREON.Controllers
             var hora = fecha.TimeOfDay;
             var user = User.Identity.GetUserId();
 
-            var Salas = db.Reservaciones_Usuarios.Where(x => x.IdAspNetUser == user).ToList();
-            
-            var Inv = db.Reservaciones
+            var Salas = db.Reservaciones.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdAspNetUser == user && p.Estatus != "Rechazada").Any())
                 .Where(x => x.Fecha == fechaa)
                 .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
-                //.Where(x => x.HEntrada >= hora)
                 .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
                 .ToList();
 
 
-            return View(Inv);
+            return View(Salas);
 
         }
 
@@ -283,22 +280,25 @@ namespace SIREON.Controllers
             var usr = User.Identity.GetUserId();
             var ResUsr = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.IdAspNetUser == usr).FirstOrDefault().Id;
             var res = db.Reservaciones_Usuarios.Where(x => x.Id == ResUsr).FirstOrDefault();
-            var prueba = "";
+
             if (res.Estatus == "Rechazada")
             {  
-                prueba = "Esta invitación fue rechazada previamente, no podrá realizar esta acción";
+                var prueba = "Esta invitación fue rechazada previamente, no podrá realizar esta acción";
+                return View(prueba);
             }
             else
             {
                 res.Estatus = "Aceptada";
-                prueba = "Invitacion Aceptada";
+                var prueba = "Invitacion Aceptada";
+                
                 db.SaveChanges();
+                return View(prueba);
             }
             
             
             
             
-            return View(prueba);
+            
         }
         //Rechazar invitacion       
         public ActionResult Rechazar(int? id)
@@ -318,18 +318,39 @@ namespace SIREON.Controllers
             var usr = User.Identity.GetUserId();
             var ResUsr = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.IdAspNetUser == usr).FirstOrDefault().Id;
             var res = db.Reservaciones_Usuarios.Where(x => x.Id == ResUsr).FirstOrDefault();
-            var prueba = "";
+            
             if (res.Estatus == "Aceptada")
             {
-                prueba = "Esta invitación fue Aceptada previamente, no podrá realizar esta acción";
+                var prueba = "Esta invitación fue Aceptada previamente, no podrá realizar esta acción";
+                return View(prueba);
             }
             else
             {
+
                 res.Estatus = "Rechazada";
-                prueba = "Invitación Rechazada";
+                var prueba = "Invitación Rechazada";
                 db.SaveChanges();
+
+
+                //var Resid = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.IdAspNetUser == usr).FirstOrDefault().IdReservacion;
+                var reser = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == reservacione.ID_Reservacion && x.Estatus != "Rechazada" && x.Estatus != "NA").Count();
+                var reserva = db.Reservaciones.Where(x => x.ID_Reservacion == reservacione.ID_Reservacion).First();
+                if (reser < 1)
+                {
+
+                    reserva.Estatus = "Rechazada";
+                    db.SaveChanges();
+
+                }
+
+                return RedirectToAction(Invitaciones2);
             }
-            return View(prueba);
+           
+        }
+
+        private ActionResult RedirectToAction(Func<ActionResult> invitaciones2)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -743,15 +764,18 @@ namespace SIREON.Controllers
                     Res.IdReservacion = model.ID_Reservacion;
                     Res.NombreInvitado = item.NombreInvitado;
                     Res.CedulaInvitado = item.CedulaInvitado;
+                    Res.Estatus = "Pendiente";
                     db.Reservaciones_Usuarios.Add(Res);
                     db.SaveChanges();
                 }
                 else
                 {
+
                     Res.IdAspNetUser = item.IdAspNetUser;
                     Res.IdReservacion = model.ID_Reservacion;
                     Res.NombreInvitado = item.NombreInvitado;
                     Res.CedulaInvitado = item.CedulaInvitado;
+                    Res.Estatus = "NA";
                     db.Reservaciones_Usuarios.Add(Res);
                     db.SaveChanges();
                 }
