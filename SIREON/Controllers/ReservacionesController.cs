@@ -182,7 +182,7 @@ namespace SIREON.Controllers
             var hora = fecha.TimeOfDay;
             var user = User.Identity.GetUserId();
 
-            var Salas = db.Reservaciones.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdAspNetUser == user && p.Estatus != "Rechazada").Any())
+            var Salas = db.Reservaciones.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdAspNetUser == user && p.Estatus != "Rechazada" && p.Estatus != "Aceptada").Any())
                 .Where(x => x.Fecha == fechaa)
                 .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
                 .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
@@ -232,12 +232,12 @@ namespace SIREON.Controllers
             var usr = User.Identity.GetUserId();
             if (User.IsInRole("Operador"))
             {
-                var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1);
+                var reservaciones = db.Reservaciones.Include(r => r.Cubiculo).Include(r => r.AspNetUser).Include(r => r.AspNetUser1).OrderByDescending(x => x.Fecha);
                 return View(reservaciones.ToList());
             }
             else
             {
-                var reservaciones = db.Reservaciones.Where(x => x.IdAspNetUsers == usr && x.Estatus != "EnCurso" && x.Estatus != "Activa").ToList() ;
+                var reservaciones = db.Reservaciones.Where(x => x.IdAspNetUsers == usr && x.Estatus != "EnCurso" && x.Estatus != "Activa").OrderByDescending(x => x.Fecha).ToList() ;
                 return View(reservaciones.ToList());
             }
             
@@ -284,7 +284,7 @@ namespace SIREON.Controllers
             if (res.Estatus == "Rechazada")
             {  
                 var prueba = "Esta invitación fue rechazada previamente, no podrá realizar esta acción";
-                return View(prueba);
+                return RedirectToAction("Invitaciones");
             }
             else
             {
@@ -292,7 +292,7 @@ namespace SIREON.Controllers
                 var prueba = "Invitacion Aceptada";
                 
                 db.SaveChanges();
-                return View(prueba);
+                return RedirectToAction("Invitaciones");
             }
             
             
@@ -322,7 +322,7 @@ namespace SIREON.Controllers
             if (res.Estatus == "Aceptada")
             {
                 var prueba = "Esta invitación fue Aceptada previamente, no podrá realizar esta acción";
-                return View(prueba);
+                return RedirectToAction("Invitaciones");
             }
             else
             {
@@ -343,15 +343,11 @@ namespace SIREON.Controllers
 
                 }
 
-                return RedirectToAction(Invitaciones2);
+                return RedirectToAction("Invitaciones");
             }
            
         }
 
-        private ActionResult RedirectToAction(Func<ActionResult> invitaciones2)
-        {
-            throw new NotImplementedException();
-        }
 
 
         // GET: Reservaciones1/Details/5
@@ -705,7 +701,7 @@ namespace SIREON.Controllers
                 model2.HoraInicial = HEntrada;
                 model2.HoraFinal = HSalida;
                 model2.Fecha = SelFecha;
-                model2.Estatus = "En Espera";
+                model2.Estatus = "Reservado";
                 db.Disponibilidads.Add(model2);
 
             }

@@ -1,36 +1,62 @@
 ﻿@model IEnumerable<SIREON.Reservacione>
-
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Historial";
 }
-    <head>
-        @if ((User.IsInRole("Operador")))
-        {
-            <style>
+<head>
+    @if ((User.IsInRole("Operador")))
+    {
+        <style>
 
-                table {
-                    display: block;
-                    height: 300px;
-                    overflow: auto;
-                }
-            </style>
+            table {
+                display: block;
+                height: 300px;
+                overflow: auto;
+            }
+        </style>
+    }
+    else
+    {
+        <style>
+
+            table {
+                display: block;
+                height: 300px;
+                overflow: auto;
+            }
+        </style>
+    }
+</head>
+<body>
+
+    @{
+        var nv = "";
+        if (User.IsInRole("Operador"))
+        {
+            nv = "Reservaciones";
         }
         else
         {
-            <style>
-
-                table {
-                    display: block;
-                    height: 300px;
-                    overflow: auto;
-                }
-            </style>
+            nv = "Mi espacio";
         }
-    </head>
-<body>
+    }
+
+    <div class="viewport-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb has-arrow">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Home")">Inicio</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Reservaciones")">@nv</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Historial</li>
+            </ol>
+        </nav>
+    </div>
     <div class="col-lg-12">
         <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
-            <p class="grid-header" style="border-left-color:green">Histórico</p>
+            <p class="grid-header" style="border-left-color:green">Historial de reservaciones</p>
             <div class="item-wrapper">
                 <div class="row" style="justify-content:space-around">
                     <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
@@ -38,15 +64,15 @@
                     </div>
 
                     <div class="btn-group mb-0" data-toggle="checkbox">
-                        <label class="btn btn-success active" id="ch1">
+                        <label class="btn btn-success" id="ch1">
                             <input type="checkbox" id="chh1" class="name" name="name" value="Completada">
                             <i class="mdi mdi-check"></i>Completada
                         </label>
-                        <label class="btn btn-success active" id="ch2">
+                        <label class="btn btn-success" id="ch2">
                             <input type="checkbox" id="chh2" class="name" name="name" value="Cancelada">
                             <i class="mdi mdi-delete-forever"></i>Cancelada
                         </label>
-                        <label class="btn btn-success active" id="ch3">
+                        <label class="btn btn-success" id="ch3">
                             <input type="checkbox" id="chh3" class="name" name="name" value="Rechazada">
                             <i class="mdi mdi-cancel"></i>Rechazada
                         </label>

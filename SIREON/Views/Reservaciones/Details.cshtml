@@ -31,12 +31,25 @@
 
     @if (User.IsInRole("Operador"))
     {
+        <div class="viewport-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb has-arrow">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Reservaciones")">Reservaciones</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                </ol>
+            </nav>
+        </div>
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
-                <div class="col-md-3 col-sm-3 grid">
+                <div class="grid">
                     <div class="grid-body">
                         <h1 class="grid-title">
-                            Titular de la reservacón
+                            Titular de la reservación
                         </h1>
                         <a href="#">
                             <div class="item-wrapper">
@@ -128,7 +141,7 @@
                 <div class="col-md-3 col-sm-3 grid">
                     <div class="grid-body">
                         <h1 class="grid-title">
-                            Estatus
+                            Estado de la reservación
                         </h1>
                         @if ((Model.Estatus) == "Activa    ")
                         {
@@ -372,6 +385,19 @@
         var user = User.Identity.GetUserId();
         if (Model.IdAspNetUsers != user)
         {
+            <div class="viewport-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb has-arrow">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Reservaciones")">Mi espacio</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Invitaciones", "Reservaciones")">Invitaciones</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Detalles de invitación</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                     <div class="col-md-3 col-sm-3 grid">
@@ -469,7 +495,7 @@
                     <div class="col-md-3 col-sm-3 grid">
                         <div class="grid-body">
                             <h1 class="grid-title">
-                                Estatus
+                                Estado de la reservación
                             </h1>
                             @if ((Model.Estatus) == "Activa    ")
                             {
@@ -711,9 +737,22 @@
                     </div>
                 </div>
             </div>
-                                    }
-                                    else
-                                    {
+        }
+        else
+        {
+            <div class="viewport-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb has-arrow">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Home")">Inicio</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Reservaciones")">Mi espacio</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Detalles de reservación</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
                     <div class="col-md-3 col-sm-3 grid">
@@ -803,7 +842,7 @@
                     <div class="col-md-3 col-sm-3 grid">
                         <div class="grid-body">
                             <h1 class="grid-title">
-                                Estatus
+                                Estado de la reservación
                             </h1>
                             @if ((Model.Estatus) == "Activa    ")
                             {
@@ -1041,9 +1080,9 @@
                     </div>
                 </div>
             </div>
-                                        }
+        }
 
-                                    }
+    }
 
 
 </div>
@@ -1343,46 +1382,89 @@
 @{var usr = User.Identity.GetUserId(); }
 @if (Model.IdAspNetUsers != usr)
 {
-<script>
-    $(window).on("load", function () {
-        var data = JSON.stringify({
-            IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+    <script>
+        $(window).on("load", function () {
+            var data = JSON.stringify({
+                IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+            });
+
+            console.log(data);
+
+            $.when(ConsMat(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+
         });
 
-        console.log(data);
+        function ConsMat(data) {
+            return $.ajax({
 
-        $.when(ConsMat(data)).then(function (response) {
-            console.log(response);
-        }).fail(function (err) {
-            console.log(err);
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Reservaciones/Usuario4",
+                data: data,
+                success: function (result3) {
+                    //alert(result3[0])
+                    //data = JSON.parse(data);
+                    console.log(result3[0])
+                    $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                    $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
+
+                },
+                error: function () {
+                    
+                }
+            });
+
+        }
+
+    </script>
+}
+else
+{
+    <script>
+        $(window).on("load", function () {
+            var data = JSON.stringify({
+                IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+            });
+
+            console.log(data);
+
+            $.when(ConsMat(data)).then(function (response) {
+                console.log(response);
+            }).fail(function (err) {
+                console.log(err);
+            });
+
         });
 
-    });
+        function ConsMat(data) {
+            return $.ajax({
 
-    function ConsMat(data) {
-        return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Reservaciones/Usuario4",
+                data: data,
+                success: function (result3) {
+                    //alert(result3[0])
+                    //data = JSON.parse(data);
+                    console.log(result3[0])
+                    $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                    $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
 
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: "/Reservaciones/Usuario4",
-            data: data,
-            success: function (result3) {
-                //alert(result3[0])
-                //data = JSON.parse(data);
-                console.log(result3[0])
-                $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
-                $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
+                },
+                error: function () {
+                    
+                }
+            });
 
-            },
-            error: function () {
-                swal("¡Error!", "Favor verificar los datos", "warning");
-            }
-        });
+        }
 
-    }
-
-</script>
+    </script>
 }
 
-    
+

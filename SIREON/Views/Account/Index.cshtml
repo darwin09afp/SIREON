@@ -8,6 +8,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
+        <div class="viewport-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb has-arrow">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Consulta de usuarios</li>
+                </ol>
+            </nav>
+        </div>
         <div class="container-fluid">
             @using (Html.BeginForm())
             {
@@ -48,7 +58,7 @@
                             <div class="item-wrapper">
                                 <div class="row" style="justify-content:space-between">
                                     <div class="form-group input-rounded col-lg-4 col-md-4">
-                                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar"/>
+                                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
                                     </div>
                                     <div class="btn-group mb-0" data-toggle="checkbox">
                                         <label class="btn btn-info active" id="ch1">
@@ -139,9 +149,9 @@
                         <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
                             <p class="grid-header" style="border-left-color:green">Usuarios</p>
                             <div class="item-wrapper">
-                                
+
                                 <div class="form-group input-rounded col-lg-4 col-md-4">
-                                    
+
                                     <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
                                 </div>
                                 <div class="table-responsive">
@@ -180,7 +190,7 @@
                                     </table>
                                 </div>
 
-                                </div>
+                            </div>
                         </div>
                     </div>
                 }

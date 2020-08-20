@@ -1,40 +1,170 @@
 ﻿@model IEnumerable<SIREON.ListaNegra>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista negra | SIREON";
 }
 
-<h2>Index</h2>
+<div class="viewport-header">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb has-arrow">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Reservaciones")">Reservaciones</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Lista negra</li>
+        </ol>
+    </nav>
+</div>
 
 <div class="d-flex flex-row mt-5 mb-5">
     <a href='@Url.Action("Create", "ListaNegra")' class="btn btn-success" type="button">Agregar nuevo usuario a la lista</a>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </th>
-        <th></th>
-    </tr>
+@{var p = 0;
 
-    @foreach (var item in Model)
+    foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AspNetUser.Email)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID_ListaN }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID_ListaN }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID_ListaN })
-            </td>
-        </tr>
+        p = p + 1;
     }
 
-</table>
+    if (p != 0)
+    {
+    <div class="col-lg-12">
+        <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+            <p class="grid-header" style="border-left-color:red">Usuarios en la lista negra</p>
+            <div class="item-wrapper">
+                <div class="row" style="justify-content:left">
+                    <div class="form-group input-rounded col-lg-1 col-md-1 col-sm-1">
+
+                    </div>
+                    <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
+                        <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+                    </div>
+
+                    @*<div class="btn-group mb-0" data-toggle="checkbox">
+                        <label class="btn btn-success active" id="ch1">
+                            <input type="checkbox" id="chh1" class="name" name="name" value="Completada">
+                            <i class="mdi mdi-check"></i>Completada
+                        </label>
+                        <label class="btn btn-success active" id="ch2">
+                            <input type="checkbox" id="chh2" class="name" name="name" value="Cancelada">
+                            <i class="mdi mdi-delete-forever"></i>Cancelada
+                        </label>
+                        <label class="btn btn-success active" id="ch3">
+                            <input type="checkbox" id="chh3" class="name" name="name" value="Rechazada">
+                            <i class="mdi mdi-cancel"></i>Rechazada
+                        </label>
+                    </div>*@
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Usuario
+                                </th>
+                                <th>
+                                    Auxiliar
+                                </th>
+                                <th>
+                                    Fecha de entrada
+                                </th>
+                                <th>
+                                    Fecha de salida
+                                </th>
+                                <th>
+                                    Estado
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            @foreach (var item2 in Model)
+                            {
+
+
+                                <tr>
+                                    <td>
+                                        @{
+                                            string str = item2.AspNetUser.Email.Substring(0, 9);
+                                        }
+                                        @str
+                                    </td>
+                                    <td>
+                                        @{
+                                            string str1 = item2.AspNetUser1.Email.Substring(0, 9);
+                                        }
+                                        @str1
+                                    </td>
+                                    <td>
+                                        @{
+
+                                            var fecha = item2.FechaEntrada.Date.ToShortDateString();
+                                            @Html.DisplayFor(m => fecha)
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+
+                                            var fecha2 = item2.FechaSalida.Date.ToShortDateString();
+                                            @Html.DisplayFor(m => fecha2)
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            if (item2.Estatus == "Bloqueado ")
+                                            {
+                                                <label class="badge badge-danger">Bloqueado</label>
+                                            }
+                                            else
+                                            {
+                                                <label class="badge badge-success">Perdonado</label>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @*@Html.ActionLink("Edit", "Edit", new { id = item2.ID_ListaN }) |*@
+                                        @Html.ActionLink("Detalles", "Details", new { id = item2.ID_ListaN }, htmlAttributes: new { @class = "btn btn-default" })
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item2.ID_ListaN })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="col-lg-12 col-md-12 col-sm-12 equel-grid" style="text-align:center">
+        <div class="col-md-3 col-sm-3 grid">
+            <div class="grid-body">
+                <h3 class="title">
+                    Actualmente no existe ningún usuario en la lista
+                </h3>
+                <br />
+                <a>
+                    <div class="item-wrapper">
+                        <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/file.jpg" id="Disp" alt="" width="100">
+                    </div>
+                </a>
+
+                <p>
+
+                </p>
+            </div>
+        </div>
+    </div>
+    }
+}
+
+
+

@@ -32,11 +32,29 @@
 
 </head>
 <body>
+    @{var p = 0;
+        foreach (var item in Model)
+        {
 
+            p = p + 1;
+        }
+    }
     @if (User.Identity.IsAuthenticated)
     {
         if ((User.IsInRole("Operador")))
         {
+
+            <div class="viewport-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb has-arrow">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Home")">Inicio</a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Reservaciones</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-9 equel-grid">
                     <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
@@ -57,245 +75,286 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-3 col-sm-3 grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
-                    <div class="grid-body">
-                        <p>
-                            <a>
 
-                            </a>
-                        </p>
+                <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center"> 
+                    <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+                        <div class="grid-body">
+                            <p>
+                                <a>
 
-                        @{
-                            var CantRes = 0;
-                            foreach (var itemm in Model)
-                            {
-                                CantRes = CantRes + 1;
+                                </a>
+                            </p>
+
+                            @{
+                                var CantRes = 0;
+                                foreach (var itemm in Model)
+                                {
+                                    CantRes = CantRes + 1;
+                                }
+                                <h1>
+                                    @CantRes
+                                </h1>
+
                             }
-                            <h1>
-                                @CantRes
-                            </h1>
-
-                        }
 
 
-                        <p>
-                            <a>
+                            <p>
+                                <a>
 
-                            </a>
-                        </p>
-                        <p>
-                            Reservaciones en espera
-                        </p>
-                        <p>
-                            <a>
+                                </a>
+                            </p>
+                            <p>
+                                Reservaciones en espera
+                            </p>
+                            <p>
+                                <a>
 
-                            </a>
-                        </p>
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <br />
-            <div class="col-lg-12">
-                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
-                    <p class="grid-header" style="border-left-color:green">Reservaciones activas</p>
-                    <div class="item-wrapper">
-                        <div class="row" style="justify-content:space-around">
-                            <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
-                                <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+            if (p != 0)
+            {
+                <div class="col-lg-12">
+                    <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+                        <p class="grid-header" style="border-left-color:green">Reservaciones activas</p>
+                        <div class="item-wrapper">
+                            <div class="row" style="justify-content:space-around">
+                                <div class="form-group input-rounded col-lg-3 col-md-3 col-sm-3">
+                                    <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
+                                </div>
+
+                                <div class="btn-group mb-0">
+                                    <label class="btn btn-success " id="ch1">
+                                        <input type="checkbox" id="chh3" class="name" name="name" value="Próxima">
+                                        <i class="mdi mdi-check"></i>Próximas
+
+                                    </label>
+                                    <label class="btn btn-success " id="ch2">
+                                        <input type="checkbox" id="chh1" class="name" name="name" value="En curso">
+                                        <i class="mdi mdi-watch"></i>En curso
+                                    </label>
+                                    @*<label class="btn btn-success " id="ch3">
+                                            <input type="checkbox" id="chh2" class="name" name="name" value="En espera">
+                                            <i class="mdi mdi-clock-alert"></i>En espera
+                                        </label>*@
+                                </div>
                             </div>
-
-                            <div class="btn-group mb-0">
-                                <label class="btn btn-success " id="ch1">
-                                    <input type="checkbox" id="chh3" class="name" name="name" value="Próxima">
-                                    <i class="mdi mdi-check"></i>Próximas
-
-                                </label>
-                                <label class="btn btn-success " id="ch2">
-                                    <input type="checkbox" id="chh1" class="name" name="name" value="En curso">
-                                    <i class="mdi mdi-watch"></i>En curso
-                                </label>
-                                @*<label class="btn btn-success " id="ch3">
-                                        <input type="checkbox" id="chh2" class="name" name="name" value="En espera">
-                                        <i class="mdi mdi-clock-alert"></i>En espera
-                                    </label>*@
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="example" style="text-align:center">
-                                <thead >
-                                    <tr>
-                                        <th>
-                                            Titular
-                                        </th>
-                                        <th>
-                                            Fecha
-                                        </th>
-                                        <th>
-                                            Hora solicitada
-                                        </th>
-                                        <th>
-                                            Hora de entrada
-                                        </th>
-                                        <th>
-                                            Hora de salida
-                                        </th>
-                                        <th>
-                                            Cubículo No.
-                                        </th>
-                                        <th>
-                                            Estatus de reservación
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="myTable" style="text-align:center">
-                                    @foreach (var item in Model)
-                                    {
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="example" style="text-align:center">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Titular
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Hora solicitada
+                                            </th>
+                                            <th>
+                                                Hora de entrada
+                                            </th>
+                                            <th>
+                                                Hora de salida
+                                            </th>
+                                            <th>
+                                                Cubículo No.
+                                            </th>
+                                            <th>
+                                                Estatus de reservación
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="myTable" style="text-align:center">
+                                        @foreach (var item in Model)
+                                        {
 
 
-                                        <tr id="tr">
+                                            <tr id="tr">
 
-                                            <td>
-                                                @{
-                                                    string str = item.AspNetUser.Email.Substring(0, 9);
-                                                }
-                                                @str
-                                            </td>
-
-                                            <td>
-                                                @{
-
-                                                    var fecha = item.FechaSolicitada.Date.ToShortDateString();
-                                                    @Html.DisplayFor(m => fecha)
-
-
-                                                }
-                                            </td>
-                                            <td>
-                                                @{
-                                                    string Hora = item.HSolicitada.ToString();
-                                                    string str2 = Hora.Substring(0,8);
-                                                }
-                                                @str2
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.HEntrada)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.HSalida)
-                                            </td>
-
-                                            @if (item.Estatus == "En espera ")
-                                            {
                                                 <td>
-                                                    N/A
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
-                                                </td>
-                                            }
-                                            <td>
-
-                                                @{
-                                                    if (item.Estatus == "Activa    ")
-                                                    {
-                                                        <label class="badge badge-info">Próxima</label>
-                                                    }
-                                                    else if (item.Estatus == "Cancelada ")
-                                                    {
-                                                        <label class="badge badge-danger">Cancelada</label>
-                                                    }
-                                                    else if (item.Estatus == "Rechazada ")
-                                                    {
-                                                        <label class="badge badge-danger">Rechazada</label>
-                                                    }
-                                                    else if (item.Estatus == "En espera ")
-                                                    {
-                                                        <label class="badge badge-warning">En espera</label>
-                                                    }
-                                                    else if (item.Estatus == "EnCurso   ")
-                                                    {
-                                                        <label class="badge badge-warning">En curso</label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <label class="badge badge-success">Completada</label>
-                                                    }
-                                                }
-
-
-                                            </td>
-                                            <td>
-
-                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
-
-                                            </td>
-                                            <td></td>
-                                            @*<td>
-
                                                     @{
-                                                        if (item.Estatus == "En espera ")
-                                                        {
-                                                            @Html.ActionLink("Dar entrada", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-success" })
-
-                                                        }
-                                                        else if (item.Estatus == "EnCurso   ")
-                                                        {
-                                                            <button class="btn btn-success" disabled>Dar entrada</button>
-                                                        }
-                                                        else if (item.Estatus == "Activa    ")
-                                                        {
-                                                            <button class="btn btn-success">Dar entrada</button>
-                                                        }
-                                                        else
-                                                        {
-                                                            <button class="btn btn-success" disabled>Dar entrada</button>
-
-                                                        }
+                                                        string str = item.AspNetUser.Email.Substring(0, 9);
                                                     }
-
-
+                                                    @str
                                                 </td>
+
+                                                <td>
+                                                    @{
+
+                                                        var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                                        @Html.DisplayFor(m => fecha)
+
+
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        string Hora = item.HSolicitada.ToString();
+                                                        string str2 = Hora.Substring(0, 8);
+                                                    }
+                                                    @str2
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.HEntrada)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.HSalida)
+                                                </td>
+
+                                                @if (item.Estatus == "En espera ")
+                                                {
+                                                    <td>
+                                                        N/A
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                                    </td>
+                                                }
                                                 <td>
 
                                                     @{
                                                         if (item.Estatus == "Activa    ")
                                                         {
-                                                            //@Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
-                                                            <a data-itemId="0" href="#" class="btn btn-danger">Rechazar</a>
+                                                            <label class="badge badge-info">Próxima</label>
+                                                        }
+                                                        else if (item.Estatus == "Cancelada ")
+                                                        {
+                                                            <label class="badge badge-danger">Cancelada</label>
+                                                        }
+                                                        else if (item.Estatus == "Rechazada ")
+                                                        {
+                                                            <label class="badge badge-danger">Rechazada</label>
+                                                        }
+                                                        else if (item.Estatus == "En espera ")
+                                                        {
+                                                            <label class="badge badge-warning">En espera</label>
                                                         }
                                                         else if (item.Estatus == "EnCurso   ")
                                                         {
-                                                            <button class="btn btn-danger" disabled>Rechazar</button>
+                                                            <label class="badge badge-warning">En curso</label>
                                                         }
                                                         else
                                                         {
-                                                            <button class="btn btn-danger" disabled>Rechazar</button>
-
+                                                            <label class="badge badge-success">Completada</label>
                                                         }
                                                     }
 
 
-                                                </td>*@
+                                                </td>
+                                                <td>
 
-                                        </tr>
-                                    }
-                                </tbody>
+                                                    @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
 
-                            </table>
+                                                </td>
+                                                <td></td>
+                                                @*<td>
+
+                                                        @{
+                                                            if (item.Estatus == "En espera ")
+                                                            {
+                                                                @Html.ActionLink("Dar entrada", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-success" })
+
+                                                            }
+                                                            else if (item.Estatus == "EnCurso   ")
+                                                            {
+                                                                <button class="btn btn-success" disabled>Dar entrada</button>
+                                                            }
+                                                            else if (item.Estatus == "Activa    ")
+                                                            {
+                                                                <button class="btn btn-success">Dar entrada</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="btn btn-success" disabled>Dar entrada</button>
+
+                                                            }
+                                                        }
+
+
+                                                    </td>
+                                                    <td>
+
+                                                        @{
+                                                            if (item.Estatus == "Activa    ")
+                                                            {
+                                                                //@Html.ActionLink("Rechazar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                                <a data-itemId="0" href="#" class="btn btn-danger">Rechazar</a>
+                                                            }
+                                                            else if (item.Estatus == "EnCurso   ")
+                                                            {
+                                                                <button class="btn btn-danger" disabled>Rechazar</button>
+                                                            }
+                                                            else
+                                                            {
+                                                                <button class="btn btn-danger" disabled>Rechazar</button>
+
+                                                            }
+                                                        }
+
+
+                                                    </td>*@
+
+                                            </tr>
+                                        }
+                                    </tbody>
+
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
+            }
+            else
+            {
+            <div class="col-lg-12 col-md-12 col-sm-12 equel-grid" style="text-align:center">
+                <div class="col-md-3 col-sm-3 grid">
+                    <div class="grid-body">
+                        <h3 class="title">
+                            Actualmente no hay reservaciones programadas
+                        </h3>
+                        <br />
+                        <a>
+                            <div class="item-wrapper">
+                                <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/file.jpg" id="Disp" alt="" width="100">
+                            </div>
+                        </a>
+
+                        <p>
+
+                        </p>
+                    </div>
+                </div>
             </div>
+            }
+
             <br />
             <br />
 
         }
         else
         {
+
+            <div class="viewport-header">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb has-arrow">
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Home")">Inicio</a>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">Mi espacio</li>
+                    </ol>
+                </nav>
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center">
                     <div class="col-md-3 col-sm-3 grid" style="box-shadow: 0 0 10px -5px #bcbebf;">
@@ -392,154 +451,180 @@
 
             </div>
             <br />
-            <div class="col-lg-12">
-                <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
-                    <p class="grid-header" style="border-left-color:green">Mis reservaciones para hoy</p>
-                    <div class="item-wrapper">
-                        <div class="table-responsive">
-                            <table class="table info-table table-striped">
-                                <thead >
-                                    <tr>
-                                        <th>
-                                            Fecha
-                                        </th>
+            if (p != 0)
+            {
+                <div class="col-lg-12">
+                    <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
+                        <p class="grid-header" style="border-left-color:green">Mis reservaciones para hoy</p>
+                        <div class="item-wrapper">
+                            <div class="table-responsive" >
+                                <table class="table info-table table-striped" >
+                                    <thead>
+                                        <tr >
+                                            <th>
+                                                Fecha
+                                            </th>
 
-                                        <th>
-                                            Hora de reserva
-                                        </th>
+                                            <th>
+                                                Hora de reserva
+                                            </th>
 
-                                        <th>
-                                            Hora de entrada
-                                        </th>
+                                            <th>
+                                                Hora de entrada
+                                            </th>
 
-                                        <th>
-                                            Hora de salida
-                                        </th>
- 
-                                        <th>
-                                            Cubículo
-                                        </th>
+                                            <th>
+                                                Hora de salida
+                                            </th>
 
-                                        <th>
-                                            Estatus de reservación
-                                        </th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody style="text-align:center">
-                                @{
-                                    foreach (var item in Model)
-                                    {
+                                            <th>
+                                                Cubículo
+                                            </th>
 
-                                        <tr>
-
-                                            <td>
-                                                @{
-
-                                                    var fecha = item.FechaSolicitada.Date.ToShortDateString();
-                                                    @Html.DisplayFor(m => fecha)
-
-                                                }
-                                            </td>
-
-                                            <td>
-                                                @{
-                                                    string Hora = item.HSolicitada.ToString();
-                                                    string str3 = Hora.Substring(0, 8);
-                                                }
-                                                @str3
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.HEntrada)
-                                            </td>
-
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.HSalida)
-                                            </td>
-
-                                            @if (item.Estatus == "En espera ")
+                                            <th>
+                                                Estatus de reservación
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="text-align:center">
+                                        @{
+                                            foreach (var item in Model)
                                             {
-                                                <td>
-                                                    N/A
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.ID_Cubiculo)
-                                                </td>
-                                            }
 
-                                            <td>
-                                                @{
-                                                    if (item.Estatus == "Activa    ")
+                                                <tr>
+
+                                                    <td>
+                                                        @{
+
+                                                            var fecha = item.FechaSolicitada.Date.ToShortDateString();
+                                                            @Html.DisplayFor(m => fecha)
+
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        @{
+                                                            string Hora = item.HSolicitada.ToString();
+                                                            string str3 = Hora.Substring(0, 8);
+                                                        }
+                                                        @str3
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.HEntrada)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.HSalida)
+                                                    </td>
+
+                                                    @if (item.Estatus == "En espera ")
                                                     {
-                                                        <label class="badge badge-info">Activa</label>
-                                                    }
-                                                    else if (item.Estatus == "Cancelada ")
-                                                    {
-                                                        <label class="badge badge-warning">Cancelada</label>
-                                                    }
-                                                    else if (item.Estatus == "Rechazada ")
-                                                    {
-                                                        <label class="badge badge-danger">Rechazada</label>
-                                                    }
-                                                    else if (item.Estatus == "En espera ")
-                                                    {
-                                                        <label class="badge badge-warning">En espera</label>
-                                                    }
-                                                    else if (item.Estatus == "EnCurso   ")
-                                                    {
-                                                        <label class="badge badge-warning">En curso</label>
+                                                        <td>
+                                                            N/A
+                                                        </td>
                                                     }
                                                     else
                                                     {
-                                                        <label class="badge badge-success">Completada</label>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Cubiculo.Descripcion)
+                                                        </td>
                                                     }
-                                                }
 
-                                            </td>
+                                                    <td>
+                                                        @{
+                                                            if (item.Estatus == "Activa    ")
+                                                            {
+                                                                <label class="badge badge-info">Activa</label>
+                                                            }
+                                                            else if (item.Estatus == "Cancelada ")
+                                                            {
+                                                                <label class="badge badge-warning">Cancelada</label>
+                                                            }
+                                                            else if (item.Estatus == "Rechazada ")
+                                                            {
+                                                                <label class="badge badge-danger">Rechazada</label>
+                                                            }
+                                                            else if (item.Estatus == "En espera ")
+                                                            {
+                                                                <label class="badge badge-warning">En espera</label>
+                                                            }
+                                                            else if (item.Estatus == "EnCurso   ")
+                                                            {
+                                                                <label class="badge badge-warning">En curso</label>
+                                                            }
+                                                            else
+                                                            {
+                                                                <label class="badge badge-success">Completada</label>
+                                                            }
+                                                        }
+
+                                                    </td>
 
 
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
 
-                                                @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
+                                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-default" })
 
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            @*<td>
-@{
-if (item.Estatus == "Activa    ")
-{
-@Html.ActionLink("Cancelar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    @*<td>
+                                                        @{
+                                                        if (item.Estatus == "Activa    ")
+                                                        {
+                                                        @Html.ActionLink("Cancelar", "Details", new { id = item.ID_Reservacion }, htmlAttributes: new { @class = "btn btn-danger" })
 
-}
-else if (item.Estatus == "EnCurso   ")
-{
-<button class="btn btn-danger" disabled>Cancelar</button>
-}
-else
-{
-<button class="btn btn-danger" disabled>Cancelar</button>
+                                                        }
+                                                        else if (item.Estatus == "EnCurso   ")
+                                                        {
+                                                        <button class="btn btn-danger" disabled>Cancelar</button>
+                                                        }
+                                                        else
+                                                        {
+                                                        <button class="btn btn-danger" disabled>Cancelar</button>
 
-}
-}
-</td>*@
-                                        </tr>
-                                    }
-                                }
-                                </tbody>
-                            </table>
+                                                        }
+                                                        }
+                                                        </td>*@
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="col-lg-12 col-md-12 col-sm-12 equel-grid" style="text-align:center">
+                    <div class="col-md-3 col-sm-3 grid">
+                        <div class="grid-body">
+                            <h3 class="title">
+                                Actualmente no hay reservaciones programadas
+                            </h3>
+                            <br />
+                            <a>
+                                <div class="item-wrapper">
+                                    <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/file.jpg" id="Disp" alt="" width="100">
+                                </div>
+                            </a>
+
+                            <p>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+            
             <br />
             <br />
         }

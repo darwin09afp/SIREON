@@ -1,42 +1,246 @@
 ﻿@model SIREON.ListaNegra
-
+@using Microsoft.AspNet.Identity;
 @{
-
+    ViewBag.Title = "Detalles de lista negra | SIREON";
 }
 
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+
+
 </head>
 <body>
-    <div>
-        <h4>ListaNegra</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Descripcion)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.AspNetUser.Email)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.AspNetUser.Email)
-            </dd>
-    
-        </dl>
+    @if (User.IsInRole("Operador"))
+    {
+        <div class="viewport-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb has-arrow">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Reservaciones")">Reservaciones</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "ListaNegra")">Lista negra</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                </ol>
+            </nav>
+        </div>
+    }
+    else
+    {
+        <div class="viewport-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb has-arrow">
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "Home")">Inicio</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Index", "ListaNegra")">Lista negra</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalles</li>
+                </ol>
+            </nav>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Usuario
+                    </h1>
+                    <a href="#">
+                        <div class="item-wrapper">
+
+                        </div>
+                    </a>
+                    <p>
+
+                    </p>
+                    <p id="NSolicitante">
+                        <input type="text" id="IdAspNetUsers2" value="@Html.DisplayFor(model => model.IdAspNetUsers)" style="display:none" />
+
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Fecha de entrada
+                    </h1>
+                    <a href="#">
+                        <div class="item-wrapper">
+
+                        </div>
+                    </a>
+                    <p>
+
+                    </p>
+                    <p>
+                        @{
+
+                            var fecha = Model.FechaEntrada.Date.ToShortDateString();
+                            @Html.DisplayFor(m => fecha)
+
+
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Fecha de salida
+                    </h1>
+                    <a href="#">
+                        <div class="item-wrapper">
+
+                        </div>
+                    </a>
+                    <p>
+
+                    </p>
+                    <p>
+                        @{
+
+                            var fecha2 = Model.FechaSalida.Date.ToShortDateString();
+                            @Html.DisplayFor(m => fecha2)
+
+
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 equel-grid" style="text-align:center">
+            <div class="col-md-3 col-sm-3 grid">
+                <div class="grid-body">
+                    <h1 class="grid-title">
+                        Estado
+                    </h1>
+                    @if ((Model.Estatus) == "Bloqueado ")
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Rechazada.png" alt="" width="200">
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            Bloqueado
+                        </p>
+                        <br />
+                        <p>
+
+                            @if (User.IsInRole("Administrador"))
+                            {
+                                <div class="row" style="justify-content:space-around">
+
+                                    @if (((Model.Estatus) == "Bloqueado "))
+                                    {
+                                        <input type="button" class="btn btn-success" id="DarEntrada" value="Perdonar" />
+                                    }
+
+                                </div>
+
+                            }
+                            else
+                            {
+
+
+                            }
+                        </p>
+                    }
+                    else
+                    {
+                        <br />
+                        <a href="#">
+                            <div class="item-wrapper">
+                                <img class="img-lg mt-1 mb-1 mr-2" src="~/Content/images/Check.png" alt="" width="200">
+
+                            </div>
+                        </a>
+                        <br />
+                        <br />
+                        <br />
+                        <p>
+                            Perdonado
+                        </p>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8 equel-grid">
+            <div class="grid">
+                <div class="grid-body">
+                    <h1 class="grid-title" style="text-align:center">
+                        Motivo de ingreso a la lista
+                    </h1>
+                    <div>
+                        <p>
+                            @Html.DisplayFor(model => model.Descripcion)
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_ListaN }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 </body>
-</html>
+
+
+
+
+@{var usr = User.Identity.GetUserId(); }
+@if (Model.IdAspNetUsers != usr)
+{
+    <script>
+    $(window).on("load", function () {
+        var data = JSON.stringify({
+            IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+        });
+
+        console.log(data);
+
+        $.when(ConsMat(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+
+    });
+
+    function ConsMat(data) {
+        return $.ajax({
+
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Usuario4",
+            data: data,
+            success: function (result3) {
+                //alert(result3[0])
+                //data = JSON.parse(data);
+                console.log(result3[0])
+                $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
+
+            },
+            error: function () {
+                swal("¡Error!", "Favor verificar los datos", "warning");
+            }
+        });
+
+    }
+
+    </script>
+}

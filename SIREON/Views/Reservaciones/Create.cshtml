@@ -11,6 +11,31 @@
 
 </head>
 <body>
+        @{
+        var nv = "";
+        if (User.IsInRole("Operador"))
+        {
+            nv = "Reservaciones";
+        }
+        else
+        {
+            nv = "Mi espacio";
+        }
+    }
+
+    <div class="viewport-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb has-arrow">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Home")">Inicio</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Reservaciones")">@nv</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Nueva reservación</li>
+            </ol>
+        </nav>
+    </div>
     <div class="row">
         <div class="col-lg-12 equel-grid">
             <div class="grid" style=" box-shadow: 0 0 10px -5px #bcbebf;">
@@ -130,7 +155,7 @@
                 <div class="grid-body">
                     <div class="item-wrapper">
                         <form>
-                            <h4>Responsable</h4>
+                            <h4>Titular</h4>
                             <br />
                             @if ((User.IsInRole("Operador")))
                             {
