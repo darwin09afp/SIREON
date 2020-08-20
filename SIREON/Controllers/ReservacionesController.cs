@@ -366,6 +366,15 @@ namespace SIREON.Controllers
         }
 
 
+        // GET: Reservaciones1/Details/5
+        public ActionResult Details2(string id)
+        {            
+            var res = db.Reservaciones.Where(x => x.IdAspNetUsers == id).OrderByDescending(p => p.Fecha).ToList();
+            return View(res);
+        }
+
+
+
         [HttpPost]
         public ActionResult Consultar(TimeSpan HEntrada)
         {

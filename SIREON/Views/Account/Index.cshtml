@@ -92,10 +92,10 @@
                                         <thead>
                                             <tr>
                                                 <th>
-                                                    Correo
+                                                    Usuario
                                                 </th>
                                                 <th>
-                                                    Usuario
+                                                    Correo
                                                 </th>
                                                 <th>
                                                     Rol Asignado
@@ -111,7 +111,10 @@
                                                 <tr>
 
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                        @{
+                                                            string str = item.Email.Substring(0, 9);
+                                                        }
+                                                        @str
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Email)
@@ -155,35 +158,41 @@
                                     <input type="text" class="form-control input-rounded" id="buscar" placeholder="Buscar" />
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table table-hover" id="example">
+                                    <table class="table table-hover" id="example" style="text-align:center">
                                         <thead>
                                             <tr>
-                                                <th>
-                                                    Correo
-                                                </th>
+                                                <th></th>
                                                 <th>
                                                     Usuario
+                                                </th>
+                                                <th>
+                                                    Correo
                                                 </th>
                                                 <th>
 
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody id="myTable">
+                                        <tbody id="myTable" style="text-align:center">
                                             @foreach (var item in Model)
                                             {
-                                                <tr>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Email)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Email)
-                                                    </td>
-                                                    <td>
-                                                        <input type="button" src="#" class="btn btn-default" value="Detalles" />
-                                                    </td>
-                                                </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    @{
+                                                        string str2 = item.Email.Substring(0, 9);
+                                                    }
+                                                    @str2
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Email)
+                                                </td>
+                                                
+                                                <td>
+                                                    @Html.ActionLink("Detalles", "Details2", "Reservaciones", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-success" })
+                                                </td>
+                                                
+                                            </tr>
                                             }
                                         </tbody>
 

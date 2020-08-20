@@ -2346,6 +2346,7 @@
     <Content Include="Views\Upload\UploadFile.cshtml" />
     <Content Include="UploadedFiles\Normas uso estudio colectivo Biblioteca UNPHU.pdf" />
     <Content Include="Views\Reservaciones\Invitaciones2.cshtml" />
+    <Content Include="Views\Reservaciones\Details2.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
