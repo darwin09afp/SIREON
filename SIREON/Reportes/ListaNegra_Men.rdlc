@@ -442,7 +442,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>=CDate(Fields!FechaEntrada.Value)</Value>
+                            <Value>=Fields!FechaEntrada.Value</Value>
                             <Style>
                               <FontWeight>Normal</FontWeight>
                               <Color>#333333</Color>

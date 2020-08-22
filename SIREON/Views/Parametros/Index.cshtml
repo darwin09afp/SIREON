@@ -32,9 +32,9 @@
         }
     </div>
 
-    <p>
+    @*<p>
         @Html.ActionLink("Create New", "Create")
-    </p>
+    </p>*@
     <br />
     <div class="col-lg-12">
         <div class="grid">
@@ -61,9 +61,10 @@
                                         @Html.DisplayFor(modelItem => item.Valor)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { htmlAttributes = new { @class = "btn btn-xs btn-primary" } })|
-                                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.ID }, htmlAttributes: new { @class = "btn btn-success" })
                                     </td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             }
 

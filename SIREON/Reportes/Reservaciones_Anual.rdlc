@@ -769,7 +769,7 @@
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>Fecha</Value>
+                                <Value>Mes</Value>
                                 <Style>
                                   <FontWeight>Bold</FontWeight>
                                 </Style>

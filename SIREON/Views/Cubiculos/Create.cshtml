@@ -18,7 +18,27 @@
     </nav>
 </div>
 
-@using (Html.BeginForm()) 
+<div class="col-lg-12 equel-grid">
+    <div class="grid">
+        <p class="grid-header">Detalles de nuevo cubículo</p>
+        <div class="grid-body">
+            <div class="item-wrapper">
+                <form>
+                    <div class="form-group">
+                        <label for="inputEmail1">Descripción del cubículo</label>
+                        <input type="email" class="form-control" id="inputEmail1" placeholder="Descripción">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1">Capacidad</label>
+                        <input type="number" class="form-control" id="inputPassword1" placeholder="Capacidad" max="10">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success">Crear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@*@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -56,4 +76,4 @@
             </div>
         </div>
     </div>
-}
+}*@
