@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DB_AplicativoDataSet" targetNamespace="http://tempuri.org/DB_AplicativoDataSet.xsd" xmlns:mstns="http://tempuri.org/DB_AplicativoDataSet.xsd" xmlns="http://tempuri.org/DB_AplicativoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="SIREONModel" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="SIREONModel (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.SIREONModel.ConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ResCubTableAdapter" GeneratorDataComponentClassName="ResCubTableAdapter" Name="ResCub" UserDataComponentName="ResCubTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="SIREONModel (Web.config)" DbObjectName="DB_Aplicativo.dbo.ResCub" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Email, Fecha, FechaSolicitada, HEntrada, HSalida, Estatus, ID_Reservacion, Descripcion FROM dbo.ResCub</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Email" DataSetColumn="Email" />
+              <Mapping SourceColumn="Fecha" DataSetColumn="Fecha" />
+              <Mapping SourceColumn="FechaSolicitada" DataSetColumn="FechaSolicitada" />
+              <Mapping SourceColumn="HEntrada" DataSetColumn="HEntrada" />
+              <Mapping SourceColumn="HSalida" DataSetColumn="HSalida" />
+              <Mapping SourceColumn="Estatus" DataSetColumn="Estatus" />
+              <Mapping SourceColumn="ID_Reservacion" DataSetColumn="ID_Reservacion" />
+              <Mapping SourceColumn="Descripcion" DataSetColumn="Descripcion" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DB_AplicativoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DB_AplicativoDataSet" msprop:Generator_UserDSName="DB_AplicativoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ResCub" msprop:Generator_TableClassName="ResCubDataTable" msprop:Generator_TableVarName="tableResCub" msprop:Generator_TablePropName="ResCub" msprop:Generator_RowDeletingName="ResCubRowDeleting" msprop:Generator_RowChangingName="ResCubRowChanging" msprop:Generator_RowEvHandlerName="ResCubRowChangeEventHandler" msprop:Generator_RowDeletedName="ResCubRowDeleted" msprop:Generator_UserTableName="ResCub" msprop:Generator_RowChangedName="ResCubRowChanged" msprop:Generator_RowEvArgName="ResCubRowChangeEvent" msprop:Generator_RowClassName="ResCubRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Email" msprop:Generator_ColumnVarNameInTable="columnEmail" msprop:Generator_ColumnPropNameInRow="Email" msprop:Generator_ColumnPropNameInTable="EmailColumn" msprop:Generator_UserColumnName="Email" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="256" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" />
+              <xs:element name="FechaSolicitada" msprop:Generator_ColumnVarNameInTable="columnFechaSolicitada" msprop:Generator_ColumnPropNameInRow="FechaSolicitada" msprop:Generator_ColumnPropNameInTable="FechaSolicitadaColumn" msprop:Generator_UserColumnName="FechaSolicitada" type="xs:dateTime" />
+              <xs:element name="HEntrada" msprop:Generator_ColumnVarNameInTable="columnHEntrada" msprop:Generator_ColumnPropNameInRow="HEntrada" msprop:Generator_ColumnPropNameInTable="HEntradaColumn" msprop:Generator_UserColumnName="HEntrada" type="xs:duration" />
+              <xs:element name="HSalida" msprop:Generator_ColumnVarNameInTable="columnHSalida" msprop:Generator_ColumnPropNameInRow="HSalida" msprop:Generator_ColumnPropNameInTable="HSalidaColumn" msprop:Generator_UserColumnName="HSalida" type="xs:duration" />
+              <xs:element name="Estatus" msprop:Generator_ColumnVarNameInTable="columnEstatus" msprop:Generator_ColumnPropNameInRow="Estatus" msprop:Generator_ColumnPropNameInTable="EstatusColumn" msprop:Generator_UserColumnName="Estatus">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ID_Reservacion" msprop:Generator_ColumnVarNameInTable="columnID_Reservacion" msprop:Generator_ColumnPropNameInRow="ID_Reservacion" msprop:Generator_ColumnPropNameInTable="ID_ReservacionColumn" msprop:Generator_UserColumnName="ID_Reservacion" type="xs:int" />
+              <xs:element name="Descripcion" msprop:Generator_ColumnVarNameInTable="columnDescripcion" msprop:Generator_ColumnPropNameInRow="Descripcion" msprop:Generator_ColumnPropNameInTable="DescripcionColumn" msprop:Generator_UserColumnName="Descripcion">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ResCub" />
+      <xs:field xpath="mstns:ID_Reservacion" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

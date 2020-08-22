@@ -236,6 +236,11 @@
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB_AplicativoDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB_AplicativoDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Directore.cs">
       <DependentUpon>UniversidadModel.tt</DependentUpon>
     </Compile>
@@ -259,6 +264,14 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ListaN.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ListaNe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListaNe.xsd</DependentUpon>
     </Compile>
     <Compile Include="ListaNegra.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
@@ -286,6 +299,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Res1DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ResCub.cs">
+      <DependentUpon>SIREONModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Reservacione.cs">
       <DependentUpon>SIREONModel.tt</DependentUpon>
@@ -2219,6 +2235,28 @@
     <Content Include="Res1DataSet.xsc">
       <DependentUpon>Res1DataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="DB_AplicativoDataSet.xsc">
+      <DependentUpon>DB_AplicativoDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="DB_AplicativoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB_AplicativoDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="DB_AplicativoDataSet.xss">
+      <DependentUpon>DB_AplicativoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="ListaNe.xsc">
+      <DependentUpon>ListaNe.xsd</DependentUpon>
+    </Content>
+    <None Include="ListaNe.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ListaNe.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ListaNe.xss">
+      <DependentUpon>ListaNe.xsd</DependentUpon>
+    </Content>
     <None Include="Res1DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>Res1DataSet.Designer.cs</LastGenOutput>
@@ -2408,7 +2446,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reportes\ResDia.rdlc" />
+    <EmbeddedResource Include="Reportes\ListaNegra_Anual.rdlc" />
+    <EmbeddedResource Include="Reportes\ListaNegra_Men.rdlc" />
+    <EmbeddedResource Include="Reportes\ListaNegra_Dia.rdlc" />
+    <EmbeddedResource Include="Reportes\Reservaciones_Anual.rdlc" />
+    <EmbeddedResource Include="Reportes\Reservaciones_Men.rdlc" />
+    <EmbeddedResource Include="Reportes\Reservaciones_Dia.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

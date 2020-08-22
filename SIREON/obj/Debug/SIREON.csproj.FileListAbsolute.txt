@@ -238,6 +238,6 @@ C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\ru\Microsoft.ReportVie
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\bin\Syncfusion.Licensing.dll
-C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\RdlCompile.cache
 C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\RdlCompile.compiled
+C:\Users\darwi\Source\Repos\darwin09afp\SIREON\SIREON\obj\Debug\SIREON.csprojAssemblyReference.cache

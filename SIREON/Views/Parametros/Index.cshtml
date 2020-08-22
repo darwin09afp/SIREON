@@ -4,65 +4,75 @@
 
 }
 
-    <body>
-        <div class="row">
+<body>
+    <div class="viewport-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb has-arrow">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Index", "Home")">Inicio</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Parámetros</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
 
-            @{
-                foreach (var item in Model)
-                {
-                    <div class="col-sm-12 col-md-6 col-lg-6 grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
+        @{
+            foreach (var item in Model)
+            {
+                <div class="col-sm-12 col-md-6 col-lg-6 grid" style="text-align:center; box-shadow: 0 0 10px -5px #bcbebf;">
 
-                            <div class="grid-body text-gray">
-                                <h6 class="text-black">@Html.DisplayFor(modelItem => item.Nombre)</h6>
-                                <h1 class="font-light text-center">@Html.DisplayFor(modelItem => item.Valor)</h1>
-                            </div>
-
+                    <div class="grid-body text-gray">
+                        <h6 class="text-black">@Html.DisplayFor(modelItem => item.Nombre)</h6>
+                        <h1 class="font-light text-center">@Html.DisplayFor(modelItem => item.Valor)</h1>
                     </div>
-                }
+
+                </div>
             }
-        </div>
+        }
+    </div>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <br/>
-        <div class="col-lg-12">
-                <div class="grid">
-                    <p class="grid-header">Todos los parametros</p>
-                    <div class="item-wrapper">
-                        <div class="table-responsive">
-                            <table class="table info-table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Valor)</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <br />
+    <div class="col-lg-12">
+        <div class="grid">
+            <p class="grid-header">Todos los parametros</p>
+            <div class="item-wrapper">
+                <div class="table-responsive">
+                    <table class="table info-table table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                                <th>@Html.DisplayNameFor(model => model.Valor)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Nombre)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Valor)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { htmlAttributes = new { @class = "btn btn-xs btn-primary" } })|
-                                                @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                            </td>
-                                        </tr>
-                                    }
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Valor)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { htmlAttributes = new { @class = "btn btn-xs btn-primary" } })|
+                                        @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                    </td>
+                                </tr>
+                            }
 
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
+    </div>
 
-    </body>
+</body>
 

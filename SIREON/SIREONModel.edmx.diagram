@@ -29,6 +29,8 @@
         <EntityTypeShape EntityType="SIREONModel.Disponibilidad" Width="1.5" PointX="6" PointY="0.75" />
         <AssociationConnector Association="SIREONModel.FK_Disponibilidad_Cubiculos" />
         <AssociationConnector Association="SIREONModel.FK_ListaNegra_AspNetUsers1" />
+        <EntityTypeShape EntityType="SIREONModel.ResCub" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SIREONModel.ListaN" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

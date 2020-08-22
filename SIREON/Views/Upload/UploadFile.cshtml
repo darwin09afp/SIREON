@@ -1,15 +1,45 @@
 ﻿@{ ViewBag.Title = "UploadFile"; }
 
-<h2>UploadFile</h2>
+<div class="viewport-header">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb has-arrow">
+            <li class="breadcrumb-item">
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
 
-@using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
+            <li class="breadcrumb-item active" aria-current="page">Reglamento</li>
+        </ol>
+    </nav>
+</div>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 equel-grid" style="text-align:center">
+        <div class="col-md-3 col-sm-3 grid" style="box-shadow: 0 0 10px -5px #bcbebf;">
+            <div class="grid-body">
+                @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
 
-<div>
-    @Html.TextBox("file", "", new { type = "file" }) <br />
+                    <div>
+                        
+                        <div class="custom-file">
+                            @Html.TextBox("file", "", new { type = "file" })
+                            @*<input type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Elegir archivo</label>*@
+                        </div>
+                        <br />
+                        <br />
+                        <input type="submit" value="Cargar archivo" class="btn btn-success"/>
 
-    <input type="submit" value="Upload" />
+                        @ViewBag.Message
 
-    @ViewBag.Message
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-</div>}
+<div class="container">
+
+    <embed src="~/UploadedFiles/Normas uso estudio colectivo Biblioteca UNPHU.pdf" type="application/pdf" width="1000" height="1600" />
+
+</div>

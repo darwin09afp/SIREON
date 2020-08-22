@@ -37,5 +37,7 @@ namespace SIREON
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Reservaciones_Usuarios> Reservaciones_Usuarios { get; set; }
         public virtual DbSet<Disponibilidad> Disponibilidads { get; set; }
+        public virtual DbSet<ResCub> ResCubs { get; set; }
+        public virtual DbSet<ListaN> ListaNs { get; set; }
     }
 }

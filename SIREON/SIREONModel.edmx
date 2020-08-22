@@ -143,6 +143,40 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Aplicativo.dbo.ListaN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ListaN">
+          <Key>
+            <PropertyRef Name="FechaEntrada" />
+            <PropertyRef Name="FechaSalida" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="FechaEntrada" Type="date" Nullable="false" />
+          <Property Name="FechaSalida" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Aplicativo.dbo.ResCub' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ResCub">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="FechaSolicitada" />
+            <PropertyRef Name="HEntrada" />
+            <PropertyRef Name="HSalida" />
+            <PropertyRef Name="Estatus" />
+            <PropertyRef Name="ID_Reservacion" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="FechaSolicitada" Type="date" Nullable="false" />
+          <Property Name="HEntrada" Type="time" Precision="7" Nullable="false" />
+          <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="ID_Reservacion" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -321,6 +355,26 @@
           <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reservaciones_Usuarios" EntityType="Self.Reservaciones_Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaN" EntityType="Self.ListaN" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListaN].[Email] AS [Email], 
+    [ListaN].[FechaEntrada] AS [FechaEntrada], 
+    [ListaN].[FechaSalida] AS [FechaSalida], 
+    [ListaN].[Descripcion] AS [Descripcion]
+    FROM [dbo].[ListaN] AS [ListaN]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ResCub" EntityType="Self.ResCub" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ResCub].[Email] AS [Email], 
+    [ResCub].[Fecha] AS [Fecha], 
+    [ResCub].[FechaSolicitada] AS [FechaSolicitada], 
+    [ResCub].[HEntrada] AS [HEntrada], 
+    [ResCub].[HSalida] AS [HSalida], 
+    [ResCub].[Estatus] AS [Estatus], 
+    [ResCub].[ID_Reservacion] AS [ID_Reservacion], 
+    [ResCub].[Descripcion] AS [Descripcion]
+    FROM [dbo].[ResCub] AS [ResCub]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -601,6 +655,8 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="ListaNegra" EntitySet="ListaNegras" />
           </AssociationSet>
+          <EntitySet Name="ResCubs" EntityType="SIREONModel.ResCub" />
+          <EntitySet Name="ListaNs" EntityType="SIREONModel.ListaN" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -734,6 +790,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ResCub">
+          <Key>
+            <PropertyRef Name="Fecha" />
+            <PropertyRef Name="FechaSolicitada" />
+            <PropertyRef Name="HEntrada" />
+            <PropertyRef Name="HSalida" />
+            <PropertyRef Name="Estatus" />
+            <PropertyRef Name="ID_Reservacion" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaSolicitada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="HEntrada" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="HSalida" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ID_Reservacion" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ListaN">
+          <Key>
+            <PropertyRef Name="FechaEntrada" />
+            <PropertyRef Name="FechaSalida" />
+            <PropertyRef Name="Descripcion" />
+          </Key>
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FechaEntrada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -884,6 +970,30 @@
                 <ScalarProperty Name="HoraInicial" ColumnName="HoraInicial" />
                 <ScalarProperty Name="IdCubiculo" ColumnName="IdCubiculo" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResCubs">
+            <EntityTypeMapping TypeName="SIREONModel.ResCub">
+              <MappingFragment StoreEntitySet="ResCub">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ID_Reservacion" ColumnName="ID_Reservacion" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="HSalida" ColumnName="HSalida" />
+                <ScalarProperty Name="HEntrada" ColumnName="HEntrada" />
+                <ScalarProperty Name="FechaSolicitada" ColumnName="FechaSolicitada" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaNs">
+            <EntityTypeMapping TypeName="SIREONModel.ListaN">
+              <MappingFragment StoreEntitySet="ListaN">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+                <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

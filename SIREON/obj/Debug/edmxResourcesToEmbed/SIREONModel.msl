@@ -148,5 +148,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ResCubs">
+      <EntityTypeMapping TypeName="SIREONModel.ResCub">
+        <MappingFragment StoreEntitySet="ResCub">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="ID_Reservacion" ColumnName="ID_Reservacion" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="HSalida" ColumnName="HSalida" />
+          <ScalarProperty Name="HEntrada" ColumnName="HEntrada" />
+          <ScalarProperty Name="FechaSolicitada" ColumnName="FechaSolicitada" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListaNs">
+      <EntityTypeMapping TypeName="SIREONModel.ListaN">
+        <MappingFragment StoreEntitySet="ListaN">
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="FechaSalida" ColumnName="FechaSalida" />
+          <ScalarProperty Name="FechaEntrada" ColumnName="FechaEntrada" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

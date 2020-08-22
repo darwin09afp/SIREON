@@ -223,6 +223,8 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="ListaNegra" EntitySet="ListaNegras" />
     </AssociationSet>
+    <EntitySet Name="ResCubs" EntityType="SIREONModel.ResCub" />
+    <EntitySet Name="ListaNs" EntityType="SIREONModel.ListaN" />
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>
@@ -356,4 +358,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="ResCub">
+    <Key>
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="FechaSolicitada" />
+      <PropertyRef Name="HEntrada" />
+      <PropertyRef Name="HSalida" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="ID_Reservacion" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaSolicitada" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="HEntrada" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="HSalida" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Estatus" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="ID_Reservacion" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ListaN">
+    <Key>
+      <PropertyRef Name="FechaEntrada" />
+      <PropertyRef Name="FechaSalida" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="FechaEntrada" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaSalida" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
 </Schema>

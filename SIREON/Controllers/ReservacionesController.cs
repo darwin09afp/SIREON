@@ -60,14 +60,14 @@ namespace SIREON.Controllers
 
         }
 
-        public ActionResult Reportes(string ReportType)
+        public ActionResult Reporte1(string ReportType)
         {
             LocalReport localReport = new LocalReport();
-            localReport.ReportPath = Server.MapPath("~/Reportes/ResDia.rdlc");
+            localReport.ReportPath = Server.MapPath("~/Reportes/Reservaciones_Dia.rdlc");
             ReportDataSource reportDataSource = new ReportDataSource();
-            reportDataSource.Name = "Res1";
+            reportDataSource.Name = "DataSet1";
             var fecha = DateTime.Now;
-            reportDataSource.Value = db.Reservaciones.Where(x =>x.Fecha == fecha.Date && x.Estatus != "EnCurso").ToList();
+            reportDataSource.Value = db.ResCubs.Where(x => x.Fecha == fecha.Date && x.Estatus != "EnCurso").ToList();
             localReport.DataSources.Add(reportDataSource);
             string RType = ReportType;
             string mimeType;
@@ -105,6 +105,240 @@ namespace SIREON.Controllers
             //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
 
         }
+
+        public ActionResult Reporte2(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/Reservaciones_Men.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "DataSet1";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.ResCubs.Where(x => x.Fecha.Month == fecha.Date.Month && x.Estatus != "EnCurso" && x.Estatus != "En espera" && x.Estatus != "Activa").OrderBy(x => x.Fecha).ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
+
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_Mes." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
+
+        public ActionResult Reporte3(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/Reservaciones_Anual.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "DataSet1";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.ResCubs.Where(x => x.Fecha.Year == fecha.Date.Year && x.Estatus != "EnCurso" && x.Estatus != "En espera" && x.Estatus != "Activa").OrderBy(x => x.Fecha).ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
+
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_Mes." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
+
+        public ActionResult Reporte4(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/ListaNegra_Dia.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "ListaNe";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.ListaNs.Where(x => x.FechaEntrada == fecha.Date).ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
+
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_Mes." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
+
+        public ActionResult Reporte5(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/ListaNegra_Men.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "ListaNe";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.ListaNs.Where(x => x.FechaEntrada.Month == fecha.Month).ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
+
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_Mes." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
+
+        public ActionResult Reporte6(string ReportType)
+        {
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("~/Reportes/ListaNegra_Anual.rdlc");
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "ListaNe";
+            var fecha = DateTime.Now;
+            reportDataSource.Value = db.ListaNs.Where(x => x.FechaEntrada.Year == fecha.Year).ToList();
+            localReport.DataSources.Add(reportDataSource);
+            string RType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtension;
+            if (ReportType == "PDF")
+            {
+                fileNameExtension = "pdf";
+
+            }
+            else
+            {
+                fileNameExtension = "pdf";
+
+            }
+
+            string deviceInfo = "<DeviceInfo>" +
+                    "  <OutputFormat>PDF</OutputFormat>" +
+                    "  <PageWidth>8.27in</PageWidth>" +
+                    "  <PageHeight>11.69in</PageHeight>" +
+                    "  <MarginTop>0.25in</MarginTop>" +
+                    "  <MarginLeft>0.4in</MarginLeft>" +
+                    "  <MarginRight>0in</MarginRight>" +
+                    "  <MarginBottom>0.25in</MarginBottom>" +
+                    "  <EmbedFonts>None</EmbedFonts>" +
+                    "</DeviceInfo>";
+
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            Response.AddHeader("content.disposition", "attachment;filename= Reservaciones_del_Mes." + fileNameExtension);
+            return File(renderedByte, mimeType);
+            //byte[] renderedBytes = localReport.Render("PDF", deviceInfo, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+            //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
+
+        }
+
+
+
+
 
         //public JsonResult Index2(TimeSpan? HEntrada)
         //{
@@ -165,14 +399,6 @@ namespace SIREON.Controllers
 
 
 
-
-
-
-
-
-
-
-
         // GET: Reservaciones
         public ActionResult Invitaciones()
         {
@@ -187,7 +413,6 @@ namespace SIREON.Controllers
                 .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
                 .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
                 .ToList();
-
 
             return View(Salas);
 

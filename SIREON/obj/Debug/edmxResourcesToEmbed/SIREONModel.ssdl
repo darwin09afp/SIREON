@@ -138,6 +138,40 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Aplicativo.dbo.ListaN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ListaN">
+    <Key>
+      <PropertyRef Name="FechaEntrada" />
+      <PropertyRef Name="FechaSalida" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="FechaEntrada" Type="date" Nullable="false" />
+    <Property Name="FechaSalida" Type="date" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_Aplicativo.dbo.ResCub' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ResCub">
+    <Key>
+      <PropertyRef Name="Fecha" />
+      <PropertyRef Name="FechaSolicitada" />
+      <PropertyRef Name="HEntrada" />
+      <PropertyRef Name="HSalida" />
+      <PropertyRef Name="Estatus" />
+      <PropertyRef Name="ID_Reservacion" />
+      <PropertyRef Name="Descripcion" />
+    </Key>
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="FechaSolicitada" Type="date" Nullable="false" />
+    <Property Name="HEntrada" Type="time" Precision="7" Nullable="false" />
+    <Property Name="HSalida" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Estatus" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="ID_Reservacion" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -316,6 +350,26 @@
     <EntitySet Name="Reservaciones" EntityType="Self.Reservaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reservaciones_Usuarios" EntityType="Self.Reservaciones_Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListaN" EntityType="Self.ListaN" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ListaN].[Email] AS [Email], 
+    [ListaN].[FechaEntrada] AS [FechaEntrada], 
+    [ListaN].[FechaSalida] AS [FechaSalida], 
+    [ListaN].[Descripcion] AS [Descripcion]
+    FROM [dbo].[ListaN] AS [ListaN]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ResCub" EntityType="Self.ResCub" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ResCub].[Email] AS [Email], 
+    [ResCub].[Fecha] AS [Fecha], 
+    [ResCub].[FechaSolicitada] AS [FechaSolicitada], 
+    [ResCub].[HEntrada] AS [HEntrada], 
+    [ResCub].[HSalida] AS [HSalida], 
+    [ResCub].[Estatus] AS [Estatus], 
+    [ResCub].[ID_Reservacion] AS [ID_Reservacion], 
+    [ResCub].[Descripcion] AS [Descripcion]
+    FROM [dbo].[ResCub] AS [ResCub]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

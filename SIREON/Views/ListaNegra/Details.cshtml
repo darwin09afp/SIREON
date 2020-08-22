@@ -139,23 +139,14 @@
                         <br />
                         <p>
 
-                            @if (User.IsInRole("Administrador"))
-                            {
-                                <div class="row" style="justify-content:space-around">
+                            <div class="row" style="justify-content:space-around">
 
-                                    @if (((Model.Estatus) == "Bloqueado "))
-                                    {
-                                        <input type="button" class="btn btn-success" id="DarEntrada" value="Perdonar" />
-                                    }
+                                @if (((Model.Estatus) == "Bloqueado "))
+                                {
+                                    <input type="button" class="btn btn-success" id="DarEntrada" value="Perdonar" />
+                                }
 
-                                </div>
-
-                            }
-                            else
-                            {
-
-
-                            }
+                            </div>
                         </p>
                     }
                     else
