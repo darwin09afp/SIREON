@@ -158,8 +158,9 @@ namespace SIREON.Controllers
             localReport.ReportPath = Server.MapPath("~/Reportes/Reservaciones_Anual.rdlc");
             ReportDataSource reportDataSource = new ReportDataSource();
             reportDataSource.Name = "DataSet1";
-            var fecha = DateTime.Now;
-            reportDataSource.Value = db.ResCubs.Where(x => x.Fecha.Year == fecha.Date.Year && x.Estatus != "EnCurso" && x.Estatus != "En espera" && x.Estatus != "Activa").OrderBy(x => x.Fecha).ToList();
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date.Year;
+            reportDataSource.Value = db.ResCubs.Where(x => x.Fecha.Year == fecha /*&& x.Estatus != "EnCurso" && x.Estatus != "En espera" && x.Estatus != "Activa"*/).OrderBy(x => x.Fecha).ToList();
             localReport.DataSources.Add(reportDataSource);
             string RType = ReportType;
             string mimeType;
@@ -337,30 +338,6 @@ namespace SIREON.Controllers
         }
 
 
-
-
-
-        //public JsonResult Index2(TimeSpan? HEntrada)
-        //{
-        //    var Fechaa = DateTime.Now;
-        //    var Fecha = Fechaa.Date;
-        //    var hora = Fechaa.TimeOfDay.Hours;
-        //    //TimeSpan HEntrada = new TimeSpan(08, 0, 0);
-        //    db.Configuration.ProxyCreationEnabled = false;
-
-        //    CustomModel3 mymodel = new CustomModel3();
-
-        //    var reserv = db.Reservaciones.Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera").Any();
-        //    var resUid = reserv.
-        //    mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
-        //    mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Reservado").Any()).ToList();
-        //    mymodel.Ocupado = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Ocupado").Any()).ToList();
-
-
-        //    //var json = JsonConvert.SerializeObject(mymodel);
-        //    return Json(mymodel, JsonRequestBehavior.AllowGet);
-
-        //}
 
 
 
@@ -651,7 +628,7 @@ namespace SIREON.Controllers
             return Json(result2, JsonRequestBehavior.AllowGet);
         }
 
-
+        #region Entradar/Rechazar/Completar/Cancelar
         [HttpPost]
         public ActionResult DarEntrada(Int32? idres, Int32? idcub, TimeSpan? HEntrada, DateTime? Fecha)
         {
@@ -697,7 +674,23 @@ namespace SIREON.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult Completar(Int32? idres, Int32? idcub, TimeSpan? HEntrada, DateTime? Fecha)
+        {
 
+            var query = db.Reservaciones.Where(x => x.ID_Reservacion == idres).FirstOrDefault();
+            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Ocupado" || p.Estatus == "Reservado").First();
+            query.Estatus = "Completada";
+            cub.Estatus = "Disponible";
+            db.SaveChanges();
+            var res = "Listo";
+
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+        #region Usuario
         public JsonResult Usuario()
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
@@ -841,7 +834,10 @@ namespace SIREON.Controllers
             return Json(result3, JsonRequestBehavior.AllowGet);
 
         }
+        #endregion
 
+
+        #region reservaciones
         public JsonResult AsignarCubiculo(string IdAspNetUsers2, Int32 idres, TimeSpan HEntrada, TimeSpan HSalida)
         {
             //Disponibilidad
@@ -1015,71 +1011,10 @@ namespace SIREON.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        #region 
-        //public ActionResult Disponibilidad2()
-        //{
-        //    List<int> CubNoDisp = new List<int>();
-        //    List<int> Cubs = new List<int>();
-        //    var Fechaa = DateTime.Now;
-        //    var Fecha = Fechaa.Date;
-        //    TimeSpan HEntrada = new TimeSpan(10,0,0);
-
-        //    foreach (var item in db.Cubiculos)
-        //    {
-        //        var idcub = item.ID_Cubiculo;
-        //        Cubs.Add(idcub);
-        //        foreach (var item2 in db.Disponibilidads)
-        //        {
-
-        //            if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
-        //            {
-        //                CubNoDisp.Add(idcub);
-        //            }
-        //            else 
-        //            {
-        //                //sigue buscando
-        //            }
-
-        //        }
-
-        //    }
-        //    var CubDisp = Cubs.Except(CubNoDisp).ToList();
-        //    //return View(CubNoDisp);
-        //    return Json(CubDisp, JsonRequestBehavior.AllowGet);
-        //}
-
-
-
-
-        //public ActionResult ActStatus()
-        //{
-        //    var a = 10;
-        //    List<int> Reservaciones = new List<int>();
-        //    List<int> Cubs = new List<int>();
-        //    var Fechaa = DateTime.Now;
-        //    var Fecha = Fechaa.Date;
-        //    TimeSpan HEntrada = new TimeSpan(a, 0, 0);
-        //    TimeSpan HSalida = new TimeSpan(a, 15, 0)  ;
-
-
-        //    var dif = HEntrada + HSalida;
-        //    var msg = "";
-        //    if (dif == null)
-        //    {
-        //        msg = "Rechazada";
-        //    }
-        //    else
-        //    {
-        //        msg = "Nothing";
-        //    }
-
-        //    return Json(HEntrada, JsonRequestBehavior.AllowGet);
-        //}
         #endregion
 
 
-
-
+        #region default
         // GET: Reservaciones1/Create
         public ActionResult Create()
         {
@@ -1211,6 +1146,7 @@ namespace SIREON.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

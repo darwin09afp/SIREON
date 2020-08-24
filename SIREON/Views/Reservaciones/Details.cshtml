@@ -254,6 +254,18 @@
                             <p>
                                 En curso
                             </p>
+                            <br />
+                            <p>
+
+                                @if (User.IsInRole("Operador"))
+                                {
+                                    <div class="row" style="justify-content:space-around">
+                                        <input type="button" class="btn btn-danger" id="Completar" value="Finalizar" />
+                                    </div>
+
+                                }
+
+                            </p>
                         }
                         else
                         {
@@ -1272,6 +1284,64 @@
         console.log(data);
 
         $.when(Cancelar(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+</script>
+
+
+<script>
+    //Dar entrada
+    function Completar(data) {
+        swal({
+            title: "¿Estás seguro?",
+            text: "Al seleccionar OK se finalizará esta reservación",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    return $.ajax({
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        type: 'POST',
+                        url: "/Reservaciones/Completar",
+                        data: data,
+                        success: function (res) {
+                            swal("¡Listo!", "Reservación finalizada", "success")
+                                .then((value) => {
+                                    location.reload();
+                                });
+                        },
+                        error: function () {
+                            swal("Error", "Datos erróneos", "danger")
+                                .then((value) => {
+                                    location.reload();
+                                });
+                        }
+                    });
+                }
+            });
+    }
+    $("#Completar").one('click', function (e) {
+        e.preventDefault();
+
+        if ($.trim($("#idres").val()) == "") return;
+
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+            idcub: $("#idcub").val(),
+            HEntrada: $("#HEntrada").val(),
+            Fecha: $("#Fecha").val(),
+        });
+
+        console.log(data);
+
+        $.when(Completar(data)).then(function (response) {
             console.log(response);
         }).fail(function (err) {
             console.log(err);

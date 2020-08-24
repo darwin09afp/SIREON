@@ -143,7 +143,9 @@
 
                                 @if (((Model.Estatus) == "Bloqueado "))
                                 {
-                                    <input type="button" class="btn btn-success" id="DarEntrada" value="Perdonar" />
+                                    @*<input type="button" class="btn btn-success" id="DarEntrada" value="Perdonar" />*@
+                                    @Html.ActionLink("Perdonar", "Perdonar", new { id = Model.ID_ListaN }, htmlAttributes: new { @class = "btn btn-success" })
+
                                 }
 
                             </div>
@@ -234,4 +236,47 @@
     }
 
     </script>
+}
+else
+{
+<script>
+    $(window).on("load", function () {
+        var data = JSON.stringify({
+            IdAspNetUsers2: $("#IdAspNetUsers2").val(),
+        });
+
+        console.log(data);
+
+        $.when(ConsMat(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+
+    });
+
+    function ConsMat(data) {
+        return $.ajax({
+
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/Usuario4",
+            data: data,
+            success: function (result3) {
+                //alert(result3[0])
+                //data = JSON.parse(data);
+                console.log(result3[0])
+                $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
+                $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
+
+            },
+            error: function () {
+                swal("¡Error!", "Favor verificar los datos", "warning");
+            }
+        });
+
+    }
+
+</script>  
 }

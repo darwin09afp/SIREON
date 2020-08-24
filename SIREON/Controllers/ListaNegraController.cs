@@ -44,7 +44,21 @@ namespace SIREON.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Perdonar(int? id)
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var user = User.Identity.GetUserId();
 
+            var listaNegra = db.ListaNegras.Where(x => x.ID_ListaN == id).FirstOrDefault();
+            listaNegra.Id_Empleado = user;
+            listaNegra.FechaSalida = fecha;
+            listaNegra.Estatus = "Perdonado";
+            db.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
 
         // GET: ListaNegra/Details/5
         public ActionResult Details(int? id)
