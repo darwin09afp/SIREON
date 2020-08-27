@@ -92,16 +92,16 @@
 
                 //alert(data)
                 //data = JSON.parse(data);
-                console.log(data)
+                //console.log(data)
                 for (var i = 0; i < data.length; i++) {
 
                     $("#IdAspNetNombres").text(data[i].Nombr + "" + data[i].Apellid);
                     
                 }
 
-                $.each(data, function (i, value) {
-                    console.log('Value of ' + i + ' is : ' + value);
-                })
+                //$.each(data, function (i, value) {
+                //    console.log('Value of ' + i + ' is : ' + value);
+                //})
             },
             error: function () {
                 alert(data)

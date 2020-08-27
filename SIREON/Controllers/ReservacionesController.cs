@@ -386,7 +386,7 @@ namespace SIREON.Controllers
             var user = User.Identity.GetUserId();
 
             var Salas = db.Reservaciones.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdAspNetUser == user && p.Estatus != "Rechazada" && p.Estatus != "Aceptada").Any())
-                .Where(x => x.Fecha == fechaa)
+                //.Where(x => x.Fecha == fechaa)
                 .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
                 .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
                 .ToList();
@@ -575,7 +575,54 @@ namespace SIREON.Controllers
             return View(res);
         }
 
+        [HttpPost]
+        public JsonResult ConsInvitados(int idres)
+        {
 
+            db.Configuration.ProxyCreationEnabled = false;
+            List<string[]> Usuarios = new List<string[]>();
+            var result3 = new string[] { };
+            CustomModel3 mymodel = new CustomModel3();
+            var i = 0;
+            var user = db.AspNetUsers.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdReservacion == idres && p.IdAspNetUser != null).Any()).ToList();
+
+            foreach (var item in user)
+            {
+                var BuscarCorreo = db.AspNetUsers.Where(x => x.Id == item.Id).FirstOrDefault().Email;
+                var BuscarNombre = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Nombre;
+                var BuscarApellido = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().Apellido;
+                var BuscarMart = db2.Entidads.Where(x => x.CorreoInst == BuscarCorreo).FirstOrDefault().CodigoInst;
+                var estatus = db.Reservaciones_Usuarios.Where(p => p.IdReservacion == idres && p.IdAspNetUser == item.Id).First().Estatus;
+                var result2 = new string[] { BuscarNombre + BuscarApellido, BuscarMart, estatus};
+
+                Usuarios.Add(result2);
+
+            }
+
+            var invitados = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == idres && x.IdAspNetUser == null).ToList();
+            foreach (var item in invitados)
+            {
+                var nombre = item.NombreInvitado;
+                var cedula = item.CedulaInvitado;
+                var estatus = item.Estatus;
+                var result2 = new string[] { nombre, cedula, estatus };
+                
+                Usuarios.Add(result2);
+
+            }
+            //var result3 = new string[] { result2 };
+
+
+
+
+            //mymodel.RU1 = Usuarios;
+            //mymodel.RU2 = db.Reservaciones_Usuarios.Where(x => x.IdReservacion == idres && x.IdAspNetUser == null).ToList();
+
+
+            //var json = JsonConvert.SerializeObject(Usuarios);
+            return Json(Usuarios, JsonRequestBehavior.AllowGet);
+
+        }
 
         [HttpPost]
         public ActionResult Consultar(TimeSpan HEntrada)

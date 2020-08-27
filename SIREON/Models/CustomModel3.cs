@@ -7,7 +7,7 @@ namespace SIREON.Models
 {
     public class CustomModel3
     {
-        public IEnumerable<Reservacione> reservaciones { get; set; }
-
+        public List<string> RU1 { get; set; }
+        public IEnumerable<Reservaciones_Usuarios> RU2 { get; set; }
     }
 }

@@ -306,83 +306,12 @@
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Matricula/Cédula</th>
-                                            <th></th>
+                                            <th>Estatus</th>
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <td @*class="d-flex align-items-center border-top-0"*@>
-                                                @*<img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">*@
-                                                <p>Herman Rosado</p>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    hr20-0182
-                                                </p>
-                                            </td>
-                                            <td>
-
-                                                @*@{
-                                                        if (Model.Estatus == "Activa    ")
-                                                        {
-                                                            <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                        }
-                                                        else
-                                                        {
-
-                                                        }
-                                                    }*@
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td @*class="d-flex align-items-center border-top-0"*@>
-                                                @*<img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">*@
-                                                <p>Elena Peralta</p>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    001-2345678-9
-                                                </p>
-                                            </td>
-                                            <td>
-                                                @*@{
-                                                        if (Model.Estatus == "Activa    ")
-                                                        {
-                                                            <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                        }
-                                                        else
-                                                        {
-
-                                                        }
-                                                    }*@
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td @*class="d-flex align-items-center border-top-0"*@>
-                                                @*<img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">*@
-                                                <p>
-                                                    Maria Castillo
-                                                </p>
-                                            </td>
-                                            <td>
-                                                <p>
-                                                    mc19-3185
-                                                </p>
-                                            </td>
-                                            <td>
-                                                @*@{
-                                                        if (Model.Estatus == "Activa    ")
-                                                        {
-                                                            <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                        }
-                                                        else
-                                                        {
-
-                                                        }
-                                                    }*@
-                                            </td>
-                                        </tr>
+                                    <tbody id="linea">
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -416,7 +345,7 @@
                     <div class="col-md-3 col-sm-3 grid">
                         <div class="grid-body">
                             <h1 class="grid-title">
-                                Titular de la reservacón
+                                Titular de la reservación
                             </h1>
                             <a href="#">
                                 <div class="item-wrapper">
@@ -664,83 +593,13 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th width="20" style="text-align:left">Nombre</th>
-                                                <th width="20">Matricula/Cédula</th>
-                                                <th width="60"></th>
+                                                <th>Nombre</th>
+                                                <th>Matrícula/Cédula</th>
+                                                <th>Estatus</th>
                                             </tr>
                                         </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Herman Rosado</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        hr20-0182
-                                                    </p>
-                                                </td>
-                                                <td>
-
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Elena Peralta</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        ep20-1132
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Maria Castillo</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        mc19-3185
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
+                                        <tbody id="linea">
                                         </tbody>
                                     </table>
                                 </div>
@@ -1006,84 +865,14 @@
                                 <div class="timeline-vertical dashboard-timeline">
                                     <table class="table table-hover">
                                         <thead>
-                                            <tr>
-                                                <th width="20" style="text-align:left">Nombre</th>
-                                                <th width="20">Matricula/Cédula</th>
-                                                <th width="60"></th>
+                                            <tr style="text-align:center">
+                                                <th>Nombre</th>
+                                                <th>Matricula/Cédula</th>
+                                                <th>Estatus</th>
                                             </tr>
                                         </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/male/image_5.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Herman Rosado</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        hr20-0182
-                                                    </p>
-                                                </td>
-                                                <td>
-
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_3.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Elena Peralta</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        ep20-1132
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="d-flex align-items-center border-top-0">
-                                                    <img class="profile-img img-sm img-rounded mr-2" src="~/Content/images/profile/female/image_1.png" alt="~/Content/images/profile/user.png">
-                                                    <span>Maria Castillo</span>
-                                                </td>
-                                                <td>
-                                                    <p>
-                                                        mc19-3185
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    @*@{
-                                                            if (Model.Estatus == "Activa    ")
-                                                            {
-                                                                <input type="button" class="btn-sm btn-danger" value="Eliminar" />
-                                                            }
-                                                            else
-                                                            {
-
-                                                            }
-                                                        }*@
-                                                </td>
-                                            </tr>
+                                        <tbody id="linea">
                                         </tbody>
                                     </table>
                                 </div>
@@ -1428,7 +1217,7 @@
                     });
                 }
             });
-    }
+    };
     $("#DarEntrada2").click(function (e) {
         e.preventDefault();
 
@@ -1439,7 +1228,7 @@
 
         });
 
-        console.log(data);
+        //console.log(data);
 
         $.when(Disponi(data)).then(function (response) {
             console.log(response);
@@ -1447,6 +1236,130 @@
             console.log(err);
         });
     });
+
+</script>
+
+@*<script>
+
+    function Invitados(data) {
+        debugger
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'GET',
+            url: "/Reservaciones/ConsInvitados",
+            data: data,
+            success: function (Inv) {
+                console.log(Inv)
+            },
+            error: function () {
+                console.log(Inv)
+            }
+        });
+    };
+
+    window.onload(function (e) {
+        debugger
+        e.preventDefault();
+
+        if ($.trim($("#idres").val()) == "") return;
+
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+        });
+
+        console.log(data);
+
+        $.when(Invitados(data)).then(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+</script>*@
+
+
+
+
+<script>
+    //consultar cubículos
+    $(window).on("load", function () {
+        var data = JSON.stringify({
+            idres: $("#idres").val(),
+        });
+
+        //console.log(data);
+
+        $.when(Invitados(data)).then(function (response) {
+            //console.log(response);
+        }).fail(function (err) {
+            console.log(err);
+        });
+    });
+
+
+
+    function Invitados(data) {
+        return $.ajax({
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            type: 'POST',
+            url: "/Reservaciones/ConsInvitados",
+            data: data,
+            success: function (Usuarios) {
+                //data = JSON.parse(Usuarios);
+                //console.log(Usuarios)
+                //console.log(myJSON)
+
+                //console.log(mymodel.RU2)
+
+                //Muestra internos
+                for (var i = 0; i < Usuarios.length; i++) {
+
+                    //console.log(Usuarios[0]);
+                    $('#linea').prepend('<tr id=L'+i+'></tr>');
+
+                    for (var j = 0; j < Usuarios[i].length; j++) {
+                        $('#L' + i + '').append('<td><p>' + Usuarios[i][j]+'</p></td>');
+
+                    }
+                }
+                //$.each(Usuarios, function (i, value) {
+                //    //alert('Value of ' + i + ' is : ' + value.Estatus);
+                //    console.log(Usuarios[0],[2]);
+                //    //$('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; display:block" id="Cub' + i + '"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Disponible.jpg"></div></a><p>Capacidad: ' + value.Capacidad + ' Personas</p><p>Estado: Disponible</p></div></div></div>');
+
+                //})
+                for (var j = 0; j < Usuarios.Length; j++) {
+                    for (var k = 0; k < Usuarios[j].Length; k++) {
+                        console.log(Usuarios[j][k]);
+                    }
+                }
+                ////Muestra externos
+                //for (var i = 0; i < mymodel.RU2.length; i++) {
+
+                //    //console.log(mymodel.RU2[i].NombreInvitado);
+                //    //console.log(mymodel.RU2[i].CedulaInvitado);
+
+                //}
+                //$.each(mymodel.RU2, function (i, value) {
+                //    //alert('Value of ' + i + ' is : ' + value.Estatus);
+                //    //console.log(mymodel.RU2[i].NombreInvitado);
+                //    //$('#Cubiculos2').append('<div class="col-lg-3 col-md-3 col-sm-3 equel-grid" style="text-align:center; display:block" id="Dis' + i + '"><div class="col-md-3 col-sm-3 grid"><div class="grid-body"><h1 class= "grid-title" >Cubículo ' + value.Descripcion + '</h1><a href="#"><div class="item-wrapper"><img class="img-xl mt-1 mb-1 mr-2" src="/Content/images/Reservado.jpg"></div><br/></a><p>Estado: Reservado</p></div></div></div>');
+
+                //})
+
+
+            },
+            error: function () {
+                alert("ERROR")
+
+            }
+        });
+    }
+
+
 
 </script>
 
@@ -1459,10 +1372,10 @@
                 IdAspNetUsers2: $("#IdAspNetUsers2").val(),
             });
 
-            console.log(data);
+            //console.log(data);
 
             $.when(ConsMat(data)).then(function (response) {
-                console.log(response);
+                //console.log(response);
             }).fail(function (err) {
                 console.log(err);
             });
@@ -1480,7 +1393,7 @@
                 success: function (result3) {
                     //alert(result3[0])
                     //data = JSON.parse(data);
-                    console.log(result3[0])
+                    //console.log(result3[0])
                     $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
                     $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
 
@@ -1502,10 +1415,10 @@ else
                 IdAspNetUsers2: $("#IdAspNetUsers2").val(),
             });
 
-            console.log(data);
+            //console.log(data);
 
             $.when(ConsMat(data)).then(function (response) {
-                console.log(response);
+                //console.log(response);
             }).fail(function (err) {
                 console.log(err);
             });
@@ -1523,7 +1436,7 @@ else
                 success: function (result3) {
                     //alert(result3[0])
                     //data = JSON.parse(data);
-                    console.log(result3[0])
+                    //console.log(result3[0])
                     $("#IdAspNetNombre2").val($.trim(result3[0]) + " " + result3[1]);
                     $('#NSolicitante').append($.trim(result3[0]) + " " + result3[1]);
 
