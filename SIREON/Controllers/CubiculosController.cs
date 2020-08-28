@@ -56,8 +56,10 @@ namespace SIREON.Controllers
 
             CustomModel2cs mymodel = new CustomModel2cs();
 
-            var nodisp = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada).Any());
+            var nodisp = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus != "Disponible").Any());
             var disp = db.Cubiculos.Except(nodisp).ToList();
+
+
             mymodel.cubiculos = db.Cubiculos.Except(nodisp).ToList();
             mymodel.disponibilidads = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Reservado").Any()).ToList();
             mymodel.Ocupado = db.Cubiculos.Where(x => x.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.Estatus == "Ocupado").Any()).ToList();

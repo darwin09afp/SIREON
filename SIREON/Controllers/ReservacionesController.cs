@@ -724,7 +724,7 @@ namespace SIREON.Controllers
         {
 
             var query = db.Reservaciones.Where(x => x.ID_Reservacion == idres).FirstOrDefault();
-            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Ocupado" || p.Estatus == "Reservado").First();
+            var cub = db.Disponibilidads.Where(p => p.Fecha == Fecha && p.HoraInicial == HEntrada && p.IdCubiculo == idcub && p.Estatus == "Ocupado").First();
             query.Estatus = "Completada";
             cub.Estatus = "Disponible";
             db.SaveChanges();
@@ -913,6 +913,9 @@ namespace SIREON.Controllers
         public ActionResult SaveOrder(string IdAspNetUsers2, TimeSpan HEntrada, TimeSpan HSalida, Reservaciones_Usuarios[] reservaciones_Usuarios)
         {
 
+            
+
+
             string result = "";
             List<Cubiculo> cubs = new List<Cubiculo>();
             var FechayHora = DateTime.Now;
@@ -920,141 +923,174 @@ namespace SIREON.Controllers
             var SelHora = FechayHora.TimeOfDay;
             var usuario = User.Identity.GetUserId();
             var empleado = db.AspNetUsers.ToList().FirstOrDefault().Id;
-
-            //Disponibilidad
-            #region disponibilidad
-            List<int> CubNoDisp = new List<int>();
-            List<int> Cubs = new List<int>();
-            var Fechaa = DateTime.Now;
-            var Fecha = Fechaa.Date;
-
-            foreach (var item in db.Cubiculos)
+            var usr = "";
+            var usr2 = "";
+            
+            if (User.IsInRole("Operador"))
             {
-                var idcub = item.ID_Cubiculo;
-                Cubs.Add(idcub);
-                foreach (var item2 in db.Disponibilidads)
-                {
+                usr = IdAspNetUsers2;
+                var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == usr).FirstOrDefault().Nombre;
+                var BuscarApellido = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().Apellido;
+                var BuscarCorreo = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUsers2).FirstOrDefault().CorreoInst;
+                usr2 = db.AspNetUsers.Where(x => x.Email == BuscarCorreo).FirstOrDefault().Id;
 
-                    if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+            }
+            else
+            {
+                usr2 = usuario;
+            }
+
+
+
+
+            var cant = db.Reservaciones.Where(x => x.Fecha == SelFecha && x.IdAspNetUsers == usr2 && x.Estatus != "Cancelada" && x.Estatus != "Rechazada").Count();
+            var Parm = db.Parametros.Where(x => x.ID == 2).First().Valor;
+            
+            if (cant <= Parm)
+            {
+                //Disponibilidad
+                #region disponibilidad
+                List<int> CubNoDisp = new List<int>();
+                List<int> Cubs = new List<int>();
+                var Fechaa = DateTime.Now;
+                var Fecha = Fechaa.Date;
+
+                foreach (var item in db.Cubiculos)
+                {
+                    var idcub = item.ID_Cubiculo;
+                    Cubs.Add(idcub);
+                    foreach (var item2 in db.Disponibilidads)
                     {
-                        CubNoDisp.Add(idcub);
-                    }
-                    else
-                    {
-                        //sigue buscando
+
+                        if (idcub == item2.IdCubiculo && item2.Fecha == Fecha && item2.HoraInicial == HEntrada && item2.Estatus != "Disponible")
+                        {
+                            CubNoDisp.Add(idcub);
+                        }
+                        else
+                        {
+                            //sigue buscando
+                        }
+
                     }
 
                 }
-
-            }
-            var CubDisp = Cubs.Except(CubNoDisp).ToList();
-            bool isEmpty = !CubDisp.Any();
-            #endregion
-
- 
-            //Agregar a tb reservaciones
-            Reservacione model = new Reservacione();
-            if (User.IsInRole("Operador"))
-            {
-                model.ID_Empleado = usuario;
-            }
-            else
-            {
-                model.ID_Empleado = empleado;
-            }
-            model.Fecha = SelFecha;
-            if (isEmpty == true)
-            {
-                model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
-                model.Estatus = "En espera";
-                result = "Se colocó su reservación en la lista de espera para la hora seleccionada";
+                var CubDisp = Cubs.Except(CubNoDisp).ToList();
+                bool isEmpty = !CubDisp.Any();
+                #endregion
 
 
-                //Agregar a tb Disponibilidad
-                Disponibilidad model2 = new Disponibilidad();
-                model2.IdCubiculo = model.ID_Cubiculo;
-                model2.HoraInicial = HEntrada;
-                model2.HoraFinal = HSalida;
-                model2.Fecha = SelFecha;
-                model2.Estatus = "Reservado";
-                db.Disponibilidads.Add(model2);
-
-            }
-            else
-            {
-                model.ID_Cubiculo = db.Cubiculos.ToList()
-                            .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
-                            .OrderBy(cubi => cubi.ID_Cubiculo)
-                            .First().ID_Cubiculo;
-                model.Estatus = "Activa";
-
-                //Agregar a tb Disponibilidad
-                Disponibilidad model2 = new Disponibilidad();
-                model2.IdCubiculo = model.ID_Cubiculo;
-                model2.HoraInicial = HEntrada;
-                model2.HoraFinal = HSalida;
-                model2.Fecha = SelFecha;
-                model2.Estatus = "Reservado";
-                db.Disponibilidads.Add(model2);
-
-
-                result = "";
-            }
-
-            model.FechaSolicitada = SelFecha;
-            model.HSolicitada = SelHora;
-            model.HEntrada = HEntrada;
-            model.HSalida = HSalida;
-            if (User.IsInRole("Operador"))
-            {
-                //Metodo solo para enviar el nombre en la reservacion la matricula del estudiante ingresado 
-
-                var UsrMat = IdAspNetUsers2;
-                var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == UsrMat).FirstOrDefault().CorreoInst;
-                var query = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
-                model.IdAspNetUsers = query;
-
-            }
-            else
-            {
-                model.IdAspNetUsers = usuario;
-            }           
-            db.Reservaciones.Add(model);
-        
-
-            //Agregar a Tb Reservaciones_usuarios
-            foreach (var item in reservaciones_Usuarios)
-            {
-                Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
-                if (item.CedulaInvitado == null)
+                //Agregar a tb reservaciones
+                Reservacione model = new Reservacione();
+                if (User.IsInRole("Operador"))
                 {
-                    var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == item.IdAspNetUser).FirstOrDefault().CorreoInst;
-                    var query2 = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
-
-                    Res.IdAspNetUser = query2;
-                    Res.IdReservacion = model.ID_Reservacion;
-                    Res.NombreInvitado = item.NombreInvitado;
-                    Res.CedulaInvitado = item.CedulaInvitado;
-                    Res.Estatus = "Pendiente";
-                    db.Reservaciones_Usuarios.Add(Res);
-                    db.SaveChanges();
+                    model.ID_Empleado = usuario;
                 }
                 else
                 {
+                    model.ID_Empleado = empleado;
+                }
+                model.Fecha = SelFecha;
+                if (isEmpty == true)
+                {
+                    model.ID_Cubiculo = db.Cubiculos.ToList().FirstOrDefault().ID_Cubiculo;
+                    model.Estatus = "En espera";
+                    result = "Se colocó su reservación en la lista de espera para la hora seleccionada";
 
-                    Res.IdAspNetUser = item.IdAspNetUser;
-                    Res.IdReservacion = model.ID_Reservacion;
-                    Res.NombreInvitado = item.NombreInvitado;
-                    Res.CedulaInvitado = item.CedulaInvitado;
-                    Res.Estatus = "NA";
-                    db.Reservaciones_Usuarios.Add(Res);
-                    db.SaveChanges();
+
+                    //Agregar a tb Disponibilidad
+                    Disponibilidad model2 = new Disponibilidad();
+                    model2.IdCubiculo = model.ID_Cubiculo;
+                    model2.HoraInicial = HEntrada;
+                    model2.HoraFinal = HSalida;
+                    model2.Fecha = SelFecha;
+                    model2.Estatus = "Reservado";
+                    db.Disponibilidads.Add(model2);
+
+                }
+                else
+                {
+                    model.ID_Cubiculo = db.Cubiculos.ToList()
+                                .Where(cubi => CubDisp.Contains(cubi.ID_Cubiculo))
+                                .OrderBy(cubi => cubi.ID_Cubiculo)
+                                .First().ID_Cubiculo;
+                    model.Estatus = "Activa";
+
+                    //Agregar a tb Disponibilidad
+                    Disponibilidad model2 = new Disponibilidad();
+                    model2.IdCubiculo = model.ID_Cubiculo;
+                    model2.HoraInicial = HEntrada;
+                    model2.HoraFinal = HSalida;
+                    model2.Fecha = SelFecha;
+                    model2.Estatus = "Reservado";
+                    db.Disponibilidads.Add(model2);
+
+
+                    result = "";
                 }
 
-            }
-            db.SaveChanges();
+                model.FechaSolicitada = SelFecha;
+                model.HSolicitada = SelHora;
+                model.HEntrada = HEntrada;
+                model.HSalida = HSalida;
+                if (User.IsInRole("Operador"))
+                {
+                    //Metodo solo para enviar el nombre en la reservacion la matricula del estudiante ingresado 
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+                    var UsrMat = IdAspNetUsers2;
+                    var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == UsrMat).FirstOrDefault().CorreoInst;
+                    var query = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
+                    model.IdAspNetUsers = query;
+
+                }
+                else
+                {
+                    model.IdAspNetUsers = usuario;
+                }
+                db.Reservaciones.Add(model);
+
+
+                //Agregar a Tb Reservaciones_usuarios
+                foreach (var item in reservaciones_Usuarios)
+                {
+                    Reservaciones_Usuarios Res = new Reservaciones_Usuarios();
+                    if (item.CedulaInvitado == null)
+                    {
+                        var BuscarEmail = db2.Entidads.Where(x => x.CodigoInst == item.IdAspNetUser).FirstOrDefault().CorreoInst;
+                        var query2 = db.AspNetUsers.Where(x => x.Email == BuscarEmail).FirstOrDefault().Id;
+
+                        Res.IdAspNetUser = query2;
+                        Res.IdReservacion = model.ID_Reservacion;
+                        Res.NombreInvitado = item.NombreInvitado;
+                        Res.CedulaInvitado = item.CedulaInvitado;
+                        Res.Estatus = "Pendiente";
+                        db.Reservaciones_Usuarios.Add(Res);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+
+                        Res.IdAspNetUser = item.IdAspNetUser;
+                        Res.IdReservacion = model.ID_Reservacion;
+                        Res.NombreInvitado = item.NombreInvitado;
+                        Res.CedulaInvitado = item.CedulaInvitado;
+                        Res.Estatus = "NA";
+                        db.Reservaciones_Usuarios.Add(Res);
+                        db.SaveChanges();
+                    }
+
+                }
+                db.SaveChanges();
+
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                result = "Usted ha alcanzado el máximo de reservaciones para el día de hoy";
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+
+
+            
         }
         #endregion
 
