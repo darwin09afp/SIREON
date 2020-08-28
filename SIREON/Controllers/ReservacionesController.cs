@@ -339,8 +339,6 @@ namespace SIREON.Controllers
 
 
 
-
-
         public ActionResult Index2()
         {
 

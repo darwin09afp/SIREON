@@ -794,90 +794,206 @@
 
 
         //Asigna Hora de salida
-        $("#Horaentrada").change(function () {
-            $choice = $(this).val();
-            switch ($choice) {
-                case "08:00:00":
-                    $("#Horasalida").val("10:00:00");
-                    break;
-                case "08:30:00":
-                    $("#Horasalida").val("10:30:00");
-                    break;
-                case "09:00:00":
-                    $("#Horasalida").val("11:00:00");
-                    break;
-                case "09:30:00":
-                    $("#Horasalida").val("11:30:00");
-                    break;
-                case "10:00:00":
-                    $("#Horasalida").val("12:00:00");
-                    break;
-                case "10:30:00":
-                    $("#Horasalida").val("12:30:00");
-                    break;
-                case "11:00:00":
-                    $("#Horasalida").val("13:00:00");
-                    break;
-                case "11:30:00":
-                    $("#Horasalida").val("13:30:00");
-                    break;
-                case "12:00:00":
-                    $("#Horasalida").val("14:00:00");
-                    break;
-                case "12:30:00":
-                    $("#Horasalida").val("14:30:00");
-                    break;
-                case "13:00:00":
-                    $("#Horasalida").val("15:00:00");
-                    break;
-                case "13:30:00":
-                    $("#Horasalida").val("15:30:00");
-                    break;
-                case "14:00:00":
-                    $("#Horasalida").val("16:00:00");
-                    break;
-                case "14:30:00":
-                    $("#Horasalida").val("16:30:00");
-                    break;
-                case "15:00:00":
-                    $("#Horasalida").val("17:00:00");
-                    break;
-                case "15:30:00":
-                    $("#Horasalida").val("17:30:00");
-                    break;
-                case "16:00:00":
-                    $("#Horasalida").val("18:00:00");
-                    break;
-                case "16:30:00":
-                    $("#Horasalida").val("18:30:00");
-                    break;
-                case "17:00:00":
-                    $("#Horasalida").val("19:00:00");
-                    break;
-                case "17:30:00":
-                    $("#Horasalida").val("19:30:00");
-                    break;
-                case "18:00:00":
-                    $("#Horasalida").val("20:00:00");
-                    break;
-                case "18:30:00":
-                    $("#Horasalida").val("20:30:00");
-                    break;
-                case "19:00:00":
-                    $("#Horasalida").val("21:00:00");
-                    break;
-                case "19:30:00":
-                    $("#Horasalida").val("21:00:00");
-                    break;
-                case "20:00:00":
-                    $("#Horasalida").val("21:00:00");
-                    break;
-                case "20:30:00":
-                    $("#Horasalida").val("21:00:00");
-                    break;
-                default:
-                //default
-            }
+        $(window).on("load", function () {
+            var data = JSON.stringify({
+                HEntrada: $("#Horaentrada").val()
+            });
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/Parametros/MaxHoras",
+                data: data,
+                success: function (val) {
+                    if (val == 2) {
+
+                        $("#Horaentrada").change(function () {
+                            $choice = $(this).val();
+                            switch ($choice) {
+                                case "08:00:00":
+                                    $("#Horasalida").val("10:00:00");
+                                    break;
+                                case "08:30:00":
+                                    $("#Horasalida").val("10:30:00");
+                                    break;
+                                case "09:00:00":
+                                    $("#Horasalida").val("11:00:00");
+                                    break;
+                                case "09:30:00":
+                                    $("#Horasalida").val("11:30:00");
+                                    break;
+                                case "10:00:00":
+                                    $("#Horasalida").val("12:00:00");
+                                    break;
+                                case "10:30:00":
+                                    $("#Horasalida").val("12:30:00");
+                                    break;
+                                case "11:00:00":
+                                    $("#Horasalida").val("13:00:00");
+                                    break;
+                                case "11:30:00":
+                                    $("#Horasalida").val("13:30:00");
+                                    break;
+                                case "12:00:00":
+                                    $("#Horasalida").val("14:00:00");
+                                    break;
+                                case "12:30:00":
+                                    $("#Horasalida").val("14:30:00");
+                                    break;
+                                case "13:00:00":
+                                    $("#Horasalida").val("15:00:00");
+                                    break;
+                                case "13:30:00":
+                                    $("#Horasalida").val("15:30:00");
+                                    break;
+                                case "14:00:00":
+                                    $("#Horasalida").val("16:00:00");
+                                    break;
+                                case "14:30:00":
+                                    $("#Horasalida").val("16:30:00");
+                                    break;
+                                case "15:00:00":
+                                    $("#Horasalida").val("17:00:00");
+                                    break;
+                                case "15:30:00":
+                                    $("#Horasalida").val("17:30:00");
+                                    break;
+                                case "16:00:00":
+                                    $("#Horasalida").val("18:00:00");
+                                    break;
+                                case "16:30:00":
+                                    $("#Horasalida").val("18:30:00");
+                                    break;
+                                case "17:00:00":
+                                    $("#Horasalida").val("19:00:00");
+                                    break;
+                                case "17:30:00":
+                                    $("#Horasalida").val("19:30:00");
+                                    break;
+                                case "18:00:00":
+                                    $("#Horasalida").val("20:00:00");
+                                    break;
+                                case "18:30:00":
+                                    $("#Horasalida").val("20:30:00");
+                                    break;
+                                case "19:00:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                case "19:30:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                case "20:00:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                case "20:30:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                default:
+                                //default
+                            }
+                        })
+                    }
+                    else {
+
+                        $("#Horaentrada").change(function () {
+                            $choice = $(this).val();
+                            switch ($choice) {
+                                case "08:00:00":
+                                    $("#Horasalida").val("09:30:00");
+                                    break;
+                                case "08:30:00":
+                                    $("#Horasalida").val("10:00:00");
+                                    break;
+                                case "09:00:00":
+                                    $("#Horasalida").val("10:30:00");
+                                    break;
+                                case "09:30:00":
+                                    $("#Horasalida").val("11:00:00");
+                                    break;
+                                case "10:00:00":
+                                    $("#Horasalida").val("11:30:00");
+                                    break;
+                                case "10:30:00":
+                                    $("#Horasalida").val("12:00:00");
+                                    break;
+                                case "11:00:00":
+                                    $("#Horasalida").val("12:30:00");
+                                    break;
+                                case "11:30:00":
+                                    $("#Horasalida").val("13:00:00");
+                                    break;
+                                case "12:00:00":
+                                    $("#Horasalida").val("13:30:00");
+                                    break;
+                                case "12:30:00":
+                                    $("#Horasalida").val("14:00:00");
+                                    break;
+                                case "13:00:00":
+                                    $("#Horasalida").val("14:30:00");
+                                    break;
+                                case "13:30:00":
+                                    $("#Horasalida").val("15:00:00");
+                                    break;
+                                case "14:00:00":
+                                    $("#Horasalida").val("15:30:00");
+                                    break;
+                                case "14:30:00":
+                                    $("#Horasalida").val("16:00:00");
+                                    break;
+                                case "15:00:00":
+                                    $("#Horasalida").val("16:30:00");
+                                    break;
+                                case "15:30:00":
+                                    $("#Horasalida").val("17:00:00");
+                                    break;
+                                case "16:00:00":
+                                    $("#Horasalida").val("17:30:00");
+                                    break;
+                                case "16:30:00":
+                                    $("#Horasalida").val("18:00:00");
+                                    break;
+                                case "17:00:00":
+                                    $("#Horasalida").val("18:30:00");
+                                    break;
+                                case "17:30:00":
+                                    $("#Horasalida").val("19:00:00");
+                                    break;
+                                case "18:00:00":
+                                    $("#Horasalida").val("19:30:00");
+                                    break;
+                                case "18:30:00":
+                                    $("#Horasalida").val("20:00:00");
+                                    break;
+                                case "19:00:00":
+                                    $("#Horasalida").val("20:30:00");
+                                    break;
+                                case "19:30:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                case "20:00:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                case "20:30:00":
+                                    $("#Horasalida").val("21:00:00");
+                                    break;
+                                default:
+                                //default
+                            }
+                        })
+                    }
+                                    
+
+                },
+                error: function () {
+                    
+                }
+            });
+
+
+
+
+
+
 
         });
     </script>

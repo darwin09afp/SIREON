@@ -20,6 +20,35 @@ namespace SIREON.Controllers
             return View(db.Parametros.ToList());
         }
 
+
+        [HttpPost]
+        public ActionResult MaxHoras(DateTime? HEntrada)
+        {
+
+            var val = db.Parametros.Where(x => x.ID == 1).First().Valor;
+
+            return Json(val, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult MaxRes()
+        {
+
+            var val = db.Parametros.Where(x => x.ID == 2).First().Valor;
+
+            return Json(val, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+
+
         // GET: Parametros/Details/5
         public ActionResult Details(int? id)
         {
