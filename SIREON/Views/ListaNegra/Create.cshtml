@@ -145,9 +145,9 @@
                     },
                     error: function () {
                         swal("Error", "Favor verificar los datos ingresados", "danger")
-                            .then((value) => {
-                                location.reload();
-                            });
+                        document.getElementById('IdAspNetUsers2').style.borderColor = 'tomato';
+                        document.getElementById('FechaSalida').style.borderColor = 'tomato';
+                        document.getElementById('Motivo').style.borderColor = 'tomato';
                     }
                 });
             }
@@ -155,9 +155,28 @@
     }
     $("#Agregar").on('click', function (e) {
         e.preventDefault();
+        
+        if ($.trim($("#IdAspNetUsers2").val()) == "") {
+            document.getElementById('IdAspNetUsers2').style.borderColor = 'tomato';
+            return;
+        }
+        if ($.trim($("#FechaSalida").val()) ==  "" /*|| $.trim($("#Motivo").val()) == ""*/) {
+            document.getElementById('FechaSalida').style.borderColor = 'tomato';
+            document.getElementById('IdAspNetUsers2').style.borderColor = '';
+            //document.getElementById('Motivo').style.borderColor = 'tomato';
+            return;
+        }
+        if ($.trim($("#Motivo").val()) == "" ) {
+            //document.getElementById('Motivo').style.borderColor = 'tomato';
+            document.getElementById('Motivo').style.borderColor = 'tomato';
+            document.getElementById('FechaSalida').style.borderColor = '';
+            document.getElementById('IdAspNetUsers2').style.borderColor = '';
 
-        if ($.trim($("#Motivo").val()) == "" || $.trim($("#FechaSalida").val()) == "") return;
-
+            return;
+        }
+        
+        
+        
         var data = JSON.stringify({
             iduser: $("#iduser").val(),
             FechaSalida: $("#FechaSalida").val(),
@@ -209,9 +228,11 @@
                 $("#Correo").val($.trim(result3[2]));
                 $("#iduser").val($.trim(result3[3]));
                 $("#Agregar").show(0)
+                document.getElementById('IdAspNetUsers2').style.borderColor = '';
             },
             error: function () {
                 swal("¡Error!", "Favor verificar los datos", "warning");
+                document.getElementById('IdAspNetUsers2').style.borderColor = 'tomato';
             }
         });
 

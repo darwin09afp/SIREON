@@ -172,8 +172,8 @@
                                                 <img src="~/Content/images/at.png" alt="check" width="33" />
                                             </div>
 
-                                            <input type="text" class="form-control" id="IdAspNetUsers2" placeholder="Matrícula/Código" value="" required>
-
+                                            <input type="text" class="form-control" id="IdAspNetUsers2" placeholder="Matrícula/Código" value="" required style="display:block" @*oninvalid="this.setCustomValidity('Enter User Name Here')" oninput="this.setCustomValidity('')"*@ />
+                                            
                                         </div>
                                     </div>
                                     <div class="col-lg-2 col-md-2 col-sm-2 my-1">
@@ -366,9 +366,12 @@
                             $("#msg2").append('<br /><p id="est">' + result3[4] + '</p>')
                             swal("¡Ups!", result3[4], "warning");
                         }
+                        document.getElementById('IdAspNetUsers2').style.borderColor = '';
                     },
                     error: function () {
                         swal("¡Error!", "Favor verificar los datos", "warning");
+                        document.getElementById('IdAspNetUsers2').style.borderColor = 'tomato';
+
                     }
                 });
 
@@ -450,7 +453,11 @@
                 $("#addToList").click(function (e) {
                     e.preventDefault();
 
-                    if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado2").val()) == "" || $.trim($("#CedulaInvitado").val()) == "") return;
+                    if ($.trim($("#TipoInvitado").val()) == "" || $.trim($("#NombreInvitado2").val()) == "" || $.trim($("#CedulaInvitado").val()) == "") {
+                        document.getElementById('NombreInvitado2').style.borderColor = 'tomato';
+                        document.getElementById('CedulaInvitado').style.borderColor = 'tomato';
+                        return;
+                    }
                     $("#detailsTable").show(0);
                     $("#saveOrder").show(0);
                     var TipoInvitado = $("#TipoInvitado").val(),
@@ -460,7 +467,8 @@
 
 
                     var productItem = '<tr><td>' + TipoInvitado + '</td><td>' + NombreInvitado2 + '</td><td>' + CedulaInvitado + '</td><td>' + '</td><td><a data-itemId="0" href="#" class="deleteItem">Eliminar</a></td></tr>';
-
+                    document.getElementById('NombreInvitado2').style.borderColor = '';
+                    document.getElementById('CedulaInvitado').style.borderColor = '';
                     detailsTableBody.append(productItem);
 
 
@@ -516,9 +524,11 @@
                                 $("#ConsInvitado").hide(0);
                                 $("#addToList").show(0);
                             }
+                            document.getElementById('UsuarioInvitado').style.borderColor = '';
                         },
                         error: function () {
                             swal("¡Error!", "Favor verificar los datos", "warning");
+                            document.getElementById('UsuarioInvitado').style.borderColor = 'tomato';
                         }
                     });
 
@@ -619,6 +629,7 @@
                             },
                             error: function () {
                                 swal("¡Error!", "Favor verificar los datos", "warning");
+                                document.getElementById('Horaentrada').style.borderColor = 'tomato';
                             }
                         });
                     }
