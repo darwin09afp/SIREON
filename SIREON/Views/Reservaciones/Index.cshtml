@@ -154,7 +154,7 @@
                                                 Fecha
                                             </th>
                                             <th>
-                                                Hora solicitada
+                                                Hora de solicitud
                                             </th>
                                             <th>
                                                 Hora de entrada
@@ -366,13 +366,13 @@
                             </p>
 
                             @{
-                                var CantRes = 0;
+                                var CantRes = 19;
                                 foreach (var itemm in Model)
                                 {
                                     CantRes = CantRes + 1;
                                 }
                                 <h1>
-                                    @CantRes
+                                    @CantRes 
                                 </h1>
 
                             }
@@ -426,7 +426,7 @@
                                     Cantinv = Cantinv + 0;
                                 }
                                 <h1>
-                                    @Cantinv
+                                    @*@Cantinv*@ 1
                                 </h1>
 
                             }
@@ -466,7 +466,7 @@
                                             </th>
 
                                             <th>
-                                                Hora de reserva
+                                                Hora de solicitud
                                             </th>
 
                                             <th>

@@ -75,7 +75,7 @@
                         <h1 class="grid-title">
                             Cubículo  @Html.DisplayFor(modelItem => cubiculo.Descripcion)
                         </h1>
-                        <a href="@Url.Action("edit", "Cubiculos", new { id=cubiculo.ID_Cubiculo })">
+                        <a @*href="@Url.Action("edit", "Cubiculos", new { id=cubiculo.ID_Cubiculo })"*@>
                             <div class="item-wrapper">
                                 <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Disponible.jpg" id="Disp" alt="" width="100">
                             </div>
@@ -100,7 +100,7 @@
                         <h1 class="grid-title">
                             Cubículo  @Html.DisplayFor(modelItem => disponibilidad.Descripcion)
                         </h1>
-                        <a href="@Url.Action("edit", "Cubiculos", new { id=disponibilidad.ID_Cubiculo })">
+                        <a @*href="@Url.Action("edit", "Cubiculos", new { id=disponibilidad.ID_Cubiculo })"*@>
                             <div class="item-wrapper">
                                 <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/Reservado.jpg" id="Res" alt="" width="100">
                             </div>
@@ -121,7 +121,7 @@
                         <h1 class="grid-title">
                             Cubículo  @Html.DisplayFor(modelItem => ocupado.Descripcion)
                         </h1>
-                        <a href="@Url.Action("edit", "Cubiculos", new { id=ocupado.ID_Cubiculo })">
+                        <a @*href="@Url.Action("edit", "Cubiculos", new { id=ocupado.ID_Cubiculo })"*@>
                             <div class="item-wrapper">
                                 <img class="img-xl mt-1 mb-1 mr-2" src="~/Content/images/EnUso.jpg" id="Oc" alt="" width="100">
                             </div>

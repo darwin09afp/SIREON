@@ -383,16 +383,14 @@
     else
     {
         <script>
-
-            window.onload = function () {
+            $(window).on("load", function () {
                 $.ajax({
-
                     url: "/Reservaciones/Usuario5",
                     method: "GET",
                     success: function (result3) {
                         //alert(data)
                         //data = JSON.parse(data);
-                        console.log(result3)
+                        //console.log(result3)
                         $("#IdAspNetNombre").val($.trim(result3[0]) + " " + result3[1]);
                         $("#IdAspNetUsers").val($.trim(result3[2]));
 
@@ -411,38 +409,13 @@
                     error: function () {
                         swal("¡Error!", "Favor verificar los datos", "warning");
                     }
+
                 });
 
-            }
+            });
 
         </script>
-        @*<script>
-                //Consultar usuario de estudiante
-                window.onload = function () {
-                    $.ajax({
-                        url: "/Reservaciones/Usuario",
-                        method: "GET",
-                        success: function (data) {
-                            //alert(data)
-                            //data = JSON.parse(data);
-                            console.log(data)
-                            for (var i = 0; i < data.length; i++) {
 
-                                $("#IdAspNetNombre").val($.trim(data[i].Nombr) + " " + data[i].Apellid);
-                                $("#IdAspNetUsers").val(data[i].Matricul);
-                            }
-
-                            $.each(data, function (i, value) {
-                                console.log('Value of ' + i + ' is : ' + value);
-                            })
-                        },
-                        error: function () {
-                            alert("Error, Usuario no detectado")
-                        }
-                    })
-                }
-
-            </script>*@
     }
 
     <script>
@@ -490,7 +463,7 @@
                 $("#ConsInvitado").click(function () {
 
 
-                    if ($.trim($("#UsuarioInvitado").val()) == "") return;
+                    //if ($.trim($("#UsuarioInvitado").val()) == "") return;
                     var data = JSON.stringify({
                         IdAspNetUser: $("#UsuarioInvitado").val(),
                     });
@@ -515,20 +488,23 @@
                         success: function (result3) {
                             //alert(data)
                             //data = JSON.parse(data);
-                            console.log(result3)
-                            if (result3 == "") {
+                            //console.log(result3)
+                            if (result3 == "Vacio") {
                                 swal("¡Ups!", "El usuario no existe, favor verificar los datos", "warning");
+
                             }
                             else {
                                 $("#NombreInvitado").val($.trim(result3[0]) + " " + result3[1]);
                                 $("#ConsInvitado").hide(0);
                                 $("#addToList").show(0);
+
                             }
                             document.getElementById('UsuarioInvitado').style.borderColor = '';
                         },
                         error: function () {
                             swal("¡Error!", "Favor verificar los datos", "warning");
                             document.getElementById('UsuarioInvitado').style.borderColor = 'tomato';
+
                         }
                     });
 
@@ -798,9 +774,6 @@
                 console.log(err);
             });
         });
-
-
-
 
 
 

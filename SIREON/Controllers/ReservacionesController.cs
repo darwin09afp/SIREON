@@ -19,6 +19,7 @@ using SIREON.Models;
 
 namespace SIREON.Controllers
 {
+    [Authorize]
     public class ReservacionesController : Controller
     {
         private SIREONEntitiess db = new SIREONEntitiess();
@@ -834,6 +835,7 @@ namespace SIREON.Controllers
 
         }
 
+        [HttpPost]
         public JsonResult Usuario3(string IdAspNetUser)
         {
             //Metodo solo para presentar el nombre en la reservacion la matricula del estudiante loggeado 
@@ -841,7 +843,7 @@ namespace SIREON.Controllers
             var BuscarNombre = db2.Entidads.Where(x => x.CodigoInst == IdAspNetUser).FirstOrDefault().Nombre;
             if (BuscarNombre == null)
             {
-                var result3 = "";
+                var result3 = "Vacio";
                 return Json(result3, JsonRequestBehavior.AllowGet);
 
             }
