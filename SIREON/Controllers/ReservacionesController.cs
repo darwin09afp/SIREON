@@ -24,7 +24,7 @@ namespace SIREON.Controllers
     {
         private SIREONEntitiess db = new SIREONEntitiess();
         private UniversidadEntities db2 = new UniversidadEntities();
-
+        
         // GET: Reservaciones
         public ActionResult Index()
         {
@@ -39,7 +39,7 @@ namespace SIREON.Controllers
                     .Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")
                     //.Where(x => x.HSalida >= hora)
                     .Where(x => x.Fecha == fechaa).ToList().OrderBy(x => x.HEntrada);
-                
+
                 return View(reservaciones.ToList());
 
             }
@@ -56,11 +56,45 @@ namespace SIREON.Controllers
                     .Where(x => x.Fecha == fechaa).ToList().OrderBy(x => x.HEntrada);
 
                 return View(reservaciones.ToList());
-                
+
             }
 
         }
 
+        public ActionResult Index2()
+        {
+
+            if (User.IsInRole("Operador"))
+            {
+
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var reservaciones = db.Reservaciones.Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")/*.Where(x => x.HSalida >= hora)*/.Where(x => x.Fecha == fechaa).ToList();
+                //var solicitante = db.Reservaciones.Contains(reservaciones).
+
+                return View(reservaciones.ToList());
+
+            }
+            else
+            {
+                var fecha = DateTime.Now;
+                var fechaa = fecha.Date;
+                var hora = fecha.TimeOfDay;
+                var user = User.Identity.GetUserId();
+                var reservaciones = db.Reservaciones
+                    .Where(x => x.IdAspNetUsers == user)
+                    .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
+                    //.Where(x => x.HEntrada >= hora)
+                    .Where(x => x.Fecha == fechaa).ToList();
+
+                return View(reservaciones.ToList());
+
+            }
+
+        }
+
+        #region reportes
         public ActionResult Reporte1(string ReportType)
         {
             LocalReport localReport = new LocalReport();
@@ -337,41 +371,81 @@ namespace SIREON.Controllers
             //Response.AddHeader("content.disposition", "attachment:filename= Reservaciones_del_dia." + fileNameExtension);
 
         }
+        #endregion
 
-
-
-        public ActionResult Index2()
+        #region consultas
+        public JsonResult CantRes()
         {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var Cant = db.Reservaciones.Where(x => x.Fecha == fecha).ToList().Count();
 
-            if (User.IsInRole("Operador"))
-            {
-
-                var fecha = DateTime.Now;
-                var fechaa = fecha.Date;
-                var hora = fecha.TimeOfDay;
-                var reservaciones = db.Reservaciones.Where(x => x.Estatus != "Completada" && x.Estatus != "Rechazada" && x.Estatus != "Cancelada" && x.Estatus != "En Espera")/*.Where(x => x.HSalida >= hora)*/.Where(x => x.Fecha == fechaa).ToList();
-                //var solicitante = db.Reservaciones.Contains(reservaciones).
-
-                return View(reservaciones.ToList());
-
-            }
-            else
-            {
-                var fecha = DateTime.Now;
-                var fechaa = fecha.Date;
-                var hora = fecha.TimeOfDay;
-                var user = User.Identity.GetUserId();
-                var reservaciones = db.Reservaciones
-                    .Where(x => x.IdAspNetUsers == user)
-                    .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
-                    //.Where(x => x.HEntrada >= hora)
-                    .Where(x => x.Fecha == fechaa).ToList();
-
-                return View(reservaciones.ToList());
-
-            }
-
+            return Json(Cant, JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult CantAtend()
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var Cant = db.Reservaciones.Where(x => x.Fecha == fecha && x.Estatus != "Activa").ToList().Count();
+
+            return Json(Cant, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult CantEsp()
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var Cant = db.Reservaciones.Where(x => x.Fecha == fecha && x.Estatus == "En espera").ToList().Count();
+
+            return Json(Cant, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult LN()
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var Cant = db.ListaNegras.Where(x => x.Estatus != "Perdonado").ToList().Count();
+
+            return Json(Cant, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        public ActionResult CantRes2()
+        {
+            var fechaa = DateTime.Now;
+            var fecha = fechaa.Date;
+            var user = User.Identity.GetUserId();
+            var Cant = db.Reservaciones.Where(x => x.IdAspNetUsers == user).ToList().Count();
+
+            return Json(Cant, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult Inv()
+        {
+            var fecha = DateTime.Now;
+            var fechaa = fecha.Date;
+            var hora = fecha.TimeOfDay;
+            var user = User.Identity.GetUserId();
+
+            var Cant = db.Reservaciones.Where(x => x.Reservaciones_Usuarios.Where(p => p.IdAspNetUser == user && p.Estatus != "Rechazada" && p.Estatus != "Aceptada").Any())
+                .Where(x => x.Fecha == fechaa)
+                .Where(x => x.Estatus == "Activa" || x.Estatus == "En espera")
+                .Where(x => x.Reservaciones_Usuarios.Any(p => p.IdAspNetUser == user))
+                .ToList().Count();
+
+            return Json(Cant, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
+
 
 
 

@@ -366,13 +366,13 @@
                             </p>
 
                             @{
-                                var CantRes = 19;
-                                foreach (var itemm in Model)
-                                {
-                                    CantRes = CantRes + 1;
-                                }
-                                <h1>
-                                    @CantRes 
+//var CantRes = 19;
+//foreach (var itemm in Model)
+//{
+//    CantRes = CantRes + 1;
+//}
+                                <h1 id="ResDia">
+                                    
                                 </h1>
 
                             }
@@ -420,13 +420,13 @@
                             </p>
 
                             @{
-                                var Cantinv = 0;
-                                foreach (var itemm in Model)
-                                {
-                                    Cantinv = Cantinv + 0;
-                                }
-                                <h1>
-                                    @*@Cantinv*@ 1
+//var Cantinv = 0;
+//foreach (var itemm in Model)
+//{
+//    Cantinv = Cantinv + 0;
+//}
+                                <h1 id="Inv">
+                                    
                                 </h1>
 
                             }
@@ -641,7 +641,51 @@
 </body>
 </html>
 
+<script>
+    $(window).on("load", function () {
+        return $.ajax({
+            url: "/Reservaciones/CantRes2",
+            method: "GET",
+            success: function (Cant) {
+                //data = JSON.parse(data);
+                console.log(Cant)
+                $("#ResDia").append(Cant);
 
+
+            },
+            error: function () {
+
+
+            }
+
+        });
+
+    });
+
+</script>
+
+<script>
+    $(window).on("load", function () {
+        return $.ajax({
+            url: "/Reservaciones/Inv",
+            method: "GET",
+            success: function (Cant) {
+                //data = JSON.parse(data);
+                console.log(Cant)
+                $("#Inv").append(Cant);
+
+
+            },
+            error: function () {
+
+
+            }
+
+        });
+
+    });
+
+</script>
 
 @*Consultar nombre de solicitante*@
 <script>
